@@ -1,7 +1,6 @@
 import { prisma } from "../db.config.js";
 
 export const addReviewData = async (data) => {
-  console.log(data);
   const userId = await prisma.user.findFirst({ where: { id: data.userId } });
   if (!userId) {
     return { error: "NO_USER" };
@@ -15,6 +14,7 @@ export const addReviewData = async (data) => {
   if (!data.imageUrl) {
     return { error: "NO_IMAGE_URL" };
   }
+
   const reviewId = await prisma.review.create({
     data: {
       user_id: data.userId,
@@ -28,6 +28,16 @@ export const addReviewData = async (data) => {
     data.imageUrl.map((url) => {
       return prisma.review_image.create({
         data: { review_id: reviewId.id, link: url },
+      });
+    })
+  );
+
+  const updateTag = await Promise.all(
+    data.tag.map(async (unit) => {
+      const restTag = await prisma.rest_tag.upsert({
+        where: { tag_rest_id: { rest_id: data.restId, tag: unit } },
+        create: { rest_id: data.restId, tag: unit },
+        update: { count: { increment: 1 } },
       });
     })
   );
