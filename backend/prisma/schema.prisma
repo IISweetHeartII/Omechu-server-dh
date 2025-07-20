@@ -87,23 +87,26 @@ model rest_menu {
 }
 
 model restaurant {
-  id             BigInt       @id @default(autoincrement())
-  location1      String?      @db.VarChar(20)
-  location2      String?      @db.VarChar(20)
-  location3      String?      @db.VarChar(20)
-  name           String?      @db.VarChar(60)
-  repre_menu     String?      @db.VarChar(50)
-  close_day      String?      @db.Text
-  start_time     String?      @db.VarChar(4)
-  end_time       String?      @db.VarChar(4)
-  address        String?      @db.VarChar(60)
-  detail_address String?      @db.VarChar(60)
-  rating         Float?       @db.Float
-  day_open_time  String?      @db.Text
-  rest_image     rest_image[]
-  rest_menu      rest_menu[]
-  review         review[]
-  zzim           zzim[]
+  id              BigInt       @id @default(autoincrement())
+  location        String?      @db.VarChar(20)
+  name            String?      @db.VarChar(60)
+  repre_menu      String?      @db.VarChar(50)
+  address         String?      @db.VarChar(60)
+  detail_address  String?      @db.VarChar(60)
+  rating          Float?       @db.Float
+  monday          String?      @db.Text
+  tuesday         String?      @db.Text
+  wednesday       String?      @db.Text
+  thursday        String?      @db.Text
+  friday          String?      @db.Text
+  saturday        String?      @db.Text
+  sunday          String?      @db.Text
+  google_place_id String?      @db.Text
+  rest_image      rest_image[]
+  rest_menu       rest_menu[]
+  rest_tag        rest_tag[]
+  review          review[]
+  zzim            zzim[]
 }
 
 model review {
@@ -145,9 +148,9 @@ model user {
   phone_num        String?            @db.VarChar(21)
   is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
-  body_type        user_body_type?
-  gender           user_gender?
-  exercise         user_exercise?
+  body_type        Int?
+  gender           Int?
+  exercise         Int?
   password         String             @db.VarChar(50)
   created_at       DateTime?          @default(now()) @db.DateTime(0)
   updated_at       DateTime?          @default(now()) @db.DateTime(0)
@@ -191,22 +194,51 @@ model zzim {
   @@index([user_id], map: "user_id")
 }
 
-enum user_body_type {
-  cold        @map("감기")
-  indigestion @map("소화불량")
-  heat_type   @map("더위잘탐")
-  cold_type   @map("추위잘탐")
+model email_verification {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique(map: "email_verification_pk") @db.VarChar(255)
+  code       String    @db.VarChar(10)
+  created_at DateTime? @default(now()) @db.DateTime(0)
 }
 
-enum user_gender {
-  male   @map("남성")
-  female @map("여성")
-}
+model rest_tag {
+  id         Int        @id @default(autoincrement())
+  rest_id    BigInt
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 아침식사 Int @default(0) @map("아침식사")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 점심식사 Int @default(0) @map("점심식사")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 저녁식사 Int @default(0) @map("저녁식사")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 야식 Int @default(0) @map("야식")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 혼밥 Int @default(0) @map("혼밥")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 데이트 Int @default(0) @map("데이트")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 가족 Int @default(0) @map("가족")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 단체회식 Int @default(0) @map("단체회식")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 고급스러운 Int @default(0) @map("고급스러운")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 가성비 Int @default(0) @map("가성비")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 기념일 Int @default(0) @map("기념일")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 술모임 Int @default(0) @map("술모임")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 시끌벅적한 Int @default(0) @map("시끌벅적한")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 깔끔한 Int @default(0) @map("깔끔한")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 캐주얼한 Int @default(0) @map("캐주얼한")
+  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
+  // 조용한 Int @default(0) @map("조용한")
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rest_tag_restaurant_id_fk")
 
-enum user_exercise {
-  diet     @map("다이어트 중")
-  bulk     @map("중량 중")
-  maintain @map("유지 중")
+  @@index([rest_id], map: "rest_tag_restaurant_id_fk")
 }
 
 enum allergy_type {
