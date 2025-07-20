@@ -34,30 +34,11 @@ export const addReviewData = async (data) => {
 
   const updateTag = await Promise.all(
     data.tag.map(async (unit) => {
-      const restTag = await prisma.rest_tag.findFirst({
-        where: { rest_id: data.restId, tag: unit },
+      const restTag = await prisma.rest_tag.upsert({
+        where: { tag_rest_id: { rest_id: data.restId, tag: unit } },
+        create: { rest_id: data.restId, tag: unit },
+        update: { count: { increment: 1 } },
       });
-
-      if (restTag) {
-        return await prisma.rest_tag.update({
-          where: {
-            tag_rest_id: { rest_id: data.restId, tag: unit },
-          },
-          data: {
-            count: {
-              increment: 1,
-            },
-          },
-        });
-      } else {
-        return await prisma.rest_tag.create({
-          data: {
-            rest_id: data.restId,
-            tag: unit,
-            count: 1,
-          },
-        });
-      }
     })
   );
 
