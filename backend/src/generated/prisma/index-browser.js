@@ -255,8 +255,9 @@ exports.Prisma.Email_verificationScalarFieldEnum = {
 };
 
 exports.Prisma.Rest_tagScalarFieldEnum = {
-  id: 'id',
-  rest_id: 'rest_id'
+  rest_id: 'rest_id',
+  tag: 'tag',
+  count: 'count'
 };
 
 exports.Prisma.SortOrder = {
@@ -345,6 +346,10 @@ exports.Prisma.userOrderByRelevanceFieldEnum = {
 exports.Prisma.email_verificationOrderByRelevanceFieldEnum = {
   email: 'email',
   code: 'code'
+};
+
+exports.Prisma.rest_tagOrderByRelevanceFieldEnum = {
+  tag: 'tag'
 };
 exports.allergy_type = exports.$Enums.allergy_type = {
   egg: 'egg',
