@@ -129,7 +129,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://omechu.log8.kr",
-      "https://omechu-api.log8.kr",
+      // "https://omechu-api.log8.kr",
     ],
     credentials: true,
   })
