@@ -24,6 +24,18 @@ import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
 
+// 🆕 마이페이지 컨트롤러 추가
+import {
+  handleGetUserProfile,
+  handleUpdateUserProfile,
+  handleGetMyRestaurants,
+  handleUpdateRestaurant,
+  handleAddZzim,
+  handleRemoveZzim,
+  handleGetZzimList
+} from "./controllers/mypage.controller.js";
+
+
 dotenv.config();
 
 const app = express();
@@ -147,6 +159,20 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
 
+<<<<<<< HEAD:backend/src/index.js
+=======
+
+// 🆕 마이페이지 라우터들 추가
+app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
+app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
+app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
+app.patch("/mypage/restaurant/:restaurantId/edit", isLoggedIn, handleUpdateRestaurant);
+app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
+app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
+app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);
+
+
+>>>>>>> ae08b97 (every mypage feature added):src/index.js
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
   if (res.headersSent) {
