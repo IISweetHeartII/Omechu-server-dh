@@ -7,9 +7,10 @@ import MySQLStore from "express-mysql-session";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
-import { handleRecommendMenu } from "./controllers/menu.controller.js";
+import { handleRecommendMenu, handleFindRelatedMenu } from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
+import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
 import { generatePresignedUrl } from "./controllers/image.uploader.js";
 import { handleUserLogin } from "./controllers/login.controller.js";
 import { handleRenewSession } from "./controllers/session.controller.js";
@@ -18,6 +19,7 @@ import { handleAddReview } from "./controllers/addReview.controller.js";
 import { handleUserLogout } from "./controllers/logout.controller.js";
 import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
+import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
 
 dotenv.config();
 
@@ -123,8 +125,11 @@ app.get("/", (req, res) => {
 
 // 회원가입 라우터 (POST /auth/signup)
 app.post("/auth/signup", handleUserSignUp);
-app.get("/recommend", handleRecommendMenu);
+app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
+app.post("/fetch-google-places", handleFetchGooglePlaces);
+app.get("/place-detail/:id", handleFetchPlaceDetail);
+app.post("/find-related-menu", handleFindRelatedMenu);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 
 // 프로필 이미지 presigned url 생성 API
