@@ -106,10 +106,12 @@ app.get("/openapi.json", async (req, res, next) => {
 });
 
 // 기타 미들웨어
-app.use(cors({ 
-  origin: ["http://localhost:3000"],
-  credentials: true,
- }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    credentials: true,
+  })
+);
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -129,14 +131,13 @@ app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/image/upload", generatePresignedUrl);
 app.post("/auth/login", handleUserLogin);
 // 세션 재발급 API
-app.post("/auth/reissue", isLoggedIn, handleRenewSession)
+app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
-
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
