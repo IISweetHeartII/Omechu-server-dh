@@ -1,6 +1,5 @@
-import { PrismaClient } from '../generated/prisma/index.js'
+import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
-
 
 export const findUserById = async (userId) => {
   return await prisma.user.findUnique({
@@ -30,9 +29,6 @@ export const createUserAllergies = async (userId, allergyArray) => {
   const data = allergyArray.map((a) => ({ userId, allergy: a }));
   await prisma.allergy.createMany({ data });
 };
-<<<<<<< HEAD
-=======
-
 
 export const getUserInfoForMenu = async (userId) => {
   //exceptions, gender,exercise,preference,body_type, allergy
@@ -56,7 +52,7 @@ export const getUserInfoForMenu = async (userId) => {
     exercise: userInfo.exercise,
     body_type: userInfo.body_type,
   };
-}
+};
 
 export const getUserPreferences = async (userId) => {
   if (!userId) {
@@ -67,7 +63,7 @@ export const getUserPreferences = async (userId) => {
     select: { prefer: true },
   });
   return preferences.map((p) => p.prefer);
-}
+};
 
 export const getUserAllergies = async (userId) => {
   if (!userId) {
@@ -78,10 +74,9 @@ export const getUserAllergies = async (userId) => {
     select: { allergy: true },
   });
   return allergies.map((a) => a.allergy);
-}
+};
 
 export const getUserExceptedMenus = async (userId) => {
-
   //prisma로 변경
   try {
     const exceptedMenus = await prisma.recommend_except.findMany({
@@ -100,8 +95,7 @@ export const getUserExceptedMenus = async (userId) => {
     console.error("Error getting user excepted menus:", error);
     throw error;
   }
-
-}
+};
 
 export const getUserIdBySession = async (session) => {
   console.log("Session ID:", session);
@@ -122,5 +116,4 @@ export const getUserIdBySession = async (session) => {
   }
 
   return sessionData.user.id;
-}
->>>>>>> develop
+};
