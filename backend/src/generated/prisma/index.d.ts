@@ -18410,55 +18410,61 @@ export namespace Prisma {
   }
 
   export type Rest_tagAvgAggregateOutputType = {
-    id: number | null
     rest_id: number | null
+    count: number | null
   }
 
   export type Rest_tagSumAggregateOutputType = {
-    id: number | null
     rest_id: bigint | null
+    count: number | null
   }
 
   export type Rest_tagMinAggregateOutputType = {
-    id: number | null
     rest_id: bigint | null
+    tag: string | null
+    count: number | null
   }
 
   export type Rest_tagMaxAggregateOutputType = {
-    id: number | null
     rest_id: bigint | null
+    tag: string | null
+    count: number | null
   }
 
   export type Rest_tagCountAggregateOutputType = {
-    id: number
     rest_id: number
+    tag: number
+    count: number
     _all: number
   }
 
 
   export type Rest_tagAvgAggregateInputType = {
-    id?: true
     rest_id?: true
+    count?: true
   }
 
   export type Rest_tagSumAggregateInputType = {
-    id?: true
     rest_id?: true
+    count?: true
   }
 
   export type Rest_tagMinAggregateInputType = {
-    id?: true
     rest_id?: true
+    tag?: true
+    count?: true
   }
 
   export type Rest_tagMaxAggregateInputType = {
-    id?: true
     rest_id?: true
+    tag?: true
+    count?: true
   }
 
   export type Rest_tagCountAggregateInputType = {
-    id?: true
     rest_id?: true
+    tag?: true
+    count?: true
     _all?: true
   }
 
@@ -18549,8 +18555,9 @@ export namespace Prisma {
   }
 
   export type Rest_tagGroupByOutputType = {
-    id: number
     rest_id: bigint
+    tag: string
+    count: number
     _count: Rest_tagCountAggregateOutputType | null
     _avg: Rest_tagAvgAggregateOutputType | null
     _sum: Rest_tagSumAggregateOutputType | null
@@ -18573,19 +18580,21 @@ export namespace Prisma {
 
 
   export type rest_tagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     rest_id?: boolean
+    tag?: boolean
+    count?: boolean
     restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rest_tag"]>
 
 
 
   export type rest_tagSelectScalar = {
-    id?: boolean
     rest_id?: boolean
+    tag?: boolean
+    count?: boolean
   }
 
-  export type rest_tagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_id", ExtArgs["result"]["rest_tag"]>
+  export type rest_tagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"rest_id" | "tag" | "count", ExtArgs["result"]["rest_tag"]>
   export type rest_tagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
   }
@@ -18593,29 +18602,12 @@ export namespace Prisma {
   export type $rest_tagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "rest_tag"
     objects: {
-      /**
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       * This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-       */
       restaurant: Prisma.$restaurantPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
       rest_id: bigint
+      tag: string
+      count: number
     }, ExtArgs["result"]["rest_tag"]>
     composites: {}
   }
@@ -18699,8 +18691,8 @@ export namespace Prisma {
      * // Get first 10 Rest_tags
      * const rest_tags = await prisma.rest_tag.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const rest_tagWithIdOnly = await prisma.rest_tag.findMany({ select: { id: true } })
+     * // Only select the `rest_id`
+     * const rest_tagWithRest_idOnly = await prisma.rest_tag.findMany({ select: { rest_id: true } })
      * 
      */
     findMany<T extends rest_tagFindManyArgs>(args?: SelectSubset<T, rest_tagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_tagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -18986,8 +18978,9 @@ export namespace Prisma {
    * Fields of the rest_tag model
    */
   interface rest_tagFieldRefs {
-    readonly id: FieldRef<"rest_tag", 'Int'>
     readonly rest_id: FieldRef<"rest_tag", 'BigInt'>
+    readonly tag: FieldRef<"rest_tag", 'String'>
+    readonly count: FieldRef<"rest_tag", 'Int'>
   }
     
 
@@ -19546,8 +19539,9 @@ export namespace Prisma {
 
 
   export const Rest_tagScalarFieldEnum: {
-    id: 'id',
-    rest_id: 'rest_id'
+    rest_id: 'rest_id',
+    tag: 'tag',
+    count: 'count'
   };
 
   export type Rest_tagScalarFieldEnum = (typeof Rest_tagScalarFieldEnum)[keyof typeof Rest_tagScalarFieldEnum]
@@ -19684,6 +19678,13 @@ export namespace Prisma {
   };
 
   export type email_verificationOrderByRelevanceFieldEnum = (typeof email_verificationOrderByRelevanceFieldEnum)[keyof typeof email_verificationOrderByRelevanceFieldEnum]
+
+
+  export const rest_tagOrderByRelevanceFieldEnum: {
+    tag: 'tag'
+  };
+
+  export type rest_tagOrderByRelevanceFieldEnum = (typeof rest_tagOrderByRelevanceFieldEnum)[keyof typeof rest_tagOrderByRelevanceFieldEnum]
 
 
   /**
@@ -20771,29 +20772,35 @@ export namespace Prisma {
     AND?: rest_tagWhereInput | rest_tagWhereInput[]
     OR?: rest_tagWhereInput[]
     NOT?: rest_tagWhereInput | rest_tagWhereInput[]
-    id?: IntFilter<"rest_tag"> | number
     rest_id?: BigIntFilter<"rest_tag"> | bigint | number
+    tag?: StringFilter<"rest_tag"> | string
+    count?: IntFilter<"rest_tag"> | number
     restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
   }
 
   export type rest_tagOrderByWithRelationInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    tag?: SortOrder
+    count?: SortOrder
     restaurant?: restaurantOrderByWithRelationInput
+    _relevance?: rest_tagOrderByRelevanceInput
   }
 
   export type rest_tagWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    tag_rest_id?: rest_tagTagRest_idCompoundUniqueInput
     AND?: rest_tagWhereInput | rest_tagWhereInput[]
     OR?: rest_tagWhereInput[]
     NOT?: rest_tagWhereInput | rest_tagWhereInput[]
     rest_id?: BigIntFilter<"rest_tag"> | bigint | number
+    tag?: StringFilter<"rest_tag"> | string
+    count?: IntFilter<"rest_tag"> | number
     restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
-  }, "id">
+  }, "tag_rest_id">
 
   export type rest_tagOrderByWithAggregationInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    tag?: SortOrder
+    count?: SortOrder
     _count?: rest_tagCountOrderByAggregateInput
     _avg?: rest_tagAvgOrderByAggregateInput
     _max?: rest_tagMaxOrderByAggregateInput
@@ -20805,8 +20812,9 @@ export namespace Prisma {
     AND?: rest_tagScalarWhereWithAggregatesInput | rest_tagScalarWhereWithAggregatesInput[]
     OR?: rest_tagScalarWhereWithAggregatesInput[]
     NOT?: rest_tagScalarWhereWithAggregatesInput | rest_tagScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"rest_tag"> | number
     rest_id?: BigIntWithAggregatesFilter<"rest_tag"> | bigint | number
+    tag?: StringWithAggregatesFilter<"rest_tag"> | string
+    count?: IntWithAggregatesFilter<"rest_tag"> | number
   }
 
   export type choiceCreateInput = {
@@ -21791,35 +21799,44 @@ export namespace Prisma {
   }
 
   export type rest_tagCreateInput = {
+    tag: string
+    count?: number
     restaurant: restaurantCreateNestedOneWithoutRest_tagInput
   }
 
   export type rest_tagUncheckedCreateInput = {
-    id?: number
     rest_id: bigint | number
+    tag: string
+    count?: number
   }
 
   export type rest_tagUpdateInput = {
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
     restaurant?: restaurantUpdateOneRequiredWithoutRest_tagNestedInput
   }
 
   export type rest_tagUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type rest_tagCreateManyInput = {
-    id?: number
     rest_id: bigint | number
+    tag: string
+    count?: number
   }
 
   export type rest_tagUpdateManyMutationInput = {
-
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type rest_tagUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -22921,29 +22938,43 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type rest_tagOrderByRelevanceInput = {
+    fields: rest_tagOrderByRelevanceFieldEnum | rest_tagOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type rest_tagTagRest_idCompoundUniqueInput = {
+    tag: string
+    rest_id: bigint | number
+  }
+
   export type rest_tagCountOrderByAggregateInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    tag?: SortOrder
+    count?: SortOrder
   }
 
   export type rest_tagAvgOrderByAggregateInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    count?: SortOrder
   }
 
   export type rest_tagMaxOrderByAggregateInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    tag?: SortOrder
+    count?: SortOrder
   }
 
   export type rest_tagMinOrderByAggregateInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    tag?: SortOrder
+    count?: SortOrder
   }
 
   export type rest_tagSumOrderByAggregateInput = {
-    id?: SortOrder
     rest_id?: SortOrder
+    count?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -25263,11 +25294,13 @@ export namespace Prisma {
   }
 
   export type rest_tagCreateWithoutRestaurantInput = {
-
+    tag: string
+    count?: number
   }
 
   export type rest_tagUncheckedCreateWithoutRestaurantInput = {
-    id?: number
+    tag: string
+    count?: number
   }
 
   export type rest_tagCreateOrConnectWithoutRestaurantInput = {
@@ -25397,8 +25430,9 @@ export namespace Prisma {
     AND?: rest_tagScalarWhereInput | rest_tagScalarWhereInput[]
     OR?: rest_tagScalarWhereInput[]
     NOT?: rest_tagScalarWhereInput | rest_tagScalarWhereInput[]
-    id?: IntFilter<"rest_tag"> | number
     rest_id?: BigIntFilter<"rest_tag"> | bigint | number
+    tag?: StringFilter<"rest_tag"> | string
+    count?: IntFilter<"rest_tag"> | number
   }
 
   export type reviewUpsertWithWhereUniqueWithoutRestaurantInput = {
@@ -26695,7 +26729,8 @@ export namespace Prisma {
   }
 
   export type rest_tagCreateManyRestaurantInput = {
-    id?: number
+    tag: string
+    count?: number
   }
 
   export type reviewCreateManyRestaurantInput = {
@@ -26745,15 +26780,18 @@ export namespace Prisma {
   }
 
   export type rest_tagUpdateWithoutRestaurantInput = {
-
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type rest_tagUncheckedUpdateWithoutRestaurantInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type rest_tagUncheckedUpdateManyWithoutRestaurantInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    tag?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
   }
 
   export type reviewUpdateWithoutRestaurantInput = {

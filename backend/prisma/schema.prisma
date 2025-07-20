@@ -202,42 +202,12 @@ model email_verification {
 }
 
 model rest_tag {
-  id         Int        @id @default(autoincrement())
   rest_id    BigInt
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 아침식사 Int @default(0) @map("아침식사")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 점심식사 Int @default(0) @map("점심식사")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 저녁식사 Int @default(0) @map("저녁식사")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 야식 Int @default(0) @map("야식")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 혼밥 Int @default(0) @map("혼밥")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 데이트 Int @default(0) @map("데이트")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 가족 Int @default(0) @map("가족")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 단체회식 Int @default(0) @map("단체회식")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 고급스러운 Int @default(0) @map("고급스러운")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 가성비 Int @default(0) @map("가성비")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 기념일 Int @default(0) @map("기념일")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 술모임 Int @default(0) @map("술모임")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 시끌벅적한 Int @default(0) @map("시끌벅적한")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 깔끔한 Int @default(0) @map("깔끔한")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 캐주얼한 Int @default(0) @map("캐주얼한")
-  /// This field was commented out because of an invalid name. Please provide a valid one that matches [a-zA-Z][a-zA-Z0-9_]*
-  // 조용한 Int @default(0) @map("조용한")
+  tag        String     @db.VarChar(255)
+  count      Int        @default(1)
   restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rest_tag_restaurant_id_fk")
 
+  @@id([tag, rest_id])
   @@index([rest_id], map: "rest_tag_restaurant_id_fk")
 }
 
