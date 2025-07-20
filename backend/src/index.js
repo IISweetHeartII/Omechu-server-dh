@@ -7,7 +7,10 @@ import MySQLStore from "express-mysql-session";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
-import { handleRecommendMenu, handleFindRelatedMenu } from "./controllers/menu.controller.js";
+import {
+  handleRecommendMenu,
+  handleFindRelatedMenu,
+} from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
 import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
