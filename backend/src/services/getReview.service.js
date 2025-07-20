@@ -1,5 +1,5 @@
 import { getReviewData } from "../repositories/getReview.repository.js";
-import { NoParams, NoRestData } from "../errors.js";
+import {  NoRestData } from "../errors.js";
 import { responseFromGetReview } from "../dtos/getReview.dto.js";
 export const getReview = async (data) => {
   const reviewData = await getReviewData(data);

@@ -87,23 +87,26 @@ model rest_menu {
 }
 
 model restaurant {
-  id             BigInt       @id @default(autoincrement())
-  location1      String?      @db.VarChar(20)
-  location2      String?      @db.VarChar(20)
-  location3      String?      @db.VarChar(20)
-  name           String?      @db.VarChar(60)
-  repre_menu     String?      @db.VarChar(50)
-  close_day      String?      @db.Text
-  start_time     String?      @db.VarChar(4)
-  end_time       String?      @db.VarChar(4)
-  address        String?      @db.VarChar(60)
-  detail_address String?      @db.VarChar(60)
-  rating         Float?       @db.Float
-  day_open_time  String?      @db.Text
-  rest_image     rest_image[]
-  rest_menu      rest_menu[]
-  review         review[]
-  zzim           zzim[]
+  id              BigInt       @id @default(autoincrement())
+  location        String?      @db.VarChar(20)
+  name            String?      @db.VarChar(60)
+  repre_menu      String?      @db.VarChar(50)
+  address         String?      @db.VarChar(60)
+  detail_address  String?      @db.VarChar(60)
+  rating          Float?       @db.Float
+  monday          String?      @db.Text
+  tuesday         String?      @db.Text
+  wednesday       String?      @db.Text
+  thursday        String?      @db.Text
+  friday          String?      @db.Text
+  saturday        String?      @db.Text
+  sunday          String?      @db.Text
+  google_place_id String?      @db.Text
+  rest_image      rest_image[]
+  rest_menu       rest_menu[]
+  rest_tag        rest_tag[]
+  review          review[]
+  zzim            zzim[]
 }
 
 model review {
@@ -145,9 +148,9 @@ model user {
   phone_num        String?            @db.VarChar(21)
   is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
-  body_type        user_body_type?
-  gender           user_gender?
-  exercise         user_exercise?
+  body_type        Int?
+  gender           Int?
+  exercise         Int?
   password         String             @db.VarChar(50)
   created_at       DateTime?          @default(now()) @db.DateTime(0)
   updated_at       DateTime?          @default(now()) @db.DateTime(0)
@@ -191,22 +194,21 @@ model zzim {
   @@index([user_id], map: "user_id")
 }
 
-enum user_body_type {
-  cold        @map("감기")
-  indigestion @map("소화불량")
-  heat_type   @map("더위잘탐")
-  cold_type   @map("추위잘탐")
+model email_verification {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique(map: "email_verification_pk") @db.VarChar(255)
+  code       String    @db.VarChar(10)
+  created_at DateTime? @default(now()) @db.DateTime(0)
 }
 
-enum user_gender {
-  male   @map("남성")
-  female @map("여성")
-}
+model rest_tag {
+  rest_id    BigInt
+  tag        String     @db.VarChar(255)
+  count      Int        @default(1)
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rest_tag_restaurant_id_fk")
 
-enum user_exercise {
-  diet     @map("다이어트 중")
-  bulk     @map("중량 중")
-  maintain @map("유지 중")
+  @@id([tag, rest_id])
+  @@index([rest_id], map: "rest_tag_restaurant_id_fk")
 }
 
 enum allergy_type {

@@ -7,15 +7,33 @@ import MySQLStore from "express-mysql-session";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
-import { handleRecommendMenu } from "./controllers/menu.controller.js";
+import {
+  handleRecommendMenu,
+  handleFindRelatedMenu,
+} from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
+import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
 import { generatePresignedUrl } from "./controllers/image.uploader.js";
 import { handleUserLogin } from "./controllers/login.controller.js";
+import { handleRenewSession } from "./controllers/session.controller.js";
 import { handleUpdateUserInfo } from "./controllers/user.controller.js";
 import { handleAddReview } from "./controllers/addReview.controller.js";
+import { handleUserLogout } from "./controllers/logout.controller.js";
 import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
+import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+
+// 🆕 마이페이지 컨트롤러 추가
+import {
+  handleGetUserProfile,
+  handleUpdateUserProfile,
+  handleGetMyRestaurants,
+  handleUpdateRestaurant,
+  handleAddZzim,
+  handleRemoveZzim,
+  handleGetZzimList,
+} from "./controllers/mypage.controller.js";
 
 dotenv.config();
 
@@ -104,7 +122,12 @@ app.get("/openapi.json", async (req, res, next) => {
 });
 
 // 기타 미들웨어
-app.use(cors({ origin: ["http://localhost:3000","https://omechu.log8.kr"] }));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    credentials: true,
+  })
+);
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -116,16 +139,37 @@ app.get("/", (req, res) => {
 
 // 회원가입 라우터 (POST /auth/signup)
 app.post("/auth/signup", handleUserSignUp);
-app.get("/recommend", handleRecommendMenu);
+app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
+app.post("/fetch-google-places", handleFetchGooglePlaces);
+app.get("/place-detail/:id", handleFetchPlaceDetail);
+app.post("/find-related-menu", handleFindRelatedMenu);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 
 // 프로필 이미지 presigned url 생성 API
 app.post("/image/upload", generatePresignedUrl);
 app.post("/auth/login", handleUserLogin);
+// 세션 재발급 API
+app.post("/auth/reissue", isLoggedIn, handleRenewSession);
+
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
+app.post("/auth/logout", isLoggedIn, handleUserLogout);
+
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
+
+// 🆕 마이페이지 라우터들 추가
+app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
+app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
+app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
+app.patch(
+  "/mypage/restaurant/:restaurantId/edit",
+  isLoggedIn,
+  handleUpdateRestaurant
+);
+app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
+app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
+app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {

@@ -174,18 +174,20 @@ exports.Prisma.Rest_menuScalarFieldEnum = {
 
 exports.Prisma.RestaurantScalarFieldEnum = {
   id: 'id',
-  location1: 'location1',
-  location2: 'location2',
-  location3: 'location3',
+  location: 'location',
   name: 'name',
   repre_menu: 'repre_menu',
-  close_day: 'close_day',
-  start_time: 'start_time',
-  end_time: 'end_time',
   address: 'address',
   detail_address: 'detail_address',
   rating: 'rating',
-  day_open_time: 'day_open_time'
+  monday: 'monday',
+  tuesday: 'tuesday',
+  wednesday: 'wednesday',
+  thursday: 'thursday',
+  friday: 'friday',
+  saturday: 'saturday',
+  sunday: 'sunday',
+  google_place_id: 'google_place_id'
 };
 
 exports.Prisma.ReviewScalarFieldEnum = {
@@ -245,6 +247,19 @@ exports.Prisma.ZzimScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.Email_verificationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  code: 'code',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Rest_tagScalarFieldEnum = {
+  rest_id: 'rest_id',
+  tag: 'tag',
+  count: 'count'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -281,17 +296,19 @@ exports.Prisma.rest_imageOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.restaurantOrderByRelevanceFieldEnum = {
-  location1: 'location1',
-  location2: 'location2',
-  location3: 'location3',
+  location: 'location',
   name: 'name',
   repre_menu: 'repre_menu',
-  close_day: 'close_day',
-  start_time: 'start_time',
-  end_time: 'end_time',
   address: 'address',
   detail_address: 'detail_address',
-  day_open_time: 'day_open_time'
+  monday: 'monday',
+  tuesday: 'tuesday',
+  wednesday: 'wednesday',
+  thursday: 'thursday',
+  friday: 'friday',
+  saturday: 'saturday',
+  sunday: 'sunday',
+  google_place_id: 'google_place_id'
 };
 
 exports.Prisma.JsonNullValueFilter = {
@@ -325,24 +342,15 @@ exports.Prisma.userOrderByRelevanceFieldEnum = {
   password: 'password',
   profileImageUrl: 'profileImageUrl'
 };
-exports.user_body_type = exports.$Enums.user_body_type = {
-  cold: 'cold',
-  indigestion: 'indigestion',
-  heat_type: 'heat_type',
-  cold_type: 'cold_type'
+
+exports.Prisma.email_verificationOrderByRelevanceFieldEnum = {
+  email: 'email',
+  code: 'code'
 };
 
-exports.user_gender = exports.$Enums.user_gender = {
-  male: 'male',
-  female: 'female'
+exports.Prisma.rest_tagOrderByRelevanceFieldEnum = {
+  tag: 'tag'
 };
-
-exports.user_exercise = exports.$Enums.user_exercise = {
-  diet: 'diet',
-  bulk: 'bulk',
-  maintain: 'maintain'
-};
-
 exports.allergy_type = exports.$Enums.allergy_type = {
   egg: 'egg',
   milk: 'milk',
@@ -374,7 +382,9 @@ exports.Prisma.ModelName = {
   user: 'user',
   allergy: 'allergy',
   prefer: 'prefer',
-  zzim: 'zzim'
+  zzim: 'zzim',
+  email_verification: 'email_verification',
+  rest_tag: 'rest_tag'
 };
 
 /**

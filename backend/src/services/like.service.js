@@ -1,6 +1,6 @@
 import { changeLike } from "../repositories/like.repository.js";
 import {
-  FailToChangeLike,
+  //FailToChangeLike,
   NoInCorrectData,
   NoInCorrectParmas,
 } from "../errors.js";
@@ -12,11 +12,11 @@ export const addLike = async ({ data, restId, reviewId }) => {
       restId,
       reviewId,
     });
-  } else if (like.error === "CANT_CHANGE") {
-    throw new FailToChangeLike("해당 리뷰의 좋아요 수가 0개 이하 입니다", {
-      restId,
-      reviewId,
-    });
+  // } else if (like.error === "CANT_CHANGE") {
+  //   throw new FailToChangeLike("해당 리뷰의 좋아요 수가 0개 이하 입니다", {
+  //     restId,
+  //     reviewId,
+  //   });
   } else if (like.error === "NO_INCORRECT_DATA") {
     throw new NoInCorrectData("해당 리뷰의 정보가 없습니다", {
       restId,

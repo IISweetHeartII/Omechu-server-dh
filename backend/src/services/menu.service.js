@@ -1,4 +1,4 @@
-import { recommendMenu,checkMenuExists,addMenuToDatabase } from "../repositories/menu.repository.js";
+import { recommendMenu,checkMenuExists,addMenuToDatabase,findRelatedMenu } from "../repositories/menu.repository.js";
 import { fetchKakaoPlaces } from "../repositories/restaurant.repository.js";
 export const recommendMenuService = async (choice) => {
     const menus = await recommendMenu(choice);
@@ -59,4 +59,15 @@ export const recommendMenuService = async (choice) => {
 
     // 카카오 API를 통해 장소 정보를 가져옴
     return menus;
+}
+
+export const findRelatedMenuService = async (menuName) => {
+    console.log("Finding related menu for:", menuName);
+    const relatedMenus = await findRelatedMenu(menuName);
+    if (!relatedMenus || relatedMenus.length === 0) {
+        console.error("No related menus found for:", menuName);
+        return [];
+    }
+    console.log("Related menus found:", relatedMenus);
+    return relatedMenus;
 }
