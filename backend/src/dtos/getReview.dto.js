@@ -15,9 +15,10 @@ export const responseFromGetReview = ({
       text: data.text,
       created_at: data.created_at,
       like: data.like,
-      reviewImg: data.review_image,
+      reviewImg: data.review_image.map((img) => img.link),
     };
   });
+  console.log(totalReview);
   const tag = mostTag.map((tagData) => {
     return {
       restId: tagData.rest_id.toString(),
@@ -30,7 +31,7 @@ export const responseFromGetReview = ({
     mostTag: tag,
     allReviewCount: allReviewCount,
     avgRating: avgRating,
-    nextCursor: parseInt(nextCursor),
+    nextCursor: nextCursor ? parseInt(nextCursor, 10) : null,
     hasNextPage: hasNextPage,
   };
 };

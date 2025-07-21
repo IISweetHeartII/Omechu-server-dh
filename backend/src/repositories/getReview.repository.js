@@ -48,6 +48,7 @@ export const getReviewData = async (data) => {
     where: { rest_id: data.rest_id },
   });
   const avgRating = await prisma.review.aggregate({
+    where: { rest_id: data.rest_id },
     _avg: { rating: true },
   });
   const hasNextPage = reviews.length > pageSize;
