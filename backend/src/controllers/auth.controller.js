@@ -110,7 +110,7 @@ export const handleUserSignUp = async (req, res, next) => {
   const user = await userSignUp(bodyToUser(req.body));
 
   req.session.user = {
-    id: Number(user.id), 
+    id: Number(user.id),
     email: user.email,
   };
 

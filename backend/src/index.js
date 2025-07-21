@@ -7,7 +7,10 @@ import MySQLStore from "express-mysql-session";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
-import { handleRecommendMenu, handleFindRelatedMenu } from "./controllers/menu.controller.js";
+import {
+  handleRecommendMenu,
+  handleFindRelatedMenu,
+} from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
 import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
@@ -31,9 +34,8 @@ import {
   handleUpdateRestaurant,
   handleAddZzim,
   handleRemoveZzim,
-  handleGetZzimList
+  handleGetZzimList,
 } from "./controllers/mypage.controller.js";
-
 
 dotenv.config();
 
@@ -113,7 +115,7 @@ app.get("/openapi.json", async (req, res, next) => {
   const doc = {
     info: {
       title: "Omechu",
-      description: "Umc 8th Omech 데모데이 프로젝트",
+      description: "Umc 8th Omechu 데모데이 프로젝트",
     },
     host: "localhost:3000",
   };
@@ -168,7 +170,11 @@ app.post("/auth/verify", handleVerifyEmailCode);
 app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
 app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
 app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
-app.patch("/mypage/restaurant/:restaurantId/edit", isLoggedIn, handleUpdateRestaurant);
+app.patch(
+  "/mypage/restaurant/:restaurantId/edit",
+  isLoggedIn,
+  handleUpdateRestaurant
+);
 app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
 app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
 app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);
