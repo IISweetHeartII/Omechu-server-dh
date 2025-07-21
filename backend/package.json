@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Team-Omechu/Omechu-server#readme",
   "dependencies": {
-    "@prisma/client": "^6.11.1",
+    "@prisma/client": "^6.12.0",
     "aws-sdk": "^2.1692.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
@@ -35,13 +35,13 @@
     "nodemailer": "^7.0.5",
     "openai": "^5.8.2",
     "path": "^0.12.7",
-    "prisma": "^6.11.1",
     "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "prisma": "^6.12.0"
   }
 }

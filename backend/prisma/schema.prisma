@@ -15,7 +15,7 @@ model choice {
 
 model menu {
   id               BigInt             @id @default(autoincrement())
-  name             String             @db.VarChar(30)
+  name             String             @unique(map: "unique_name") @db.VarChar(30)
   description      String?            @db.VarChar(150)
   calory           BigInt?
   carbo            BigInt?
@@ -209,6 +209,14 @@ model rest_tag {
 
   @@id([tag, rest_id])
   @@index([rest_id], map: "rest_tag_restaurant_id_fk")
+}
+
+model password_reset_token {
+  id         Int       @id @default(autoincrement())
+  email      String    @unique(map: "email") @db.VarChar(255)
+  token      String    @db.VarChar(255)
+  expires_at DateTime  @db.DateTime(0)
+  created_at DateTime? @default(now()) @db.DateTime(0)
 }
 
 enum allergy_type {
