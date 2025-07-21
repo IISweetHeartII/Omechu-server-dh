@@ -1,10 +1,7 @@
 import dotenv from "dotenv";
 import { prisma } from "../db.config.js";
 dotenv.config();
-import { OpenAI } from 'openai';
-
-
-
+import { OpenAI } from "openai";
 
 // {
 // "y" : "37.4895246",
@@ -37,9 +34,6 @@ export const fetchKakaoPlaces = async (info) => {
   return data;
 };
 
-
-
-
 export const fetchGooglePlaces = async ({ info }) => {
   const url = "https://places.googleapis.com/v1/places:searchText";
 
@@ -62,7 +56,8 @@ export const fetchGooglePlaces = async ({ info }) => {
     headers: {
       "Content-Type": "application/json",
       "X-Goog-Api-Key": KEY,
-      "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.id"
+      "X-Goog-FieldMask":
+        "places.displayName,places.formattedAddress,places.id",
     },
     body: JSON.stringify(body),
   });
@@ -77,8 +72,7 @@ export const fetchGooglePlaces = async ({ info }) => {
   const data = await response.json();
   console.log(data);
   return data;
-}
-
+};
 
 export const addRestaurantToDatabase = async (restaurantData, keyword) => {
   try {
@@ -87,7 +81,9 @@ export const addRestaurantToDatabase = async (restaurantData, keyword) => {
     const repreMenu = keyword || "";
     const googlePlaceId = restaurantData.id || "";
     //address 맨 앞에 "대한민국"이 붙어 있다면 제거
-    const cleanedAddress = address.startsWith("대한민국") ? address.slice(5).trim() : address;
+    const cleanedAddress = address.startsWith("대한민국")
+      ? address.slice(5).trim()
+      : address;
     const location = await addressToLocation(cleanedAddress);
     console.log("Converted location:", location);
     const result = await prisma.restaurant.create({
@@ -104,7 +100,7 @@ export const addRestaurantToDatabase = async (restaurantData, keyword) => {
     console.error("Error adding restaurant to database:", error);
     throw error;
   }
-}
+};
 
 // 레스토랑 id가 존재하는 지 확인하는 함수
 export const checkRestaurantExists = async (restaurantId) => {
@@ -121,51 +117,49 @@ export const checkRestaurantExists = async (restaurantId) => {
     console.error("Error checking restaurant existence:", error);
     throw error;
   }
-}
+};
 
 export const addressToLocation = async (address) => {
   try {
     console.log("Converting address to location:", address);
     const key = process.env.OPENAI_API_KEY;
     const openai = new OpenAI({
-      apiKey: key
+      apiKey: key,
     });
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
-          role: 'system',
+          role: "system",
           content: `
                         해당 주소를 보고 "무슨시 무슨구 무슨동" 형식의 위치로 변환해줘.
                         주소: ${address}
                         예시: "서울특별시 강남구 역삼동"
                         만약 주소가 "대한민국"으로 시작한다면, "대한민국"을 제거하고 변환해줘.
           `,
-        }
+        },
       ],
     });
     const rawText = completion.choices[0].message.content.trim();
     console.log("Raw response from GPT:", rawText);
     return rawText;
-
   } catch (error) {
     console.error("Error converting address to location:", error);
     throw error;
   }
-}
-
-
+};
 
 export const fetchPlaceDetail = async (placeId) => {
   try {
     const url = `https://places.googleapis.com/v1/places/${placeId}?languageCode=ko`;
-    
+
     const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": process.env.GOOGLE_MAPS_API_KEY,
-        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress",
+        "X-Goog-FieldMask":
+          "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress",
       },
     });
 
@@ -173,11 +167,10 @@ export const fetchPlaceDetail = async (placeId) => {
       console.error("Google Places API 요청 실패:", response.statusText);
       return null;
     }
-    
+
     const data = await response.json();
     console.log("Fetched place detail:", data);
     return data;
-
   } catch (error) {
     console.error("Google Places 요청 중 에러 발생:", error);
     return null;

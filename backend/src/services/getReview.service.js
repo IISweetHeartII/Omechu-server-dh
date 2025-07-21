@@ -1,5 +1,5 @@
 import { getReviewData } from "../repositories/getReview.repository.js";
-import {  NoRestData } from "../errors.js";
+import { NoRestData } from "../errors.js";
 import { responseFromGetReview } from "../dtos/getReview.dto.js";
 export const getReview = async (data) => {
   const reviewData = await getReviewData(data);
@@ -10,6 +10,9 @@ export const getReview = async (data) => {
 
   return responseFromGetReview({
     reviewData: reviewData.data,
+    mostTag: reviewData.mostThreeTag,
+    allReviewCount: reviewData.allReviewCount,
+    avgRating: reviewData.avgRating,
     hasNextPage: reviewData.hasNextPage,
     nextCursor: reviewData.nextCursor,
   });
