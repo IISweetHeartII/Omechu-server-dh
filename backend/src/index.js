@@ -113,7 +113,7 @@ app.get("/openapi.json", async (req, res, next) => {
   const doc = {
     info: {
       title: "Omechu",
-      description: "Umc 8th Omech 데모데이 프로젝트",
+      description: "Umc 8th Omechu 데모데이 프로젝트",
     },
     host: "localhost:3000",
   };
