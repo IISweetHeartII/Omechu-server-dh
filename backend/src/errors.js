@@ -106,7 +106,6 @@ export class FailToAddReview extends Error {
   }
 }
 
-
 export class NoInCorrectParmas extends Error {
   errorCode = "C006";
   constructor(reason, data) {
@@ -118,27 +117,6 @@ export class NoInCorrectParmas extends Error {
 
 export class NoInCorrectData extends Error {
   errorCode = "C007";
-  constructor(reason, data) {
-    super(reason);
-    this.reason = reason;
-    this.data = data;
-  }
-}
-
-
-// ============== 🔧 like.service.js에서 필요한 에러 ==============
-
-export class FailToChangeLike extends Error {
-  errorCode = "C005";
-  constructor(reason, data) {
-    super(reason);
-    this.reason = reason;
-    this.data = data;
-  }
-}
-
-export class NoParams extends Error {
-  errorCode = "C005";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;

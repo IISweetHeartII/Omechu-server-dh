@@ -37,7 +37,12 @@ export const getReviewData = async (data) => {
   if (!reviews || reviews.length === 0) {
     return { error: "NO_RES_DATA" };
   }
-
+  const restTag = prisma.rest_tag.findMany({
+    where: { rest_id: data.rest_id },
+    orderBy: { count: "desc" },
+    take: 3,
+  });
+  console.log(restTag);
   const hasNextPage = reviews.length > pageSize;
   const slicedReviews = hasNextPage ? reviews.slice(0, pageSize) : reviews;
   const nextCursor = hasNextPage
