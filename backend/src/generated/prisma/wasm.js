@@ -260,6 +260,14 @@ exports.Prisma.Rest_tagScalarFieldEnum = {
   count: 'count'
 };
 
+exports.Prisma.Password_reset_tokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  expires_at: 'expires_at',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -351,6 +359,11 @@ exports.Prisma.email_verificationOrderByRelevanceFieldEnum = {
 exports.Prisma.rest_tagOrderByRelevanceFieldEnum = {
   tag: 'tag'
 };
+
+exports.Prisma.password_reset_tokenOrderByRelevanceFieldEnum = {
+  email: 'email',
+  token: 'token'
+};
 exports.allergy_type = exports.$Enums.allergy_type = {
   egg: 'egg',
   milk: 'milk',
@@ -384,7 +397,8 @@ exports.Prisma.ModelName = {
   prefer: 'prefer',
   zzim: 'zzim',
   email_verification: 'email_verification',
-  rest_tag: 'rest_tag'
+  rest_tag: 'rest_tag',
+  password_reset_token: 'password_reset_token'
 };
 
 /**
