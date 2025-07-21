@@ -5,12 +5,13 @@ export const bodyToUserInfo = (body, userId) => {
     nickname: body.nickname,
     is_verified: body.isVerified,
     profileImageUrl: body.profileImageUrl,
-    body_type: body.body_type,
-    exercise: body.state, 
-    gender: body.gender,  
+    body_type: convertBodyTypeToEnum(body.body_type),  // String → Int
+    exercise: convertExerciseToEnum(body.state),       // String → Int
+    gender: convertGenderToEnum(body.gender),          // String → Int
     phone_num: body.phoneNumber,
   };
 };
+
 
 export const responseFromUser = (user) => {
   const prefer = user.prefer || [];
@@ -31,31 +32,31 @@ export const responseFromUser = (user) => {
   };
 };
 
-function convertGender(gender) {
+function convertGenderToEnum(gender) {
   const map = {
-    male: "남성",
-    female: "여성",
+    "남자": 1,
+    "여자": 2,
   };
-  return map[gender] ?? gender;
+  return map[gender] ?? null;
 }
 
-function convertExercise(ex) {
+function convertExerciseToEnum(state) {
   const map = {
-    diet: "다이어트 중",
-    bulk: "중량 중",
-    maintain: "유지 중",
+    "다이어트 중": 1,
+    "중량 중": 2,
+    "유지 중": 3,
   };
-  return map[ex] ?? ex;
+  return map[state] ?? null;
 }
 
-function convertBodyType(type) {
+function convertBodyTypeToEnum(type) {
   const map = {
-    cold: "감기",
-    indigestion: "소화불량",
-    heat_type: "더위잘탐",
-    cold_type: "추위잘탐",
+    "감기": 1,
+    "소화불량": 2,
+    "더위잘탐": 3,
+    "추위잘탐": 4,
   };
-  return map[type] ?? type;
+  return map[type] ?? null;
 }
 
 function convertPrefer(prefer) {
@@ -78,4 +79,31 @@ function convertAllergy(allergy) {
     nuts: "견과류 알레르기",
   };
   return map[allergy] ?? allergy;
+}
+
+function convertGender(gender) {
+  const map = {
+    1: "남자",
+    2: "여자",
+  };
+  return map[gender] ?? gender;
+}
+
+function convertExercise(ex) {
+  const map = {
+    1: "다이어트 중",
+    2: "중량 중",
+    3: "유지 중",
+  };
+  return map[ex] ?? ex;
+}
+
+function convertBodyType(type) {
+  const map = {
+    1: "감기",
+    2: "소화불량",
+    3: "더위잘탐",
+    4: "추위잘탐",
+  };
+  return map[type] ?? type;
 }
