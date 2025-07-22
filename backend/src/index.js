@@ -25,8 +25,11 @@ import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
-import { handleGetMenu, handleGetMenuInfo } from "./controllers/menu.controller.js";
-// 🆕 마이페이지 컨트롤러 추가
+import {
+  handleGetMenu,
+  handleGetMenuInfo,
+} from "./controllers/menu.controller.js";
+
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
