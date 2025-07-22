@@ -22,18 +22,13 @@ import {
 
 /**
  * 내 프로필 조회
+ * GET /profile/me
  */
 export const handleGetUserProfile = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "내 프로필 조회"
-  #swagger.description = "사용자의 프로필 정보를 조회합니다."
-  #swagger.parameters['userId'] = {
-    in: 'query',
-    description: '사용자 ID',
-    required: true,
-    type: 'integer'
-  }
+  #swagger.description = "세션 기반으로 현재 로그인한 사용자의 프로필 정보를 조회합니다."
   #swagger.responses[200] = {
     description: "프로필 조회 성공",
     content: {
@@ -47,11 +42,12 @@ export const handleGetUserProfile = async (req, res, next) => {
               type: "object",
               properties: {
                 id: { type: "string", example: "1" },
-                email: { type: "string", example: "user@example.com" },
-                nickname: { type: "string", example: "오메추유저" },
-                body_type: { type: "string", example: "보통" },
+                email: { type: "string", example: "test@example.com" },
+                nickname: { type: "string", example: "테스트유저" },
+                body_type: { type: "string", example: "더위잘탐" },
                 gender: { type: "string", example: "남성" },
-                exercise: { type: "string", example: "다이어트 중" }
+                exercise: { type: "string", example: "다이어트 중" },
+                profileImageUrl: { type: "string", example: "https://s3.amazonaws.com/profile.jpg" }
               }
             }
           }
@@ -59,8 +55,8 @@ export const handleGetUserProfile = async (req, res, next) => {
       }
     }
   }
-  #swagger.responses[400] = {
-    description: "사용자 ID가 없거나 잘못된 경우",
+  #swagger.responses[401] = {
+    description: "인증 필요",
     content: {
       'application/json': {
         schema: {
@@ -70,12 +66,10 @@ export const handleGetUserProfile = async (req, res, next) => {
             error: {
               type: "object",
               properties: {
-                errorCode: { type: "string", example: "M001" },
-                reason: { type: "string", example: "사용자 프로필을 찾을 수 없습니다." },
-                data: { type: "object" }
+                errorCode: { type: "string", example: "AUTH_REQUIRED" },
+                reason: { type: "string", example: "로그인이 필요합니다." }
               }
-            },
-            success: { type: "object", example: null }
+            }
           }
         }
       }
@@ -84,12 +78,11 @@ export const handleGetUserProfile = async (req, res, next) => {
   */
 
   try {
-    const { userId } = req.query;
-
+    const userId = req.session.user?.id;
     if (!userId) {
-      return res.status(StatusCodes.BAD_REQUEST).error({
-        errorCode: "C006",
-        reason: "사용자 ID가 필요합니다.",
+      return res.status(StatusCodes.UNAUTHORIZED).error({
+        errorCode: "AUTH_REQUIRED",
+        reason: "로그인이 필요합니다.",
         data: null
       });
     }
@@ -106,6 +99,7 @@ export const handleGetUserProfile = async (req, res, next) => {
 
 /**
  * 프로필 정보 수정
+ * PATCH /profile/edit
  */
 export const handleUpdateUserProfile = async (req, res, next) => {
   /*
@@ -119,59 +113,45 @@ export const handleUpdateUserProfile = async (req, res, next) => {
         schema: {
           type: 'object',
           properties: {
-            email: { type: 'string', example: 'user@example.com' },
+            nickname: { type: 'string', example: '테스트유저' },
+            email: { type: 'string', example: 'test@example.com' },
             phone_num: { type: 'string', example: '010-1234-5678' },
-            nickname: { type: 'string', example: '새닉네임' },
-            body_type: { type: 'string', enum: ['감기', '소화불량', '더위잘탐', '추위잘탐'] },
-            gender: { type: 'string', enum: ['남성', '여성'] },
-            exercise: { type: 'string', enum: ['다이어트 중', '중량 중', '유지 중'] },
+            body_type: { type: 'string', enum: ['감기', '소화불량', '더위잘탐', '추위잘탐'], example: '더위잘탐' },
+            gender: { type: 'string', enum: ['남성', '여성'], example: '남성' },
+            exercise: { type: 'string', enum: ['다이어트 중', '중량 중', '유지 중'], example: '다이어트 중' },
+            prefer: { type: 'string', example: '한식, 중식' },
+            allergic: { type: 'string', example: '견과류, 갑각류' },
             profileImageUrl: { type: 'string', example: 'https://s3.amazonaws.com/profile.jpg' }
+          }
+        },
+        examples: {
+          basic_update: {
+            summary: '기본 정보만 수정',
+            value: {
+              nickname: '새닉네임',
+              email: 'new@example.com'
+            }
+          },
+          full_update: {
+            summary: '전체 정보 수정',
+            value: {
+              nickname: '테스트유저',
+              email: 'test@example.com',
+              phone_num: '010-1234-5678',
+              body_type: '더위잘탐',
+              gender: '남성',
+              exercise: '다이어트 중',
+              prefer: '한식, 중식',
+              allergic: '견과류',
+              profileImageUrl: 'https://s3.amazonaws.com/profile.jpg'
+            }
           }
         }
       }
     }
   }
   #swagger.responses[200] = {
-    description: "프로필 수정 성공",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "SUCCESS" },
-            error: { type: "object", example: null },
-            success: {
-              type: "object",
-              properties: {
-                id: { type: "string", example: "1" },
-                email: { type: "string", example: "user@example.com" },
-                nickname: { type: "string", example: "새닉네임" }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  #swagger.responses[401] = {
-    description: "로그인이 필요한 경우",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "AUTH_REQUIRED" },
-                reason: { type: "string", example: "로그인이 필요합니다" }
-              }
-            }
-          }
-        }
-      }
-    }
+    description: "프로필 수정 성공"
   }
   */
 
@@ -197,66 +177,52 @@ export const handleUpdateUserProfile = async (req, res, next) => {
 };
 
 /**
- * 내가 등록한 맛집 목록 조회
+ * 내가 등록한 맛집 가져오기
+ * GET /place/:id
  */
 export const handleGetMyRestaurants = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
-  #swagger.summary = "내가 등록한 맛집 목록 조회"
-  #swagger.description = "사용자가 등록한 맛집 목록을 조회합니다."
-  #swagger.parameters['limit'] = {
-    in: 'query',
-    description: '한 번에 가져올 데이터 개수',
-    required: false,
-    type: 'integer',
-    default: 10
-  }
-  #swagger.parameters['cursor'] = {
-    in: 'query',
-    description: '마지막으로 받은 맛집 ID (페이지네이션용)',
-    required: false,
-    type: 'string'
-  }
-  #swagger.responses[200] = {
-    description: "맛집 목록 조회 성공",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "SUCCESS" },
-            error: { type: "object", example: null },
-            success: {
-              type: "object",
-              properties: {
-                data: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      id: { type: "string", example: "1" },
-                      name: { type: "string", example: "맛있는집" },
-                      address: { type: "string", example: "서울시 강남구" }
-                    }
-                  }
-                },
-                hasNextPage: { type: "boolean", example: true },
-                nextCursor: { type: "string", example: "10" }
-              }
-            }
-          }
-        }
-      }
+  #swagger.summary = "내가 등록한 맛집 가져오기"
+  #swagger.description = "사용자 ID로 해당 사용자가 등록한 맛집 목록을 조회합니다."
+  #swagger.parameters = [
+    {
+      name: 'id',
+      in: 'path',
+      required: true,
+      schema: { type: 'string' },
+      description: '사용자 ID',
+      example: '1'
+    },
+    {
+      name: 'limit',
+      in: 'query',
+      schema: { type: 'integer', default: 10 },
+      description: '조회할 개수',
+      example: 10
+    },
+    {
+      name: 'cursor',
+      in: 'query',
+      schema: { type: 'string' },
+      description: '페이징 커서',
+      example: 'abc123'
     }
+  ]
+  #swagger.responses[200] = {
+    description: "맛집 목록 조회 성공"
   }
   */
 
   try {
-    const userId = req.session.user?.id;
-    if (!userId) {
+    const { id: userId } = req.params;
+    
+    // 세션 사용자와 요청 사용자 일치 확인
+    const sessionUserId = req.session.user?.id;
+    if (!sessionUserId || sessionUserId.toString() !== userId) {
       return res.status(StatusCodes.UNAUTHORIZED).error({
         errorCode: "AUTH_REQUIRED",
-        reason: "로그인이 필요합니다.",
+        reason: "본인의 정보만 조회할 수 있습니다.",
         data: null
       });
     }
@@ -273,19 +239,24 @@ export const handleGetMyRestaurants = async (req, res, next) => {
 };
 
 /**
- * 특정 맛집 정보 수정
+ * 특정 맛집 정보 수정하기
+ * PATCH /place/:id/edit
  */
 export const handleUpdateRestaurant = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
-  #swagger.summary = "맛집 정보 수정"
+  #swagger.summary = "특정 맛집 정보 수정하기"
   #swagger.description = "등록한 맛집의 정보를 수정합니다."
-  #swagger.parameters['restaurantId'] = {
-    in: 'path',
-    description: '맛집 ID',
-    required: true,
-    type: 'string'
-  }
+  #swagger.parameters = [
+    {
+      name: 'id',
+      in: 'path',
+      required: true,
+      schema: { type: 'string' },
+      description: '맛집 ID',
+      example: '1'
+    }
+  ]
   #swagger.requestBody = {
     required: true,
     content: {
@@ -293,11 +264,40 @@ export const handleUpdateRestaurant = async (req, res, next) => {
         schema: {
           type: 'object',
           properties: {
-            name: { type: 'string', example: '수정된 맛집 이름' },
-            address: { type: 'string', example: '서울시 강남구 테헤란로' },
-            repre_menu: { type: 'string', example: '대표메뉴' },
-            start_time: { type: 'string', example: '0900' },
-            end_time: { type: 'string', example: '2200' }
+            name: { type: 'string', example: '맛있는 테스트 김치찌개집' },
+            repre_menu: { type: 'string', example: '김치찌개, 된장찌개' },
+            address: { type: 'string', example: '서울시 강남구 테헤란로 123' },
+            location1: { type: 'string', example: '서울시' },
+            location2: { type: 'string', example: '강남구' },
+            location3: { type: 'string', example: '역삼동' },
+            detail_address: { type: 'string', example: '1층 101호' },
+            close_day: { type: 'string', example: '월요일' },
+            start_time: { type: 'string', example: '11:00' },
+            end_time: { type: 'string', example: '22:00' }
+          }
+        },
+        examples: {
+          basic_update: {
+            summary: '기본 정보만 수정',
+            value: {
+              name: '새로운 맛집 이름',
+              repre_menu: '김치찌개'
+            }
+          },
+          full_update: {
+            summary: '전체 정보 수정',
+            value: {
+              name: '맛있는 테스트 김치찌개집',
+              repre_menu: '김치찌개, 된장찌개',
+              address: '서울시 강남구 테헤란로 123',
+              location1: '서울시',
+              location2: '강남구',
+              location3: '역삼동',
+              detail_address: '1층 101호',
+              close_day: '월요일',
+              start_time: '11:00',
+              end_time: '22:00'
+            }
           }
         }
       }
@@ -305,26 +305,6 @@ export const handleUpdateRestaurant = async (req, res, next) => {
   }
   #swagger.responses[200] = {
     description: "맛집 정보 수정 성공"
-  }
-  #swagger.responses[403] = {
-    description: "수정 권한 없음",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "M003" },
-                reason: { type: "string", example: "맛집 정보를 수정할 권한이 없습니다." }
-              }
-            }
-          }
-        }
-      }
-    }
   }
   */
 
@@ -338,7 +318,7 @@ export const handleUpdateRestaurant = async (req, res, next) => {
       });
     }
 
-    const { restaurantId } = req.params;
+    const { id: restaurantId } = req.params;
     const restaurantData = bodyToRestaurantUpdate(req.body, restaurantId, userId);
     
     const updatedRestaurant = await updateRestaurantService(
@@ -357,12 +337,13 @@ export const handleUpdateRestaurant = async (req, res, next) => {
 };
 
 /**
- * 찜 등록
+ * 찜 등록하기
+ * POST /heart
  */
 export const handleAddZzim = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
-  #swagger.summary = "찜 등록"
+  #swagger.summary = "찜 등록하기"
   #swagger.description = "맛집을 찜 목록에 추가합니다."
   #swagger.requestBody = {
     required: true,
@@ -372,53 +353,25 @@ export const handleAddZzim = async (req, res, next) => {
           type: 'object',
           required: ['restaurantId'],
           properties: {
-            restaurantId: { type: 'integer', example: 1 }
+            restaurantId: { type: 'integer', description: '찜할 맛집 ID', example: 1 }
+          }
+        },
+        examples: {
+          add_zzim: {
+            summary: '찜 등록 예시',
+            value: {
+              restaurantId: 1
+            }
           }
         }
       }
     }
   }
   #swagger.responses[201] = {
-    description: "찜 등록 성공",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "SUCCESS" },
-            error: { type: "object", example: null },
-            success: {
-              type: "object",
-              properties: {
-                id: { type: "string", example: "1" },
-                userId: { type: "string", example: "1" },
-                restaurantId: { type: "string", example: "1" }
-              }
-            }
-          }
-        }
-      }
-    }
+    description: "찜 등록 성공"
   }
-  #swagger.responses[409] = {
-    description: "이미 찜한 맛집인 경우",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "M004" },
-                reason: { type: "string", example: "이미 찜한 맛집입니다." }
-              }
-            }
-          }
-        }
-      }
-    }
+  #swagger.responses[400] = {
+    description: "이미 찜한 맛집이거나 잘못된 요청"
   }
   */
 
@@ -452,12 +405,13 @@ export const handleAddZzim = async (req, res, next) => {
 };
 
 /**
- * 찜 해제
+ * 찜 상태 변경하기 (찜 해제)
+ * PATCH /heart
  */
 export const handleRemoveZzim = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
-  #swagger.summary = "찜 해제"
+  #swagger.summary = "찜 상태 변경하기"
   #swagger.description = "찜 목록에서 맛집을 제거합니다."
   #swagger.requestBody = {
     required: true,
@@ -467,7 +421,15 @@ export const handleRemoveZzim = async (req, res, next) => {
           type: 'object',
           required: ['restaurantId'],
           properties: {
-            restaurantId: { type: 'integer', example: 1 }
+            restaurantId: { type: 'integer', description: '찜 해제할 맛집 ID', example: 1 }
+          }
+        },
+        examples: {
+          remove_zzim: {
+            summary: '찜 해제 예시',
+            value: {
+              restaurantId: 1
+            }
           }
         }
       }
@@ -512,71 +474,52 @@ export const handleRemoveZzim = async (req, res, next) => {
 };
 
 /**
- * 찜 목록 조회
+ * 찜 목록 가져오기
+ * GET /heart/:id
  */
 export const handleGetZzimList = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
-  #swagger.summary = "찜 목록 조회"
-  #swagger.description = "사용자의 찜 목록을 조회합니다."
-  #swagger.parameters['limit'] = {
-    in: 'query',
-    description: '한 번에 가져올 데이터 개수',
-    required: false,
-    type: 'integer',
-    default: 10
-  }
-  #swagger.parameters['cursor'] = {
-    in: 'query',
-    description: '마지막으로 받은 찜 ID (페이지네이션용)',
-    required: false,
-    type: 'string'
-  }
-  #swagger.responses[200] = {
-    description: "찜 목록 조회 성공",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "SUCCESS" },
-            error: { type: "object", example: null },
-            success: {
-              type: "object",
-              properties: {
-                data: {
-                  type: "array",
-                  items: {
-                    type: "object",
-                    properties: {
-                      id: { type: "string", example: "1" },
-                      restaurantId: { type: "string", example: "1" },
-                      restaurant: {
-                        type: "object",
-                        properties: {
-                          name: { type: "string", example: "맛있는집" }
-                        }
-                      }
-                    }
-                  }
-                },
-                hasNextPage: { type: "boolean", example: true },
-                nextCursor: { type: "string", example: "10" }
-              }
-            }
-          }
-        }
-      }
+  #swagger.summary = "찜 목록 가져오기"
+  #swagger.description = "사용자 ID로 해당 사용자의 찜 목록을 조회합니다."
+  #swagger.parameters = [
+    {
+      name: 'id',
+      in: 'path',
+      required: true,
+      schema: { type: 'string' },
+      description: '사용자 ID',
+      example: '1'
+    },
+    {
+      name: 'limit',
+      in: 'query',
+      schema: { type: 'integer', default: 10 },
+      description: '조회할 개수',
+      example: 10
+    },
+    {
+      name: 'cursor',
+      in: 'query',
+      schema: { type: 'string' },
+      description: '페이징 커서',
+      example: 'abc123'
     }
+  ]
+  #swagger.responses[200] = {
+    description: "찜 목록 조회 성공"
   }
   */
 
   try {
-    const userId = req.session.user?.id;
-    if (!userId) {
+    const { id: userId } = req.params;
+    
+    // 세션 사용자와 요청 사용자 일치 확인
+    const sessionUserId = req.session.user?.id;
+    if (!sessionUserId || sessionUserId.toString() !== userId) {
       return res.status(StatusCodes.UNAUTHORIZED).error({
         errorCode: "AUTH_REQUIRED",
-        reason: "로그인이 필요합니다.",
+        reason: "본인의 정보만 조회할 수 있습니다.",
         data: null
       });
     }

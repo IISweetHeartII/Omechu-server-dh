@@ -1,6 +1,31 @@
-/**
- * 마이페이지 관련 DTO 함수들
- */
+
+// Enum 변환 함수들
+const convertBodyType = (bodyType) => {
+  const bodyTypeMap = {
+    1: '감기',
+    2: '소화불량', 
+    3: '더위잘탐',
+    4: '추위잘탐'
+  };
+  return bodyTypeMap[bodyType] || bodyType;
+};
+
+const convertGender = (gender) => {
+  const genderMap = {
+    1: '남성',
+    2: '여성'
+  };
+  return genderMap[gender] || gender;
+};
+
+const convertExercise = (exercise) => {
+  const exerciseMap = {
+    1: '다이어트 중',
+    2: '증량 중', 
+    3: '유지 중'
+  };
+  return exerciseMap[exercise] || exercise;
+};
 
 // 프로필 수정 요청 데이터 변환
 export const bodyToProfileUpdate = (body, userId) => {
@@ -18,7 +43,7 @@ export const bodyToProfileUpdate = (body, userId) => {
   };
 };
 
-// 프로필 응답 데이터 변환
+// 프로필 응답 데이터 변환 - ID로 조회한 모든 정보 반환
 export const responseFromProfile = (user) => {
   return {
     id: user.id.toString(),
@@ -54,7 +79,7 @@ export const bodyToRestaurantUpdate = (body, restaurantId, userId) => {
   };
 };
 
-// 맛집 응답 데이터 변환
+// 맛집 응답 데이터 변환 - ID로 조회한 모든 맛집 정보 반환
 export const responseFromRestaurant = (restaurant) => {
   return {
     id: restaurant.id.toString(),
@@ -69,10 +94,20 @@ export const responseFromRestaurant = (restaurant) => {
     start_time: restaurant.start_time,
     end_time: restaurant.end_time,
     rating: restaurant.rating,
+    // 이미지 정보가 있다면 포함
     images: restaurant.rest_image?.map(img => ({
       id: img.id.toString(),
       link: img.link
     })) || []
+  };
+};
+
+// 맛집 목록 응답 데이터 변환 - ID로 조회한 모든 맛집 목록 반환
+export const responseFromRestaurantList = (restaurants, hasNextPage, nextCursor) => {
+  return {
+    data: restaurants.map(restaurant => responseFromRestaurant(restaurant)),
+    hasNextPage,
+    nextCursor
   };
 };
 
@@ -84,7 +119,7 @@ export const bodyToZzimRequest = (body) => {
   };
 };
 
-// 찜 응답 데이터 변환
+// 찜 응답 데이터 변환 - ID로 조회한 모든 찜 정보 반환
 export const responseFromZzim = (zzim) => {
   return {
     id: zzim.id.toString(),
@@ -95,61 +130,11 @@ export const responseFromZzim = (zzim) => {
   };
 };
 
-// 찜 목록 응답 데이터 변환
-export const responseFromZzimList = (zzimList, hasNextPage, nextCursor) => {
-  const transformedList = zzimList.map(zzim => responseFromZzim(zzim));
-  
+// 찜 목록 응답 데이터 변환 - ID로 조회한 모든 찜 목록 반환
+export const responseFromZzimList = (zzims, hasNextPage, nextCursor) => {
   return {
-    data: transformedList,
-    hasNextPage: hasNextPage,
-    nextCursor: nextCursor
+    data: zzims.map(zzim => responseFromZzim(zzim)),
+    hasNextPage,
+    nextCursor
   };
 };
-
-// 맛집 목록 응답 데이터 변환
-export const responseFromRestaurantList = (restaurants, hasNextPage, nextCursor) => {
-  const transformedList = restaurants.map(restaurant => responseFromRestaurant(restaurant));
-  
-  return {
-    data: transformedList,
-    hasNextPage: hasNextPage,
-    nextCursor: nextCursor
-  };
-};
-
-// Enum 변환 함수들 (기존 user.dto.js 스타일 따름)
-function convertGender(gender) {
-  const map = {
-    male: "남성",
-    female: "여성",
-    "남성": "남성",
-    "여성": "여성"
-  };
-  return map[gender] ?? gender;
-}
-
-function convertExercise(exercise) {
-  const map = {
-    diet: "다이어트 중",
-    bulk: "중량 중", 
-    maintain: "유지 중",
-    "다이어트 중": "다이어트 중",
-    "중량 중": "중량 중",
-    "유지 중": "유지 중"
-  };
-  return map[exercise] ?? exercise;
-}
-
-function convertBodyType(bodyType) {
-  const map = {
-    cold: "감기",
-    indigestion: "소화불량", 
-    heat_type: "더위잘탐",
-    cold_type: "추위잘탐",
-    "감기": "감기",
-    "소화불량": "소화불량",
-    "더위잘탐": "더위잘탐",
-    "추위잘탐": "추위잘탐"
-  };
-  return map[bodyType] ?? bodyType;
-}

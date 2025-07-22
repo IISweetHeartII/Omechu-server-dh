@@ -394,7 +394,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/hwijune/Desktop/Omechu/Omechu-server/backend/src/generated/prisma",
+      "value": "C:\\Users\\mhdmj\\OneDrive\\바탕 화면\\Omechu_Project\\omechu-server\\backend\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -403,12 +403,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/hwijune/Desktop/Omechu/Omechu-server/backend/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\mhdmj\\OneDrive\\바탕 화면\\Omechu_Project\\omechu-server\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

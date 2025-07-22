@@ -3,7 +3,7 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 /**
- * 사용자 프로필 조회 (실제 DB 구조에 맞게 수정)
+ * 사용자 프로필 조회 (실제 DB 스키마에 맞게 수정)
  */
 export const findUserProfile = async (userId) => {
   try {
@@ -19,17 +19,33 @@ export const findUserProfile = async (userId) => {
         exercise: true,
         profileImageUrl: true,
         created_at: true,
-        updated_at: true
-        // prefer와 allergy는 별도 테이블이므로 제거
+        updated_at: true,
+        // 관계 테이블에서 데이터 조회
+        allergy: {
+          select: {
+            allergy: true
+          }
+        },
+        prefer: {
+          select: {
+            prefer: true
+          }
+        }
       }
     });
 
     if (!user) return null;
 
-    // BigInt 변환
+    // 관계 데이터를 문자열로 변환
+    const allergies = user.allergy?.map(a => a.allergy).join(', ') || '';
+    const preferences = user.prefer?.map(p => p.prefer).join(', ') || '';
+
+    // BigInt 변환 및 데이터 정리
     return {
       ...user,
-      id: user.id.toString()
+      id: user.id.toString(),
+      allergic: allergies,  // 관계 테이블에서 가져온 데이터
+      prefer: preferences   // 관계 테이블에서 가져온 데이터
     };
 
   } catch (error) {
@@ -39,34 +55,49 @@ export const findUserProfile = async (userId) => {
 };
 
 /**
- * 사용자 프로필 업데이트 (실제 DB 구조에 맞게 수정)
+ * 사용자 프로필 업데이트 (실제 DB 스키마에 맞게 수정)
  */
 export const updateUserProfile = async (userId, data) => {
   try {
-    // enum 필드들은 제외하고 업데이트 (숫자 변환 문제 때문)
     const updateData = {
-      email: data.email,
-      phone_num: data.phone_num,
-      nickname: data.nickname,
-      profileImageUrl: data.profileImageUrl,
       updated_at: new Date()
     };
 
-    // undefined 값 제거
-    Object.keys(updateData).forEach(key => {
-      if (updateData[key] === undefined) {
-        delete updateData[key];
-      }
-    });
+    // 기본 필드들만 업데이트 (관계 테이블 제외)
+    if (data.email !== undefined) updateData.email = data.email;
+    if (data.phone_num !== undefined) updateData.phone_num = data.phone_num;
+    if (data.nickname !== undefined) updateData.nickname = data.nickname;
+    if (data.body_type !== undefined) updateData.body_type = data.body_type;
+    if (data.gender !== undefined) updateData.gender = data.gender;
+    if (data.exercise !== undefined) updateData.exercise = data.exercise;
+    if (data.profileImageUrl !== undefined) updateData.profileImageUrl = data.profileImageUrl;
 
     const updatedUser = await prisma.user.update({
       where: { id: BigInt(userId) },
-      data: updateData
+      data: updateData,
+      include: {
+        allergy: {
+          select: {
+            allergy: true
+          }
+        },
+        prefer: {
+          select: {
+            prefer: true
+          }
+        }
+      }
     });
+
+    // 관계 데이터를 문자열로 변환
+    const allergies = updatedUser.allergy?.map(a => a.allergy).join(', ') || '';
+    const preferences = updatedUser.prefer?.map(p => p.prefer).join(', ') || '';
 
     return {
       ...updatedUser,
-      id: updatedUser.id.toString()
+      id: updatedUser.id.toString(),
+      allergic: allergies,
+      prefer: preferences
     };
 
   } catch (error) {
@@ -76,13 +107,12 @@ export const updateUserProfile = async (userId, data) => {
 };
 
 /**
- * 맛집 정보 조회 (실제 DB 구조에 맞게 단순화)
+ * 맛집 정보 조회 (ID로 모든 정보 조회)
  */
 export const findRestaurantById = async (restaurantId) => {
   try {
     const restaurant = await prisma.restaurant.findUnique({
       where: { id: BigInt(restaurantId) }
-      // include 제거 - 실제 DB 구조가 다름
     });
 
     if (!restaurant) return null;
@@ -103,7 +133,7 @@ export const findRestaurantById = async (restaurantId) => {
  */
 export const countUserRestaurants = async (userId) => {
   try {
-    // 전체 맛집 개수 반환 (등록자 필드가 없으므로)
+    // 실제 구현시 user_id 필드로 조회해야 함
     const count = await prisma.restaurant.count();
     return count;
 
@@ -114,7 +144,7 @@ export const countUserRestaurants = async (userId) => {
 };
 
 /**
- * 사용자가 등록한 맛집 목록 조회 (단순화)
+ * 사용자가 등록한 맛집 목록 조회 (ID로 모든 맛집 정보 반환)
  */
 export const findUserRestaurants = async (userId, limit, cursor) => {
   try {
@@ -150,15 +180,23 @@ export const findUserRestaurants = async (userId, limit, cursor) => {
 };
 
 /**
- * 맛집 정보 업데이트 (실제 컬럼만 사용)
+ * 맛집 정보 업데이트 (모든 가능한 필드 업데이트)
  */
 export const updateRestaurant = async (restaurantId, data) => {
   try {
-    // 실제 존재하는 컬럼만 업데이트
     const updateData = {};
+    
+    // 실제 존재하는 컬럼만 업데이트
     if (data.name !== undefined) updateData.name = data.name;
     if (data.repre_menu !== undefined) updateData.repre_menu = data.repre_menu;
     if (data.address !== undefined) updateData.address = data.address;
+    if (data.location1 !== undefined) updateData.location1 = data.location1;
+    if (data.location2 !== undefined) updateData.location2 = data.location2;
+    if (data.location3 !== undefined) updateData.location3 = data.location3;
+    if (data.detail_address !== undefined) updateData.detail_address = data.detail_address;
+    if (data.close_day !== undefined) updateData.close_day = data.close_day;
+    if (data.start_time !== undefined) updateData.start_time = data.start_time;
+    if (data.end_time !== undefined) updateData.end_time = data.end_time;
 
     const updatedRestaurant = await prisma.restaurant.update({
       where: { id: BigInt(restaurantId) },
@@ -177,7 +215,7 @@ export const updateRestaurant = async (restaurantId, data) => {
 };
 
 /**
- * 찜 조회
+ * 찜 조회 (ID로 찜 정보 확인)
  */
 export const findZzim = async (userId, restaurantId) => {
   try {
@@ -204,7 +242,7 @@ export const findZzim = async (userId, restaurantId) => {
 };
 
 /**
- * 찜 생성
+ * 찜 생성 (모든 찜 관련 정보 생성)
  */
 export const createZzim = async (userId, restaurantId) => {
   try {
@@ -264,14 +302,14 @@ export const countUserZzims = async (userId) => {
 };
 
 /**
- * 사용자 찜 목록 조회 (단순화)
+ * 사용자 찜 목록 조회 (ID로 모든 찜 정보 반환)
  */
 export const findUserZzims = async (userId, limit, cursor) => {
   try {
     const zzimList = await prisma.zzim.findMany({
       where: { user_id: BigInt(userId) },
       include: {
-        restaurant: true // 단순 include만 사용
+        restaurant: true // 맛집 정보도 함께 조회
       },
       take: limit + 1,
       ...(cursor ? {
@@ -291,10 +329,10 @@ export const findUserZzims = async (userId, limit, cursor) => {
       id: zzim.id.toString(),
       user_id: zzim.user_id.toString(),
       rest_id: zzim.rest_id.toString(),
-      restaurant: {
+      restaurant: zzim.restaurant ? {
         ...zzim.restaurant,
         id: zzim.restaurant.id.toString()
-      }
+      } : null
     }));
 
     return {

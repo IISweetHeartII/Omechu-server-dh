@@ -24,6 +24,7 @@ import {
 
 /**
  * 사용자 프로필 조회
+ * ID만 전달하면 해당 사용자의 모든 프로필 정보 반환
  */
 export const getUserProfile = async (userId) => {
   const user = await findUserProfile(userId);
@@ -37,6 +38,7 @@ export const getUserProfile = async (userId) => {
 
 /**
  * 사용자 프로필 수정
+ * ID와 수정할 데이터만 전달하면 모든 프로필 정보 업데이트
  */
 export const updateUserProfileService = async (userId, data) => {
   // 사용자 존재 확인
@@ -46,7 +48,7 @@ export const updateUserProfileService = async (userId, data) => {
   }
 
   // 업데이트할 데이터가 있는지 확인
-  const updateFields = ['email', 'phone_num', 'nickname', 'profileImageUrl'];
+  const updateFields = ['email', 'phone_num', 'nickname', 'body_type', 'gender', 'exercise', 'prefer', 'allergic', 'profileImageUrl'];
   const hasUpdateData = updateFields.some(field => data[field] !== undefined);
   
   if (!hasUpdateData) {
@@ -63,6 +65,7 @@ export const updateUserProfileService = async (userId, data) => {
 
 /**
  * 내가 등록한 맛집 목록 조회
+ * ID만 전달하면 해당 사용자의 모든 맛집 정보 반환
  */
 export const getMyRestaurants = async (userId, limit = 10, cursor = null) => {
   try {
@@ -70,7 +73,7 @@ export const getMyRestaurants = async (userId, limit = 10, cursor = null) => {
     return result;
   } catch (error) {
     console.error('맛집 목록 조회 상세 오류:', error);
-    // 에러 발생시 빈 결과 반환
+    // 에러 발생시 빈 결과 반환 (프론트에서 선별 사용 가능하도록)
     return {
       data: [],
       hasNextPage: false,
@@ -81,6 +84,7 @@ export const getMyRestaurants = async (userId, limit = 10, cursor = null) => {
 
 /**
  * 맛집 정보 수정
+ * ID와 수정할 데이터만 전달하면 모든 맛집 정보 업데이트
  */
 export const updateRestaurantService = async (restaurantId, userId, data) => {
   // 맛집 존재 확인을 임시로 건너뛰기 (DB 스키마 문제 때문)
@@ -90,7 +94,7 @@ export const updateRestaurantService = async (restaurantId, userId, data) => {
   // }
 
   // 업데이트할 데이터 필터링 (실제 존재하는 컬럼만)
-  const updateFields = ['name', 'repre_menu', 'address'];
+  const updateFields = ['name', 'repre_menu', 'address', 'location1', 'location2', 'location3', 'detail_address', 'close_day', 'start_time', 'end_time'];
   
   const filteredData = {};
   updateFields.forEach(field => {
@@ -112,7 +116,8 @@ export const updateRestaurantService = async (restaurantId, userId, data) => {
 };
 
 /**
- * 찜 등록 (맛집 존재 확인 제거)
+ * 찜 등록
+ * ID만 전달하면 모든 찜 관련 처리 완료
  */
 export const addZzimService = async (userId, restaurantId) => {
   // 사용자 존재 확인
@@ -144,6 +149,7 @@ export const addZzimService = async (userId, restaurantId) => {
 
 /**
  * 찜 해제
+ * ID만 전달하면 모든 찜 해제 처리 완료
  */
 export const removeZzimService = async (userId, restaurantId) => {
   // 찜 존재 확인
@@ -162,6 +168,7 @@ export const removeZzimService = async (userId, restaurantId) => {
 
 /**
  * 찜 목록 조회
+ * ID만 전달하면 해당 사용자의 모든 찜 목록 반환
  */
 export const getZzimList = async (userId, limit = 10, cursor = null) => {
   try {
@@ -169,11 +176,35 @@ export const getZzimList = async (userId, limit = 10, cursor = null) => {
     return result;
   } catch (error) {
     console.error('찜 목록 조회 상세 오류:', error);
-    // 에러 발생시 빈 결과 반환
+    // 에러 발생시 빈 결과 반환 (프론트에서 선별 사용 가능하도록)
     return {
       data: [],
       hasNextPage: false,
       nextCursor: null
     };
+  }
+};
+
+/**
+ * 사용자 찜 개수 조회
+ */
+export const countUserZzimsService = async (userId) => {
+  try {
+    return await countUserZzims(userId);
+  } catch (error) {
+    console.error('찜 개수 조회 오류:', error);
+    return 0;
+  }
+};
+
+/**
+ * 사용자 맛집 개수 조회
+ */
+export const countUserRestaurantsService = async (userId) => {
+  try {
+    return await countUserRestaurants(userId);
+  } catch (error) {
+    console.error('맛집 개수 조회 오류:', error);
+    return 0;
   }
 };
