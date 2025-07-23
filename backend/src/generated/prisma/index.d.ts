@@ -21625,8 +21625,6 @@ export namespace Prisma {
   export type Password_reset_tokenScalarFieldEnum = (typeof Password_reset_tokenScalarFieldEnum)[keyof typeof Password_reset_tokenScalarFieldEnum]
 
 
-<<<<<<< HEAD
-=======
   export const Repre_menuScalarFieldEnum: {
     id: 'id',
     rest_id: 'rest_id',
@@ -21636,7 +21634,6 @@ export namespace Prisma {
   export type Repre_menuScalarFieldEnum = (typeof Repre_menuScalarFieldEnum)[keyof typeof Repre_menuScalarFieldEnum]
 
 
->>>>>>> develop
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -21785,8 +21782,6 @@ export namespace Prisma {
   export type password_reset_tokenOrderByRelevanceFieldEnum = (typeof password_reset_tokenOrderByRelevanceFieldEnum)[keyof typeof password_reset_tokenOrderByRelevanceFieldEnum]
 
 
-<<<<<<< HEAD
-=======
   export const repre_menuOrderByRelevanceFieldEnum: {
     menu: 'menu'
   };
@@ -21794,7 +21789,6 @@ export namespace Prisma {
   export type repre_menuOrderByRelevanceFieldEnum = (typeof repre_menuOrderByRelevanceFieldEnum)[keyof typeof repre_menuOrderByRelevanceFieldEnum]
 
 
->>>>>>> develop
   /**
    * Field references
    */
