@@ -8643,11 +8643,7 @@ export namespace Prisma {
 
   export type RestaurantGroupByOutputType = {
     id: bigint
-<<<<<<< HEAD
-    rest_image: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location: string | null
     name: string | null
     keyword: string | null
@@ -8750,11 +8746,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
-<<<<<<< HEAD
-      rest_image: string | null
-=======
       rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
       location: string | null
       name: string | null
       keyword: string | null
@@ -21171,11 +21163,7 @@ export namespace Prisma {
     OR?: restaurantWhereInput[]
     NOT?: restaurantWhereInput | restaurantWhereInput[]
     id?: BigIntFilter<"restaurant"> | bigint | number
-<<<<<<< HEAD
-    rest_image?: StringNullableFilter<"restaurant"> | string | null
-=======
     rest_image?: StringFilter<"restaurant"> | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
     keyword?: StringNullableFilter<"restaurant"> | string | null
@@ -21199,11 +21187,7 @@ export namespace Prisma {
 
   export type restaurantOrderByWithRelationInput = {
     id?: SortOrder
-<<<<<<< HEAD
-    rest_image?: SortOrderInput | SortOrder
-=======
     rest_image?: SortOrder
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     keyword?: SortOrderInput | SortOrder
@@ -21231,11 +21215,7 @@ export namespace Prisma {
     AND?: restaurantWhereInput | restaurantWhereInput[]
     OR?: restaurantWhereInput[]
     NOT?: restaurantWhereInput | restaurantWhereInput[]
-<<<<<<< HEAD
-    rest_image?: StringNullableFilter<"restaurant"> | string | null
-=======
     rest_image?: StringFilter<"restaurant"> | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
     keyword?: StringNullableFilter<"restaurant"> | string | null
@@ -21259,11 +21239,7 @@ export namespace Prisma {
 
   export type restaurantOrderByWithAggregationInput = {
     id?: SortOrder
-<<<<<<< HEAD
-    rest_image?: SortOrderInput | SortOrder
-=======
     rest_image?: SortOrder
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
     keyword?: SortOrderInput | SortOrder
@@ -21290,11 +21266,7 @@ export namespace Prisma {
     OR?: restaurantScalarWhereWithAggregatesInput[]
     NOT?: restaurantScalarWhereWithAggregatesInput | restaurantScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"restaurant"> | bigint | number
-<<<<<<< HEAD
-    rest_image?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
-=======
     rest_image?: StringWithAggregatesFilter<"restaurant"> | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     name?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     keyword?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
@@ -22281,11 +22253,7 @@ export namespace Prisma {
 
   export type restaurantCreateInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -22309,11 +22277,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -22337,11 +22301,7 @@ export namespace Prisma {
 
   export type restaurantUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22365,11 +22325,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22393,11 +22349,7 @@ export namespace Prisma {
 
   export type restaurantCreateManyInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -22416,11 +22368,7 @@ export namespace Prisma {
 
   export type restaurantUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22439,11 +22387,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26333,11 +26277,7 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutRest_menuInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -26360,11 +26300,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateWithoutRest_menuInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -26446,11 +26382,7 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutRest_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26473,11 +26405,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateWithoutRest_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26807,11 +26735,7 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutReviewInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -26834,11 +26758,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateWithoutReviewInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -26976,11 +26896,7 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27003,11 +26919,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27656,11 +27568,7 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutZzimInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -27683,11 +27591,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateWithoutZzimInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -27779,11 +27683,7 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27806,11 +27706,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27833,11 +27729,7 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutRest_tagInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -27860,11 +27752,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateWithoutRest_tagInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -27903,11 +27791,7 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutRest_tagInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27930,11 +27814,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateWithoutRest_tagInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27957,11 +27837,7 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutRepre_menuInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -27984,11 +27860,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedCreateWithoutRepre_menuInput = {
     id?: bigint | number
-<<<<<<< HEAD
-    rest_image?: string | null
-=======
     rest_image: string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: string | null
     name?: string | null
     keyword?: string | null
@@ -28027,11 +27899,7 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutRepre_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28054,11 +27922,7 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateWithoutRepre_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-<<<<<<< HEAD
-    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
-=======
     rest_image?: StringFieldUpdateOperationsInput | string
->>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null

@@ -1,7 +1,6 @@
 import { prisma } from "../db.config.js";
 import axios from "axios";
 export const editRestData = async (data, params) => {
-  console.log(data, params);
   var locationData;
   const restData = await prisma.restaurant.findFirst({ where: { id: params } });
   console.log(restData);
@@ -46,11 +45,9 @@ export const editRestData = async (data, params) => {
       google_place_id: data.google_place_id,
     },
   });
-  console.log(updateRestData);
   const deleteRepreMenu = await prisma.repre_menu.deleteMany({
     where: { rest_id: params },
   });
-  console.log("deleteRepreMenu", deleteRepreMenu);
   const addRepreMenu = await Promise.all(
     data.repre_menu.map((repreData) => {
       return prisma.repre_menu.create({
@@ -58,5 +55,4 @@ export const editRestData = async (data, params) => {
       });
     })
   );
-  console.log("addRepreMenu", addRepreMenu);
 };
