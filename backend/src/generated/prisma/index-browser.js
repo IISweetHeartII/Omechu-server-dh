@@ -270,6 +270,12 @@ exports.Prisma.Repre_menuScalarFieldEnum = {
   menu: 'menu'
 };
 
+exports.Prisma.User_restScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  rest_id: 'rest_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -401,7 +407,8 @@ exports.Prisma.ModelName = {
   email_verification: 'email_verification',
   rest_tag: 'rest_tag',
   password_reset_token: 'password_reset_token',
-  repre_menu: 'repre_menu'
+  repre_menu: 'repre_menu',
+  user_rest: 'user_rest'
 };
 
 /**

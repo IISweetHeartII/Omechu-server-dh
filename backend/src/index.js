@@ -168,7 +168,7 @@ app.get("/place/review/:id", isLoggedIn, handleGetReview);
 //맛집 등록하기 API
 app.post("/place/:id", isLoggedIn, handleAddRestaurant);
 //특정 맛집 정보 수정하기 API
-app.patch("/place/detail/:id", isLoggedIn, handleEditRestaurant);
+app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 // 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);

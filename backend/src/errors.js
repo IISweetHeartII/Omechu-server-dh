@@ -229,3 +229,20 @@ export class FailToAddRepreMenu extends Error {
     this.data = data;
   }
 }
+
+export class NotYourRest extends Error {
+  errorCode = "C010";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class FailToUpdateRestData extends Error {
+  errorCode = "C011";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
