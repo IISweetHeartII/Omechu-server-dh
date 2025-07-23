@@ -66,15 +66,6 @@ model report {
   @@index([user_id], map: "user_id")
 }
 
-model rest_image {
-  id         BigInt     @id @default(autoincrement())
-  rest_id    BigInt
-  link       String?    @db.VarChar(50)
-  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rest_image_ibfk_1")
-
-  @@index([rest_id], map: "rest_id")
-}
-
 model rest_menu {
   id         BigInt     @id @default(autoincrement())
   menu_id    BigInt
@@ -88,21 +79,22 @@ model rest_menu {
 
 model restaurant {
   id              BigInt       @id @default(autoincrement())
+  rest_image      String       @db.VarChar(50)
   location        String?      @db.VarChar(20)
   name            String?      @db.VarChar(60)
-  repre_menu      String?      @db.VarChar(50)
+  keyword         String?      @db.VarChar(50)
   address         String?      @db.VarChar(60)
   detail_address  String?      @db.VarChar(60)
-  rating          Float?       @db.Float
-  monday          String?      @db.Text
-  tuesday         String?      @db.Text
-  wednesday       String?      @db.Text
-  thursday        String?      @db.Text
-  friday          String?      @db.Text
-  saturday        String?      @db.Text
-  sunday          String?      @db.Text
+  rating          Float?       @default(0) @db.Float
+  monday          String?      @default("휴무") @db.VarChar(20)
+  tuesday         String?      @default("휴뮤") @db.VarChar(20)
+  wednesday       String?      @default("휴무") @db.VarChar(20)
+  thursday        String?      @db.VarChar(20)
+  friday          String?      @default("휴무") @db.VarChar(20)
+  saturday        String?      @default("휴무") @db.VarChar(20)
+  sunday          String?      @default("휴무") @db.VarChar(20)
   google_place_id String?      @db.Text
-  rest_image      rest_image[]
+  repre_menu      repre_menu[]
   rest_menu       rest_menu[]
   rest_tag        rest_tag[]
   review          review[]
@@ -144,7 +136,7 @@ model sessions {
 
 model user {
   id               BigInt             @id @default(autoincrement())
-  email            String?            @db.VarChar(30)
+  email            String?            @unique(map: "user_pk") @db.VarChar(30)
   phone_num        String?            @db.VarChar(21)
   is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
@@ -199,6 +191,7 @@ model email_verification {
   email      String    @unique(map: "email_verification_pk") @db.VarChar(255)
   code       String    @db.VarChar(10)
   created_at DateTime? @default(now()) @db.DateTime(0)
+  expires_at DateTime  @default(now()) @db.DateTime(0)
 }
 
 model rest_tag {
@@ -213,10 +206,19 @@ model rest_tag {
 
 model password_reset_token {
   id         Int       @id @default(autoincrement())
-  email      String    @unique(map: "email") @db.VarChar(255)
-  token      String    @db.VarChar(255)
+  email      String    @unique(map: "password_reset_token_pk_2") @db.VarChar(255)
+  token      String    @unique(map: "password_reset_token_pk") @db.VarChar(255)
   expires_at DateTime  @db.DateTime(0)
   created_at DateTime? @default(now()) @db.DateTime(0)
+}
+
+model repre_menu {
+  id         BigInt     @id @default(autoincrement())
+  rest_id    BigInt
+  menu       String     @db.VarChar(50)
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "repre_menu_restaurant_id_fk")
+
+  @@index([rest_id], map: "repre_menu_restaurant_id_fk")
 }
 
 enum allergy_type {
