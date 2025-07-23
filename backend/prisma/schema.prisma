@@ -93,14 +93,14 @@ model restaurant {
   keyword         String?      @db.VarChar(50)
   address         String?      @db.VarChar(60)
   detail_address  String?      @db.VarChar(60)
-  rating          Float?       @db.Float
-  monday          String?      @db.Text
-  tuesday         String?      @db.Text
-  wednesday       String?      @db.Text
-  thursday        String?      @db.Text
-  friday          String?      @db.Text
-  saturday        String?      @db.Text
-  sunday          String?      @db.Text
+  rating          Float?       @default(0) @db.Float
+  monday          String?      @default("휴무") @db.VarChar(20)
+  tuesday         String?      @default("휴뮤") @db.VarChar(20)
+  wednesday       String?      @default("휴무") @db.VarChar(20)
+  thursday        String?      @db.VarChar(20)
+  friday          String?      @default("휴무") @db.VarChar(20)
+  saturday        String?      @default("휴무") @db.VarChar(20)
+  sunday          String?      @default("휴무") @db.VarChar(20)
   google_place_id String?      @db.Text
   repre_menu      repre_menu[]
   rest_image      rest_image[]
@@ -200,6 +200,7 @@ model email_verification {
   email      String    @unique(map: "email_verification_pk") @db.VarChar(255)
   code       String    @db.VarChar(10)
   created_at DateTime? @default(now()) @db.DateTime(0)
+  expires_at DateTime  @default(now()) @db.DateTime(0)
 }
 
 model rest_tag {
