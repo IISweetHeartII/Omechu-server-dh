@@ -197,8 +197,32 @@ export class NoParams extends Error {
   }
 }
 
+export class FailToAddRest extends Error {
+  errorCode = "C006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
 export class DuplicatedRest extends Error {
   errorCode = "C006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class WrongAddress extends Error {
+  errorCode = "C007";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class FailToAddRepreMenu extends Error {
+  errorCode = "C009";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;

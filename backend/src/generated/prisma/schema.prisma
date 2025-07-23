@@ -79,7 +79,11 @@ model rest_menu {
 
 model restaurant {
   id              BigInt       @id @default(autoincrement())
+<<<<<<< HEAD
   rest_image      String?      @db.VarChar(50)
+=======
+  rest_image      String       @db.VarChar(50)
+>>>>>>> 02f97f6caf90b6f9b6919202f5719733e72309a0
   location        String?      @db.VarChar(20)
   name            String?      @db.VarChar(60)
   keyword         String?      @db.VarChar(50)
