@@ -31,10 +31,11 @@ export const addRestData = async (restData) => {
       return { error: "WRONG_ADDRESS" };
     }
     const location =
-      `${data.documents[0].road_address.region_1depth_name}특별시 ${data.documents[0].road_address.region_2depth_name} ${data.documents[0].road_address.region_3depth_name}`.trim();
+      `${data.documents[0].road_address.region_1depth_name} ${data.documents[0].road_address.region_2depth_name} ${data.documents[0].road_address.region_3depth_name}`.trim();
 
     const restId = await prisma.restaurant.create({
       data: {
+        rest_image: restData.imageUrl,
         location: location,
         name: restData.name,
         address: restData.address,
