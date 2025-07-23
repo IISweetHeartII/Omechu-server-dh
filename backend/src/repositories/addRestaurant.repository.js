@@ -13,21 +13,25 @@ export const addRestData = async (restData) => {
   ) {
     return { error: "NO_PARAMS" };
   }
-  const findDuplicatedRest = await prisma.restaurant.findMany({
+  const findDuplicatedRest = await prisma.restaurant.findFirst({
     select: { id: true, name: true },
     where: { name: restData.name, address: restData.address },
   });
-  if (findDuplicatedRest.length == 0) {
+  if (findDuplicatedRest === null) {
     const { data } = await axios.get(
-      `https://dapi.kakao.com/v2/local/search/address.json?query=${restData.address}`,
+      `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURIComponent(
+        restData.address
+      )}`,
       {
         headers: { Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}` },
       }
     );
+
     if (data.documents.length == 0) {
       return { error: "WRONG_ADDRESS" };
     }
-    const location = `${data.documents[0].road_address.region_1depth_name}특별시 ${data.documents[0].road_address.region_2depth_name} ${data.documents[0].road_address.region_3depth_name}`;
+    const location =
+      `${data.documents[0].road_address.region_1depth_name}특별시 ${data.documents[0].road_address.region_2depth_name} ${data.documents[0].road_address.region_3depth_name}`.trim();
 
     const restId = await prisma.restaurant.create({
       data: {

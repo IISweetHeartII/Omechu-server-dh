@@ -222,7 +222,7 @@ export class WrongAddress extends Error {
   }
 }
 export class FailToAddRepreMenu extends Error {
-  errorCode = "C008";
+  errorCode = "C009";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
