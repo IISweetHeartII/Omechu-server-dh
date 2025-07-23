@@ -22,6 +22,7 @@ import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+import { handleResetRequest, handleResetPassword } from "./controllers/passwordReset.controller.js";
 
 // 🆕 마이페이지 컨트롤러 추가
 import {
@@ -145,6 +146,8 @@ app.post("/fetch-google-places", handleFetchGooglePlaces);
 app.get("/place-detail/:id", handleFetchPlaceDetail);
 app.post("/find-related-menu", handleFindRelatedMenu);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
+app.post("/auth/reset-request", handleResetRequest);
+app.patch("/auth/reset-passwd", handleResetPassword);
 
 // 프로필 이미지 presigned url 생성 API
 app.post("/image/upload", generatePresignedUrl);
