@@ -40,6 +40,7 @@ import {
   handleGetZzimList,
 } from "./controllers/mypage.controller.js";
 
+import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 dotenv.config();
 
 const app = express();
@@ -166,6 +167,8 @@ app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 //리뷰 가져오기 API
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
 
+//특정 맛집 정보 수정하기 API
+app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 // 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
