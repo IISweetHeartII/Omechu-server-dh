@@ -164,6 +164,7 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 //리뷰 가져오기 API
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
+//맛집 등록하기 API
 app.post("/place", isLoggedIn, handleAddRestaurant);
 // 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
