@@ -196,3 +196,12 @@ export class NoParams extends Error {
     this.data = data;
   }
 }
+
+export class DuplicatedRest extends Error {
+  errorCode = "C006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
