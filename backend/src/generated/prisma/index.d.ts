@@ -17720,6 +17720,7 @@ export namespace Prisma {
     email: string | null
     code: string | null
     created_at: Date | null
+    expires_at: Date | null
   }
 
   export type Email_verificationMaxAggregateOutputType = {
@@ -17727,6 +17728,7 @@ export namespace Prisma {
     email: string | null
     code: string | null
     created_at: Date | null
+    expires_at: Date | null
   }
 
   export type Email_verificationCountAggregateOutputType = {
@@ -17734,6 +17736,7 @@ export namespace Prisma {
     email: number
     code: number
     created_at: number
+    expires_at: number
     _all: number
   }
 
@@ -17751,6 +17754,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
   }
 
   export type Email_verificationMaxAggregateInputType = {
@@ -17758,6 +17762,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
   }
 
   export type Email_verificationCountAggregateInputType = {
@@ -17765,6 +17770,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
     _all?: true
   }
 
@@ -17859,6 +17865,7 @@ export namespace Prisma {
     email: string
     code: string
     created_at: Date | null
+    expires_at: Date
     _count: Email_verificationCountAggregateOutputType | null
     _avg: Email_verificationAvgAggregateOutputType | null
     _sum: Email_verificationSumAggregateOutputType | null
@@ -17885,6 +17892,7 @@ export namespace Prisma {
     email?: boolean
     code?: boolean
     created_at?: boolean
+    expires_at?: boolean
   }, ExtArgs["result"]["email_verification"]>
 
 
@@ -17894,9 +17902,10 @@ export namespace Prisma {
     email?: boolean
     code?: boolean
     created_at?: boolean
+    expires_at?: boolean
   }
 
-  export type email_verificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "code" | "created_at", ExtArgs["result"]["email_verification"]>
+  export type email_verificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "code" | "created_at" | "expires_at", ExtArgs["result"]["email_verification"]>
 
   export type $email_verificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "email_verification"
@@ -17906,6 +17915,7 @@ export namespace Prisma {
       email: string
       code: string
       created_at: Date | null
+      expires_at: Date
     }, ExtArgs["result"]["email_verification"]>
     composites: {}
   }
@@ -18279,6 +18289,7 @@ export namespace Prisma {
     readonly email: FieldRef<"email_verification", 'String'>
     readonly code: FieldRef<"email_verification", 'String'>
     readonly created_at: FieldRef<"email_verification", 'DateTime'>
+    readonly expires_at: FieldRef<"email_verification", 'DateTime'>
   }
     
 
@@ -21596,7 +21607,8 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     code: 'code',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    expires_at: 'expires_at'
   };
 
   export type Email_verificationScalarFieldEnum = (typeof Email_verificationScalarFieldEnum)[keyof typeof Email_verificationScalarFieldEnum]
@@ -22828,6 +22840,7 @@ export namespace Prisma {
     email?: StringFilter<"email_verification"> | string
     code?: StringFilter<"email_verification"> | string
     created_at?: DateTimeNullableFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeFilter<"email_verification"> | Date | string
   }
 
   export type email_verificationOrderByWithRelationInput = {
@@ -22835,6 +22848,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
     _relevance?: email_verificationOrderByRelevanceInput
   }
 
@@ -22846,6 +22860,7 @@ export namespace Prisma {
     NOT?: email_verificationWhereInput | email_verificationWhereInput[]
     code?: StringFilter<"email_verification"> | string
     created_at?: DateTimeNullableFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeFilter<"email_verification"> | Date | string
   }, "id" | "email">
 
   export type email_verificationOrderByWithAggregationInput = {
@@ -22853,6 +22868,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
     _count?: email_verificationCountOrderByAggregateInput
     _avg?: email_verificationAvgOrderByAggregateInput
     _max?: email_verificationMaxOrderByAggregateInput
@@ -22868,6 +22884,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"email_verification"> | string
     code?: StringWithAggregatesFilter<"email_verification"> | string
     created_at?: DateTimeNullableWithAggregatesFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeWithAggregatesFilter<"email_verification"> | Date | string
   }
 
   export type rest_tagWhereInput = {
@@ -23965,6 +23982,7 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUncheckedCreateInput = {
@@ -23972,12 +23990,14 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationUncheckedUpdateInput = {
@@ -23985,6 +24005,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationCreateManyInput = {
@@ -23992,12 +24013,14 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationUncheckedUpdateManyInput = {
@@ -24005,6 +24028,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type rest_tagCreateInput = {
@@ -25216,6 +25240,17 @@ export namespace Prisma {
     rest_id?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type email_verificationOrderByRelevanceInput = {
     fields: email_verificationOrderByRelevanceFieldEnum | email_verificationOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -25227,6 +25262,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationAvgOrderByAggregateInput = {
@@ -25238,6 +25274,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationMinOrderByAggregateInput = {
@@ -25245,10 +25282,25 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type rest_tagOrderByRelevanceInput = {
@@ -25290,17 +25342,6 @@ export namespace Prisma {
     count?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type password_reset_tokenOrderByRelevanceInput = {
     fields: password_reset_tokenOrderByRelevanceFieldEnum | password_reset_tokenOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -25337,20 +25378,6 @@ export namespace Prisma {
 
   export type password_reset_tokenSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type repre_menuOrderByRelevanceInput = {
@@ -26431,6 +26458,10 @@ export namespace Prisma {
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutZzimInput, restaurantUpdateWithoutZzimInput>, restaurantUncheckedUpdateWithoutZzimInput>
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type restaurantCreateNestedOneWithoutRest_tagInput = {
     create?: XOR<restaurantCreateWithoutRest_tagInput, restaurantUncheckedCreateWithoutRest_tagInput>
     connectOrCreate?: restaurantCreateOrConnectWithoutRest_tagInput
@@ -26443,10 +26474,6 @@ export namespace Prisma {
     upsert?: restaurantUpsertWithoutRest_tagInput
     connect?: restaurantWhereUniqueInput
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRest_tagInput, restaurantUpdateWithoutRest_tagInput>, restaurantUncheckedUpdateWithoutRest_tagInput>
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type restaurantCreateNestedOneWithoutRepre_menuInput = {
