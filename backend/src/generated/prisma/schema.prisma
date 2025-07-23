@@ -90,7 +90,7 @@ model restaurant {
   id              BigInt       @id @default(autoincrement())
   location        String?      @db.VarChar(20)
   name            String?      @db.VarChar(60)
-  repre_menu      String?      @db.VarChar(50)
+  keyword         String?      @db.VarChar(50)
   address         String?      @db.VarChar(60)
   detail_address  String?      @db.VarChar(60)
   rating          Float?       @db.Float
@@ -102,6 +102,7 @@ model restaurant {
   saturday        String?      @db.Text
   sunday          String?      @db.Text
   google_place_id String?      @db.Text
+  repre_menu      repre_menu[]
   rest_image      rest_image[]
   rest_menu       rest_menu[]
   rest_tag        rest_tag[]
@@ -217,6 +218,15 @@ model password_reset_token {
   token      String    @unique(map: "password_reset_token_pk") @db.VarChar(255)
   expires_at DateTime  @db.DateTime(0)
   created_at DateTime? @default(now()) @db.DateTime(0)
+}
+
+model repre_menu {
+  id         BigInt     @id @default(autoincrement())
+  rest_id    BigInt
+  menu       String     @db.VarChar(50)
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "repre_menu_restaurant_id_fk")
+
+  @@index([rest_id], map: "repre_menu_restaurant_id_fk")
 }
 
 enum allergy_type {

@@ -7,7 +7,10 @@ import MySQLStore from "express-mysql-session";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
-import { handleRecommendMenu, handleFindRelatedMenu } from "./controllers/menu.controller.js";
+import {
+  handleRecommendMenu,
+  handleFindRelatedMenu,
+} from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
 import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
@@ -23,8 +26,11 @@ import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
 import { handleResetRequest, handleResetPassword } from "./controllers/passwordReset.controller.js";
+import {
+  handleGetMenu,
+  handleGetMenuInfo,
+} from "./controllers/menu.controller.js";
 
-// 🆕 마이페이지 컨트롤러 추가
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
@@ -32,9 +38,8 @@ import {
   handleUpdateRestaurant,
   handleAddZzim,
   handleRemoveZzim,
-  handleGetZzimList
+  handleGetZzimList,
 } from "./controllers/mypage.controller.js";
-
 
 dotenv.config();
 
@@ -114,7 +119,7 @@ app.get("/openapi.json", async (req, res, next) => {
   const doc = {
     info: {
       title: "Omechu",
-      description: "Umc 8th Omech 데모데이 프로젝트",
+      description: "Umc 8th Omechu 데모데이 프로젝트",
     },
     host: "localhost:3000",
   };
@@ -145,6 +150,8 @@ app.get("/fetch-places", handleFetchKakaoPlaces);
 app.post("/fetch-google-places", handleFetchGooglePlaces);
 app.get("/place-detail/:id", handleFetchPlaceDetail);
 app.post("/find-related-menu", handleFindRelatedMenu);
+app.get("/menu", handleGetMenu);
+app.post("/menu-info", handleGetMenuInfo);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
 app.patch("/auth/reset-passwd", handleResetPassword);
@@ -169,7 +176,11 @@ app.post("/auth/verify", handleVerifyEmailCode);
 app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
 app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
 app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
-app.patch("/mypage/restaurant/:restaurantId/edit", isLoggedIn, handleUpdateRestaurant);
+app.patch(
+  "/mypage/restaurant/:restaurantId/edit",
+  isLoggedIn,
+  handleUpdateRestaurant
+);
 app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
 app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
 app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);

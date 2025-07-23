@@ -1,6 +1,7 @@
 import { OpenAI } from 'openai';
 import dotenv from "dotenv";
 import { pool } from "../db.config.js";
+import {prisma} from "../db.config.js";
 dotenv.config();
 const key = process.env.OPENAI_API_KEY;
 
@@ -176,7 +177,7 @@ export const recommendMenu = async (choice) => {
         console.log("exceptedMenus2String:", exceptedMenus2String);
 
         const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
+            model: "gpt-4.1",
             store: true,
             messages: [
                 {
@@ -200,7 +201,6 @@ export const recommendMenu = async (choice) => {
                         ex) 한우 숙성 꽃등심 스테이크는 적절하지 않고, 스테이크는 맞아.
                         ex) 비리아 타코는 적절하지 않고, 타코는 맞아.
                         또, 카카오 맵에 검색했을 때 나오는 메뉴 이름이면 가산점이야.
-                        이미지링크도 같이 추천해줘.
                         추천할 때 아래 형식의 JSON으로 3개의 메뉴를 3개의 json 배열로 답해줘(마크다운 없이):
                         {
                             "menu": "짜장면",
@@ -254,4 +254,77 @@ export const findRelatedMenu = async (menuName) => {
     const rawText = completion.choices[0].message.content.trim();
     console.log("Raw response from GPT:", rawText);
     return rawText;
+}
+
+
+export const getMenu = async () => {
+    try {
+        const menus = await prisma.menu.findMany({
+            select: {
+                name: true,
+                image_link: true,
+            },
+        });
+        if (!menus || menus.length === 0) {
+            console.error("No menus found");
+            return [];
+        }
+        return menus;
+    } catch (error) {
+        console.error("Error fetching menus:", error);
+        throw error;
+    }
+}
+
+export const getMenuInfo = async (menuName) => {
+    try {
+        console.log("Fetching menu info for:", menuName);
+        const menuInfo = await prisma.menu.findFirst({  // findUnique → findFirst로 변경
+            where: { name: menuName },
+            select: {
+                name: true,
+                description: true,
+                calory: true,
+                carbo: true,
+                protein: true,
+                fat: true,
+                sodium: true,
+                vitamin: true,
+                allergic: true,
+                image_link: true,
+            },
+        });
+
+        if (!menuInfo) {
+            console.error(`No menu info found for: ${menuName}`);
+            return null;
+        }
+
+        // 숫자 변환
+        for (const key of ['calory', 'carbo', 'protein', 'fat', 'sodium']) {
+            if (menuInfo[key] !== null && menuInfo[key] !== undefined) {
+                menuInfo[key] = Number(menuInfo[key]);
+            }
+        }
+
+        // JSON 문자열 파싱
+        for(const key of ['vitamin', 'allergic']) {
+            try {
+                if (menuInfo[key] && typeof menuInfo[key] === 'string') {
+                    menuInfo[key] = JSON.parse(menuInfo[key]);
+                }
+            } catch (parseError) {
+                console.warn(`Error parsing ${key} data:`, parseError);
+                menuInfo[key] = [];
+            }
+        }
+        
+    
+
+        console.log("Menu info fetched successfully:", menuInfo);
+        return menuInfo;
+    } catch (error) {
+        console.error(`Error fetching menu info for ${menuName}:`, error);
+        throw error;
+    }
 }

@@ -103,6 +103,11 @@ export type rest_tag = $Result.DefaultSelection<Prisma.$rest_tagPayload>
  * 
  */
 export type password_reset_token = $Result.DefaultSelection<Prisma.$password_reset_tokenPayload>
+/**
+ * Model repre_menu
+ * 
+ */
+export type repre_menu = $Result.DefaultSelection<Prisma.$repre_menuPayload>
 
 /**
  * Enums
@@ -443,6 +448,16 @@ export class PrismaClient<
     * ```
     */
   get password_reset_token(): Prisma.password_reset_tokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.repre_menu`: Exposes CRUD operations for the **repre_menu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Repre_menus
+    * const repre_menus = await prisma.repre_menu.findMany()
+    * ```
+    */
+  get repre_menu(): Prisma.repre_menuDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -900,7 +915,8 @@ export namespace Prisma {
     zzim: 'zzim',
     email_verification: 'email_verification',
     rest_tag: 'rest_tag',
-    password_reset_token: 'password_reset_token'
+    password_reset_token: 'password_reset_token',
+    repre_menu: 'repre_menu'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -919,7 +935,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_image" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token"
+      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_image" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu",
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2111,6 +2127,72 @@ export namespace Prisma {
           }
         }
       }
+      repre_menu: {
+        payload: Prisma.$repre_menuPayload<ExtArgs>
+        fields: Prisma.repre_menuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.repre_menuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.repre_menuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          findFirst: {
+            args: Prisma.repre_menuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.repre_menuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          findMany: {
+            args: Prisma.repre_menuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>[]
+          }
+          create: {
+            args: Prisma.repre_menuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          createMany: {
+            args: Prisma.repre_menuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.repre_menuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          update: {
+            args: Prisma.repre_menuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          deleteMany: {
+            args: Prisma.repre_menuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.repre_menuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.repre_menuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          aggregate: {
+            args: Prisma.Repre_menuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRepre_menu>
+          }
+          groupBy: {
+            args: Prisma.repre_menuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Repre_menuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.repre_menuCountArgs<ExtArgs>
+            result: $Utils.Optional<Repre_menuCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2213,6 +2295,7 @@ export namespace Prisma {
     email_verification?: email_verificationOmit
     rest_tag?: rest_tagOmit
     password_reset_token?: password_reset_tokenOmit
+    repre_menu?: repre_menuOmit
   }
 
   /* Types for Logging */
@@ -2356,6 +2439,7 @@ export namespace Prisma {
    */
 
   export type RestaurantCountOutputType = {
+    repre_menu: number
     rest_image: number
     rest_menu: number
     rest_tag: number
@@ -2364,6 +2448,7 @@ export namespace Prisma {
   }
 
   export type RestaurantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    repre_menu?: boolean | RestaurantCountOutputTypeCountRepre_menuArgs
     rest_image?: boolean | RestaurantCountOutputTypeCountRest_imageArgs
     rest_menu?: boolean | RestaurantCountOutputTypeCountRest_menuArgs
     rest_tag?: boolean | RestaurantCountOutputTypeCountRest_tagArgs
@@ -2380,6 +2465,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the RestaurantCountOutputType
      */
     select?: RestaurantCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RestaurantCountOutputType without action
+   */
+  export type RestaurantCountOutputTypeCountRepre_menuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: repre_menuWhereInput
   }
 
   /**
@@ -9377,7 +9469,7 @@ export namespace Prisma {
     id: bigint | null
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
     detail_address: string | null
     rating: number | null
@@ -9395,7 +9487,7 @@ export namespace Prisma {
     id: bigint | null
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
     detail_address: string | null
     rating: number | null
@@ -9413,7 +9505,7 @@ export namespace Prisma {
     id: number
     location: number
     name: number
-    repre_menu: number
+    keyword: number
     address: number
     detail_address: number
     rating: number
@@ -9443,7 +9535,7 @@ export namespace Prisma {
     id?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
     detail_address?: true
     rating?: true
@@ -9461,7 +9553,7 @@ export namespace Prisma {
     id?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
     detail_address?: true
     rating?: true
@@ -9479,7 +9571,7 @@ export namespace Prisma {
     id?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
     detail_address?: true
     rating?: true
@@ -9584,7 +9676,7 @@ export namespace Prisma {
     id: bigint
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
     detail_address: string | null
     rating: number | null
@@ -9621,7 +9713,7 @@ export namespace Prisma {
     id?: boolean
     location?: boolean
     name?: boolean
-    repre_menu?: boolean
+    keyword?: boolean
     address?: boolean
     detail_address?: boolean
     rating?: boolean
@@ -9633,6 +9725,7 @@ export namespace Prisma {
     saturday?: boolean
     sunday?: boolean
     google_place_id?: boolean
+    repre_menu?: boolean | restaurant$repre_menuArgs<ExtArgs>
     rest_image?: boolean | restaurant$rest_imageArgs<ExtArgs>
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
@@ -9647,7 +9740,7 @@ export namespace Prisma {
     id?: boolean
     location?: boolean
     name?: boolean
-    repre_menu?: boolean
+    keyword?: boolean
     address?: boolean
     detail_address?: boolean
     rating?: boolean
@@ -9661,8 +9754,9 @@ export namespace Prisma {
     google_place_id?: boolean
   }
 
-  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "location" | "name" | "repre_menu" | "address" | "detail_address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
+  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "location" | "name" | "keyword" | "address" | "detail_address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
   export type restaurantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    repre_menu?: boolean | restaurant$repre_menuArgs<ExtArgs>
     rest_image?: boolean | restaurant$rest_imageArgs<ExtArgs>
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
@@ -9674,6 +9768,7 @@ export namespace Prisma {
   export type $restaurantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "restaurant"
     objects: {
+      repre_menu: Prisma.$repre_menuPayload<ExtArgs>[]
       rest_image: Prisma.$rest_imagePayload<ExtArgs>[]
       rest_menu: Prisma.$rest_menuPayload<ExtArgs>[]
       rest_tag: Prisma.$rest_tagPayload<ExtArgs>[]
@@ -9684,7 +9779,7 @@ export namespace Prisma {
       id: bigint
       location: string | null
       name: string | null
-      repre_menu: string | null
+      keyword: string | null
       address: string | null
       detail_address: string | null
       rating: number | null
@@ -10036,6 +10131,7 @@ export namespace Prisma {
    */
   export interface Prisma__restaurantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    repre_menu<T extends restaurant$repre_menuArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$repre_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_image<T extends restaurant$rest_imageArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_imageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_menu<T extends restaurant$rest_menuArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_tag<T extends restaurant$rest_tagArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_tagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_tagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10073,7 +10169,7 @@ export namespace Prisma {
     readonly id: FieldRef<"restaurant", 'BigInt'>
     readonly location: FieldRef<"restaurant", 'String'>
     readonly name: FieldRef<"restaurant", 'String'>
-    readonly repre_menu: FieldRef<"restaurant", 'String'>
+    readonly keyword: FieldRef<"restaurant", 'String'>
     readonly address: FieldRef<"restaurant", 'String'>
     readonly detail_address: FieldRef<"restaurant", 'String'>
     readonly rating: FieldRef<"restaurant", 'Float'>
@@ -10425,6 +10521,30 @@ export namespace Prisma {
      * Limit how many restaurants to delete.
      */
     limit?: number
+  }
+
+  /**
+   * restaurant.repre_menu
+   */
+  export type restaurant$repre_menuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    where?: repre_menuWhereInput
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    cursor?: repre_menuWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
   }
 
   /**
@@ -20342,6 +20462,954 @@ export namespace Prisma {
 
 
   /**
+<<<<<<< HEAD
+=======
+   * Model repre_menu
+   */
+
+  export type AggregateRepre_menu = {
+    _count: Repre_menuCountAggregateOutputType | null
+    _avg: Repre_menuAvgAggregateOutputType | null
+    _sum: Repre_menuSumAggregateOutputType | null
+    _min: Repre_menuMinAggregateOutputType | null
+    _max: Repre_menuMaxAggregateOutputType | null
+  }
+
+  export type Repre_menuAvgAggregateOutputType = {
+    id: number | null
+    rest_id: number | null
+  }
+
+  export type Repre_menuSumAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+  }
+
+  export type Repre_menuMinAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+    menu: string | null
+  }
+
+  export type Repre_menuMaxAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+    menu: string | null
+  }
+
+  export type Repre_menuCountAggregateOutputType = {
+    id: number
+    rest_id: number
+    menu: number
+    _all: number
+  }
+
+
+  export type Repre_menuAvgAggregateInputType = {
+    id?: true
+    rest_id?: true
+  }
+
+  export type Repre_menuSumAggregateInputType = {
+    id?: true
+    rest_id?: true
+  }
+
+  export type Repre_menuMinAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+  }
+
+  export type Repre_menuMaxAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+  }
+
+  export type Repre_menuCountAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+    _all?: true
+  }
+
+  export type Repre_menuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which repre_menu to aggregate.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned repre_menus
+    **/
+    _count?: true | Repre_menuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Repre_menuAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Repre_menuSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Repre_menuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Repre_menuMaxAggregateInputType
+  }
+
+  export type GetRepre_menuAggregateType<T extends Repre_menuAggregateArgs> = {
+        [P in keyof T & keyof AggregateRepre_menu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRepre_menu[P]>
+      : GetScalarType<T[P], AggregateRepre_menu[P]>
+  }
+
+
+
+
+  export type repre_menuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: repre_menuWhereInput
+    orderBy?: repre_menuOrderByWithAggregationInput | repre_menuOrderByWithAggregationInput[]
+    by: Repre_menuScalarFieldEnum[] | Repre_menuScalarFieldEnum
+    having?: repre_menuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Repre_menuCountAggregateInputType | true
+    _avg?: Repre_menuAvgAggregateInputType
+    _sum?: Repre_menuSumAggregateInputType
+    _min?: Repre_menuMinAggregateInputType
+    _max?: Repre_menuMaxAggregateInputType
+  }
+
+  export type Repre_menuGroupByOutputType = {
+    id: bigint
+    rest_id: bigint
+    menu: string
+    _count: Repre_menuCountAggregateOutputType | null
+    _avg: Repre_menuAvgAggregateOutputType | null
+    _sum: Repre_menuSumAggregateOutputType | null
+    _min: Repre_menuMinAggregateOutputType | null
+    _max: Repre_menuMaxAggregateOutputType | null
+  }
+
+  type GetRepre_menuGroupByPayload<T extends repre_menuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Repre_menuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Repre_menuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Repre_menuGroupByOutputType[P]>
+            : GetScalarType<T[P], Repre_menuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type repre_menuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    rest_id?: boolean
+    menu?: boolean
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["repre_menu"]>
+
+
+
+  export type repre_menuSelectScalar = {
+    id?: boolean
+    rest_id?: boolean
+    menu?: boolean
+  }
+
+  export type repre_menuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_id" | "menu", ExtArgs["result"]["repre_menu"]>
+  export type repre_menuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+  }
+
+  export type $repre_menuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "repre_menu"
+    objects: {
+      restaurant: Prisma.$restaurantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      rest_id: bigint
+      menu: string
+    }, ExtArgs["result"]["repre_menu"]>
+    composites: {}
+  }
+
+  type repre_menuGetPayload<S extends boolean | null | undefined | repre_menuDefaultArgs> = $Result.GetResult<Prisma.$repre_menuPayload, S>
+
+  type repre_menuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<repre_menuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Repre_menuCountAggregateInputType | true
+    }
+
+  export interface repre_menuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['repre_menu'], meta: { name: 'repre_menu' } }
+    /**
+     * Find zero or one Repre_menu that matches the filter.
+     * @param {repre_menuFindUniqueArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends repre_menuFindUniqueArgs>(args: SelectSubset<T, repre_menuFindUniqueArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Repre_menu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {repre_menuFindUniqueOrThrowArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends repre_menuFindUniqueOrThrowArgs>(args: SelectSubset<T, repre_menuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Repre_menu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindFirstArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends repre_menuFindFirstArgs>(args?: SelectSubset<T, repre_menuFindFirstArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Repre_menu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindFirstOrThrowArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends repre_menuFindFirstOrThrowArgs>(args?: SelectSubset<T, repre_menuFindFirstOrThrowArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Repre_menus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Repre_menus
+     * const repre_menus = await prisma.repre_menu.findMany()
+     * 
+     * // Get first 10 Repre_menus
+     * const repre_menus = await prisma.repre_menu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const repre_menuWithIdOnly = await prisma.repre_menu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends repre_menuFindManyArgs>(args?: SelectSubset<T, repre_menuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Repre_menu.
+     * @param {repre_menuCreateArgs} args - Arguments to create a Repre_menu.
+     * @example
+     * // Create one Repre_menu
+     * const Repre_menu = await prisma.repre_menu.create({
+     *   data: {
+     *     // ... data to create a Repre_menu
+     *   }
+     * })
+     * 
+     */
+    create<T extends repre_menuCreateArgs>(args: SelectSubset<T, repre_menuCreateArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Repre_menus.
+     * @param {repre_menuCreateManyArgs} args - Arguments to create many Repre_menus.
+     * @example
+     * // Create many Repre_menus
+     * const repre_menu = await prisma.repre_menu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends repre_menuCreateManyArgs>(args?: SelectSubset<T, repre_menuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Repre_menu.
+     * @param {repre_menuDeleteArgs} args - Arguments to delete one Repre_menu.
+     * @example
+     * // Delete one Repre_menu
+     * const Repre_menu = await prisma.repre_menu.delete({
+     *   where: {
+     *     // ... filter to delete one Repre_menu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends repre_menuDeleteArgs>(args: SelectSubset<T, repre_menuDeleteArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Repre_menu.
+     * @param {repre_menuUpdateArgs} args - Arguments to update one Repre_menu.
+     * @example
+     * // Update one Repre_menu
+     * const repre_menu = await prisma.repre_menu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends repre_menuUpdateArgs>(args: SelectSubset<T, repre_menuUpdateArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Repre_menus.
+     * @param {repre_menuDeleteManyArgs} args - Arguments to filter Repre_menus to delete.
+     * @example
+     * // Delete a few Repre_menus
+     * const { count } = await prisma.repre_menu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends repre_menuDeleteManyArgs>(args?: SelectSubset<T, repre_menuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Repre_menus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Repre_menus
+     * const repre_menu = await prisma.repre_menu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends repre_menuUpdateManyArgs>(args: SelectSubset<T, repre_menuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Repre_menu.
+     * @param {repre_menuUpsertArgs} args - Arguments to update or create a Repre_menu.
+     * @example
+     * // Update or create a Repre_menu
+     * const repre_menu = await prisma.repre_menu.upsert({
+     *   create: {
+     *     // ... data to create a Repre_menu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Repre_menu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends repre_menuUpsertArgs>(args: SelectSubset<T, repre_menuUpsertArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Repre_menus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuCountArgs} args - Arguments to filter Repre_menus to count.
+     * @example
+     * // Count the number of Repre_menus
+     * const count = await prisma.repre_menu.count({
+     *   where: {
+     *     // ... the filter for the Repre_menus we want to count
+     *   }
+     * })
+    **/
+    count<T extends repre_menuCountArgs>(
+      args?: Subset<T, repre_menuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Repre_menuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Repre_menu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Repre_menuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Repre_menuAggregateArgs>(args: Subset<T, Repre_menuAggregateArgs>): Prisma.PrismaPromise<GetRepre_menuAggregateType<T>>
+
+    /**
+     * Group by Repre_menu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends repre_menuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: repre_menuGroupByArgs['orderBy'] }
+        : { orderBy?: repre_menuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, repre_menuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRepre_menuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the repre_menu model
+   */
+  readonly fields: repre_menuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for repre_menu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__repre_menuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    restaurant<T extends restaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, restaurantDefaultArgs<ExtArgs>>): Prisma__restaurantClient<$Result.GetResult<Prisma.$restaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the repre_menu model
+   */
+  interface repre_menuFieldRefs {
+    readonly id: FieldRef<"repre_menu", 'BigInt'>
+    readonly rest_id: FieldRef<"repre_menu", 'BigInt'>
+    readonly menu: FieldRef<"repre_menu", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * repre_menu findUnique
+   */
+  export type repre_menuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu findUniqueOrThrow
+   */
+  export type repre_menuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu findFirst
+   */
+  export type repre_menuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of repre_menus.
+     */
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu findFirstOrThrow
+   */
+  export type repre_menuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of repre_menus.
+     */
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu findMany
+   */
+  export type repre_menuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menus to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu create
+   */
+  export type repre_menuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The data needed to create a repre_menu.
+     */
+    data: XOR<repre_menuCreateInput, repre_menuUncheckedCreateInput>
+  }
+
+  /**
+   * repre_menu createMany
+   */
+  export type repre_menuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many repre_menus.
+     */
+    data: repre_menuCreateManyInput | repre_menuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * repre_menu update
+   */
+  export type repre_menuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The data needed to update a repre_menu.
+     */
+    data: XOR<repre_menuUpdateInput, repre_menuUncheckedUpdateInput>
+    /**
+     * Choose, which repre_menu to update.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu updateMany
+   */
+  export type repre_menuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update repre_menus.
+     */
+    data: XOR<repre_menuUpdateManyMutationInput, repre_menuUncheckedUpdateManyInput>
+    /**
+     * Filter which repre_menus to update
+     */
+    where?: repre_menuWhereInput
+    /**
+     * Limit how many repre_menus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * repre_menu upsert
+   */
+  export type repre_menuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The filter to search for the repre_menu to update in case it exists.
+     */
+    where: repre_menuWhereUniqueInput
+    /**
+     * In case the repre_menu found by the `where` argument doesn't exist, create a new repre_menu with this data.
+     */
+    create: XOR<repre_menuCreateInput, repre_menuUncheckedCreateInput>
+    /**
+     * In case the repre_menu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<repre_menuUpdateInput, repre_menuUncheckedUpdateInput>
+  }
+
+  /**
+   * repre_menu delete
+   */
+  export type repre_menuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter which repre_menu to delete.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu deleteMany
+   */
+  export type repre_menuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which repre_menus to delete
+     */
+    where?: repre_menuWhereInput
+    /**
+     * Limit how many repre_menus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * repre_menu without action
+   */
+  export type repre_menuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+  }
+
+
+  /**
+>>>>>>> develop
    * Enums
    */
 
@@ -20432,7 +21500,7 @@ export namespace Prisma {
     id: 'id',
     location: 'location',
     name: 'name',
-    repre_menu: 'repre_menu',
+    keyword: 'keyword',
     address: 'address',
     detail_address: 'detail_address',
     rating: 'rating',
@@ -20557,6 +21625,18 @@ export namespace Prisma {
   export type Password_reset_tokenScalarFieldEnum = (typeof Password_reset_tokenScalarFieldEnum)[keyof typeof Password_reset_tokenScalarFieldEnum]
 
 
+<<<<<<< HEAD
+=======
+  export const Repre_menuScalarFieldEnum: {
+    id: 'id',
+    rest_id: 'rest_id',
+    menu: 'menu'
+  };
+
+  export type Repre_menuScalarFieldEnum = (typeof Repre_menuScalarFieldEnum)[keyof typeof Repre_menuScalarFieldEnum]
+
+
+>>>>>>> develop
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20616,7 +21696,7 @@ export namespace Prisma {
   export const restaurantOrderByRelevanceFieldEnum: {
     location: 'location',
     name: 'name',
-    repre_menu: 'repre_menu',
+    keyword: 'keyword',
     address: 'address',
     detail_address: 'detail_address',
     monday: 'monday',
@@ -20705,6 +21785,16 @@ export namespace Prisma {
   export type password_reset_tokenOrderByRelevanceFieldEnum = (typeof password_reset_tokenOrderByRelevanceFieldEnum)[keyof typeof password_reset_tokenOrderByRelevanceFieldEnum]
 
 
+<<<<<<< HEAD
+=======
+  export const repre_menuOrderByRelevanceFieldEnum: {
+    menu: 'menu'
+  };
+
+  export type repre_menuOrderByRelevanceFieldEnum = (typeof repre_menuOrderByRelevanceFieldEnum)[keyof typeof repre_menuOrderByRelevanceFieldEnum]
+
+
+>>>>>>> develop
   /**
    * Field references
    */
@@ -21188,7 +22278,7 @@ export namespace Prisma {
     id?: BigIntFilter<"restaurant"> | bigint | number
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableFilter<"restaurant"> | string | null
+    keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
     detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
@@ -21200,6 +22290,7 @@ export namespace Prisma {
     saturday?: StringNullableFilter<"restaurant"> | string | null
     sunday?: StringNullableFilter<"restaurant"> | string | null
     google_place_id?: StringNullableFilter<"restaurant"> | string | null
+    repre_menu?: Repre_menuListRelationFilter
     rest_image?: Rest_imageListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
@@ -21211,7 +22302,7 @@ export namespace Prisma {
     id?: SortOrder
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
-    repre_menu?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
@@ -21223,6 +22314,7 @@ export namespace Prisma {
     saturday?: SortOrderInput | SortOrder
     sunday?: SortOrderInput | SortOrder
     google_place_id?: SortOrderInput | SortOrder
+    repre_menu?: repre_menuOrderByRelationAggregateInput
     rest_image?: rest_imageOrderByRelationAggregateInput
     rest_menu?: rest_menuOrderByRelationAggregateInput
     rest_tag?: rest_tagOrderByRelationAggregateInput
@@ -21238,7 +22330,7 @@ export namespace Prisma {
     NOT?: restaurantWhereInput | restaurantWhereInput[]
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableFilter<"restaurant"> | string | null
+    keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
     detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
@@ -21250,6 +22342,7 @@ export namespace Prisma {
     saturday?: StringNullableFilter<"restaurant"> | string | null
     sunday?: StringNullableFilter<"restaurant"> | string | null
     google_place_id?: StringNullableFilter<"restaurant"> | string | null
+    repre_menu?: Repre_menuListRelationFilter
     rest_image?: Rest_imageListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
@@ -21261,7 +22354,7 @@ export namespace Prisma {
     id?: SortOrder
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
-    repre_menu?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
@@ -21287,7 +22380,7 @@ export namespace Prisma {
     id?: BigIntWithAggregatesFilter<"restaurant"> | bigint | number
     location?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     name?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
+    keyword?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     detail_address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     rating?: FloatNullableWithAggregatesFilter<"restaurant"> | number | null
@@ -21890,6 +22983,54 @@ export namespace Prisma {
     created_at?: DateTimeNullableWithAggregatesFilter<"password_reset_token"> | Date | string | null
   }
 
+  export type repre_menuWhereInput = {
+    AND?: repre_menuWhereInput | repre_menuWhereInput[]
+    OR?: repre_menuWhereInput[]
+    NOT?: repre_menuWhereInput | repre_menuWhereInput[]
+    id?: BigIntFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+  }
+
+  export type repre_menuOrderByWithRelationInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+    restaurant?: restaurantOrderByWithRelationInput
+    _relevance?: repre_menuOrderByRelevanceInput
+  }
+
+  export type repre_menuWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: repre_menuWhereInput | repre_menuWhereInput[]
+    OR?: repre_menuWhereInput[]
+    NOT?: repre_menuWhereInput | repre_menuWhereInput[]
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+  }, "id">
+
+  export type repre_menuOrderByWithAggregationInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+    _count?: repre_menuCountOrderByAggregateInput
+    _avg?: repre_menuAvgOrderByAggregateInput
+    _max?: repre_menuMaxOrderByAggregateInput
+    _min?: repre_menuMinOrderByAggregateInput
+    _sum?: repre_menuSumOrderByAggregateInput
+  }
+
+  export type repre_menuScalarWhereWithAggregatesInput = {
+    AND?: repre_menuScalarWhereWithAggregatesInput | repre_menuScalarWhereWithAggregatesInput[]
+    OR?: repre_menuScalarWhereWithAggregatesInput[]
+    NOT?: repre_menuScalarWhereWithAggregatesInput | repre_menuScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntWithAggregatesFilter<"repre_menu"> | bigint | number
+    menu?: StringWithAggregatesFilter<"repre_menu"> | string
+  }
+
   export type choiceCreateInput = {
     id?: bigint | number
     description?: string | null
@@ -22261,7 +23402,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -22273,6 +23414,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
@@ -22284,7 +23426,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -22296,6 +23438,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
@@ -22307,7 +23450,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -22319,6 +23462,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
@@ -22330,7 +23474,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -22342,6 +23486,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
@@ -22353,7 +23498,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -22371,7 +23516,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -22389,7 +23534,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -22965,6 +24110,47 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type repre_menuCreateInput = {
+    id?: bigint | number
+    menu: string
+    restaurant: restaurantCreateNestedOneWithoutRepre_menuInput
+  }
+
+  export type repre_menuUncheckedCreateInput = {
+    id?: bigint | number
+    rest_id: bigint | number
+    menu: string
+  }
+
+  export type repre_menuUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+    restaurant?: restaurantUpdateOneRequiredWithoutRepre_menuNestedInput
+  }
+
+  export type repre_menuUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuCreateManyInput = {
+    id?: bigint | number
+    rest_id: bigint | number
+    menu: string
+  }
+
+  export type repre_menuUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[]
@@ -23453,6 +24639,12 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type Repre_menuListRelationFilter = {
+    every?: repre_menuWhereInput
+    some?: repre_menuWhereInput
+    none?: repre_menuWhereInput
+  }
+
   export type Rest_imageListRelationFilter = {
     every?: rest_imageWhereInput
     some?: rest_imageWhereInput
@@ -23475,6 +24667,10 @@ export namespace Prisma {
     every?: zzimWhereInput
     some?: zzimWhereInput
     none?: zzimWhereInput
+  }
+
+  export type repre_menuOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type rest_imageOrderByRelationAggregateInput = {
@@ -23503,7 +24699,7 @@ export namespace Prisma {
     id?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
     detail_address?: SortOrder
     rating?: SortOrder
@@ -23526,7 +24722,7 @@ export namespace Prisma {
     id?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
     detail_address?: SortOrder
     rating?: SortOrder
@@ -23544,7 +24740,7 @@ export namespace Prisma {
     id?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
     detail_address?: SortOrder
     rating?: SortOrder
@@ -24166,6 +25362,40 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type repre_menuOrderByRelevanceInput = {
+    fields: repre_menuOrderByRelevanceFieldEnum | repre_menuOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type repre_menuCountOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuAvgOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type repre_menuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuMinOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuSumOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+  }
+
   export type BigIntFieldUpdateOperationsInput = {
     set?: bigint | number
     increment?: bigint | number
@@ -24450,6 +25680,13 @@ export namespace Prisma {
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRest_menuInput, restaurantUpdateWithoutRest_menuInput>, restaurantUncheckedUpdateWithoutRest_menuInput>
   }
 
+  export type repre_menuCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+  }
+
   export type rest_imageCreateNestedManyWithoutRestaurantInput = {
     create?: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput> | rest_imageCreateWithoutRestaurantInput[] | rest_imageUncheckedCreateWithoutRestaurantInput[]
     connectOrCreate?: rest_imageCreateOrConnectWithoutRestaurantInput | rest_imageCreateOrConnectWithoutRestaurantInput[]
@@ -24483,6 +25720,13 @@ export namespace Prisma {
     connectOrCreate?: zzimCreateOrConnectWithoutRestaurantInput | zzimCreateOrConnectWithoutRestaurantInput[]
     createMany?: zzimCreateManyRestaurantInputEnvelope
     connect?: zzimWhereUniqueInput | zzimWhereUniqueInput[]
+  }
+
+  export type repre_menuUncheckedCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
   }
 
   export type rest_imageUncheckedCreateNestedManyWithoutRestaurantInput = {
@@ -24526,6 +25770,20 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type repre_menuUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    upsert?: repre_menuUpsertWithWhereUniqueWithoutRestaurantInput | repre_menuUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    set?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    disconnect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    delete?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    update?: repre_menuUpdateWithWhereUniqueWithoutRestaurantInput | repre_menuUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: repre_menuUpdateManyWithWhereWithoutRestaurantInput | repre_menuUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
   }
 
   export type rest_imageUpdateManyWithoutRestaurantNestedInput = {
@@ -24596,6 +25854,20 @@ export namespace Prisma {
     update?: zzimUpdateWithWhereUniqueWithoutRestaurantInput | zzimUpdateWithWhereUniqueWithoutRestaurantInput[]
     updateMany?: zzimUpdateManyWithWhereWithoutRestaurantInput | zzimUpdateManyWithWhereWithoutRestaurantInput[]
     deleteMany?: zzimScalarWhereInput | zzimScalarWhereInput[]
+  }
+
+  export type repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    upsert?: repre_menuUpsertWithWhereUniqueWithoutRestaurantInput | repre_menuUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    set?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    disconnect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    delete?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    update?: repre_menuUpdateWithWhereUniqueWithoutRestaurantInput | repre_menuUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: repre_menuUpdateManyWithWhereWithoutRestaurantInput | repre_menuUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
   }
 
   export type rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput = {
@@ -25184,6 +26456,20 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type restaurantCreateNestedOneWithoutRepre_menuInput = {
+    create?: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutRepre_menuInput
+    connect?: restaurantWhereUniqueInput
+  }
+
+  export type restaurantUpdateOneRequiredWithoutRepre_menuNestedInput = {
+    create?: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutRepre_menuInput
+    upsert?: restaurantUpsertWithoutRepre_menuInput
+    connect?: restaurantWhereUniqueInput
+    update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRepre_menuInput, restaurantUpdateWithoutRepre_menuInput>, restaurantUncheckedUpdateWithoutRepre_menuInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -26187,7 +27473,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26199,6 +27485,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
@@ -26209,7 +27496,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26221,6 +27508,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
@@ -26247,7 +27535,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26259,6 +27547,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
@@ -26269,7 +27558,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26281,6 +27570,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
@@ -26328,7 +27618,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26340,6 +27630,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
@@ -26350,7 +27641,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26362,6 +27653,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
@@ -26431,7 +27723,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26443,6 +27735,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
@@ -26453,7 +27746,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26465,10 +27758,31 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type repre_menuCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    menu: string
+  }
+
+  export type repre_menuUncheckedCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    menu: string
+  }
+
+  export type repre_menuCreateOrConnectWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    create: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type repre_menuCreateManyRestaurantInputEnvelope = {
+    data: repre_menuCreateManyRestaurantInput | repre_menuCreateManyRestaurantInput[]
+    skipDuplicates?: boolean
   }
 
   export type rest_imageCreateWithoutRestaurantInput = {
@@ -26585,6 +27899,31 @@ export namespace Prisma {
   export type zzimCreateManyRestaurantInputEnvelope = {
     data: zzimCreateManyRestaurantInput | zzimCreateManyRestaurantInput[]
     skipDuplicates?: boolean
+  }
+
+  export type repre_menuUpsertWithWhereUniqueWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    update: XOR<repre_menuUpdateWithoutRestaurantInput, repre_menuUncheckedUpdateWithoutRestaurantInput>
+    create: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type repre_menuUpdateWithWhereUniqueWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    data: XOR<repre_menuUpdateWithoutRestaurantInput, repre_menuUncheckedUpdateWithoutRestaurantInput>
+  }
+
+  export type repre_menuUpdateManyWithWhereWithoutRestaurantInput = {
+    where: repre_menuScalarWhereInput
+    data: XOR<repre_menuUpdateManyMutationInput, repre_menuUncheckedUpdateManyWithoutRestaurantInput>
+  }
+
+  export type repre_menuScalarWhereInput = {
+    AND?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
+    OR?: repre_menuScalarWhereInput[]
+    NOT?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
+    id?: BigIntFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
   }
 
   export type rest_imageUpsertWithWhereUniqueWithoutRestaurantInput = {
@@ -26782,7 +28121,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26794,6 +28133,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
@@ -26804,7 +28144,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -26816,6 +28156,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
@@ -26941,7 +28282,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26953,6 +28294,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
@@ -26963,7 +28305,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -26975,6 +28317,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
@@ -27611,7 +28954,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -27623,6 +28966,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
@@ -27633,7 +28977,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -27645,6 +28989,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
@@ -27724,7 +29069,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27736,6 +29081,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
@@ -27746,7 +29092,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27758,6 +29104,7 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
@@ -27768,7 +29115,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -27780,6 +29127,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
@@ -27790,7 +29138,7 @@ export namespace Prisma {
     id?: bigint | number
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
     detail_address?: string | null
     rating?: number | null
@@ -27802,6 +29150,7 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
@@ -27828,7 +29177,115 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
+    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantUncheckedUpdateWithoutRest_tagInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantCreateWithoutRepre_menuInput = {
+    id?: bigint | number
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    detail_address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    review?: reviewCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantUncheckedCreateWithoutRepre_menuInput = {
+    id?: bigint | number
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    detail_address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantCreateOrConnectWithoutRepre_menuInput = {
+    where: restaurantWhereUniqueInput
+    create: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+  }
+
+  export type restaurantUpsertWithoutRepre_menuInput = {
+    update: XOR<restaurantUpdateWithoutRepre_menuInput, restaurantUncheckedUpdateWithoutRepre_menuInput>
+    create: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    where?: restaurantWhereInput
+  }
+
+  export type restaurantUpdateToOneWithWhereWithoutRepre_menuInput = {
+    where?: restaurantWhereInput
+    data: XOR<restaurantUpdateWithoutRepre_menuInput, restaurantUncheckedUpdateWithoutRepre_menuInput>
+  }
+
+  export type restaurantUpdateWithoutRepre_menuInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27842,15 +29299,16 @@ export namespace Prisma {
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
     rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
-  export type restaurantUncheckedUpdateWithoutRest_tagInput = {
+  export type restaurantUncheckedUpdateWithoutRepre_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -27864,6 +29322,7 @@ export namespace Prisma {
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
     rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -27936,6 +29395,11 @@ export namespace Prisma {
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
+  export type repre_menuCreateManyRestaurantInput = {
+    id?: bigint | number
+    menu: string
+  }
+
   export type rest_imageCreateManyRestaurantInput = {
     id?: bigint | number
     link?: string | null
@@ -27965,6 +29429,21 @@ export namespace Prisma {
     id?: bigint | number
     user_id: bigint | number
     created_at?: Date | string | null
+  }
+
+  export type repre_menuUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuUncheckedUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuUncheckedUpdateManyWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
   }
 
   export type rest_imageUpdateWithoutRestaurantInput = {
