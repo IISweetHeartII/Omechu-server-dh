@@ -251,7 +251,8 @@ exports.Prisma.Email_verificationScalarFieldEnum = {
   id: 'id',
   email: 'email',
   code: 'code',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  expires_at: 'expires_at'
 };
 
 exports.Prisma.Rest_tagScalarFieldEnum = {
