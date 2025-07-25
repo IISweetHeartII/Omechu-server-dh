@@ -4,7 +4,9 @@ export const editRestData = async (newData, params, userId) => {
   var locationData;
   var addressData;
 
-  const restData = await prisma.restaurant.findFirst({ where: { id: params } });
+  const restData = await prisma.restaurant.findFirst({
+    where: { id: BigInt(params) },
+  });
 
   if (!restData) {
     return { error: "NO_REST_DATA" };
@@ -12,6 +14,7 @@ export const editRestData = async (newData, params, userId) => {
   const restUserData = await prisma.user_rest.findFirst({
     where: { rest_id: params },
   });
+  console.log(restUserData);
   if (restUserData === null) {
     return { error: "NO_DATA" };
   } else if (restUserData.user_id.toString() !== userId) {

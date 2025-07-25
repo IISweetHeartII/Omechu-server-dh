@@ -16,7 +16,7 @@ export const editRestaurant = async ({ data, params, userId }) => {
       "가게 정보를 업데이트 하는데 실패했습니다",
       data
     );
-  } else if (restId.error == "NO_DATA") {
+  } else if (restId.error == "NO_DATA" || restId.error == "NO_REST_DATA") {
     throw new NoRestData("해당 가게의 정보가 없습니다", {
       rest_id: params,
     });
