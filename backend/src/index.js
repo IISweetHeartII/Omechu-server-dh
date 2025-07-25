@@ -113,6 +113,7 @@ app.use(
     {
       swaggerOptions: {
         url: "/openapi.json",
+        withCredentials: true,
       },
     }
   )
