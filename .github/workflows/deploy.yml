@@ -3,203 +3,217 @@ name: Deploy FoodApp to EC2
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
     paths-ignore:
-      - 'README.md'
-      - 'docs/**'
+      - "README.md"
+      - "docs/**"
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: "18"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     name: Run Tests
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-    
-    - name: Check project structure
-      run: |
-        echo "=== Project Root ==="
-        ls -la
-        
-        echo "=== Backend Directory ==="
-        ls -la backend/ || echo "No backend directory"
-        
-        echo "=== Package Files ==="
-        find . -name "package.json" -type f || echo "No package.json files found"
-    
-    - name: Install backend dependencies
-      run: |
-        if [ -d "backend" ] && [ -f "backend/package.json" ]; then
-          echo "✅ Found backend/package.json"
-          cd backend
-          echo "Installing dependencies in backend directory..."
-          npm install
-          echo "✅ Backend dependencies installed"
-        else
-          echo "❌ No backend/package.json found"
-          echo "Checking for root package.json..."
-          if [ -f "package.json" ]; then
-            echo "✅ Found root package.json"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Check project structure
+        run: |
+          echo "=== Project Root ==="
+          ls -la
+
+          echo "=== Backend Directory ==="
+          ls -la backend/ || echo "No backend directory"
+
+          echo "=== Package Files ==="
+          find . -name "package.json" -type f || echo "No package.json files found"
+
+      - name: Install backend dependencies
+        run: |
+          if [ -d "backend" ] && [ -f "backend/package.json" ]; then
+            echo "✅ Found backend/package.json"
+            cd backend
+            echo "Installing dependencies in backend directory..."
             npm install
+            echo "✅ Backend dependencies installed"
           else
-            echo "⚠️ No package.json found anywhere - skipping npm install"
+            echo "❌ No backend/package.json found"
+            echo "Checking for root package.json..."
+            if [ -f "package.json" ]; then
+              echo "✅ Found root package.json"
+              npm install
+            else
+              echo "⚠️ No package.json found anywhere - skipping npm install"
+            fi
           fi
-        fi
-    
-    - name: Run backend tests
-      run: |
-        if [ -d "backend" ] && [ -f "backend/package.json" ]; then
-          cd backend
-          npm test || echo "Tests failed or not configured - continuing"
-        else
-          echo "No backend directory - skipping tests"
-        fi
-    
-    - name: Run linter
-      run: |
-        if [ -d "backend" ] && [ -f "backend/package.json" ]; then
-          cd backend
-          npm run lint || echo "Linter not configured - continuing"
-        else
-          echo "No backend directory - skipping linter"
-        fi
+
+      - name: Run backend tests
+        run: |
+          if [ -d "backend" ] && [ -f "backend/package.json" ]; then
+            cd backend
+            npm test || echo "Tests failed or not configured - continuing"
+          else
+            echo "No backend directory - skipping tests"
+          fi
+
+      - name: Run linter
+        run: |
+          if [ -d "backend" ] && [ -f "backend/package.json" ]; then
+            cd backend
+            npm run lint || echo "Linter not configured - continuing"
+          else
+            echo "No backend directory - skipping linter"
+          fi
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     name: Deploy to EC2
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-    
+
     steps:
-    - name: Deploy to EC2 via SSH
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: 22
-        timeout: 300s
-        script: |
-          # 변수 설정
-          PROJECT_DIR="/home/ubuntu/foodapp"
-          LOG_FILE="/home/ubuntu/deploy.log"
-          
-          # 로그 함수
-          log() {
-              echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a $LOG_FILE
-          }
-          
-          log "🚀 Starting deployment process..."
-          
-          # 프로젝트 디렉토리로 이동
-          cd $PROJECT_DIR || {
-              log "❌ Failed to change directory to $PROJECT_DIR"
+      - name: Create .env.production from GitHub Secret
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
+
+      - name: Upload .env.production to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: ".env.production"
+          target: "/home/ubuntu/foodapp"
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          timeout: 300s
+          script: |
+            # 변수 설정
+            PROJECT_DIR="/home/ubuntu/foodapp"
+            LOG_FILE="/home/ubuntu/deploy.log"
+
+            # 로그 함수
+            log() {
+                echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a $LOG_FILE
+            }
+
+            log "🚀 Starting deployment process..."
+
+            # 프로젝트 디렉토리로 이동
+            cd $PROJECT_DIR || {
+                log "❌ Failed to change directory to $PROJECT_DIR"
+                exit 1
+            }
+
+            # 현재 상태 백업
+            CURRENT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+            log "📍 Current commit: $CURRENT_COMMIT"
+
+            # Git 업데이트
+            log "📥 Pulling latest changes..."
+            git fetch origin
+            git reset --hard origin/main
+
+            NEW_COMMIT=$(git rev-parse --short HEAD)
+            log "📍 New commit: $NEW_COMMIT"
+
+            # 프로젝트 구조 확인
+            log "📂 Project structure check:"
+            ls -la
+
+            if [ -d "backend" ]; then
+                log "✅ Backend directory found"
+                ls -la backend/
+            else
+                log "⚠️ No backend directory"
+            fi
+
+            # Backend 의존성 설치
+            if [ -d "backend" ] && [ -f "backend/package.json" ]; then
+                log "📦 Installing backend dependencies..."
+                cd backend
+                npm install --production || {
+                    log "⚠️ npm install failed, but continuing..."
+                }
+                cd ..
+            else
+                log "ℹ️ No backend/package.json found, skipping npm install"
+            fi
+
+            # 환경변수 설정
+            log "🌍 Setting up environment variables..."
+            if [ -f .env.production ]; then
+              cp .env.production .env
+              log "✅ Environment variables copied to .env"
+            else
+              log "❌ .env.production not found in EC2"
               exit 1
-          }
-          
-          # 현재 상태 백업
-          CURRENT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
-          log "📍 Current commit: $CURRENT_COMMIT"
-          
-          # Git 업데이트
-          log "📥 Pulling latest changes..."
-          git fetch origin
-          git reset --hard origin/main
-          
-          NEW_COMMIT=$(git rev-parse --short HEAD)
-          log "📍 New commit: $NEW_COMMIT"
-          
-          # 프로젝트 구조 확인
-          log "📂 Project structure check:"
-          ls -la
-          
-          if [ -d "backend" ]; then
-              log "✅ Backend directory found"
-              ls -la backend/
-          else
-              log "⚠️ No backend directory"
-          fi
-          
-          # Backend 의존성 설치
-          if [ -d "backend" ] && [ -f "backend/package.json" ]; then
-              log "📦 Installing backend dependencies..."
-              cd backend
-              npm install --production || {
-                  log "⚠️ npm install failed, but continuing..."
-              }
-              cd ..
-          else
-              log "ℹ️ No backend/package.json found, skipping npm install"
-          fi
-          
-          # 환경변수 설정
-          log "🌍 Setting up environment variables..."
-          if [ -f .env.production ]; then
-              cp .env.production ./backend/.env
-              log "✅ Environment variables updated from .env.production"
-          else
-              log "⚠️ No .env.production file found"
-          fi
-          
-          # Docker 컨테이너 현재 상태
-          log "🐳 Current Docker containers:"
-          docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" || true
-          
-          # Docker 컨테이너 재시작
-          log "🔄 Restarting Docker containers..."
-          docker-compose down || true
-          docker-compose up -d --build
-          
-          # 서비스 시작 대기
-          log "⏳ Waiting for services to start..."
-          sleep 30
-          
-          # 헬스 체크
-          log "🏥 Performing health checks..."
-          
-          # 포트 3000 체크
-          if curl -f -s http://localhost:3000/ > /dev/null 2>&1; then
-              log "✅ Backend service responding on port 3000"
-              BACKEND_OK=true
-          else
-              log "⚠️ Backend service not responding on port 3000"
-              BACKEND_OK=false
-          fi
-          
-          # 포트 80 체크 (Nginx)
-          if curl -f -s http://localhost/ > /dev/null 2>&1; then
-              log "✅ Nginx service responding on port 80"
-              NGINX_OK=true
-          else
-              log "⚠️ Nginx service not responding on port 80"
-              NGINX_OK=false
-          fi
-          
-          # 최종 상태 확인
-          log "📊 Final deployment status:"
-          docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-          
-          if [ "$BACKEND_OK" = true ] || [ "$NGINX_OK" = true ]; then
-              log "🎉 Deployment completed successfully!"
-              log "✅ At least one service is responding"
-          else
-              log "⚠️ Deployment completed but services may not be fully ready"
-              log "📋 Recent container logs:"
-              docker-compose logs --tail=10
-          fi
-          
-          # 정리
-          log "🧹 Cleaning up old Docker images..."
-          docker image prune -f > /dev/null 2>&1 || true
-          
-          log "✨ Deployment process finished"
+            fi
+
+            # Docker 컨테이너 현재 상태
+            log "🐳 Current Docker containers:"
+            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" || true
+
+            # Docker 컨테이너 재시작
+            log "🔄 Restarting Docker containers..."
+            docker-compose down || true
+            docker-compose up -d --build
+
+            # 서비스 시작 대기
+            log "⏳ Waiting for services to start..."
+            sleep 30
+
+            # 헬스 체크
+            log "🏥 Performing health checks..."
+
+            # 포트 3000 체크
+            if curl -f -s http://localhost:3000/ > /dev/null 2>&1; then
+                log "✅ Backend service responding on port 3000"
+                BACKEND_OK=true
+            else
+                log "⚠️ Backend service not responding on port 3000"
+                BACKEND_OK=false
+            fi
+
+            # 포트 80 체크 (Nginx)
+            if curl -f -s http://localhost/ > /dev/null 2>&1; then
+                log "✅ Nginx service responding on port 80"
+                NGINX_OK=true
+            else
+                log "⚠️ Nginx service not responding on port 80"
+                NGINX_OK=false
+            fi
+
+            # 최종 상태 확인
+            log "📊 Final deployment status:"
+            docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+            if [ "$BACKEND_OK" = true ] || [ "$NGINX_OK" = true ]; then
+                log "🎉 Deployment completed successfully!"
+                log "✅ At least one service is responding"
+            else
+                log "⚠️ Deployment completed but services may not be fully ready"
+                log "📋 Recent container logs:"
+                docker-compose logs --tail=10
+            fi
+
+            # 정리
+            log "🧹 Cleaning up old Docker images..."
+            docker image prune -f > /dev/null 2>&1 || true
+
+            log "✨ Deployment process finished"
