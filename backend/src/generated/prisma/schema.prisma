@@ -82,7 +82,6 @@ model restaurant {
   rest_image      String?      @db.VarChar(50)
   location        String?      @db.VarChar(20)
   name            String?      @db.VarChar(60)
-  keyword         String?      @db.VarChar(50)
   address         String?      @db.VarChar(60)
   rating          Float?       @default(0) @db.Float
   monday          String?      @default("휴무") @db.VarChar(20)
@@ -137,7 +136,6 @@ model sessions {
 model user {
   id               BigInt             @id @default(autoincrement())
   email            String?            @unique(map: "user_pk") @db.VarChar(30)
-  phone_num        String?            @db.VarChar(21)
   is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
   body_type        Int?

@@ -8,7 +8,6 @@ export const userSignUp = async (data) => {
   const joinUserId = await addUser({
     email: data.email,
     password: data.password,
-    phoneNumber: data.phoneNumber,
   });
 
   if (joinUserId === null) {
