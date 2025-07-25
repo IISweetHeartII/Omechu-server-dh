@@ -78,7 +78,14 @@ export class SessionRegenerateError extends Error {
     this.data = data;
   }
 }
-
+export class NoParams extends Error {
+  errorCode = "C005";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
 export class NoRestData extends Error {
   errorCode = "C004";
   constructor(reason, data) {
@@ -99,15 +106,6 @@ export class NoImageUrl extends Error {
 
 export class FailToAddReview extends Error {
   errorCode = "C004";
-  constructor(reason, data) {
-    super(reason);
-    this.reason = reason;
-    this.data = data;
-  }
-}
-
-export class NoParams extends Error {
-  errorCode = "C005";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
@@ -191,6 +189,102 @@ export class NoZzimData extends Error {
 
 export class InvalidProfileData extends Error {
   errorCode = "M006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class InvalidOrExpiredTokenError extends Error {
+  errorCode = "E001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class UserNotFoundError extends Error {
+  errorCode = "E002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class FailToAddRest extends Error {
+  errorCode = "C006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class DuplicatedRest extends Error {
+  errorCode = "C006";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class WrongAddress extends Error {
+  errorCode = "C007";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class FailToAddRepreMenu extends Error {
+  errorCode = "C009";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class NotYourRest extends Error {
+  errorCode = "C010";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class FailToUpdateRestData extends Error {
+  errorCode = "C011";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class InvalidVerificationCodeError extends Error {
+  errorCode = "V001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class VerificationCodeExpiredError extends Error {
+  errorCode = "V002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class NoParams extends Error {
+  errorCode = "P001";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;

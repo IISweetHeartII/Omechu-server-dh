@@ -1,6 +1,7 @@
 import { OpenAI } from 'openai';
 import dotenv from "dotenv";
 import { pool } from "../db.config.js";
+import {prisma} from "../db.config.js";
 dotenv.config();
 const key = process.env.OPENAI_API_KEY;
 
@@ -83,6 +84,111 @@ export const addMenuToDatabase = async (menuData) => {
 // "allergy" : ["갑각류"]
 // "weather" : "맑음"
 // }
+const menuList = `초코무스
+불고기
+리조토
+라면
+라멘
+토마토 파스타
+까르보나라 파스타
+김치볶음밥
+콩나물국밥
+마카롱
+햄버거
+비빔국수
+냉면
+우동
+야끼소바
+떡볶이
+순대국
+제육볶음
+김치찌개
+된장찌개
+부대찌개
+순두부찌개
+갈비탕
+삼계탕
+해물찜
+카레라이스
+김밥
+잡채
+새우튀김
+칼국수
+삼겹살
+닭갈비
+해물파전
+김치전
+감자탕
+동태찌개
+설렁탕
+청국장
+닭도리탕
+닭강정
+참치마요덮밥
+크림떡볶이
+막국수
+오므라이스
+비빔밥
+낙지볶음
+닭발
+만두
+샤브샤브
+스테이크
+함박스테이크
+감바스
+LA 갈비
+바베큐 폭립
+초밥
+오코노미야끼
+텐동
+후토마끼
+사케동
+규동
+마제소바
+냉모밀
+카이센동
+사시미
+짜장면
+짬뽕
+마라탕
+칠리새우
+딤섬
+탕수육
+팔보채
+유산슬
+훠궈
+치킨
+돈까스
+장어
+회
+족발
+보쌈
+수육
+랍스터구이
+피자
+쌀국수
+팟타이
+타코
+똠얌꿍
+나시고랭
+케밥
+분짜
+커리
+포케
+연어 샐러드
+훈제오리
+닭가슴살 샐러드
+샌드위치
+오트밀죽
+프렌치토스트
+고로케
+팬케이크
+치즈케이크
+티라미수
+베이글
+그릭요거트
+팥빙수`;
+
 export const recommendMenu = async (choice) => {
     try {
         console.log("Received request for GPT processing");
@@ -176,7 +282,7 @@ export const recommendMenu = async (choice) => {
         console.log("exceptedMenus2String:", exceptedMenus2String);
 
         const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
+            model: "gpt-4.1",
             store: true,
             messages: [
                 {
@@ -195,12 +301,9 @@ export const recommendMenu = async (choice) => {
                         체질: ${bodyTypeText}
                         사용자의 알레르기: ${allergyString}
                         현재 날씨: ${choice.weather}
-                        각각의 정보들에 딱 들어 맞을 필요까지는 없고, 5가지 요소를 최대한 반영해줘.
-                        그리고 추천해 줄 때 메뉴명을 띄어쓰기 없는 간결한 단어로 말해줘야해.
-                        ex) 한우 숙성 꽃등심 스테이크는 적절하지 않고, 스테이크는 맞아.
-                        ex) 비리아 타코는 적절하지 않고, 타코는 맞아.
-                        또, 카카오 맵에 검색했을 때 나오는 메뉴 이름이면 가산점이야.
-                        이미지링크도 같이 추천해줘.
+                        각각의 정보들에 딱 들어 맞을 필요까지는 없고, 각 요소를 최대한 반영해줘.
+                        추천은 다음 목록 안에서 이루어져야해.
+                        ${menuList}
                         추천할 때 아래 형식의 JSON으로 3개의 메뉴를 3개의 json 배열로 답해줘(마크다운 없이):
                         {
                             "menu": "짜장면",
@@ -254,4 +357,77 @@ export const findRelatedMenu = async (menuName) => {
     const rawText = completion.choices[0].message.content.trim();
     console.log("Raw response from GPT:", rawText);
     return rawText;
+}
+
+
+export const getMenu = async () => {
+    try {
+        const menus = await prisma.menu.findMany({
+            select: {
+                name: true,
+                image_link: true,
+            },
+        });
+        if (!menus || menus.length === 0) {
+            console.error("No menus found");
+            return [];
+        }
+        return menus;
+    } catch (error) {
+        console.error("Error fetching menus:", error);
+        throw error;
+    }
+}
+
+export const getMenuInfo = async (menuName) => {
+    try {
+        console.log("Fetching menu info for:", menuName);
+        const menuInfo = await prisma.menu.findFirst({  // findUnique → findFirst로 변경
+            where: { name: menuName },
+            select: {
+                name: true,
+                description: true,
+                calory: true,
+                carbo: true,
+                protein: true,
+                fat: true,
+                sodium: true,
+                vitamin: true,
+                allergic: true,
+                image_link: true,
+            },
+        });
+
+        if (!menuInfo) {
+            console.error(`No menu info found for: ${menuName}`);
+            return null;
+        }
+
+        // 숫자 변환
+        for (const key of ['calory', 'carbo', 'protein', 'fat', 'sodium']) {
+            if (menuInfo[key] !== null && menuInfo[key] !== undefined) {
+                menuInfo[key] = Number(menuInfo[key]);
+            }
+        }
+
+        // JSON 문자열 파싱
+        for(const key of ['vitamin', 'allergic']) {
+            try {
+                if (menuInfo[key] && typeof menuInfo[key] === 'string') {
+                    menuInfo[key] = JSON.parse(menuInfo[key]);
+                }
+            } catch (parseError) {
+                console.warn(`Error parsing ${key} data:`, parseError);
+                menuInfo[key] = [];
+            }
+        }
+        
+    
+
+        console.log("Menu info fetched successfully:", menuInfo);
+        return menuInfo;
+    } catch (error) {
+        console.error(`Error fetching menu info for ${menuName}:`, error);
+        throw error;
+    }
 }

@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.11.1
- * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
+ * Prisma Client JS version: 6.12.0
+ * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
  */
 Prisma.prismaVersion = {
-  client: "6.11.1",
-  engine: "f40f79ec31188888a2e33acda0ecc8fd10a853a9"
+  client: "6.12.0",
+  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -160,12 +160,6 @@ exports.Prisma.ReportScalarFieldEnum = {
   text: 'text'
 };
 
-exports.Prisma.Rest_imageScalarFieldEnum = {
-  id: 'id',
-  rest_id: 'rest_id',
-  link: 'link'
-};
-
 exports.Prisma.Rest_menuScalarFieldEnum = {
   id: 'id',
   menu_id: 'menu_id',
@@ -174,11 +168,11 @@ exports.Prisma.Rest_menuScalarFieldEnum = {
 
 exports.Prisma.RestaurantScalarFieldEnum = {
   id: 'id',
+  rest_image: 'rest_image',
   location: 'location',
   name: 'name',
-  repre_menu: 'repre_menu',
+  keyword: 'keyword',
   address: 'address',
-  detail_address: 'detail_address',
   rating: 'rating',
   monday: 'monday',
   tuesday: 'tuesday',
@@ -251,13 +245,34 @@ exports.Prisma.Email_verificationScalarFieldEnum = {
   id: 'id',
   email: 'email',
   code: 'code',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  expires_at: 'expires_at'
 };
 
 exports.Prisma.Rest_tagScalarFieldEnum = {
   rest_id: 'rest_id',
   tag: 'tag',
   count: 'count'
+};
+
+exports.Prisma.Password_reset_tokenScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  token: 'token',
+  expires_at: 'expires_at',
+  created_at: 'created_at'
+};
+
+exports.Prisma.Repre_menuScalarFieldEnum = {
+  id: 'id',
+  rest_id: 'rest_id',
+  menu: 'menu'
+};
+
+exports.Prisma.User_restScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  rest_id: 'rest_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -291,16 +306,12 @@ exports.Prisma.reportOrderByRelevanceFieldEnum = {
   text: 'text'
 };
 
-exports.Prisma.rest_imageOrderByRelevanceFieldEnum = {
-  link: 'link'
-};
-
 exports.Prisma.restaurantOrderByRelevanceFieldEnum = {
+  rest_image: 'rest_image',
   location: 'location',
   name: 'name',
-  repre_menu: 'repre_menu',
+  keyword: 'keyword',
   address: 'address',
-  detail_address: 'detail_address',
   monday: 'monday',
   tuesday: 'tuesday',
   wednesday: 'wednesday',
@@ -351,6 +362,15 @@ exports.Prisma.email_verificationOrderByRelevanceFieldEnum = {
 exports.Prisma.rest_tagOrderByRelevanceFieldEnum = {
   tag: 'tag'
 };
+
+exports.Prisma.password_reset_tokenOrderByRelevanceFieldEnum = {
+  email: 'email',
+  token: 'token'
+};
+
+exports.Prisma.repre_menuOrderByRelevanceFieldEnum = {
+  menu: 'menu'
+};
 exports.allergy_type = exports.$Enums.allergy_type = {
   egg: 'egg',
   milk: 'milk',
@@ -373,7 +393,6 @@ exports.Prisma.ModelName = {
   mukburim: 'mukburim',
   recommend_except: 'recommend_except',
   report: 'report',
-  rest_image: 'rest_image',
   rest_menu: 'rest_menu',
   restaurant: 'restaurant',
   review: 'review',
@@ -384,7 +403,10 @@ exports.Prisma.ModelName = {
   prefer: 'prefer',
   zzim: 'zzim',
   email_verification: 'email_verification',
-  rest_tag: 'rest_tag'
+  rest_tag: 'rest_tag',
+  password_reset_token: 'password_reset_token',
+  repre_menu: 'repre_menu',
+  user_rest: 'user_rest'
 };
 
 /**

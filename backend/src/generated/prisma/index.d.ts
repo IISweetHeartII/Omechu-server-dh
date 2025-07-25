@@ -39,11 +39,6 @@ export type recommend_except = $Result.DefaultSelection<Prisma.$recommend_except
  */
 export type report = $Result.DefaultSelection<Prisma.$reportPayload>
 /**
- * Model rest_image
- * 
- */
-export type rest_image = $Result.DefaultSelection<Prisma.$rest_imagePayload>
-/**
  * Model rest_menu
  * 
  */
@@ -98,6 +93,21 @@ export type email_verification = $Result.DefaultSelection<Prisma.$email_verifica
  * 
  */
 export type rest_tag = $Result.DefaultSelection<Prisma.$rest_tagPayload>
+/**
+ * Model password_reset_token
+ * 
+ */
+export type password_reset_token = $Result.DefaultSelection<Prisma.$password_reset_tokenPayload>
+/**
+ * Model repre_menu
+ * 
+ */
+export type repre_menu = $Result.DefaultSelection<Prisma.$repre_menuPayload>
+/**
+ * Model user_rest
+ * 
+ */
+export type user_rest = $Result.DefaultSelection<Prisma.$user_restPayload>
 
 /**
  * Enums
@@ -310,16 +320,6 @@ export class PrismaClient<
   get report(): Prisma.reportDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.rest_image`: Exposes CRUD operations for the **rest_image** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Rest_images
-    * const rest_images = await prisma.rest_image.findMany()
-    * ```
-    */
-  get rest_image(): Prisma.rest_imageDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.rest_menu`: Exposes CRUD operations for the **rest_menu** model.
     * Example usage:
     * ```ts
@@ -428,6 +428,36 @@ export class PrismaClient<
     * ```
     */
   get rest_tag(): Prisma.rest_tagDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.password_reset_token`: Exposes CRUD operations for the **password_reset_token** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Password_reset_tokens
+    * const password_reset_tokens = await prisma.password_reset_token.findMany()
+    * ```
+    */
+  get password_reset_token(): Prisma.password_reset_tokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.repre_menu`: Exposes CRUD operations for the **repre_menu** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Repre_menus
+    * const repre_menus = await prisma.repre_menu.findMany()
+    * ```
+    */
+  get repre_menu(): Prisma.repre_menuDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.user_rest`: Exposes CRUD operations for the **user_rest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more User_rests
+    * const user_rests = await prisma.user_rest.findMany()
+    * ```
+    */
+  get user_rest(): Prisma.user_restDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -486,8 +516,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.11.1
-   * Query Engine version: f40f79ec31188888a2e33acda0ecc8fd10a853a9
+   * Prisma Client JS version: 6.12.0
+   * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
    */
   export type PrismaVersion = {
     client: string
@@ -873,7 +903,6 @@ export namespace Prisma {
     mukburim: 'mukburim',
     recommend_except: 'recommend_except',
     report: 'report',
-    rest_image: 'rest_image',
     rest_menu: 'rest_menu',
     restaurant: 'restaurant',
     review: 'review',
@@ -884,7 +913,10 @@ export namespace Prisma {
     prefer: 'prefer',
     zzim: 'zzim',
     email_verification: 'email_verification',
-    rest_tag: 'rest_tag'
+    rest_tag: 'rest_tag',
+    password_reset_token: 'password_reset_token',
+    repre_menu: 'repre_menu',
+    user_rest: 'user_rest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -903,7 +935,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_image" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag"
+      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu" | "user_rest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1234,72 +1266,6 @@ export namespace Prisma {
           count: {
             args: Prisma.reportCountArgs<ExtArgs>
             result: $Utils.Optional<ReportCountAggregateOutputType> | number
-          }
-        }
-      }
-      rest_image: {
-        payload: Prisma.$rest_imagePayload<ExtArgs>
-        fields: Prisma.rest_imageFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.rest_imageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.rest_imageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          findFirst: {
-            args: Prisma.rest_imageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.rest_imageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          findMany: {
-            args: Prisma.rest_imageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>[]
-          }
-          create: {
-            args: Prisma.rest_imageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          createMany: {
-            args: Prisma.rest_imageCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.rest_imageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          update: {
-            args: Prisma.rest_imageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          deleteMany: {
-            args: Prisma.rest_imageDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.rest_imageUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.rest_imageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$rest_imagePayload>
-          }
-          aggregate: {
-            args: Prisma.Rest_imageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRest_image>
-          }
-          groupBy: {
-            args: Prisma.rest_imageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<Rest_imageGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.rest_imageCountArgs<ExtArgs>
-            result: $Utils.Optional<Rest_imageCountAggregateOutputType> | number
           }
         }
       }
@@ -2029,6 +1995,204 @@ export namespace Prisma {
           }
         }
       }
+      password_reset_token: {
+        payload: Prisma.$password_reset_tokenPayload<ExtArgs>
+        fields: Prisma.password_reset_tokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.password_reset_tokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.password_reset_tokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          findFirst: {
+            args: Prisma.password_reset_tokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.password_reset_tokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          findMany: {
+            args: Prisma.password_reset_tokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>[]
+          }
+          create: {
+            args: Prisma.password_reset_tokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          createMany: {
+            args: Prisma.password_reset_tokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.password_reset_tokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          update: {
+            args: Prisma.password_reset_tokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.password_reset_tokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.password_reset_tokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.password_reset_tokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$password_reset_tokenPayload>
+          }
+          aggregate: {
+            args: Prisma.Password_reset_tokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePassword_reset_token>
+          }
+          groupBy: {
+            args: Prisma.password_reset_tokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Password_reset_tokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.password_reset_tokenCountArgs<ExtArgs>
+            result: $Utils.Optional<Password_reset_tokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      repre_menu: {
+        payload: Prisma.$repre_menuPayload<ExtArgs>
+        fields: Prisma.repre_menuFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.repre_menuFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.repre_menuFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          findFirst: {
+            args: Prisma.repre_menuFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.repre_menuFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          findMany: {
+            args: Prisma.repre_menuFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>[]
+          }
+          create: {
+            args: Prisma.repre_menuCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          createMany: {
+            args: Prisma.repre_menuCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.repre_menuDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          update: {
+            args: Prisma.repre_menuUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          deleteMany: {
+            args: Prisma.repre_menuDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.repre_menuUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.repre_menuUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$repre_menuPayload>
+          }
+          aggregate: {
+            args: Prisma.Repre_menuAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRepre_menu>
+          }
+          groupBy: {
+            args: Prisma.repre_menuGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Repre_menuGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.repre_menuCountArgs<ExtArgs>
+            result: $Utils.Optional<Repre_menuCountAggregateOutputType> | number
+          }
+        }
+      }
+      user_rest: {
+        payload: Prisma.$user_restPayload<ExtArgs>
+        fields: Prisma.user_restFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.user_restFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.user_restFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          findFirst: {
+            args: Prisma.user_restFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.user_restFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          findMany: {
+            args: Prisma.user_restFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>[]
+          }
+          create: {
+            args: Prisma.user_restCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          createMany: {
+            args: Prisma.user_restCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.user_restDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          update: {
+            args: Prisma.user_restUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          deleteMany: {
+            args: Prisma.user_restDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.user_restUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.user_restUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$user_restPayload>
+          }
+          aggregate: {
+            args: Prisma.User_restAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUser_rest>
+          }
+          groupBy: {
+            args: Prisma.user_restGroupByArgs<ExtArgs>
+            result: $Utils.Optional<User_restGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.user_restCountArgs<ExtArgs>
+            result: $Utils.Optional<User_restCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2118,7 +2282,6 @@ export namespace Prisma {
     mukburim?: mukburimOmit
     recommend_except?: recommend_exceptOmit
     report?: reportOmit
-    rest_image?: rest_imageOmit
     rest_menu?: rest_menuOmit
     restaurant?: restaurantOmit
     review?: reviewOmit
@@ -2130,6 +2293,9 @@ export namespace Prisma {
     zzim?: zzimOmit
     email_verification?: email_verificationOmit
     rest_tag?: rest_tagOmit
+    password_reset_token?: password_reset_tokenOmit
+    repre_menu?: repre_menuOmit
+    user_rest?: user_restOmit
   }
 
   /* Types for Logging */
@@ -2273,18 +2439,20 @@ export namespace Prisma {
    */
 
   export type RestaurantCountOutputType = {
-    rest_image: number
+    repre_menu: number
     rest_menu: number
     rest_tag: number
     review: number
+    user_rest: number
     zzim: number
   }
 
   export type RestaurantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    rest_image?: boolean | RestaurantCountOutputTypeCountRest_imageArgs
+    repre_menu?: boolean | RestaurantCountOutputTypeCountRepre_menuArgs
     rest_menu?: boolean | RestaurantCountOutputTypeCountRest_menuArgs
     rest_tag?: boolean | RestaurantCountOutputTypeCountRest_tagArgs
     review?: boolean | RestaurantCountOutputTypeCountReviewArgs
+    user_rest?: boolean | RestaurantCountOutputTypeCountUser_restArgs
     zzim?: boolean | RestaurantCountOutputTypeCountZzimArgs
   }
 
@@ -2302,8 +2470,8 @@ export namespace Prisma {
   /**
    * RestaurantCountOutputType without action
    */
-  export type RestaurantCountOutputTypeCountRest_imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: rest_imageWhereInput
+  export type RestaurantCountOutputTypeCountRepre_menuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: repre_menuWhereInput
   }
 
   /**
@@ -2325,6 +2493,13 @@ export namespace Prisma {
    */
   export type RestaurantCountOutputTypeCountReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: reviewWhereInput
+  }
+
+  /**
+   * RestaurantCountOutputType without action
+   */
+  export type RestaurantCountOutputTypeCountUser_restArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_restWhereInput
   }
 
   /**
@@ -2386,6 +2561,7 @@ export namespace Prisma {
     recommend_except: number
     report: number
     review: number
+    user_rest: number
     zzim: number
   }
 
@@ -2396,6 +2572,7 @@ export namespace Prisma {
     recommend_except?: boolean | UserCountOutputTypeCountRecommend_exceptArgs
     report?: boolean | UserCountOutputTypeCountReportArgs
     review?: boolean | UserCountOutputTypeCountReviewArgs
+    user_rest?: boolean | UserCountOutputTypeCountUser_restArgs
     zzim?: boolean | UserCountOutputTypeCountZzimArgs
   }
 
@@ -2450,6 +2627,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: reviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUser_restArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_restWhereInput
   }
 
   /**
@@ -7371,951 +7555,6 @@ export namespace Prisma {
 
 
   /**
-   * Model rest_image
-   */
-
-  export type AggregateRest_image = {
-    _count: Rest_imageCountAggregateOutputType | null
-    _avg: Rest_imageAvgAggregateOutputType | null
-    _sum: Rest_imageSumAggregateOutputType | null
-    _min: Rest_imageMinAggregateOutputType | null
-    _max: Rest_imageMaxAggregateOutputType | null
-  }
-
-  export type Rest_imageAvgAggregateOutputType = {
-    id: number | null
-    rest_id: number | null
-  }
-
-  export type Rest_imageSumAggregateOutputType = {
-    id: bigint | null
-    rest_id: bigint | null
-  }
-
-  export type Rest_imageMinAggregateOutputType = {
-    id: bigint | null
-    rest_id: bigint | null
-    link: string | null
-  }
-
-  export type Rest_imageMaxAggregateOutputType = {
-    id: bigint | null
-    rest_id: bigint | null
-    link: string | null
-  }
-
-  export type Rest_imageCountAggregateOutputType = {
-    id: number
-    rest_id: number
-    link: number
-    _all: number
-  }
-
-
-  export type Rest_imageAvgAggregateInputType = {
-    id?: true
-    rest_id?: true
-  }
-
-  export type Rest_imageSumAggregateInputType = {
-    id?: true
-    rest_id?: true
-  }
-
-  export type Rest_imageMinAggregateInputType = {
-    id?: true
-    rest_id?: true
-    link?: true
-  }
-
-  export type Rest_imageMaxAggregateInputType = {
-    id?: true
-    rest_id?: true
-    link?: true
-  }
-
-  export type Rest_imageCountAggregateInputType = {
-    id?: true
-    rest_id?: true
-    link?: true
-    _all?: true
-  }
-
-  export type Rest_imageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which rest_image to aggregate.
-     */
-    where?: rest_imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of rest_images to fetch.
-     */
-    orderBy?: rest_imageOrderByWithRelationInput | rest_imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: rest_imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` rest_images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` rest_images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned rest_images
-    **/
-    _count?: true | Rest_imageCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: Rest_imageAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: Rest_imageSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: Rest_imageMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: Rest_imageMaxAggregateInputType
-  }
-
-  export type GetRest_imageAggregateType<T extends Rest_imageAggregateArgs> = {
-        [P in keyof T & keyof AggregateRest_image]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateRest_image[P]>
-      : GetScalarType<T[P], AggregateRest_image[P]>
-  }
-
-
-
-
-  export type rest_imageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: rest_imageWhereInput
-    orderBy?: rest_imageOrderByWithAggregationInput | rest_imageOrderByWithAggregationInput[]
-    by: Rest_imageScalarFieldEnum[] | Rest_imageScalarFieldEnum
-    having?: rest_imageScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: Rest_imageCountAggregateInputType | true
-    _avg?: Rest_imageAvgAggregateInputType
-    _sum?: Rest_imageSumAggregateInputType
-    _min?: Rest_imageMinAggregateInputType
-    _max?: Rest_imageMaxAggregateInputType
-  }
-
-  export type Rest_imageGroupByOutputType = {
-    id: bigint
-    rest_id: bigint
-    link: string | null
-    _count: Rest_imageCountAggregateOutputType | null
-    _avg: Rest_imageAvgAggregateOutputType | null
-    _sum: Rest_imageSumAggregateOutputType | null
-    _min: Rest_imageMinAggregateOutputType | null
-    _max: Rest_imageMaxAggregateOutputType | null
-  }
-
-  type GetRest_imageGroupByPayload<T extends rest_imageGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<Rest_imageGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof Rest_imageGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], Rest_imageGroupByOutputType[P]>
-            : GetScalarType<T[P], Rest_imageGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type rest_imageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    rest_id?: boolean
-    link?: boolean
-    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["rest_image"]>
-
-
-
-  export type rest_imageSelectScalar = {
-    id?: boolean
-    rest_id?: boolean
-    link?: boolean
-  }
-
-  export type rest_imageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_id" | "link", ExtArgs["result"]["rest_image"]>
-  export type rest_imageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
-  }
-
-  export type $rest_imagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "rest_image"
-    objects: {
-      restaurant: Prisma.$restaurantPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: bigint
-      rest_id: bigint
-      link: string | null
-    }, ExtArgs["result"]["rest_image"]>
-    composites: {}
-  }
-
-  type rest_imageGetPayload<S extends boolean | null | undefined | rest_imageDefaultArgs> = $Result.GetResult<Prisma.$rest_imagePayload, S>
-
-  type rest_imageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<rest_imageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: Rest_imageCountAggregateInputType | true
-    }
-
-  export interface rest_imageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['rest_image'], meta: { name: 'rest_image' } }
-    /**
-     * Find zero or one Rest_image that matches the filter.
-     * @param {rest_imageFindUniqueArgs} args - Arguments to find a Rest_image
-     * @example
-     * // Get one Rest_image
-     * const rest_image = await prisma.rest_image.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends rest_imageFindUniqueArgs>(args: SelectSubset<T, rest_imageFindUniqueArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Rest_image that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {rest_imageFindUniqueOrThrowArgs} args - Arguments to find a Rest_image
-     * @example
-     * // Get one Rest_image
-     * const rest_image = await prisma.rest_image.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends rest_imageFindUniqueOrThrowArgs>(args: SelectSubset<T, rest_imageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Rest_image that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageFindFirstArgs} args - Arguments to find a Rest_image
-     * @example
-     * // Get one Rest_image
-     * const rest_image = await prisma.rest_image.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends rest_imageFindFirstArgs>(args?: SelectSubset<T, rest_imageFindFirstArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Rest_image that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageFindFirstOrThrowArgs} args - Arguments to find a Rest_image
-     * @example
-     * // Get one Rest_image
-     * const rest_image = await prisma.rest_image.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends rest_imageFindFirstOrThrowArgs>(args?: SelectSubset<T, rest_imageFindFirstOrThrowArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Rest_images that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Rest_images
-     * const rest_images = await prisma.rest_image.findMany()
-     * 
-     * // Get first 10 Rest_images
-     * const rest_images = await prisma.rest_image.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const rest_imageWithIdOnly = await prisma.rest_image.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends rest_imageFindManyArgs>(args?: SelectSubset<T, rest_imageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Rest_image.
-     * @param {rest_imageCreateArgs} args - Arguments to create a Rest_image.
-     * @example
-     * // Create one Rest_image
-     * const Rest_image = await prisma.rest_image.create({
-     *   data: {
-     *     // ... data to create a Rest_image
-     *   }
-     * })
-     * 
-     */
-    create<T extends rest_imageCreateArgs>(args: SelectSubset<T, rest_imageCreateArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Rest_images.
-     * @param {rest_imageCreateManyArgs} args - Arguments to create many Rest_images.
-     * @example
-     * // Create many Rest_images
-     * const rest_image = await prisma.rest_image.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends rest_imageCreateManyArgs>(args?: SelectSubset<T, rest_imageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Rest_image.
-     * @param {rest_imageDeleteArgs} args - Arguments to delete one Rest_image.
-     * @example
-     * // Delete one Rest_image
-     * const Rest_image = await prisma.rest_image.delete({
-     *   where: {
-     *     // ... filter to delete one Rest_image
-     *   }
-     * })
-     * 
-     */
-    delete<T extends rest_imageDeleteArgs>(args: SelectSubset<T, rest_imageDeleteArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Rest_image.
-     * @param {rest_imageUpdateArgs} args - Arguments to update one Rest_image.
-     * @example
-     * // Update one Rest_image
-     * const rest_image = await prisma.rest_image.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends rest_imageUpdateArgs>(args: SelectSubset<T, rest_imageUpdateArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Rest_images.
-     * @param {rest_imageDeleteManyArgs} args - Arguments to filter Rest_images to delete.
-     * @example
-     * // Delete a few Rest_images
-     * const { count } = await prisma.rest_image.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends rest_imageDeleteManyArgs>(args?: SelectSubset<T, rest_imageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Rest_images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Rest_images
-     * const rest_image = await prisma.rest_image.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends rest_imageUpdateManyArgs>(args: SelectSubset<T, rest_imageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Rest_image.
-     * @param {rest_imageUpsertArgs} args - Arguments to update or create a Rest_image.
-     * @example
-     * // Update or create a Rest_image
-     * const rest_image = await prisma.rest_image.upsert({
-     *   create: {
-     *     // ... data to create a Rest_image
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Rest_image we want to update
-     *   }
-     * })
-     */
-    upsert<T extends rest_imageUpsertArgs>(args: SelectSubset<T, rest_imageUpsertArgs<ExtArgs>>): Prisma__rest_imageClient<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Rest_images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageCountArgs} args - Arguments to filter Rest_images to count.
-     * @example
-     * // Count the number of Rest_images
-     * const count = await prisma.rest_image.count({
-     *   where: {
-     *     // ... the filter for the Rest_images we want to count
-     *   }
-     * })
-    **/
-    count<T extends rest_imageCountArgs>(
-      args?: Subset<T, rest_imageCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], Rest_imageCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Rest_image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {Rest_imageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends Rest_imageAggregateArgs>(args: Subset<T, Rest_imageAggregateArgs>): Prisma.PrismaPromise<GetRest_imageAggregateType<T>>
-
-    /**
-     * Group by Rest_image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {rest_imageGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends rest_imageGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: rest_imageGroupByArgs['orderBy'] }
-        : { orderBy?: rest_imageGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, rest_imageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRest_imageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the rest_image model
-   */
-  readonly fields: rest_imageFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for rest_image.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__rest_imageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    restaurant<T extends restaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, restaurantDefaultArgs<ExtArgs>>): Prisma__restaurantClient<$Result.GetResult<Prisma.$restaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the rest_image model
-   */
-  interface rest_imageFieldRefs {
-    readonly id: FieldRef<"rest_image", 'BigInt'>
-    readonly rest_id: FieldRef<"rest_image", 'BigInt'>
-    readonly link: FieldRef<"rest_image", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * rest_image findUnique
-   */
-  export type rest_imageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter, which rest_image to fetch.
-     */
-    where: rest_imageWhereUniqueInput
-  }
-
-  /**
-   * rest_image findUniqueOrThrow
-   */
-  export type rest_imageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter, which rest_image to fetch.
-     */
-    where: rest_imageWhereUniqueInput
-  }
-
-  /**
-   * rest_image findFirst
-   */
-  export type rest_imageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter, which rest_image to fetch.
-     */
-    where?: rest_imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of rest_images to fetch.
-     */
-    orderBy?: rest_imageOrderByWithRelationInput | rest_imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for rest_images.
-     */
-    cursor?: rest_imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` rest_images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` rest_images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of rest_images.
-     */
-    distinct?: Rest_imageScalarFieldEnum | Rest_imageScalarFieldEnum[]
-  }
-
-  /**
-   * rest_image findFirstOrThrow
-   */
-  export type rest_imageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter, which rest_image to fetch.
-     */
-    where?: rest_imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of rest_images to fetch.
-     */
-    orderBy?: rest_imageOrderByWithRelationInput | rest_imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for rest_images.
-     */
-    cursor?: rest_imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` rest_images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` rest_images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of rest_images.
-     */
-    distinct?: Rest_imageScalarFieldEnum | Rest_imageScalarFieldEnum[]
-  }
-
-  /**
-   * rest_image findMany
-   */
-  export type rest_imageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter, which rest_images to fetch.
-     */
-    where?: rest_imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of rest_images to fetch.
-     */
-    orderBy?: rest_imageOrderByWithRelationInput | rest_imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing rest_images.
-     */
-    cursor?: rest_imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` rest_images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` rest_images.
-     */
-    skip?: number
-    distinct?: Rest_imageScalarFieldEnum | Rest_imageScalarFieldEnum[]
-  }
-
-  /**
-   * rest_image create
-   */
-  export type rest_imageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a rest_image.
-     */
-    data: XOR<rest_imageCreateInput, rest_imageUncheckedCreateInput>
-  }
-
-  /**
-   * rest_image createMany
-   */
-  export type rest_imageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many rest_images.
-     */
-    data: rest_imageCreateManyInput | rest_imageCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * rest_image update
-   */
-  export type rest_imageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * The data needed to update a rest_image.
-     */
-    data: XOR<rest_imageUpdateInput, rest_imageUncheckedUpdateInput>
-    /**
-     * Choose, which rest_image to update.
-     */
-    where: rest_imageWhereUniqueInput
-  }
-
-  /**
-   * rest_image updateMany
-   */
-  export type rest_imageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update rest_images.
-     */
-    data: XOR<rest_imageUpdateManyMutationInput, rest_imageUncheckedUpdateManyInput>
-    /**
-     * Filter which rest_images to update
-     */
-    where?: rest_imageWhereInput
-    /**
-     * Limit how many rest_images to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * rest_image upsert
-   */
-  export type rest_imageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * The filter to search for the rest_image to update in case it exists.
-     */
-    where: rest_imageWhereUniqueInput
-    /**
-     * In case the rest_image found by the `where` argument doesn't exist, create a new rest_image with this data.
-     */
-    create: XOR<rest_imageCreateInput, rest_imageUncheckedCreateInput>
-    /**
-     * In case the rest_image was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<rest_imageUpdateInput, rest_imageUncheckedUpdateInput>
-  }
-
-  /**
-   * rest_image delete
-   */
-  export type rest_imageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-    /**
-     * Filter which rest_image to delete.
-     */
-    where: rest_imageWhereUniqueInput
-  }
-
-  /**
-   * rest_image deleteMany
-   */
-  export type rest_imageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which rest_images to delete
-     */
-    where?: rest_imageWhereInput
-    /**
-     * Limit how many rest_images to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * rest_image without action
-   */
-  export type rest_imageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the rest_image
-     */
-    select?: rest_imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the rest_image
-     */
-    omit?: rest_imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: rest_imageInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model rest_menu
    */
 
@@ -9292,11 +8531,11 @@ export namespace Prisma {
 
   export type RestaurantMinAggregateOutputType = {
     id: bigint | null
+    rest_image: string | null
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -9310,11 +8549,11 @@ export namespace Prisma {
 
   export type RestaurantMaxAggregateOutputType = {
     id: bigint | null
+    rest_image: string | null
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -9328,11 +8567,11 @@ export namespace Prisma {
 
   export type RestaurantCountAggregateOutputType = {
     id: number
+    rest_image: number
     location: number
     name: number
-    repre_menu: number
+    keyword: number
     address: number
-    detail_address: number
     rating: number
     monday: number
     tuesday: number
@@ -9358,11 +8597,11 @@ export namespace Prisma {
 
   export type RestaurantMinAggregateInputType = {
     id?: true
+    rest_image?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -9376,11 +8615,11 @@ export namespace Prisma {
 
   export type RestaurantMaxAggregateInputType = {
     id?: true
+    rest_image?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -9394,11 +8633,11 @@ export namespace Prisma {
 
   export type RestaurantCountAggregateInputType = {
     id?: true
+    rest_image?: true
     location?: true
     name?: true
-    repre_menu?: true
+    keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -9499,11 +8738,11 @@ export namespace Prisma {
 
   export type RestaurantGroupByOutputType = {
     id: bigint
+    rest_image: string | null
     location: string | null
     name: string | null
-    repre_menu: string | null
+    keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -9536,11 +8775,11 @@ export namespace Prisma {
 
   export type restaurantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    rest_image?: boolean
     location?: boolean
     name?: boolean
-    repre_menu?: boolean
+    keyword?: boolean
     address?: boolean
-    detail_address?: boolean
     rating?: boolean
     monday?: boolean
     tuesday?: boolean
@@ -9550,10 +8789,11 @@ export namespace Prisma {
     saturday?: boolean
     sunday?: boolean
     google_place_id?: boolean
-    rest_image?: boolean | restaurant$rest_imageArgs<ExtArgs>
+    repre_menu?: boolean | restaurant$repre_menuArgs<ExtArgs>
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
     review?: boolean | restaurant$reviewArgs<ExtArgs>
+    user_rest?: boolean | restaurant$user_restArgs<ExtArgs>
     zzim?: boolean | restaurant$zzimArgs<ExtArgs>
     _count?: boolean | RestaurantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurant"]>
@@ -9562,11 +8802,11 @@ export namespace Prisma {
 
   export type restaurantSelectScalar = {
     id?: boolean
+    rest_image?: boolean
     location?: boolean
     name?: boolean
-    repre_menu?: boolean
+    keyword?: boolean
     address?: boolean
-    detail_address?: boolean
     rating?: boolean
     monday?: boolean
     tuesday?: boolean
@@ -9578,12 +8818,13 @@ export namespace Prisma {
     google_place_id?: boolean
   }
 
-  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "location" | "name" | "repre_menu" | "address" | "detail_address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
+  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_image" | "location" | "name" | "keyword" | "address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
   export type restaurantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    rest_image?: boolean | restaurant$rest_imageArgs<ExtArgs>
+    repre_menu?: boolean | restaurant$repre_menuArgs<ExtArgs>
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
     review?: boolean | restaurant$reviewArgs<ExtArgs>
+    user_rest?: boolean | restaurant$user_restArgs<ExtArgs>
     zzim?: boolean | restaurant$zzimArgs<ExtArgs>
     _count?: boolean | RestaurantCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -9591,19 +8832,20 @@ export namespace Prisma {
   export type $restaurantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "restaurant"
     objects: {
-      rest_image: Prisma.$rest_imagePayload<ExtArgs>[]
+      repre_menu: Prisma.$repre_menuPayload<ExtArgs>[]
       rest_menu: Prisma.$rest_menuPayload<ExtArgs>[]
       rest_tag: Prisma.$rest_tagPayload<ExtArgs>[]
       review: Prisma.$reviewPayload<ExtArgs>[]
+      user_rest: Prisma.$user_restPayload<ExtArgs>[]
       zzim: Prisma.$zzimPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
+      rest_image: string | null
       location: string | null
       name: string | null
-      repre_menu: string | null
+      keyword: string | null
       address: string | null
-      detail_address: string | null
       rating: number | null
       monday: string | null
       tuesday: string | null
@@ -9953,10 +9195,11 @@ export namespace Prisma {
    */
   export interface Prisma__restaurantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    rest_image<T extends restaurant$rest_imageArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_imageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    repre_menu<T extends restaurant$repre_menuArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$repre_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_menu<T extends restaurant$rest_menuArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_tag<T extends restaurant$rest_tagArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_tagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_tagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     review<T extends restaurant$reviewArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$reviewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_rest<T extends restaurant$user_restArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$user_restArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zzim<T extends restaurant$zzimArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$zzimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$zzimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9988,11 +9231,11 @@ export namespace Prisma {
    */
   interface restaurantFieldRefs {
     readonly id: FieldRef<"restaurant", 'BigInt'>
+    readonly rest_image: FieldRef<"restaurant", 'String'>
     readonly location: FieldRef<"restaurant", 'String'>
     readonly name: FieldRef<"restaurant", 'String'>
-    readonly repre_menu: FieldRef<"restaurant", 'String'>
+    readonly keyword: FieldRef<"restaurant", 'String'>
     readonly address: FieldRef<"restaurant", 'String'>
-    readonly detail_address: FieldRef<"restaurant", 'String'>
     readonly rating: FieldRef<"restaurant", 'Float'>
     readonly monday: FieldRef<"restaurant", 'String'>
     readonly tuesday: FieldRef<"restaurant", 'String'>
@@ -10345,27 +9588,27 @@ export namespace Prisma {
   }
 
   /**
-   * restaurant.rest_image
+   * restaurant.repre_menu
    */
-  export type restaurant$rest_imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type restaurant$repre_menuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the rest_image
+     * Select specific fields to fetch from the repre_menu
      */
-    select?: rest_imageSelect<ExtArgs> | null
+    select?: repre_menuSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the rest_image
+     * Omit specific fields from the repre_menu
      */
-    omit?: rest_imageOmit<ExtArgs> | null
+    omit?: repre_menuOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: rest_imageInclude<ExtArgs> | null
-    where?: rest_imageWhereInput
-    orderBy?: rest_imageOrderByWithRelationInput | rest_imageOrderByWithRelationInput[]
-    cursor?: rest_imageWhereUniqueInput
+    include?: repre_menuInclude<ExtArgs> | null
+    where?: repre_menuWhereInput
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    cursor?: repre_menuWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: Rest_imageScalarFieldEnum | Rest_imageScalarFieldEnum[]
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
   }
 
   /**
@@ -10438,6 +9681,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * restaurant.user_rest
+   */
+  export type restaurant$user_restArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    where?: user_restWhereInput
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    cursor?: user_restWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: User_restScalarFieldEnum | User_restScalarFieldEnum[]
   }
 
   /**
@@ -13664,6 +12931,7 @@ export namespace Prisma {
     recommend_except?: boolean | user$recommend_exceptArgs<ExtArgs>
     report?: boolean | user$reportArgs<ExtArgs>
     review?: boolean | user$reviewArgs<ExtArgs>
+    user_rest?: boolean | user$user_restArgs<ExtArgs>
     zzim?: boolean | user$zzimArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -13693,6 +12961,7 @@ export namespace Prisma {
     recommend_except?: boolean | user$recommend_exceptArgs<ExtArgs>
     report?: boolean | user$reportArgs<ExtArgs>
     review?: boolean | user$reviewArgs<ExtArgs>
+    user_rest?: boolean | user$user_restArgs<ExtArgs>
     zzim?: boolean | user$zzimArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13706,6 +12975,7 @@ export namespace Prisma {
       recommend_except: Prisma.$recommend_exceptPayload<ExtArgs>[]
       report: Prisma.$reportPayload<ExtArgs>[]
       review: Prisma.$reviewPayload<ExtArgs>[]
+      user_rest: Prisma.$user_restPayload<ExtArgs>[]
       zzim: Prisma.$zzimPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -14067,6 +13337,7 @@ export namespace Prisma {
     recommend_except<T extends user$recommend_exceptArgs<ExtArgs> = {}>(args?: Subset<T, user$recommend_exceptArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$recommend_exceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     report<T extends user$reportArgs<ExtArgs> = {}>(args?: Subset<T, user$reportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     review<T extends user$reviewArgs<ExtArgs> = {}>(args?: Subset<T, user$reviewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_rest<T extends user$user_restArgs<ExtArgs> = {}>(args?: Subset<T, user$user_restArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zzim<T extends user$zzimArgs<ExtArgs> = {}>(args?: Subset<T, user$zzimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$zzimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14593,6 +13864,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * user.user_rest
+   */
+  export type user$user_restArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    where?: user_restWhereInput
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    cursor?: user_restWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: User_restScalarFieldEnum | User_restScalarFieldEnum[]
   }
 
   /**
@@ -17517,6 +16812,7 @@ export namespace Prisma {
     email: string | null
     code: string | null
     created_at: Date | null
+    expires_at: Date | null
   }
 
   export type Email_verificationMaxAggregateOutputType = {
@@ -17524,6 +16820,7 @@ export namespace Prisma {
     email: string | null
     code: string | null
     created_at: Date | null
+    expires_at: Date | null
   }
 
   export type Email_verificationCountAggregateOutputType = {
@@ -17531,6 +16828,7 @@ export namespace Prisma {
     email: number
     code: number
     created_at: number
+    expires_at: number
     _all: number
   }
 
@@ -17548,6 +16846,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
   }
 
   export type Email_verificationMaxAggregateInputType = {
@@ -17555,6 +16854,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
   }
 
   export type Email_verificationCountAggregateInputType = {
@@ -17562,6 +16862,7 @@ export namespace Prisma {
     email?: true
     code?: true
     created_at?: true
+    expires_at?: true
     _all?: true
   }
 
@@ -17656,6 +16957,7 @@ export namespace Prisma {
     email: string
     code: string
     created_at: Date | null
+    expires_at: Date
     _count: Email_verificationCountAggregateOutputType | null
     _avg: Email_verificationAvgAggregateOutputType | null
     _sum: Email_verificationSumAggregateOutputType | null
@@ -17682,6 +16984,7 @@ export namespace Prisma {
     email?: boolean
     code?: boolean
     created_at?: boolean
+    expires_at?: boolean
   }, ExtArgs["result"]["email_verification"]>
 
 
@@ -17691,9 +16994,10 @@ export namespace Prisma {
     email?: boolean
     code?: boolean
     created_at?: boolean
+    expires_at?: boolean
   }
 
-  export type email_verificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "code" | "created_at", ExtArgs["result"]["email_verification"]>
+  export type email_verificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "code" | "created_at" | "expires_at", ExtArgs["result"]["email_verification"]>
 
   export type $email_verificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "email_verification"
@@ -17703,6 +17007,7 @@ export namespace Prisma {
       email: string
       code: string
       created_at: Date | null
+      expires_at: Date
     }, ExtArgs["result"]["email_verification"]>
     composites: {}
   }
@@ -18076,6 +17381,7 @@ export namespace Prisma {
     readonly email: FieldRef<"email_verification", 'String'>
     readonly code: FieldRef<"email_verification", 'String'>
     readonly created_at: FieldRef<"email_verification", 'DateTime'>
+    readonly expires_at: FieldRef<"email_verification", 'DateTime'>
   }
     
 
@@ -19343,6 +18649,2820 @@ export namespace Prisma {
 
 
   /**
+   * Model password_reset_token
+   */
+
+  export type AggregatePassword_reset_token = {
+    _count: Password_reset_tokenCountAggregateOutputType | null
+    _avg: Password_reset_tokenAvgAggregateOutputType | null
+    _sum: Password_reset_tokenSumAggregateOutputType | null
+    _min: Password_reset_tokenMinAggregateOutputType | null
+    _max: Password_reset_tokenMaxAggregateOutputType | null
+  }
+
+  export type Password_reset_tokenAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type Password_reset_tokenSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type Password_reset_tokenMinAggregateOutputType = {
+    id: number | null
+    email: string | null
+    token: string | null
+    expires_at: Date | null
+    created_at: Date | null
+  }
+
+  export type Password_reset_tokenMaxAggregateOutputType = {
+    id: number | null
+    email: string | null
+    token: string | null
+    expires_at: Date | null
+    created_at: Date | null
+  }
+
+  export type Password_reset_tokenCountAggregateOutputType = {
+    id: number
+    email: number
+    token: number
+    expires_at: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type Password_reset_tokenAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type Password_reset_tokenSumAggregateInputType = {
+    id?: true
+  }
+
+  export type Password_reset_tokenMinAggregateInputType = {
+    id?: true
+    email?: true
+    token?: true
+    expires_at?: true
+    created_at?: true
+  }
+
+  export type Password_reset_tokenMaxAggregateInputType = {
+    id?: true
+    email?: true
+    token?: true
+    expires_at?: true
+    created_at?: true
+  }
+
+  export type Password_reset_tokenCountAggregateInputType = {
+    id?: true
+    email?: true
+    token?: true
+    expires_at?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type Password_reset_tokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which password_reset_token to aggregate.
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of password_reset_tokens to fetch.
+     */
+    orderBy?: password_reset_tokenOrderByWithRelationInput | password_reset_tokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: password_reset_tokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` password_reset_tokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` password_reset_tokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned password_reset_tokens
+    **/
+    _count?: true | Password_reset_tokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Password_reset_tokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Password_reset_tokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Password_reset_tokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Password_reset_tokenMaxAggregateInputType
+  }
+
+  export type GetPassword_reset_tokenAggregateType<T extends Password_reset_tokenAggregateArgs> = {
+        [P in keyof T & keyof AggregatePassword_reset_token]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePassword_reset_token[P]>
+      : GetScalarType<T[P], AggregatePassword_reset_token[P]>
+  }
+
+
+
+
+  export type password_reset_tokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: password_reset_tokenWhereInput
+    orderBy?: password_reset_tokenOrderByWithAggregationInput | password_reset_tokenOrderByWithAggregationInput[]
+    by: Password_reset_tokenScalarFieldEnum[] | Password_reset_tokenScalarFieldEnum
+    having?: password_reset_tokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Password_reset_tokenCountAggregateInputType | true
+    _avg?: Password_reset_tokenAvgAggregateInputType
+    _sum?: Password_reset_tokenSumAggregateInputType
+    _min?: Password_reset_tokenMinAggregateInputType
+    _max?: Password_reset_tokenMaxAggregateInputType
+  }
+
+  export type Password_reset_tokenGroupByOutputType = {
+    id: number
+    email: string
+    token: string
+    expires_at: Date
+    created_at: Date | null
+    _count: Password_reset_tokenCountAggregateOutputType | null
+    _avg: Password_reset_tokenAvgAggregateOutputType | null
+    _sum: Password_reset_tokenSumAggregateOutputType | null
+    _min: Password_reset_tokenMinAggregateOutputType | null
+    _max: Password_reset_tokenMaxAggregateOutputType | null
+  }
+
+  type GetPassword_reset_tokenGroupByPayload<T extends password_reset_tokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Password_reset_tokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Password_reset_tokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Password_reset_tokenGroupByOutputType[P]>
+            : GetScalarType<T[P], Password_reset_tokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type password_reset_tokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    token?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["password_reset_token"]>
+
+
+
+  export type password_reset_tokenSelectScalar = {
+    id?: boolean
+    email?: boolean
+    token?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+  }
+
+  export type password_reset_tokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "token" | "expires_at" | "created_at", ExtArgs["result"]["password_reset_token"]>
+
+  export type $password_reset_tokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "password_reset_token"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      email: string
+      token: string
+      expires_at: Date
+      created_at: Date | null
+    }, ExtArgs["result"]["password_reset_token"]>
+    composites: {}
+  }
+
+  type password_reset_tokenGetPayload<S extends boolean | null | undefined | password_reset_tokenDefaultArgs> = $Result.GetResult<Prisma.$password_reset_tokenPayload, S>
+
+  type password_reset_tokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<password_reset_tokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Password_reset_tokenCountAggregateInputType | true
+    }
+
+  export interface password_reset_tokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['password_reset_token'], meta: { name: 'password_reset_token' } }
+    /**
+     * Find zero or one Password_reset_token that matches the filter.
+     * @param {password_reset_tokenFindUniqueArgs} args - Arguments to find a Password_reset_token
+     * @example
+     * // Get one Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends password_reset_tokenFindUniqueArgs>(args: SelectSubset<T, password_reset_tokenFindUniqueArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Password_reset_token that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {password_reset_tokenFindUniqueOrThrowArgs} args - Arguments to find a Password_reset_token
+     * @example
+     * // Get one Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends password_reset_tokenFindUniqueOrThrowArgs>(args: SelectSubset<T, password_reset_tokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Password_reset_token that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenFindFirstArgs} args - Arguments to find a Password_reset_token
+     * @example
+     * // Get one Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends password_reset_tokenFindFirstArgs>(args?: SelectSubset<T, password_reset_tokenFindFirstArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Password_reset_token that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenFindFirstOrThrowArgs} args - Arguments to find a Password_reset_token
+     * @example
+     * // Get one Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends password_reset_tokenFindFirstOrThrowArgs>(args?: SelectSubset<T, password_reset_tokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Password_reset_tokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Password_reset_tokens
+     * const password_reset_tokens = await prisma.password_reset_token.findMany()
+     * 
+     * // Get first 10 Password_reset_tokens
+     * const password_reset_tokens = await prisma.password_reset_token.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const password_reset_tokenWithIdOnly = await prisma.password_reset_token.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends password_reset_tokenFindManyArgs>(args?: SelectSubset<T, password_reset_tokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Password_reset_token.
+     * @param {password_reset_tokenCreateArgs} args - Arguments to create a Password_reset_token.
+     * @example
+     * // Create one Password_reset_token
+     * const Password_reset_token = await prisma.password_reset_token.create({
+     *   data: {
+     *     // ... data to create a Password_reset_token
+     *   }
+     * })
+     * 
+     */
+    create<T extends password_reset_tokenCreateArgs>(args: SelectSubset<T, password_reset_tokenCreateArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Password_reset_tokens.
+     * @param {password_reset_tokenCreateManyArgs} args - Arguments to create many Password_reset_tokens.
+     * @example
+     * // Create many Password_reset_tokens
+     * const password_reset_token = await prisma.password_reset_token.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends password_reset_tokenCreateManyArgs>(args?: SelectSubset<T, password_reset_tokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Password_reset_token.
+     * @param {password_reset_tokenDeleteArgs} args - Arguments to delete one Password_reset_token.
+     * @example
+     * // Delete one Password_reset_token
+     * const Password_reset_token = await prisma.password_reset_token.delete({
+     *   where: {
+     *     // ... filter to delete one Password_reset_token
+     *   }
+     * })
+     * 
+     */
+    delete<T extends password_reset_tokenDeleteArgs>(args: SelectSubset<T, password_reset_tokenDeleteArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Password_reset_token.
+     * @param {password_reset_tokenUpdateArgs} args - Arguments to update one Password_reset_token.
+     * @example
+     * // Update one Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends password_reset_tokenUpdateArgs>(args: SelectSubset<T, password_reset_tokenUpdateArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Password_reset_tokens.
+     * @param {password_reset_tokenDeleteManyArgs} args - Arguments to filter Password_reset_tokens to delete.
+     * @example
+     * // Delete a few Password_reset_tokens
+     * const { count } = await prisma.password_reset_token.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends password_reset_tokenDeleteManyArgs>(args?: SelectSubset<T, password_reset_tokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Password_reset_tokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Password_reset_tokens
+     * const password_reset_token = await prisma.password_reset_token.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends password_reset_tokenUpdateManyArgs>(args: SelectSubset<T, password_reset_tokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Password_reset_token.
+     * @param {password_reset_tokenUpsertArgs} args - Arguments to update or create a Password_reset_token.
+     * @example
+     * // Update or create a Password_reset_token
+     * const password_reset_token = await prisma.password_reset_token.upsert({
+     *   create: {
+     *     // ... data to create a Password_reset_token
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Password_reset_token we want to update
+     *   }
+     * })
+     */
+    upsert<T extends password_reset_tokenUpsertArgs>(args: SelectSubset<T, password_reset_tokenUpsertArgs<ExtArgs>>): Prisma__password_reset_tokenClient<$Result.GetResult<Prisma.$password_reset_tokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Password_reset_tokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenCountArgs} args - Arguments to filter Password_reset_tokens to count.
+     * @example
+     * // Count the number of Password_reset_tokens
+     * const count = await prisma.password_reset_token.count({
+     *   where: {
+     *     // ... the filter for the Password_reset_tokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends password_reset_tokenCountArgs>(
+      args?: Subset<T, password_reset_tokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Password_reset_tokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Password_reset_token.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Password_reset_tokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Password_reset_tokenAggregateArgs>(args: Subset<T, Password_reset_tokenAggregateArgs>): Prisma.PrismaPromise<GetPassword_reset_tokenAggregateType<T>>
+
+    /**
+     * Group by Password_reset_token.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {password_reset_tokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends password_reset_tokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: password_reset_tokenGroupByArgs['orderBy'] }
+        : { orderBy?: password_reset_tokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, password_reset_tokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPassword_reset_tokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the password_reset_token model
+   */
+  readonly fields: password_reset_tokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for password_reset_token.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__password_reset_tokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the password_reset_token model
+   */
+  interface password_reset_tokenFieldRefs {
+    readonly id: FieldRef<"password_reset_token", 'Int'>
+    readonly email: FieldRef<"password_reset_token", 'String'>
+    readonly token: FieldRef<"password_reset_token", 'String'>
+    readonly expires_at: FieldRef<"password_reset_token", 'DateTime'>
+    readonly created_at: FieldRef<"password_reset_token", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * password_reset_token findUnique
+   */
+  export type password_reset_tokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter, which password_reset_token to fetch.
+     */
+    where: password_reset_tokenWhereUniqueInput
+  }
+
+  /**
+   * password_reset_token findUniqueOrThrow
+   */
+  export type password_reset_tokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter, which password_reset_token to fetch.
+     */
+    where: password_reset_tokenWhereUniqueInput
+  }
+
+  /**
+   * password_reset_token findFirst
+   */
+  export type password_reset_tokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter, which password_reset_token to fetch.
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of password_reset_tokens to fetch.
+     */
+    orderBy?: password_reset_tokenOrderByWithRelationInput | password_reset_tokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for password_reset_tokens.
+     */
+    cursor?: password_reset_tokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` password_reset_tokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` password_reset_tokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of password_reset_tokens.
+     */
+    distinct?: Password_reset_tokenScalarFieldEnum | Password_reset_tokenScalarFieldEnum[]
+  }
+
+  /**
+   * password_reset_token findFirstOrThrow
+   */
+  export type password_reset_tokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter, which password_reset_token to fetch.
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of password_reset_tokens to fetch.
+     */
+    orderBy?: password_reset_tokenOrderByWithRelationInput | password_reset_tokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for password_reset_tokens.
+     */
+    cursor?: password_reset_tokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` password_reset_tokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` password_reset_tokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of password_reset_tokens.
+     */
+    distinct?: Password_reset_tokenScalarFieldEnum | Password_reset_tokenScalarFieldEnum[]
+  }
+
+  /**
+   * password_reset_token findMany
+   */
+  export type password_reset_tokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter, which password_reset_tokens to fetch.
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of password_reset_tokens to fetch.
+     */
+    orderBy?: password_reset_tokenOrderByWithRelationInput | password_reset_tokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing password_reset_tokens.
+     */
+    cursor?: password_reset_tokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` password_reset_tokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` password_reset_tokens.
+     */
+    skip?: number
+    distinct?: Password_reset_tokenScalarFieldEnum | Password_reset_tokenScalarFieldEnum[]
+  }
+
+  /**
+   * password_reset_token create
+   */
+  export type password_reset_tokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * The data needed to create a password_reset_token.
+     */
+    data: XOR<password_reset_tokenCreateInput, password_reset_tokenUncheckedCreateInput>
+  }
+
+  /**
+   * password_reset_token createMany
+   */
+  export type password_reset_tokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many password_reset_tokens.
+     */
+    data: password_reset_tokenCreateManyInput | password_reset_tokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * password_reset_token update
+   */
+  export type password_reset_tokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * The data needed to update a password_reset_token.
+     */
+    data: XOR<password_reset_tokenUpdateInput, password_reset_tokenUncheckedUpdateInput>
+    /**
+     * Choose, which password_reset_token to update.
+     */
+    where: password_reset_tokenWhereUniqueInput
+  }
+
+  /**
+   * password_reset_token updateMany
+   */
+  export type password_reset_tokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update password_reset_tokens.
+     */
+    data: XOR<password_reset_tokenUpdateManyMutationInput, password_reset_tokenUncheckedUpdateManyInput>
+    /**
+     * Filter which password_reset_tokens to update
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * Limit how many password_reset_tokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * password_reset_token upsert
+   */
+  export type password_reset_tokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * The filter to search for the password_reset_token to update in case it exists.
+     */
+    where: password_reset_tokenWhereUniqueInput
+    /**
+     * In case the password_reset_token found by the `where` argument doesn't exist, create a new password_reset_token with this data.
+     */
+    create: XOR<password_reset_tokenCreateInput, password_reset_tokenUncheckedCreateInput>
+    /**
+     * In case the password_reset_token was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<password_reset_tokenUpdateInput, password_reset_tokenUncheckedUpdateInput>
+  }
+
+  /**
+   * password_reset_token delete
+   */
+  export type password_reset_tokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+    /**
+     * Filter which password_reset_token to delete.
+     */
+    where: password_reset_tokenWhereUniqueInput
+  }
+
+  /**
+   * password_reset_token deleteMany
+   */
+  export type password_reset_tokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which password_reset_tokens to delete
+     */
+    where?: password_reset_tokenWhereInput
+    /**
+     * Limit how many password_reset_tokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * password_reset_token without action
+   */
+  export type password_reset_tokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the password_reset_token
+     */
+    select?: password_reset_tokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the password_reset_token
+     */
+    omit?: password_reset_tokenOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model repre_menu
+   */
+
+  export type AggregateRepre_menu = {
+    _count: Repre_menuCountAggregateOutputType | null
+    _avg: Repre_menuAvgAggregateOutputType | null
+    _sum: Repre_menuSumAggregateOutputType | null
+    _min: Repre_menuMinAggregateOutputType | null
+    _max: Repre_menuMaxAggregateOutputType | null
+  }
+
+  export type Repre_menuAvgAggregateOutputType = {
+    id: number | null
+    rest_id: number | null
+  }
+
+  export type Repre_menuSumAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+  }
+
+  export type Repre_menuMinAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+    menu: string | null
+  }
+
+  export type Repre_menuMaxAggregateOutputType = {
+    id: bigint | null
+    rest_id: bigint | null
+    menu: string | null
+  }
+
+  export type Repre_menuCountAggregateOutputType = {
+    id: number
+    rest_id: number
+    menu: number
+    _all: number
+  }
+
+
+  export type Repre_menuAvgAggregateInputType = {
+    id?: true
+    rest_id?: true
+  }
+
+  export type Repre_menuSumAggregateInputType = {
+    id?: true
+    rest_id?: true
+  }
+
+  export type Repre_menuMinAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+  }
+
+  export type Repre_menuMaxAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+  }
+
+  export type Repre_menuCountAggregateInputType = {
+    id?: true
+    rest_id?: true
+    menu?: true
+    _all?: true
+  }
+
+  export type Repre_menuAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which repre_menu to aggregate.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned repre_menus
+    **/
+    _count?: true | Repre_menuCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Repre_menuAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Repre_menuSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Repre_menuMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Repre_menuMaxAggregateInputType
+  }
+
+  export type GetRepre_menuAggregateType<T extends Repre_menuAggregateArgs> = {
+        [P in keyof T & keyof AggregateRepre_menu]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRepre_menu[P]>
+      : GetScalarType<T[P], AggregateRepre_menu[P]>
+  }
+
+
+
+
+  export type repre_menuGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: repre_menuWhereInput
+    orderBy?: repre_menuOrderByWithAggregationInput | repre_menuOrderByWithAggregationInput[]
+    by: Repre_menuScalarFieldEnum[] | Repre_menuScalarFieldEnum
+    having?: repre_menuScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Repre_menuCountAggregateInputType | true
+    _avg?: Repre_menuAvgAggregateInputType
+    _sum?: Repre_menuSumAggregateInputType
+    _min?: Repre_menuMinAggregateInputType
+    _max?: Repre_menuMaxAggregateInputType
+  }
+
+  export type Repre_menuGroupByOutputType = {
+    id: bigint
+    rest_id: bigint
+    menu: string
+    _count: Repre_menuCountAggregateOutputType | null
+    _avg: Repre_menuAvgAggregateOutputType | null
+    _sum: Repre_menuSumAggregateOutputType | null
+    _min: Repre_menuMinAggregateOutputType | null
+    _max: Repre_menuMaxAggregateOutputType | null
+  }
+
+  type GetRepre_menuGroupByPayload<T extends repre_menuGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Repre_menuGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Repre_menuGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Repre_menuGroupByOutputType[P]>
+            : GetScalarType<T[P], Repre_menuGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type repre_menuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    rest_id?: boolean
+    menu?: boolean
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["repre_menu"]>
+
+
+
+  export type repre_menuSelectScalar = {
+    id?: boolean
+    rest_id?: boolean
+    menu?: boolean
+  }
+
+  export type repre_menuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_id" | "menu", ExtArgs["result"]["repre_menu"]>
+  export type repre_menuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+  }
+
+  export type $repre_menuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "repre_menu"
+    objects: {
+      restaurant: Prisma.$restaurantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      rest_id: bigint
+      menu: string
+    }, ExtArgs["result"]["repre_menu"]>
+    composites: {}
+  }
+
+  type repre_menuGetPayload<S extends boolean | null | undefined | repre_menuDefaultArgs> = $Result.GetResult<Prisma.$repre_menuPayload, S>
+
+  type repre_menuCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<repre_menuFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Repre_menuCountAggregateInputType | true
+    }
+
+  export interface repre_menuDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['repre_menu'], meta: { name: 'repre_menu' } }
+    /**
+     * Find zero or one Repre_menu that matches the filter.
+     * @param {repre_menuFindUniqueArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends repre_menuFindUniqueArgs>(args: SelectSubset<T, repre_menuFindUniqueArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Repre_menu that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {repre_menuFindUniqueOrThrowArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends repre_menuFindUniqueOrThrowArgs>(args: SelectSubset<T, repre_menuFindUniqueOrThrowArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Repre_menu that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindFirstArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends repre_menuFindFirstArgs>(args?: SelectSubset<T, repre_menuFindFirstArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Repre_menu that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindFirstOrThrowArgs} args - Arguments to find a Repre_menu
+     * @example
+     * // Get one Repre_menu
+     * const repre_menu = await prisma.repre_menu.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends repre_menuFindFirstOrThrowArgs>(args?: SelectSubset<T, repre_menuFindFirstOrThrowArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Repre_menus that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Repre_menus
+     * const repre_menus = await prisma.repre_menu.findMany()
+     * 
+     * // Get first 10 Repre_menus
+     * const repre_menus = await prisma.repre_menu.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const repre_menuWithIdOnly = await prisma.repre_menu.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends repre_menuFindManyArgs>(args?: SelectSubset<T, repre_menuFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Repre_menu.
+     * @param {repre_menuCreateArgs} args - Arguments to create a Repre_menu.
+     * @example
+     * // Create one Repre_menu
+     * const Repre_menu = await prisma.repre_menu.create({
+     *   data: {
+     *     // ... data to create a Repre_menu
+     *   }
+     * })
+     * 
+     */
+    create<T extends repre_menuCreateArgs>(args: SelectSubset<T, repre_menuCreateArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Repre_menus.
+     * @param {repre_menuCreateManyArgs} args - Arguments to create many Repre_menus.
+     * @example
+     * // Create many Repre_menus
+     * const repre_menu = await prisma.repre_menu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends repre_menuCreateManyArgs>(args?: SelectSubset<T, repre_menuCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Repre_menu.
+     * @param {repre_menuDeleteArgs} args - Arguments to delete one Repre_menu.
+     * @example
+     * // Delete one Repre_menu
+     * const Repre_menu = await prisma.repre_menu.delete({
+     *   where: {
+     *     // ... filter to delete one Repre_menu
+     *   }
+     * })
+     * 
+     */
+    delete<T extends repre_menuDeleteArgs>(args: SelectSubset<T, repre_menuDeleteArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Repre_menu.
+     * @param {repre_menuUpdateArgs} args - Arguments to update one Repre_menu.
+     * @example
+     * // Update one Repre_menu
+     * const repre_menu = await prisma.repre_menu.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends repre_menuUpdateArgs>(args: SelectSubset<T, repre_menuUpdateArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Repre_menus.
+     * @param {repre_menuDeleteManyArgs} args - Arguments to filter Repre_menus to delete.
+     * @example
+     * // Delete a few Repre_menus
+     * const { count } = await prisma.repre_menu.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends repre_menuDeleteManyArgs>(args?: SelectSubset<T, repre_menuDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Repre_menus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Repre_menus
+     * const repre_menu = await prisma.repre_menu.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends repre_menuUpdateManyArgs>(args: SelectSubset<T, repre_menuUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Repre_menu.
+     * @param {repre_menuUpsertArgs} args - Arguments to update or create a Repre_menu.
+     * @example
+     * // Update or create a Repre_menu
+     * const repre_menu = await prisma.repre_menu.upsert({
+     *   create: {
+     *     // ... data to create a Repre_menu
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Repre_menu we want to update
+     *   }
+     * })
+     */
+    upsert<T extends repre_menuUpsertArgs>(args: SelectSubset<T, repre_menuUpsertArgs<ExtArgs>>): Prisma__repre_menuClient<$Result.GetResult<Prisma.$repre_menuPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Repre_menus.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuCountArgs} args - Arguments to filter Repre_menus to count.
+     * @example
+     * // Count the number of Repre_menus
+     * const count = await prisma.repre_menu.count({
+     *   where: {
+     *     // ... the filter for the Repre_menus we want to count
+     *   }
+     * })
+    **/
+    count<T extends repre_menuCountArgs>(
+      args?: Subset<T, repre_menuCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Repre_menuCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Repre_menu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Repre_menuAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Repre_menuAggregateArgs>(args: Subset<T, Repre_menuAggregateArgs>): Prisma.PrismaPromise<GetRepre_menuAggregateType<T>>
+
+    /**
+     * Group by Repre_menu.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {repre_menuGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends repre_menuGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: repre_menuGroupByArgs['orderBy'] }
+        : { orderBy?: repre_menuGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, repre_menuGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRepre_menuGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the repre_menu model
+   */
+  readonly fields: repre_menuFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for repre_menu.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__repre_menuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    restaurant<T extends restaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, restaurantDefaultArgs<ExtArgs>>): Prisma__restaurantClient<$Result.GetResult<Prisma.$restaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the repre_menu model
+   */
+  interface repre_menuFieldRefs {
+    readonly id: FieldRef<"repre_menu", 'BigInt'>
+    readonly rest_id: FieldRef<"repre_menu", 'BigInt'>
+    readonly menu: FieldRef<"repre_menu", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * repre_menu findUnique
+   */
+  export type repre_menuFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu findUniqueOrThrow
+   */
+  export type repre_menuFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu findFirst
+   */
+  export type repre_menuFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of repre_menus.
+     */
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu findFirstOrThrow
+   */
+  export type repre_menuFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menu to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of repre_menus.
+     */
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu findMany
+   */
+  export type repre_menuFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter, which repre_menus to fetch.
+     */
+    where?: repre_menuWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of repre_menus to fetch.
+     */
+    orderBy?: repre_menuOrderByWithRelationInput | repre_menuOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing repre_menus.
+     */
+    cursor?: repre_menuWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` repre_menus from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` repre_menus.
+     */
+    skip?: number
+    distinct?: Repre_menuScalarFieldEnum | Repre_menuScalarFieldEnum[]
+  }
+
+  /**
+   * repre_menu create
+   */
+  export type repre_menuCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The data needed to create a repre_menu.
+     */
+    data: XOR<repre_menuCreateInput, repre_menuUncheckedCreateInput>
+  }
+
+  /**
+   * repre_menu createMany
+   */
+  export type repre_menuCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many repre_menus.
+     */
+    data: repre_menuCreateManyInput | repre_menuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * repre_menu update
+   */
+  export type repre_menuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The data needed to update a repre_menu.
+     */
+    data: XOR<repre_menuUpdateInput, repre_menuUncheckedUpdateInput>
+    /**
+     * Choose, which repre_menu to update.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu updateMany
+   */
+  export type repre_menuUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update repre_menus.
+     */
+    data: XOR<repre_menuUpdateManyMutationInput, repre_menuUncheckedUpdateManyInput>
+    /**
+     * Filter which repre_menus to update
+     */
+    where?: repre_menuWhereInput
+    /**
+     * Limit how many repre_menus to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * repre_menu upsert
+   */
+  export type repre_menuUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * The filter to search for the repre_menu to update in case it exists.
+     */
+    where: repre_menuWhereUniqueInput
+    /**
+     * In case the repre_menu found by the `where` argument doesn't exist, create a new repre_menu with this data.
+     */
+    create: XOR<repre_menuCreateInput, repre_menuUncheckedCreateInput>
+    /**
+     * In case the repre_menu was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<repre_menuUpdateInput, repre_menuUncheckedUpdateInput>
+  }
+
+  /**
+   * repre_menu delete
+   */
+  export type repre_menuDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+    /**
+     * Filter which repre_menu to delete.
+     */
+    where: repre_menuWhereUniqueInput
+  }
+
+  /**
+   * repre_menu deleteMany
+   */
+  export type repre_menuDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which repre_menus to delete
+     */
+    where?: repre_menuWhereInput
+    /**
+     * Limit how many repre_menus to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * repre_menu without action
+   */
+  export type repre_menuDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the repre_menu
+     */
+    select?: repre_menuSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the repre_menu
+     */
+    omit?: repre_menuOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: repre_menuInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model user_rest
+   */
+
+  export type AggregateUser_rest = {
+    _count: User_restCountAggregateOutputType | null
+    _avg: User_restAvgAggregateOutputType | null
+    _sum: User_restSumAggregateOutputType | null
+    _min: User_restMinAggregateOutputType | null
+    _max: User_restMaxAggregateOutputType | null
+  }
+
+  export type User_restAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    rest_id: number | null
+  }
+
+  export type User_restSumAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    rest_id: bigint | null
+  }
+
+  export type User_restMinAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    rest_id: bigint | null
+  }
+
+  export type User_restMaxAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    rest_id: bigint | null
+  }
+
+  export type User_restCountAggregateOutputType = {
+    id: number
+    user_id: number
+    rest_id: number
+    _all: number
+  }
+
+
+  export type User_restAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    rest_id?: true
+  }
+
+  export type User_restSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    rest_id?: true
+  }
+
+  export type User_restMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    rest_id?: true
+  }
+
+  export type User_restMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    rest_id?: true
+  }
+
+  export type User_restCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    rest_id?: true
+    _all?: true
+  }
+
+  export type User_restAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which user_rest to aggregate.
+     */
+    where?: user_restWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_rests to fetch.
+     */
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: user_restWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_rests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_rests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned user_rests
+    **/
+    _count?: true | User_restCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: User_restAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: User_restSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: User_restMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: User_restMaxAggregateInputType
+  }
+
+  export type GetUser_restAggregateType<T extends User_restAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser_rest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUser_rest[P]>
+      : GetScalarType<T[P], AggregateUser_rest[P]>
+  }
+
+
+
+
+  export type user_restGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: user_restWhereInput
+    orderBy?: user_restOrderByWithAggregationInput | user_restOrderByWithAggregationInput[]
+    by: User_restScalarFieldEnum[] | User_restScalarFieldEnum
+    having?: user_restScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: User_restCountAggregateInputType | true
+    _avg?: User_restAvgAggregateInputType
+    _sum?: User_restSumAggregateInputType
+    _min?: User_restMinAggregateInputType
+    _max?: User_restMaxAggregateInputType
+  }
+
+  export type User_restGroupByOutputType = {
+    id: bigint
+    user_id: bigint
+    rest_id: bigint
+    _count: User_restCountAggregateOutputType | null
+    _avg: User_restAvgAggregateOutputType | null
+    _sum: User_restSumAggregateOutputType | null
+    _min: User_restMinAggregateOutputType | null
+    _max: User_restMaxAggregateOutputType | null
+  }
+
+  type GetUser_restGroupByPayload<T extends user_restGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<User_restGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof User_restGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], User_restGroupByOutputType[P]>
+            : GetScalarType<T[P], User_restGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type user_restSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    rest_id?: boolean
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user_rest"]>
+
+
+
+  export type user_restSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    rest_id?: boolean
+  }
+
+  export type user_restOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "rest_id", ExtArgs["result"]["user_rest"]>
+  export type user_restInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $user_restPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "user_rest"
+    objects: {
+      restaurant: Prisma.$restaurantPayload<ExtArgs>
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      user_id: bigint
+      rest_id: bigint
+    }, ExtArgs["result"]["user_rest"]>
+    composites: {}
+  }
+
+  type user_restGetPayload<S extends boolean | null | undefined | user_restDefaultArgs> = $Result.GetResult<Prisma.$user_restPayload, S>
+
+  type user_restCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<user_restFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: User_restCountAggregateInputType | true
+    }
+
+  export interface user_restDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['user_rest'], meta: { name: 'user_rest' } }
+    /**
+     * Find zero or one User_rest that matches the filter.
+     * @param {user_restFindUniqueArgs} args - Arguments to find a User_rest
+     * @example
+     * // Get one User_rest
+     * const user_rest = await prisma.user_rest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends user_restFindUniqueArgs>(args: SelectSubset<T, user_restFindUniqueArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one User_rest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {user_restFindUniqueOrThrowArgs} args - Arguments to find a User_rest
+     * @example
+     * // Get one User_rest
+     * const user_rest = await prisma.user_rest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends user_restFindUniqueOrThrowArgs>(args: SelectSubset<T, user_restFindUniqueOrThrowArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User_rest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restFindFirstArgs} args - Arguments to find a User_rest
+     * @example
+     * // Get one User_rest
+     * const user_rest = await prisma.user_rest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends user_restFindFirstArgs>(args?: SelectSubset<T, user_restFindFirstArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first User_rest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restFindFirstOrThrowArgs} args - Arguments to find a User_rest
+     * @example
+     * // Get one User_rest
+     * const user_rest = await prisma.user_rest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends user_restFindFirstOrThrowArgs>(args?: SelectSubset<T, user_restFindFirstOrThrowArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more User_rests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all User_rests
+     * const user_rests = await prisma.user_rest.findMany()
+     * 
+     * // Get first 10 User_rests
+     * const user_rests = await prisma.user_rest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const user_restWithIdOnly = await prisma.user_rest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends user_restFindManyArgs>(args?: SelectSubset<T, user_restFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a User_rest.
+     * @param {user_restCreateArgs} args - Arguments to create a User_rest.
+     * @example
+     * // Create one User_rest
+     * const User_rest = await prisma.user_rest.create({
+     *   data: {
+     *     // ... data to create a User_rest
+     *   }
+     * })
+     * 
+     */
+    create<T extends user_restCreateArgs>(args: SelectSubset<T, user_restCreateArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many User_rests.
+     * @param {user_restCreateManyArgs} args - Arguments to create many User_rests.
+     * @example
+     * // Create many User_rests
+     * const user_rest = await prisma.user_rest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends user_restCreateManyArgs>(args?: SelectSubset<T, user_restCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a User_rest.
+     * @param {user_restDeleteArgs} args - Arguments to delete one User_rest.
+     * @example
+     * // Delete one User_rest
+     * const User_rest = await prisma.user_rest.delete({
+     *   where: {
+     *     // ... filter to delete one User_rest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends user_restDeleteArgs>(args: SelectSubset<T, user_restDeleteArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one User_rest.
+     * @param {user_restUpdateArgs} args - Arguments to update one User_rest.
+     * @example
+     * // Update one User_rest
+     * const user_rest = await prisma.user_rest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends user_restUpdateArgs>(args: SelectSubset<T, user_restUpdateArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more User_rests.
+     * @param {user_restDeleteManyArgs} args - Arguments to filter User_rests to delete.
+     * @example
+     * // Delete a few User_rests
+     * const { count } = await prisma.user_rest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends user_restDeleteManyArgs>(args?: SelectSubset<T, user_restDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more User_rests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many User_rests
+     * const user_rest = await prisma.user_rest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends user_restUpdateManyArgs>(args: SelectSubset<T, user_restUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one User_rest.
+     * @param {user_restUpsertArgs} args - Arguments to update or create a User_rest.
+     * @example
+     * // Update or create a User_rest
+     * const user_rest = await prisma.user_rest.upsert({
+     *   create: {
+     *     // ... data to create a User_rest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the User_rest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends user_restUpsertArgs>(args: SelectSubset<T, user_restUpsertArgs<ExtArgs>>): Prisma__user_restClient<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of User_rests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restCountArgs} args - Arguments to filter User_rests to count.
+     * @example
+     * // Count the number of User_rests
+     * const count = await prisma.user_rest.count({
+     *   where: {
+     *     // ... the filter for the User_rests we want to count
+     *   }
+     * })
+    **/
+    count<T extends user_restCountArgs>(
+      args?: Subset<T, user_restCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], User_restCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a User_rest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {User_restAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends User_restAggregateArgs>(args: Subset<T, User_restAggregateArgs>): Prisma.PrismaPromise<GetUser_restAggregateType<T>>
+
+    /**
+     * Group by User_rest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {user_restGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends user_restGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: user_restGroupByArgs['orderBy'] }
+        : { orderBy?: user_restGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, user_restGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUser_restGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the user_rest model
+   */
+  readonly fields: user_restFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for user_rest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__user_restClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    restaurant<T extends restaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, restaurantDefaultArgs<ExtArgs>>): Prisma__restaurantClient<$Result.GetResult<Prisma.$restaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the user_rest model
+   */
+  interface user_restFieldRefs {
+    readonly id: FieldRef<"user_rest", 'BigInt'>
+    readonly user_id: FieldRef<"user_rest", 'BigInt'>
+    readonly rest_id: FieldRef<"user_rest", 'BigInt'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * user_rest findUnique
+   */
+  export type user_restFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter, which user_rest to fetch.
+     */
+    where: user_restWhereUniqueInput
+  }
+
+  /**
+   * user_rest findUniqueOrThrow
+   */
+  export type user_restFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter, which user_rest to fetch.
+     */
+    where: user_restWhereUniqueInput
+  }
+
+  /**
+   * user_rest findFirst
+   */
+  export type user_restFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter, which user_rest to fetch.
+     */
+    where?: user_restWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_rests to fetch.
+     */
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for user_rests.
+     */
+    cursor?: user_restWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_rests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_rests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of user_rests.
+     */
+    distinct?: User_restScalarFieldEnum | User_restScalarFieldEnum[]
+  }
+
+  /**
+   * user_rest findFirstOrThrow
+   */
+  export type user_restFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter, which user_rest to fetch.
+     */
+    where?: user_restWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_rests to fetch.
+     */
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for user_rests.
+     */
+    cursor?: user_restWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_rests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_rests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of user_rests.
+     */
+    distinct?: User_restScalarFieldEnum | User_restScalarFieldEnum[]
+  }
+
+  /**
+   * user_rest findMany
+   */
+  export type user_restFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter, which user_rests to fetch.
+     */
+    where?: user_restWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of user_rests to fetch.
+     */
+    orderBy?: user_restOrderByWithRelationInput | user_restOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing user_rests.
+     */
+    cursor?: user_restWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` user_rests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` user_rests.
+     */
+    skip?: number
+    distinct?: User_restScalarFieldEnum | User_restScalarFieldEnum[]
+  }
+
+  /**
+   * user_rest create
+   */
+  export type user_restCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * The data needed to create a user_rest.
+     */
+    data: XOR<user_restCreateInput, user_restUncheckedCreateInput>
+  }
+
+  /**
+   * user_rest createMany
+   */
+  export type user_restCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many user_rests.
+     */
+    data: user_restCreateManyInput | user_restCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * user_rest update
+   */
+  export type user_restUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * The data needed to update a user_rest.
+     */
+    data: XOR<user_restUpdateInput, user_restUncheckedUpdateInput>
+    /**
+     * Choose, which user_rest to update.
+     */
+    where: user_restWhereUniqueInput
+  }
+
+  /**
+   * user_rest updateMany
+   */
+  export type user_restUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update user_rests.
+     */
+    data: XOR<user_restUpdateManyMutationInput, user_restUncheckedUpdateManyInput>
+    /**
+     * Filter which user_rests to update
+     */
+    where?: user_restWhereInput
+    /**
+     * Limit how many user_rests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * user_rest upsert
+   */
+  export type user_restUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * The filter to search for the user_rest to update in case it exists.
+     */
+    where: user_restWhereUniqueInput
+    /**
+     * In case the user_rest found by the `where` argument doesn't exist, create a new user_rest with this data.
+     */
+    create: XOR<user_restCreateInput, user_restUncheckedCreateInput>
+    /**
+     * In case the user_rest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<user_restUpdateInput, user_restUncheckedUpdateInput>
+  }
+
+  /**
+   * user_rest delete
+   */
+  export type user_restDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+    /**
+     * Filter which user_rest to delete.
+     */
+    where: user_restWhereUniqueInput
+  }
+
+  /**
+   * user_rest deleteMany
+   */
+  export type user_restDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which user_rests to delete
+     */
+    where?: user_restWhereInput
+    /**
+     * Limit how many user_rests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * user_rest without action
+   */
+  export type user_restDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user_rest
+     */
+    select?: user_restSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user_rest
+     */
+    omit?: user_restOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: user_restInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19411,15 +21531,6 @@ export namespace Prisma {
   export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
 
 
-  export const Rest_imageScalarFieldEnum: {
-    id: 'id',
-    rest_id: 'rest_id',
-    link: 'link'
-  };
-
-  export type Rest_imageScalarFieldEnum = (typeof Rest_imageScalarFieldEnum)[keyof typeof Rest_imageScalarFieldEnum]
-
-
   export const Rest_menuScalarFieldEnum: {
     id: 'id',
     menu_id: 'menu_id',
@@ -19431,11 +21542,11 @@ export namespace Prisma {
 
   export const RestaurantScalarFieldEnum: {
     id: 'id',
+    rest_image: 'rest_image',
     location: 'location',
     name: 'name',
-    repre_menu: 'repre_menu',
+    keyword: 'keyword',
     address: 'address',
-    detail_address: 'detail_address',
     rating: 'rating',
     monday: 'monday',
     tuesday: 'tuesday',
@@ -19532,7 +21643,8 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     code: 'code',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    expires_at: 'expires_at'
   };
 
   export type Email_verificationScalarFieldEnum = (typeof Email_verificationScalarFieldEnum)[keyof typeof Email_verificationScalarFieldEnum]
@@ -19545,6 +21657,35 @@ export namespace Prisma {
   };
 
   export type Rest_tagScalarFieldEnum = (typeof Rest_tagScalarFieldEnum)[keyof typeof Rest_tagScalarFieldEnum]
+
+
+  export const Password_reset_tokenScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    token: 'token',
+    expires_at: 'expires_at',
+    created_at: 'created_at'
+  };
+
+  export type Password_reset_tokenScalarFieldEnum = (typeof Password_reset_tokenScalarFieldEnum)[keyof typeof Password_reset_tokenScalarFieldEnum]
+
+
+  export const Repre_menuScalarFieldEnum: {
+    id: 'id',
+    rest_id: 'rest_id',
+    menu: 'menu'
+  };
+
+  export type Repre_menuScalarFieldEnum = (typeof Repre_menuScalarFieldEnum)[keyof typeof Repre_menuScalarFieldEnum]
+
+
+  export const User_restScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    rest_id: 'rest_id'
+  };
+
+  export type User_restScalarFieldEnum = (typeof User_restScalarFieldEnum)[keyof typeof User_restScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -19596,19 +21737,12 @@ export namespace Prisma {
   export type reportOrderByRelevanceFieldEnum = (typeof reportOrderByRelevanceFieldEnum)[keyof typeof reportOrderByRelevanceFieldEnum]
 
 
-  export const rest_imageOrderByRelevanceFieldEnum: {
-    link: 'link'
-  };
-
-  export type rest_imageOrderByRelevanceFieldEnum = (typeof rest_imageOrderByRelevanceFieldEnum)[keyof typeof rest_imageOrderByRelevanceFieldEnum]
-
-
   export const restaurantOrderByRelevanceFieldEnum: {
+    rest_image: 'rest_image',
     location: 'location',
     name: 'name',
-    repre_menu: 'repre_menu',
+    keyword: 'keyword',
     address: 'address',
-    detail_address: 'detail_address',
     monday: 'monday',
     tuesday: 'tuesday',
     wednesday: 'wednesday',
@@ -19685,6 +21819,21 @@ export namespace Prisma {
   };
 
   export type rest_tagOrderByRelevanceFieldEnum = (typeof rest_tagOrderByRelevanceFieldEnum)[keyof typeof rest_tagOrderByRelevanceFieldEnum]
+
+
+  export const password_reset_tokenOrderByRelevanceFieldEnum: {
+    email: 'email',
+    token: 'token'
+  };
+
+  export type password_reset_tokenOrderByRelevanceFieldEnum = (typeof password_reset_tokenOrderByRelevanceFieldEnum)[keyof typeof password_reset_tokenOrderByRelevanceFieldEnum]
+
+
+  export const repre_menuOrderByRelevanceFieldEnum: {
+    menu: 'menu'
+  };
+
+  export type repre_menuOrderByRelevanceFieldEnum = (typeof repre_menuOrderByRelevanceFieldEnum)[keyof typeof repre_menuOrderByRelevanceFieldEnum]
 
 
   /**
@@ -19845,10 +21994,10 @@ export namespace Prisma {
 
   export type menuWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
+    name?: string
     AND?: menuWhereInput | menuWhereInput[]
     OR?: menuWhereInput[]
     NOT?: menuWhereInput | menuWhereInput[]
-    name?: StringFilter<"menu"> | string
     description?: StringNullableFilter<"menu"> | string | null
     calory?: BigIntNullableFilter<"menu"> | bigint | number | null
     carbo?: BigIntNullableFilter<"menu"> | bigint | number | null
@@ -19861,7 +22010,7 @@ export namespace Prisma {
     mukburim?: MukburimListRelationFilter
     recommend_except?: Recommend_exceptListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type menuOrderByWithAggregationInput = {
     id?: SortOrder
@@ -20065,54 +22214,6 @@ export namespace Prisma {
     text?: StringNullableWithAggregatesFilter<"report"> | string | null
   }
 
-  export type rest_imageWhereInput = {
-    AND?: rest_imageWhereInput | rest_imageWhereInput[]
-    OR?: rest_imageWhereInput[]
-    NOT?: rest_imageWhereInput | rest_imageWhereInput[]
-    id?: BigIntFilter<"rest_image"> | bigint | number
-    rest_id?: BigIntFilter<"rest_image"> | bigint | number
-    link?: StringNullableFilter<"rest_image"> | string | null
-    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
-  }
-
-  export type rest_imageOrderByWithRelationInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-    link?: SortOrderInput | SortOrder
-    restaurant?: restaurantOrderByWithRelationInput
-    _relevance?: rest_imageOrderByRelevanceInput
-  }
-
-  export type rest_imageWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
-    AND?: rest_imageWhereInput | rest_imageWhereInput[]
-    OR?: rest_imageWhereInput[]
-    NOT?: rest_imageWhereInput | rest_imageWhereInput[]
-    rest_id?: BigIntFilter<"rest_image"> | bigint | number
-    link?: StringNullableFilter<"rest_image"> | string | null
-    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
-  }, "id">
-
-  export type rest_imageOrderByWithAggregationInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-    link?: SortOrderInput | SortOrder
-    _count?: rest_imageCountOrderByAggregateInput
-    _avg?: rest_imageAvgOrderByAggregateInput
-    _max?: rest_imageMaxOrderByAggregateInput
-    _min?: rest_imageMinOrderByAggregateInput
-    _sum?: rest_imageSumOrderByAggregateInput
-  }
-
-  export type rest_imageScalarWhereWithAggregatesInput = {
-    AND?: rest_imageScalarWhereWithAggregatesInput | rest_imageScalarWhereWithAggregatesInput[]
-    OR?: rest_imageScalarWhereWithAggregatesInput[]
-    NOT?: rest_imageScalarWhereWithAggregatesInput | rest_imageScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"rest_image"> | bigint | number
-    rest_id?: BigIntWithAggregatesFilter<"rest_image"> | bigint | number
-    link?: StringNullableWithAggregatesFilter<"rest_image"> | string | null
-  }
-
   export type rest_menuWhereInput = {
     AND?: rest_menuWhereInput | rest_menuWhereInput[]
     OR?: rest_menuWhereInput[]
@@ -20168,11 +22269,11 @@ export namespace Prisma {
     OR?: restaurantWhereInput[]
     NOT?: restaurantWhereInput | restaurantWhereInput[]
     id?: BigIntFilter<"restaurant"> | bigint | number
+    rest_image?: StringNullableFilter<"restaurant"> | string | null
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableFilter<"restaurant"> | string | null
+    keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
-    detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
     monday?: StringNullableFilter<"restaurant"> | string | null
     tuesday?: StringNullableFilter<"restaurant"> | string | null
@@ -20182,20 +22283,21 @@ export namespace Prisma {
     saturday?: StringNullableFilter<"restaurant"> | string | null
     sunday?: StringNullableFilter<"restaurant"> | string | null
     google_place_id?: StringNullableFilter<"restaurant"> | string | null
-    rest_image?: Rest_imageListRelationFilter
+    repre_menu?: Repre_menuListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
     review?: ReviewListRelationFilter
+    user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
   }
 
   export type restaurantOrderByWithRelationInput = {
     id?: SortOrder
+    rest_image?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
-    repre_menu?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
     monday?: SortOrderInput | SortOrder
     tuesday?: SortOrderInput | SortOrder
@@ -20205,10 +22307,11 @@ export namespace Prisma {
     saturday?: SortOrderInput | SortOrder
     sunday?: SortOrderInput | SortOrder
     google_place_id?: SortOrderInput | SortOrder
-    rest_image?: rest_imageOrderByRelationAggregateInput
+    repre_menu?: repre_menuOrderByRelationAggregateInput
     rest_menu?: rest_menuOrderByRelationAggregateInput
     rest_tag?: rest_tagOrderByRelationAggregateInput
     review?: reviewOrderByRelationAggregateInput
+    user_rest?: user_restOrderByRelationAggregateInput
     zzim?: zzimOrderByRelationAggregateInput
     _relevance?: restaurantOrderByRelevanceInput
   }
@@ -20218,11 +22321,11 @@ export namespace Prisma {
     AND?: restaurantWhereInput | restaurantWhereInput[]
     OR?: restaurantWhereInput[]
     NOT?: restaurantWhereInput | restaurantWhereInput[]
+    rest_image?: StringNullableFilter<"restaurant"> | string | null
     location?: StringNullableFilter<"restaurant"> | string | null
     name?: StringNullableFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableFilter<"restaurant"> | string | null
+    keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
-    detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
     monday?: StringNullableFilter<"restaurant"> | string | null
     tuesday?: StringNullableFilter<"restaurant"> | string | null
@@ -20232,20 +22335,21 @@ export namespace Prisma {
     saturday?: StringNullableFilter<"restaurant"> | string | null
     sunday?: StringNullableFilter<"restaurant"> | string | null
     google_place_id?: StringNullableFilter<"restaurant"> | string | null
-    rest_image?: Rest_imageListRelationFilter
+    repre_menu?: Repre_menuListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
     review?: ReviewListRelationFilter
+    user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
   }, "id">
 
   export type restaurantOrderByWithAggregationInput = {
     id?: SortOrder
+    rest_image?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     name?: SortOrderInput | SortOrder
-    repre_menu?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
     monday?: SortOrderInput | SortOrder
     tuesday?: SortOrderInput | SortOrder
@@ -20267,11 +22371,11 @@ export namespace Prisma {
     OR?: restaurantScalarWhereWithAggregatesInput[]
     NOT?: restaurantScalarWhereWithAggregatesInput | restaurantScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"restaurant"> | bigint | number
+    rest_image?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     location?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     name?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
-    repre_menu?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
+    keyword?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
-    detail_address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     rating?: FloatNullableWithAggregatesFilter<"restaurant"> | number | null
     monday?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     tuesday?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
@@ -20480,6 +22584,7 @@ export namespace Prisma {
     recommend_except?: Recommend_exceptListRelationFilter
     report?: ReportListRelationFilter
     review?: ReviewListRelationFilter
+    user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
   }
 
@@ -20502,16 +22607,17 @@ export namespace Prisma {
     recommend_except?: recommend_exceptOrderByRelationAggregateInput
     report?: reportOrderByRelationAggregateInput
     review?: reviewOrderByRelationAggregateInput
+    user_rest?: user_restOrderByRelationAggregateInput
     zzim?: zzimOrderByRelationAggregateInput
     _relevance?: userOrderByRelevanceInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
+    email?: string
     AND?: userWhereInput | userWhereInput[]
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
-    email?: StringNullableFilter<"user"> | string | null
     phone_num?: StringNullableFilter<"user"> | string | null
     is_verified?: BoolNullableFilter<"user"> | boolean | null
     nickname?: StringNullableFilter<"user"> | string | null
@@ -20528,8 +22634,9 @@ export namespace Prisma {
     recommend_except?: Recommend_exceptListRelationFilter
     report?: ReportListRelationFilter
     review?: ReviewListRelationFilter
+    user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
-  }, "id">
+  }, "id" | "email">
 
   export type userOrderByWithAggregationInput = {
     id?: SortOrder
@@ -20726,6 +22833,7 @@ export namespace Prisma {
     email?: StringFilter<"email_verification"> | string
     code?: StringFilter<"email_verification"> | string
     created_at?: DateTimeNullableFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeFilter<"email_verification"> | Date | string
   }
 
   export type email_verificationOrderByWithRelationInput = {
@@ -20733,6 +22841,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
     _relevance?: email_verificationOrderByRelevanceInput
   }
 
@@ -20744,6 +22853,7 @@ export namespace Prisma {
     NOT?: email_verificationWhereInput | email_verificationWhereInput[]
     code?: StringFilter<"email_verification"> | string
     created_at?: DateTimeNullableFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeFilter<"email_verification"> | Date | string
   }, "id" | "email">
 
   export type email_verificationOrderByWithAggregationInput = {
@@ -20751,6 +22861,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrderInput | SortOrder
+    expires_at?: SortOrder
     _count?: email_verificationCountOrderByAggregateInput
     _avg?: email_verificationAvgOrderByAggregateInput
     _max?: email_verificationMaxOrderByAggregateInput
@@ -20766,6 +22877,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"email_verification"> | string
     code?: StringWithAggregatesFilter<"email_verification"> | string
     created_at?: DateTimeNullableWithAggregatesFilter<"email_verification"> | Date | string | null
+    expires_at?: DateTimeWithAggregatesFilter<"email_verification"> | Date | string
   }
 
   export type rest_tagWhereInput = {
@@ -20815,6 +22927,159 @@ export namespace Prisma {
     rest_id?: BigIntWithAggregatesFilter<"rest_tag"> | bigint | number
     tag?: StringWithAggregatesFilter<"rest_tag"> | string
     count?: IntWithAggregatesFilter<"rest_tag"> | number
+  }
+
+  export type password_reset_tokenWhereInput = {
+    AND?: password_reset_tokenWhereInput | password_reset_tokenWhereInput[]
+    OR?: password_reset_tokenWhereInput[]
+    NOT?: password_reset_tokenWhereInput | password_reset_tokenWhereInput[]
+    id?: IntFilter<"password_reset_token"> | number
+    email?: StringFilter<"password_reset_token"> | string
+    token?: StringFilter<"password_reset_token"> | string
+    expires_at?: DateTimeFilter<"password_reset_token"> | Date | string
+    created_at?: DateTimeNullableFilter<"password_reset_token"> | Date | string | null
+  }
+
+  export type password_reset_tokenOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    _relevance?: password_reset_tokenOrderByRelevanceInput
+  }
+
+  export type password_reset_tokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    token?: string
+    AND?: password_reset_tokenWhereInput | password_reset_tokenWhereInput[]
+    OR?: password_reset_tokenWhereInput[]
+    NOT?: password_reset_tokenWhereInput | password_reset_tokenWhereInput[]
+    expires_at?: DateTimeFilter<"password_reset_token"> | Date | string
+    created_at?: DateTimeNullableFilter<"password_reset_token"> | Date | string | null
+  }, "id" | "email" | "token">
+
+  export type password_reset_tokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    _count?: password_reset_tokenCountOrderByAggregateInput
+    _avg?: password_reset_tokenAvgOrderByAggregateInput
+    _max?: password_reset_tokenMaxOrderByAggregateInput
+    _min?: password_reset_tokenMinOrderByAggregateInput
+    _sum?: password_reset_tokenSumOrderByAggregateInput
+  }
+
+  export type password_reset_tokenScalarWhereWithAggregatesInput = {
+    AND?: password_reset_tokenScalarWhereWithAggregatesInput | password_reset_tokenScalarWhereWithAggregatesInput[]
+    OR?: password_reset_tokenScalarWhereWithAggregatesInput[]
+    NOT?: password_reset_tokenScalarWhereWithAggregatesInput | password_reset_tokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"password_reset_token"> | number
+    email?: StringWithAggregatesFilter<"password_reset_token"> | string
+    token?: StringWithAggregatesFilter<"password_reset_token"> | string
+    expires_at?: DateTimeWithAggregatesFilter<"password_reset_token"> | Date | string
+    created_at?: DateTimeNullableWithAggregatesFilter<"password_reset_token"> | Date | string | null
+  }
+
+  export type repre_menuWhereInput = {
+    AND?: repre_menuWhereInput | repre_menuWhereInput[]
+    OR?: repre_menuWhereInput[]
+    NOT?: repre_menuWhereInput | repre_menuWhereInput[]
+    id?: BigIntFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+  }
+
+  export type repre_menuOrderByWithRelationInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+    restaurant?: restaurantOrderByWithRelationInput
+    _relevance?: repre_menuOrderByRelevanceInput
+  }
+
+  export type repre_menuWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: repre_menuWhereInput | repre_menuWhereInput[]
+    OR?: repre_menuWhereInput[]
+    NOT?: repre_menuWhereInput | repre_menuWhereInput[]
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+  }, "id">
+
+  export type repre_menuOrderByWithAggregationInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+    _count?: repre_menuCountOrderByAggregateInput
+    _avg?: repre_menuAvgOrderByAggregateInput
+    _max?: repre_menuMaxOrderByAggregateInput
+    _min?: repre_menuMinOrderByAggregateInput
+    _sum?: repre_menuSumOrderByAggregateInput
+  }
+
+  export type repre_menuScalarWhereWithAggregatesInput = {
+    AND?: repre_menuScalarWhereWithAggregatesInput | repre_menuScalarWhereWithAggregatesInput[]
+    OR?: repre_menuScalarWhereWithAggregatesInput[]
+    NOT?: repre_menuScalarWhereWithAggregatesInput | repre_menuScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntWithAggregatesFilter<"repre_menu"> | bigint | number
+    menu?: StringWithAggregatesFilter<"repre_menu"> | string
+  }
+
+  export type user_restWhereInput = {
+    AND?: user_restWhereInput | user_restWhereInput[]
+    OR?: user_restWhereInput[]
+    NOT?: user_restWhereInput | user_restWhereInput[]
+    id?: BigIntFilter<"user_rest"> | bigint | number
+    user_id?: BigIntFilter<"user_rest"> | bigint | number
+    rest_id?: BigIntFilter<"user_rest"> | bigint | number
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type user_restOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+    restaurant?: restaurantOrderByWithRelationInput
+    user?: userOrderByWithRelationInput
+  }
+
+  export type user_restWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: user_restWhereInput | user_restWhereInput[]
+    OR?: user_restWhereInput[]
+    NOT?: user_restWhereInput | user_restWhereInput[]
+    user_id?: BigIntFilter<"user_rest"> | bigint | number
+    rest_id?: BigIntFilter<"user_rest"> | bigint | number
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "id">
+
+  export type user_restOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+    _count?: user_restCountOrderByAggregateInput
+    _avg?: user_restAvgOrderByAggregateInput
+    _max?: user_restMaxOrderByAggregateInput
+    _min?: user_restMinOrderByAggregateInput
+    _sum?: user_restSumOrderByAggregateInput
+  }
+
+  export type user_restScalarWhereWithAggregatesInput = {
+    AND?: user_restScalarWhereWithAggregatesInput | user_restScalarWhereWithAggregatesInput[]
+    OR?: user_restScalarWhereWithAggregatesInput[]
+    NOT?: user_restScalarWhereWithAggregatesInput | user_restScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
+    user_id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
+    rest_id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
   }
 
   export type choiceCreateInput = {
@@ -21103,47 +23368,6 @@ export namespace Prisma {
     text?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type rest_imageCreateInput = {
-    id?: bigint | number
-    link?: string | null
-    restaurant: restaurantCreateNestedOneWithoutRest_imageInput
-  }
-
-  export type rest_imageUncheckedCreateInput = {
-    id?: bigint | number
-    rest_id: bigint | number
-    link?: string | null
-  }
-
-  export type rest_imageUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
-    restaurant?: restaurantUpdateOneRequiredWithoutRest_imageNestedInput
-  }
-
-  export type rest_imageUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type rest_imageCreateManyInput = {
-    id?: bigint | number
-    rest_id: bigint | number
-    link?: string | null
-  }
-
-  export type rest_imageUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type rest_imageUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type rest_menuCreateInput = {
     id?: bigint | number
     menu: menuCreateNestedOneWithoutRest_menuInput
@@ -21186,11 +23410,11 @@ export namespace Prisma {
 
   export type restaurantCreateInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -21200,20 +23424,21 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUncheckedCreateInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -21223,20 +23448,21 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21246,20 +23472,21 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21269,20 +23496,21 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantCreateManyInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -21296,11 +23524,11 @@ export namespace Prisma {
 
   export type restaurantUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21314,11 +23542,11 @@ export namespace Prisma {
 
   export type restaurantUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21515,6 +23743,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -21537,6 +23766,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -21559,6 +23789,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -21581,6 +23812,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -21756,6 +23988,7 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUncheckedCreateInput = {
@@ -21763,12 +23996,14 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationUncheckedUpdateInput = {
@@ -21776,6 +24011,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationCreateManyInput = {
@@ -21783,12 +24019,14 @@ export namespace Prisma {
     email: string
     code: string
     created_at?: Date | string | null
+    expires_at?: Date | string
   }
 
   export type email_verificationUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type email_verificationUncheckedUpdateManyInput = {
@@ -21796,6 +24034,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type rest_tagCreateInput = {
@@ -21837,6 +24076,140 @@ export namespace Prisma {
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
     tag?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type password_reset_tokenCreateInput = {
+    email: string
+    token: string
+    expires_at: Date | string
+    created_at?: Date | string | null
+  }
+
+  export type password_reset_tokenUncheckedCreateInput = {
+    id?: number
+    email: string
+    token: string
+    expires_at: Date | string
+    created_at?: Date | string | null
+  }
+
+  export type password_reset_tokenUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type password_reset_tokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type password_reset_tokenCreateManyInput = {
+    id?: number
+    email: string
+    token: string
+    expires_at: Date | string
+    created_at?: Date | string | null
+  }
+
+  export type password_reset_tokenUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type password_reset_tokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    expires_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type repre_menuCreateInput = {
+    id?: bigint | number
+    menu: string
+    restaurant: restaurantCreateNestedOneWithoutRepre_menuInput
+  }
+
+  export type repre_menuUncheckedCreateInput = {
+    id?: bigint | number
+    rest_id: bigint | number
+    menu: string
+  }
+
+  export type repre_menuUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+    restaurant?: restaurantUpdateOneRequiredWithoutRepre_menuNestedInput
+  }
+
+  export type repre_menuUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuCreateManyInput = {
+    id?: bigint | number
+    rest_id: bigint | number
+    menu: string
+  }
+
+  export type repre_menuUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type repre_menuUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type user_restCreateInput = {
+    id?: bigint | number
+    restaurant: restaurantCreateNestedOneWithoutUser_restInput
+    user: userCreateNestedOneWithoutUser_restInput
+  }
+
+  export type user_restUncheckedCreateInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    rest_id: bigint | number
+  }
+
+  export type user_restUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    restaurant?: restaurantUpdateOneRequiredWithoutUser_restNestedInput
+    user?: userUpdateOneRequiredWithoutUser_restNestedInput
+  }
+
+  export type user_restUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type user_restCreateManyInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    rest_id: bigint | number
+  }
+
+  export type user_restUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type user_restUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -22252,40 +24625,6 @@ export namespace Prisma {
     isNot?: restaurantWhereInput
   }
 
-  export type rest_imageOrderByRelevanceInput = {
-    fields: rest_imageOrderByRelevanceFieldEnum | rest_imageOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type rest_imageCountOrderByAggregateInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-    link?: SortOrder
-  }
-
-  export type rest_imageAvgOrderByAggregateInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-  }
-
-  export type rest_imageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-    link?: SortOrder
-  }
-
-  export type rest_imageMinOrderByAggregateInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-    link?: SortOrder
-  }
-
-  export type rest_imageSumOrderByAggregateInput = {
-    id?: SortOrder
-    rest_id?: SortOrder
-  }
-
   export type rest_menuCountOrderByAggregateInput = {
     id?: SortOrder
     menu_id?: SortOrder
@@ -22327,10 +24666,10 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type Rest_imageListRelationFilter = {
-    every?: rest_imageWhereInput
-    some?: rest_imageWhereInput
-    none?: rest_imageWhereInput
+  export type Repre_menuListRelationFilter = {
+    every?: repre_menuWhereInput
+    some?: repre_menuWhereInput
+    none?: repre_menuWhereInput
   }
 
   export type Rest_tagListRelationFilter = {
@@ -22345,13 +24684,19 @@ export namespace Prisma {
     none?: reviewWhereInput
   }
 
+  export type User_restListRelationFilter = {
+    every?: user_restWhereInput
+    some?: user_restWhereInput
+    none?: user_restWhereInput
+  }
+
   export type ZzimListRelationFilter = {
     every?: zzimWhereInput
     some?: zzimWhereInput
     none?: zzimWhereInput
   }
 
-  export type rest_imageOrderByRelationAggregateInput = {
+  export type repre_menuOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22360,6 +24705,10 @@ export namespace Prisma {
   }
 
   export type reviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type user_restOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22375,11 +24724,11 @@ export namespace Prisma {
 
   export type restaurantCountOrderByAggregateInput = {
     id?: SortOrder
+    rest_image?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -22398,11 +24747,11 @@ export namespace Prisma {
 
   export type restaurantMaxOrderByAggregateInput = {
     id?: SortOrder
+    rest_image?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -22416,11 +24765,11 @@ export namespace Prisma {
 
   export type restaurantMinOrderByAggregateInput = {
     id?: SortOrder
+    rest_image?: SortOrder
     location?: SortOrder
     name?: SortOrder
-    repre_menu?: SortOrder
+    keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -22903,6 +25252,17 @@ export namespace Prisma {
     rest_id?: SortOrder
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type email_verificationOrderByRelevanceInput = {
     fields: email_verificationOrderByRelevanceFieldEnum | email_verificationOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -22914,6 +25274,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationAvgOrderByAggregateInput = {
@@ -22925,6 +25286,7 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationMinOrderByAggregateInput = {
@@ -22932,10 +25294,25 @@ export namespace Prisma {
     email?: SortOrder
     code?: SortOrder
     created_at?: SortOrder
+    expires_at?: SortOrder
   }
 
   export type email_verificationSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type rest_tagOrderByRelevanceInput = {
@@ -22975,6 +25352,108 @@ export namespace Prisma {
   export type rest_tagSumOrderByAggregateInput = {
     rest_id?: SortOrder
     count?: SortOrder
+  }
+
+  export type password_reset_tokenOrderByRelevanceInput = {
+    fields: password_reset_tokenOrderByRelevanceFieldEnum | password_reset_tokenOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type password_reset_tokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type password_reset_tokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type password_reset_tokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type password_reset_tokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    token?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type password_reset_tokenSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type repre_menuOrderByRelevanceInput = {
+    fields: repre_menuOrderByRelevanceFieldEnum | repre_menuOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type repre_menuCountOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuAvgOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type repre_menuMaxOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuMinOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+    menu?: SortOrder
+  }
+
+  export type repre_menuSumOrderByAggregateInput = {
+    id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type user_restCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type user_restAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type user_restMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type user_restMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
+  }
+
+  export type user_restSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    rest_id?: SortOrder
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -23219,20 +25698,6 @@ export namespace Prisma {
     update?: XOR<XOR<reviewUpdateToOneWithWhereWithoutReportInput, reviewUpdateWithoutReportInput>, reviewUncheckedUpdateWithoutReportInput>
   }
 
-  export type restaurantCreateNestedOneWithoutRest_imageInput = {
-    create?: XOR<restaurantCreateWithoutRest_imageInput, restaurantUncheckedCreateWithoutRest_imageInput>
-    connectOrCreate?: restaurantCreateOrConnectWithoutRest_imageInput
-    connect?: restaurantWhereUniqueInput
-  }
-
-  export type restaurantUpdateOneRequiredWithoutRest_imageNestedInput = {
-    create?: XOR<restaurantCreateWithoutRest_imageInput, restaurantUncheckedCreateWithoutRest_imageInput>
-    connectOrCreate?: restaurantCreateOrConnectWithoutRest_imageInput
-    upsert?: restaurantUpsertWithoutRest_imageInput
-    connect?: restaurantWhereUniqueInput
-    update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRest_imageInput, restaurantUpdateWithoutRest_imageInput>, restaurantUncheckedUpdateWithoutRest_imageInput>
-  }
-
   export type menuCreateNestedOneWithoutRest_menuInput = {
     create?: XOR<menuCreateWithoutRest_menuInput, menuUncheckedCreateWithoutRest_menuInput>
     connectOrCreate?: menuCreateOrConnectWithoutRest_menuInput
@@ -23261,11 +25726,11 @@ export namespace Prisma {
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRest_menuInput, restaurantUpdateWithoutRest_menuInput>, restaurantUncheckedUpdateWithoutRest_menuInput>
   }
 
-  export type rest_imageCreateNestedManyWithoutRestaurantInput = {
-    create?: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput> | rest_imageCreateWithoutRestaurantInput[] | rest_imageUncheckedCreateWithoutRestaurantInput[]
-    connectOrCreate?: rest_imageCreateOrConnectWithoutRestaurantInput | rest_imageCreateOrConnectWithoutRestaurantInput[]
-    createMany?: rest_imageCreateManyRestaurantInputEnvelope
-    connect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
+  export type repre_menuCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
   }
 
   export type rest_menuCreateNestedManyWithoutRestaurantInput = {
@@ -23289,6 +25754,13 @@ export namespace Prisma {
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
   }
 
+  export type user_restCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput> | user_restCreateWithoutRestaurantInput[] | user_restUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutRestaurantInput | user_restCreateOrConnectWithoutRestaurantInput[]
+    createMany?: user_restCreateManyRestaurantInputEnvelope
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+  }
+
   export type zzimCreateNestedManyWithoutRestaurantInput = {
     create?: XOR<zzimCreateWithoutRestaurantInput, zzimUncheckedCreateWithoutRestaurantInput> | zzimCreateWithoutRestaurantInput[] | zzimUncheckedCreateWithoutRestaurantInput[]
     connectOrCreate?: zzimCreateOrConnectWithoutRestaurantInput | zzimCreateOrConnectWithoutRestaurantInput[]
@@ -23296,11 +25768,11 @@ export namespace Prisma {
     connect?: zzimWhereUniqueInput | zzimWhereUniqueInput[]
   }
 
-  export type rest_imageUncheckedCreateNestedManyWithoutRestaurantInput = {
-    create?: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput> | rest_imageCreateWithoutRestaurantInput[] | rest_imageUncheckedCreateWithoutRestaurantInput[]
-    connectOrCreate?: rest_imageCreateOrConnectWithoutRestaurantInput | rest_imageCreateOrConnectWithoutRestaurantInput[]
-    createMany?: rest_imageCreateManyRestaurantInputEnvelope
-    connect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
+  export type repre_menuUncheckedCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
   }
 
   export type rest_menuUncheckedCreateNestedManyWithoutRestaurantInput = {
@@ -23324,6 +25796,13 @@ export namespace Prisma {
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
   }
 
+  export type user_restUncheckedCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput> | user_restCreateWithoutRestaurantInput[] | user_restUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutRestaurantInput | user_restCreateOrConnectWithoutRestaurantInput[]
+    createMany?: user_restCreateManyRestaurantInputEnvelope
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+  }
+
   export type zzimUncheckedCreateNestedManyWithoutRestaurantInput = {
     create?: XOR<zzimCreateWithoutRestaurantInput, zzimUncheckedCreateWithoutRestaurantInput> | zzimCreateWithoutRestaurantInput[] | zzimUncheckedCreateWithoutRestaurantInput[]
     connectOrCreate?: zzimCreateOrConnectWithoutRestaurantInput | zzimCreateOrConnectWithoutRestaurantInput[]
@@ -23339,18 +25818,18 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type rest_imageUpdateManyWithoutRestaurantNestedInput = {
-    create?: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput> | rest_imageCreateWithoutRestaurantInput[] | rest_imageUncheckedCreateWithoutRestaurantInput[]
-    connectOrCreate?: rest_imageCreateOrConnectWithoutRestaurantInput | rest_imageCreateOrConnectWithoutRestaurantInput[]
-    upsert?: rest_imageUpsertWithWhereUniqueWithoutRestaurantInput | rest_imageUpsertWithWhereUniqueWithoutRestaurantInput[]
-    createMany?: rest_imageCreateManyRestaurantInputEnvelope
-    set?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    disconnect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    delete?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    connect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    update?: rest_imageUpdateWithWhereUniqueWithoutRestaurantInput | rest_imageUpdateWithWhereUniqueWithoutRestaurantInput[]
-    updateMany?: rest_imageUpdateManyWithWhereWithoutRestaurantInput | rest_imageUpdateManyWithWhereWithoutRestaurantInput[]
-    deleteMany?: rest_imageScalarWhereInput | rest_imageScalarWhereInput[]
+  export type repre_menuUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    upsert?: repre_menuUpsertWithWhereUniqueWithoutRestaurantInput | repre_menuUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    set?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    disconnect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    delete?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    update?: repre_menuUpdateWithWhereUniqueWithoutRestaurantInput | repre_menuUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: repre_menuUpdateManyWithWhereWithoutRestaurantInput | repre_menuUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
   }
 
   export type rest_menuUpdateManyWithoutRestaurantNestedInput = {
@@ -23395,6 +25874,20 @@ export namespace Prisma {
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
   }
 
+  export type user_restUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput> | user_restCreateWithoutRestaurantInput[] | user_restUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutRestaurantInput | user_restCreateOrConnectWithoutRestaurantInput[]
+    upsert?: user_restUpsertWithWhereUniqueWithoutRestaurantInput | user_restUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: user_restCreateManyRestaurantInputEnvelope
+    set?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    disconnect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    delete?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    update?: user_restUpdateWithWhereUniqueWithoutRestaurantInput | user_restUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: user_restUpdateManyWithWhereWithoutRestaurantInput | user_restUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: user_restScalarWhereInput | user_restScalarWhereInput[]
+  }
+
   export type zzimUpdateManyWithoutRestaurantNestedInput = {
     create?: XOR<zzimCreateWithoutRestaurantInput, zzimUncheckedCreateWithoutRestaurantInput> | zzimCreateWithoutRestaurantInput[] | zzimUncheckedCreateWithoutRestaurantInput[]
     connectOrCreate?: zzimCreateOrConnectWithoutRestaurantInput | zzimCreateOrConnectWithoutRestaurantInput[]
@@ -23409,18 +25902,18 @@ export namespace Prisma {
     deleteMany?: zzimScalarWhereInput | zzimScalarWhereInput[]
   }
 
-  export type rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput = {
-    create?: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput> | rest_imageCreateWithoutRestaurantInput[] | rest_imageUncheckedCreateWithoutRestaurantInput[]
-    connectOrCreate?: rest_imageCreateOrConnectWithoutRestaurantInput | rest_imageCreateOrConnectWithoutRestaurantInput[]
-    upsert?: rest_imageUpsertWithWhereUniqueWithoutRestaurantInput | rest_imageUpsertWithWhereUniqueWithoutRestaurantInput[]
-    createMany?: rest_imageCreateManyRestaurantInputEnvelope
-    set?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    disconnect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    delete?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    connect?: rest_imageWhereUniqueInput | rest_imageWhereUniqueInput[]
-    update?: rest_imageUpdateWithWhereUniqueWithoutRestaurantInput | rest_imageUpdateWithWhereUniqueWithoutRestaurantInput[]
-    updateMany?: rest_imageUpdateManyWithWhereWithoutRestaurantInput | rest_imageUpdateManyWithWhereWithoutRestaurantInput[]
-    deleteMany?: rest_imageScalarWhereInput | rest_imageScalarWhereInput[]
+  export type repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput> | repre_menuCreateWithoutRestaurantInput[] | repre_menuUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: repre_menuCreateOrConnectWithoutRestaurantInput | repre_menuCreateOrConnectWithoutRestaurantInput[]
+    upsert?: repre_menuUpsertWithWhereUniqueWithoutRestaurantInput | repre_menuUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: repre_menuCreateManyRestaurantInputEnvelope
+    set?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    disconnect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    delete?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    connect?: repre_menuWhereUniqueInput | repre_menuWhereUniqueInput[]
+    update?: repre_menuUpdateWithWhereUniqueWithoutRestaurantInput | repre_menuUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: repre_menuUpdateManyWithWhereWithoutRestaurantInput | repre_menuUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
   }
 
   export type rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput = {
@@ -23463,6 +25956,20 @@ export namespace Prisma {
     update?: reviewUpdateWithWhereUniqueWithoutRestaurantInput | reviewUpdateWithWhereUniqueWithoutRestaurantInput[]
     updateMany?: reviewUpdateManyWithWhereWithoutRestaurantInput | reviewUpdateManyWithWhereWithoutRestaurantInput[]
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
+  }
+
+  export type user_restUncheckedUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput> | user_restCreateWithoutRestaurantInput[] | user_restUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutRestaurantInput | user_restCreateOrConnectWithoutRestaurantInput[]
+    upsert?: user_restUpsertWithWhereUniqueWithoutRestaurantInput | user_restUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: user_restCreateManyRestaurantInputEnvelope
+    set?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    disconnect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    delete?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    update?: user_restUpdateWithWhereUniqueWithoutRestaurantInput | user_restUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: user_restUpdateManyWithWhereWithoutRestaurantInput | user_restUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: user_restScalarWhereInput | user_restScalarWhereInput[]
   }
 
   export type zzimUncheckedUpdateManyWithoutRestaurantNestedInput = {
@@ -23663,6 +26170,13 @@ export namespace Prisma {
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
   }
 
+  export type user_restCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput> | user_restCreateWithoutUserInput[] | user_restUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutUserInput | user_restCreateOrConnectWithoutUserInput[]
+    createMany?: user_restCreateManyUserInputEnvelope
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+  }
+
   export type zzimCreateNestedManyWithoutUserInput = {
     create?: XOR<zzimCreateWithoutUserInput, zzimUncheckedCreateWithoutUserInput> | zzimCreateWithoutUserInput[] | zzimUncheckedCreateWithoutUserInput[]
     connectOrCreate?: zzimCreateOrConnectWithoutUserInput | zzimCreateOrConnectWithoutUserInput[]
@@ -23710,6 +26224,13 @@ export namespace Prisma {
     connectOrCreate?: reviewCreateOrConnectWithoutUserInput | reviewCreateOrConnectWithoutUserInput[]
     createMany?: reviewCreateManyUserInputEnvelope
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
+  }
+
+  export type user_restUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput> | user_restCreateWithoutUserInput[] | user_restUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutUserInput | user_restCreateOrConnectWithoutUserInput[]
+    createMany?: user_restCreateManyUserInputEnvelope
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
   }
 
   export type zzimUncheckedCreateNestedManyWithoutUserInput = {
@@ -23801,6 +26322,20 @@ export namespace Prisma {
     update?: reviewUpdateWithWhereUniqueWithoutUserInput | reviewUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: reviewUpdateManyWithWhereWithoutUserInput | reviewUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
+  }
+
+  export type user_restUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput> | user_restCreateWithoutUserInput[] | user_restUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutUserInput | user_restCreateOrConnectWithoutUserInput[]
+    upsert?: user_restUpsertWithWhereUniqueWithoutUserInput | user_restUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_restCreateManyUserInputEnvelope
+    set?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    disconnect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    delete?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    update?: user_restUpdateWithWhereUniqueWithoutUserInput | user_restUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_restUpdateManyWithWhereWithoutUserInput | user_restUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_restScalarWhereInput | user_restScalarWhereInput[]
   }
 
   export type zzimUpdateManyWithoutUserNestedInput = {
@@ -23901,6 +26436,20 @@ export namespace Prisma {
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
   }
 
+  export type user_restUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput> | user_restCreateWithoutUserInput[] | user_restUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: user_restCreateOrConnectWithoutUserInput | user_restCreateOrConnectWithoutUserInput[]
+    upsert?: user_restUpsertWithWhereUniqueWithoutUserInput | user_restUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: user_restCreateManyUserInputEnvelope
+    set?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    disconnect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    delete?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    connect?: user_restWhereUniqueInput | user_restWhereUniqueInput[]
+    update?: user_restUpdateWithWhereUniqueWithoutUserInput | user_restUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: user_restUpdateManyWithWhereWithoutUserInput | user_restUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: user_restScalarWhereInput | user_restScalarWhereInput[]
+  }
+
   export type zzimUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<zzimCreateWithoutUserInput, zzimUncheckedCreateWithoutUserInput> | zzimCreateWithoutUserInput[] | zzimUncheckedCreateWithoutUserInput[]
     connectOrCreate?: zzimCreateOrConnectWithoutUserInput | zzimCreateOrConnectWithoutUserInput[]
@@ -23979,6 +26528,10 @@ export namespace Prisma {
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutZzimInput, restaurantUpdateWithoutZzimInput>, restaurantUncheckedUpdateWithoutZzimInput>
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type restaurantCreateNestedOneWithoutRest_tagInput = {
     create?: XOR<restaurantCreateWithoutRest_tagInput, restaurantUncheckedCreateWithoutRest_tagInput>
     connectOrCreate?: restaurantCreateOrConnectWithoutRest_tagInput
@@ -23991,6 +26544,48 @@ export namespace Prisma {
     upsert?: restaurantUpsertWithoutRest_tagInput
     connect?: restaurantWhereUniqueInput
     update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRest_tagInput, restaurantUpdateWithoutRest_tagInput>, restaurantUncheckedUpdateWithoutRest_tagInput>
+  }
+
+  export type restaurantCreateNestedOneWithoutRepre_menuInput = {
+    create?: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutRepre_menuInput
+    connect?: restaurantWhereUniqueInput
+  }
+
+  export type restaurantUpdateOneRequiredWithoutRepre_menuNestedInput = {
+    create?: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutRepre_menuInput
+    upsert?: restaurantUpsertWithoutRepre_menuInput
+    connect?: restaurantWhereUniqueInput
+    update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutRepre_menuInput, restaurantUpdateWithoutRepre_menuInput>, restaurantUncheckedUpdateWithoutRepre_menuInput>
+  }
+
+  export type restaurantCreateNestedOneWithoutUser_restInput = {
+    create?: XOR<restaurantCreateWithoutUser_restInput, restaurantUncheckedCreateWithoutUser_restInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutUser_restInput
+    connect?: restaurantWhereUniqueInput
+  }
+
+  export type userCreateNestedOneWithoutUser_restInput = {
+    create?: XOR<userCreateWithoutUser_restInput, userUncheckedCreateWithoutUser_restInput>
+    connectOrCreate?: userCreateOrConnectWithoutUser_restInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type restaurantUpdateOneRequiredWithoutUser_restNestedInput = {
+    create?: XOR<restaurantCreateWithoutUser_restInput, restaurantUncheckedCreateWithoutUser_restInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutUser_restInput
+    upsert?: restaurantUpsertWithoutUser_restInput
+    connect?: restaurantWhereUniqueInput
+    update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutUser_restInput, restaurantUpdateWithoutUser_restInput>, restaurantUncheckedUpdateWithoutUser_restInput>
+  }
+
+  export type userUpdateOneRequiredWithoutUser_restNestedInput = {
+    create?: XOR<userCreateWithoutUser_restInput, userUncheckedCreateWithoutUser_restInput>
+    connectOrCreate?: userCreateOrConnectWithoutUser_restInput
+    upsert?: userUpsertWithoutUser_restInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutUser_restInput, userUpdateWithoutUser_restInput>, userUncheckedUpdateWithoutUser_restInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -24300,6 +26895,31 @@ export namespace Prisma {
     _max?: NestedEnumprefer_typeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type mukburimCreateWithoutMenuInput = {
     id?: bigint | number
     date?: Date | string | null
@@ -24459,6 +27079,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -24480,6 +27101,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -24554,6 +27176,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -24575,6 +27198,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -24676,6 +27300,7 @@ export namespace Prisma {
     prefer?: preferCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -24697,6 +27322,7 @@ export namespace Prisma {
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -24777,6 +27403,7 @@ export namespace Prisma {
     prefer?: preferUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -24798,6 +27425,7 @@ export namespace Prisma {
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -24819,6 +27447,7 @@ export namespace Prisma {
     prefer?: preferCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -24840,6 +27469,7 @@ export namespace Prisma {
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -24906,6 +27536,7 @@ export namespace Prisma {
     prefer?: preferUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -24927,6 +27558,7 @@ export namespace Prisma {
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -24963,110 +27595,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     like?: NullableIntFieldUpdateOperationsInput | number | null
     review_image?: review_imageUncheckedUpdateManyWithoutReviewNestedInput
-  }
-
-  export type restaurantCreateWithoutRest_imageInput = {
-    id?: bigint | number
-    location?: string | null
-    name?: string | null
-    repre_menu?: string | null
-    address?: string | null
-    detail_address?: string | null
-    rating?: number | null
-    monday?: string | null
-    tuesday?: string | null
-    wednesday?: string | null
-    thursday?: string | null
-    friday?: string | null
-    saturday?: string | null
-    sunday?: string | null
-    google_place_id?: string | null
-    rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
-    rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
-    review?: reviewCreateNestedManyWithoutRestaurantInput
-    zzim?: zzimCreateNestedManyWithoutRestaurantInput
-  }
-
-  export type restaurantUncheckedCreateWithoutRest_imageInput = {
-    id?: bigint | number
-    location?: string | null
-    name?: string | null
-    repre_menu?: string | null
-    address?: string | null
-    detail_address?: string | null
-    rating?: number | null
-    monday?: string | null
-    tuesday?: string | null
-    wednesday?: string | null
-    thursday?: string | null
-    friday?: string | null
-    saturday?: string | null
-    sunday?: string | null
-    google_place_id?: string | null
-    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
-    rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
-    review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
-    zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
-  }
-
-  export type restaurantCreateOrConnectWithoutRest_imageInput = {
-    where: restaurantWhereUniqueInput
-    create: XOR<restaurantCreateWithoutRest_imageInput, restaurantUncheckedCreateWithoutRest_imageInput>
-  }
-
-  export type restaurantUpsertWithoutRest_imageInput = {
-    update: XOR<restaurantUpdateWithoutRest_imageInput, restaurantUncheckedUpdateWithoutRest_imageInput>
-    create: XOR<restaurantCreateWithoutRest_imageInput, restaurantUncheckedCreateWithoutRest_imageInput>
-    where?: restaurantWhereInput
-  }
-
-  export type restaurantUpdateToOneWithWhereWithoutRest_imageInput = {
-    where?: restaurantWhereInput
-    data: XOR<restaurantUpdateWithoutRest_imageInput, restaurantUncheckedUpdateWithoutRest_imageInput>
-  }
-
-  export type restaurantUpdateWithoutRest_imageInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
-    rating?: NullableFloatFieldUpdateOperationsInput | number | null
-    monday?: NullableStringFieldUpdateOperationsInput | string | null
-    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
-    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
-    thursday?: NullableStringFieldUpdateOperationsInput | string | null
-    friday?: NullableStringFieldUpdateOperationsInput | string | null
-    saturday?: NullableStringFieldUpdateOperationsInput | string | null
-    sunday?: NullableStringFieldUpdateOperationsInput | string | null
-    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
-    rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
-    review?: reviewUpdateManyWithoutRestaurantNestedInput
-    zzim?: zzimUpdateManyWithoutRestaurantNestedInput
-  }
-
-  export type restaurantUncheckedUpdateWithoutRest_imageInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
-    rating?: NullableFloatFieldUpdateOperationsInput | number | null
-    monday?: NullableStringFieldUpdateOperationsInput | string | null
-    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
-    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
-    thursday?: NullableStringFieldUpdateOperationsInput | string | null
-    friday?: NullableStringFieldUpdateOperationsInput | string | null
-    saturday?: NullableStringFieldUpdateOperationsInput | string | null
-    sunday?: NullableStringFieldUpdateOperationsInput | string | null
-    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
-    rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
-    review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
-    zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
   export type menuCreateWithoutRest_menuInput = {
@@ -25108,11 +27636,11 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutRest_menuInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -25122,19 +27650,20 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUncheckedCreateWithoutRest_menuInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -25144,9 +27673,10 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
@@ -25211,11 +27741,11 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutRest_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25225,19 +27755,20 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantUncheckedUpdateWithoutRest_menuInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25247,29 +27778,30 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
-  export type rest_imageCreateWithoutRestaurantInput = {
+  export type repre_menuCreateWithoutRestaurantInput = {
     id?: bigint | number
-    link?: string | null
+    menu: string
   }
 
-  export type rest_imageUncheckedCreateWithoutRestaurantInput = {
+  export type repre_menuUncheckedCreateWithoutRestaurantInput = {
     id?: bigint | number
-    link?: string | null
+    menu: string
   }
 
-  export type rest_imageCreateOrConnectWithoutRestaurantInput = {
-    where: rest_imageWhereUniqueInput
-    create: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput>
+  export type repre_menuCreateOrConnectWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    create: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput>
   }
 
-  export type rest_imageCreateManyRestaurantInputEnvelope = {
-    data: rest_imageCreateManyRestaurantInput | rest_imageCreateManyRestaurantInput[]
+  export type repre_menuCreateManyRestaurantInputEnvelope = {
+    data: repre_menuCreateManyRestaurantInput | repre_menuCreateManyRestaurantInput[]
     skipDuplicates?: boolean
   }
 
@@ -25347,6 +27879,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type user_restCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    user: userCreateNestedOneWithoutUser_restInput
+  }
+
+  export type user_restUncheckedCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    user_id: bigint | number
+  }
+
+  export type user_restCreateOrConnectWithoutRestaurantInput = {
+    where: user_restWhereUniqueInput
+    create: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type user_restCreateManyRestaurantInputEnvelope = {
+    data: user_restCreateManyRestaurantInput | user_restCreateManyRestaurantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type zzimCreateWithoutRestaurantInput = {
     id?: bigint | number
     created_at?: Date | string | null
@@ -25369,29 +27921,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type rest_imageUpsertWithWhereUniqueWithoutRestaurantInput = {
-    where: rest_imageWhereUniqueInput
-    update: XOR<rest_imageUpdateWithoutRestaurantInput, rest_imageUncheckedUpdateWithoutRestaurantInput>
-    create: XOR<rest_imageCreateWithoutRestaurantInput, rest_imageUncheckedCreateWithoutRestaurantInput>
+  export type repre_menuUpsertWithWhereUniqueWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    update: XOR<repre_menuUpdateWithoutRestaurantInput, repre_menuUncheckedUpdateWithoutRestaurantInput>
+    create: XOR<repre_menuCreateWithoutRestaurantInput, repre_menuUncheckedCreateWithoutRestaurantInput>
   }
 
-  export type rest_imageUpdateWithWhereUniqueWithoutRestaurantInput = {
-    where: rest_imageWhereUniqueInput
-    data: XOR<rest_imageUpdateWithoutRestaurantInput, rest_imageUncheckedUpdateWithoutRestaurantInput>
+  export type repre_menuUpdateWithWhereUniqueWithoutRestaurantInput = {
+    where: repre_menuWhereUniqueInput
+    data: XOR<repre_menuUpdateWithoutRestaurantInput, repre_menuUncheckedUpdateWithoutRestaurantInput>
   }
 
-  export type rest_imageUpdateManyWithWhereWithoutRestaurantInput = {
-    where: rest_imageScalarWhereInput
-    data: XOR<rest_imageUpdateManyMutationInput, rest_imageUncheckedUpdateManyWithoutRestaurantInput>
+  export type repre_menuUpdateManyWithWhereWithoutRestaurantInput = {
+    where: repre_menuScalarWhereInput
+    data: XOR<repre_menuUpdateManyMutationInput, repre_menuUncheckedUpdateManyWithoutRestaurantInput>
   }
 
-  export type rest_imageScalarWhereInput = {
-    AND?: rest_imageScalarWhereInput | rest_imageScalarWhereInput[]
-    OR?: rest_imageScalarWhereInput[]
-    NOT?: rest_imageScalarWhereInput | rest_imageScalarWhereInput[]
-    id?: BigIntFilter<"rest_image"> | bigint | number
-    rest_id?: BigIntFilter<"rest_image"> | bigint | number
-    link?: StringNullableFilter<"rest_image"> | string | null
+  export type repre_menuScalarWhereInput = {
+    AND?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
+    OR?: repre_menuScalarWhereInput[]
+    NOT?: repre_menuScalarWhereInput | repre_menuScalarWhereInput[]
+    id?: BigIntFilter<"repre_menu"> | bigint | number
+    rest_id?: BigIntFilter<"repre_menu"> | bigint | number
+    menu?: StringFilter<"repre_menu"> | string
   }
 
   export type rest_menuUpsertWithWhereUniqueWithoutRestaurantInput = {
@@ -25465,6 +28017,31 @@ export namespace Prisma {
     like?: IntNullableFilter<"review"> | number | null
   }
 
+  export type user_restUpsertWithWhereUniqueWithoutRestaurantInput = {
+    where: user_restWhereUniqueInput
+    update: XOR<user_restUpdateWithoutRestaurantInput, user_restUncheckedUpdateWithoutRestaurantInput>
+    create: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type user_restUpdateWithWhereUniqueWithoutRestaurantInput = {
+    where: user_restWhereUniqueInput
+    data: XOR<user_restUpdateWithoutRestaurantInput, user_restUncheckedUpdateWithoutRestaurantInput>
+  }
+
+  export type user_restUpdateManyWithWhereWithoutRestaurantInput = {
+    where: user_restScalarWhereInput
+    data: XOR<user_restUpdateManyMutationInput, user_restUncheckedUpdateManyWithoutRestaurantInput>
+  }
+
+  export type user_restScalarWhereInput = {
+    AND?: user_restScalarWhereInput | user_restScalarWhereInput[]
+    OR?: user_restScalarWhereInput[]
+    NOT?: user_restScalarWhereInput | user_restScalarWhereInput[]
+    id?: BigIntFilter<"user_rest"> | bigint | number
+    user_id?: BigIntFilter<"user_rest"> | bigint | number
+    rest_id?: BigIntFilter<"user_rest"> | bigint | number
+  }
+
   export type zzimUpsertWithWhereUniqueWithoutRestaurantInput = {
     where: zzimWhereUniqueInput
     update: XOR<zzimUpdateWithoutRestaurantInput, zzimUncheckedUpdateWithoutRestaurantInput>
@@ -25531,6 +28108,7 @@ export namespace Prisma {
     prefer?: preferCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -25552,6 +28130,7 @@ export namespace Prisma {
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -25562,11 +28141,11 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutReviewInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -25576,19 +28155,20 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUncheckedCreateWithoutReviewInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -25598,9 +28178,10 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
@@ -25684,6 +28265,7 @@ export namespace Prisma {
     prefer?: preferUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -25705,6 +28287,7 @@ export namespace Prisma {
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -25721,11 +28304,11 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25735,19 +28318,20 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantUncheckedUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25757,9 +28341,10 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
@@ -25990,6 +28575,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type user_restCreateWithoutUserInput = {
+    id?: bigint | number
+    restaurant: restaurantCreateNestedOneWithoutUser_restInput
+  }
+
+  export type user_restUncheckedCreateWithoutUserInput = {
+    id?: bigint | number
+    rest_id: bigint | number
+  }
+
+  export type user_restCreateOrConnectWithoutUserInput = {
+    where: user_restWhereUniqueInput
+    create: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput>
+  }
+
+  export type user_restCreateManyUserInputEnvelope = {
+    data: user_restCreateManyUserInput | user_restCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type zzimCreateWithoutUserInput = {
     id?: bigint | number
     created_at?: Date | string | null
@@ -26126,6 +28731,22 @@ export namespace Prisma {
     data: XOR<reviewUpdateManyMutationInput, reviewUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type user_restUpsertWithWhereUniqueWithoutUserInput = {
+    where: user_restWhereUniqueInput
+    update: XOR<user_restUpdateWithoutUserInput, user_restUncheckedUpdateWithoutUserInput>
+    create: XOR<user_restCreateWithoutUserInput, user_restUncheckedCreateWithoutUserInput>
+  }
+
+  export type user_restUpdateWithWhereUniqueWithoutUserInput = {
+    where: user_restWhereUniqueInput
+    data: XOR<user_restUpdateWithoutUserInput, user_restUncheckedUpdateWithoutUserInput>
+  }
+
+  export type user_restUpdateManyWithWhereWithoutUserInput = {
+    where: user_restScalarWhereInput
+    data: XOR<user_restUpdateManyMutationInput, user_restUncheckedUpdateManyWithoutUserInput>
+  }
+
   export type zzimUpsertWithWhereUniqueWithoutUserInput = {
     where: zzimWhereUniqueInput
     update: XOR<zzimUpdateWithoutUserInput, zzimUncheckedUpdateWithoutUserInput>
@@ -26160,6 +28781,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -26181,6 +28803,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -26218,6 +28841,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -26239,6 +28863,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -26260,6 +28885,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
     zzim?: zzimCreateNestedManyWithoutUserInput
   }
 
@@ -26281,6 +28907,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
     zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -26318,6 +28945,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
     zzim?: zzimUpdateManyWithoutUserNestedInput
   }
 
@@ -26339,6 +28967,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -26361,6 +28990,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
     report?: reportCreateNestedManyWithoutUserInput
     review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutZzimInput = {
@@ -26382,6 +29012,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
     report?: reportUncheckedCreateNestedManyWithoutUserInput
     review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutZzimInput = {
@@ -26391,11 +29022,11 @@ export namespace Prisma {
 
   export type restaurantCreateWithoutZzimInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -26405,19 +29036,20 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUncheckedCreateWithoutZzimInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -26427,10 +29059,11 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantCreateOrConnectWithoutZzimInput = {
@@ -26468,6 +29101,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
     report?: reportUpdateManyWithoutUserNestedInput
     review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutZzimInput = {
@@ -26489,6 +29123,7 @@ export namespace Prisma {
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type restaurantUpsertWithoutZzimInput = {
@@ -26504,11 +29139,11 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26518,19 +29153,20 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantUncheckedUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26540,19 +29176,20 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantCreateWithoutRest_tagInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -26562,19 +29199,20 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
 
   export type restaurantUncheckedCreateWithoutRest_tagInput = {
     id?: bigint | number
+    rest_image?: string | null
     location?: string | null
     name?: string | null
-    repre_menu?: string | null
+    keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -26584,9 +29222,10 @@ export namespace Prisma {
     saturday?: string | null
     sunday?: string | null
     google_place_id?: string | null
-    rest_image?: rest_imageUncheckedCreateNestedManyWithoutRestaurantInput
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
@@ -26608,11 +29247,11 @@ export namespace Prisma {
 
   export type restaurantUpdateWithoutRest_tagInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26622,19 +29261,20 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
   export type restaurantUncheckedUpdateWithoutRest_tagInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    repre_menu?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26644,10 +29284,331 @@ export namespace Prisma {
     saturday?: NullableStringFieldUpdateOperationsInput | string | null
     sunday?: NullableStringFieldUpdateOperationsInput | string | null
     google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
-    rest_image?: rest_imageUncheckedUpdateManyWithoutRestaurantNestedInput
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantCreateWithoutRepre_menuInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantUncheckedCreateWithoutRepre_menuInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantCreateOrConnectWithoutRepre_menuInput = {
+    where: restaurantWhereUniqueInput
+    create: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+  }
+
+  export type restaurantUpsertWithoutRepre_menuInput = {
+    update: XOR<restaurantUpdateWithoutRepre_menuInput, restaurantUncheckedUpdateWithoutRepre_menuInput>
+    create: XOR<restaurantCreateWithoutRepre_menuInput, restaurantUncheckedCreateWithoutRepre_menuInput>
+    where?: restaurantWhereInput
+  }
+
+  export type restaurantUpdateToOneWithWhereWithoutRepre_menuInput = {
+    where?: restaurantWhereInput
+    data: XOR<restaurantUpdateWithoutRepre_menuInput, restaurantUncheckedUpdateWithoutRepre_menuInput>
+  }
+
+  export type restaurantUpdateWithoutRepre_menuInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantUncheckedUpdateWithoutRepre_menuInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantCreateWithoutUser_restInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    review?: reviewCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantUncheckedCreateWithoutUser_restInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    keyword?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantCreateOrConnectWithoutUser_restInput = {
+    where: restaurantWhereUniqueInput
+    create: XOR<restaurantCreateWithoutUser_restInput, restaurantUncheckedCreateWithoutUser_restInput>
+  }
+
+  export type userCreateWithoutUser_restInput = {
+    id?: bigint | number
+    email?: string | null
+    phone_num?: string | null
+    is_verified?: boolean | null
+    nickname?: string | null
+    body_type?: number | null
+    gender?: number | null
+    exercise?: number | null
+    password: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    profileImageUrl?: string | null
+    allergy?: allergyCreateNestedManyWithoutUserInput
+    mukburim?: mukburimCreateNestedManyWithoutUserInput
+    prefer?: preferCreateNestedManyWithoutUserInput
+    recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
+    report?: reportCreateNestedManyWithoutUserInput
+    review?: reviewCreateNestedManyWithoutUserInput
+    zzim?: zzimCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutUser_restInput = {
+    id?: bigint | number
+    email?: string | null
+    phone_num?: string | null
+    is_verified?: boolean | null
+    nickname?: string | null
+    body_type?: number | null
+    gender?: number | null
+    exercise?: number | null
+    password: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    profileImageUrl?: string | null
+    allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
+    mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
+    prefer?: preferUncheckedCreateNestedManyWithoutUserInput
+    recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
+    report?: reportUncheckedCreateNestedManyWithoutUserInput
+    review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutUser_restInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutUser_restInput, userUncheckedCreateWithoutUser_restInput>
+  }
+
+  export type restaurantUpsertWithoutUser_restInput = {
+    update: XOR<restaurantUpdateWithoutUser_restInput, restaurantUncheckedUpdateWithoutUser_restInput>
+    create: XOR<restaurantCreateWithoutUser_restInput, restaurantUncheckedCreateWithoutUser_restInput>
+    where?: restaurantWhereInput
+  }
+
+  export type restaurantUpdateToOneWithWhereWithoutUser_restInput = {
+    where?: restaurantWhereInput
+    data: XOR<restaurantUpdateWithoutUser_restInput, restaurantUncheckedUpdateWithoutUser_restInput>
+  }
+
+  export type restaurantUpdateWithoutUser_restInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantUncheckedUpdateWithoutUser_restInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type userUpsertWithoutUser_restInput = {
+    update: XOR<userUpdateWithoutUser_restInput, userUncheckedUpdateWithoutUser_restInput>
+    create: XOR<userCreateWithoutUser_restInput, userUncheckedCreateWithoutUser_restInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutUser_restInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutUser_restInput, userUncheckedUpdateWithoutUser_restInput>
+  }
+
+  export type userUpdateWithoutUser_restInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_num?: NullableStringFieldUpdateOperationsInput | string | null
+    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    body_type?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableIntFieldUpdateOperationsInput | number | null
+    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    password?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    allergy?: allergyUpdateManyWithoutUserNestedInput
+    mukburim?: mukburimUpdateManyWithoutUserNestedInput
+    prefer?: preferUpdateManyWithoutUserNestedInput
+    recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
+    report?: reportUpdateManyWithoutUserNestedInput
+    review?: reviewUpdateManyWithoutUserNestedInput
+    zzim?: zzimUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutUser_restInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_num?: NullableStringFieldUpdateOperationsInput | string | null
+    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    body_type?: NullableIntFieldUpdateOperationsInput | number | null
+    gender?: NullableIntFieldUpdateOperationsInput | number | null
+    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    password?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
+    mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
+    prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
+    recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
+    report?: reportUncheckedUpdateManyWithoutUserNestedInput
+    review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type mukburimCreateManyMenuInput = {
@@ -26718,9 +29679,9 @@ export namespace Prisma {
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
-  export type rest_imageCreateManyRestaurantInput = {
+  export type repre_menuCreateManyRestaurantInput = {
     id?: bigint | number
-    link?: string | null
+    menu: string
   }
 
   export type rest_menuCreateManyRestaurantInput = {
@@ -26743,25 +29704,30 @@ export namespace Prisma {
     like?: number | null
   }
 
+  export type user_restCreateManyRestaurantInput = {
+    id?: bigint | number
+    user_id: bigint | number
+  }
+
   export type zzimCreateManyRestaurantInput = {
     id?: bigint | number
     user_id: bigint | number
     created_at?: Date | string | null
   }
 
-  export type rest_imageUpdateWithoutRestaurantInput = {
+  export type repre_menuUpdateWithoutRestaurantInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
+    menu?: StringFieldUpdateOperationsInput | string
   }
 
-  export type rest_imageUncheckedUpdateWithoutRestaurantInput = {
+  export type repre_menuUncheckedUpdateWithoutRestaurantInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
+    menu?: StringFieldUpdateOperationsInput | string
   }
 
-  export type rest_imageUncheckedUpdateManyWithoutRestaurantInput = {
+  export type repre_menuUncheckedUpdateManyWithoutRestaurantInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    link?: NullableStringFieldUpdateOperationsInput | string | null
+    menu?: StringFieldUpdateOperationsInput | string
   }
 
   export type rest_menuUpdateWithoutRestaurantInput = {
@@ -26826,6 +29792,21 @@ export namespace Prisma {
     text?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     like?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type user_restUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user?: userUpdateOneRequiredWithoutUser_restNestedInput
+  }
+
+  export type user_restUncheckedUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type user_restUncheckedUpdateManyWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type zzimUpdateWithoutRestaurantInput = {
@@ -26926,6 +29907,11 @@ export namespace Prisma {
     text?: string | null
     created_at?: Date | string | null
     like?: number | null
+  }
+
+  export type user_restCreateManyUserInput = {
+    id?: bigint | number
+    rest_id: bigint | number
   }
 
   export type zzimCreateManyUserInput = {
@@ -27048,6 +30034,21 @@ export namespace Prisma {
     text?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     like?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type user_restUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    restaurant?: restaurantUpdateOneRequiredWithoutUser_restNestedInput
+  }
+
+  export type user_restUncheckedUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type user_restUncheckedUpdateManyWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type zzimUpdateWithoutUserInput = {
