@@ -66,15 +66,6 @@ model report {
   @@index([user_id], map: "user_id")
 }
 
-model rest_image {
-  id         BigInt     @id @default(autoincrement())
-  rest_id    BigInt
-  link       String?    @db.VarChar(50)
-  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "rest_image_ibfk_1")
-
-  @@index([rest_id], map: "rest_id")
-}
-
 model rest_menu {
   id         BigInt     @id @default(autoincrement())
   menu_id    BigInt
@@ -88,25 +79,26 @@ model rest_menu {
 
 model restaurant {
   id              BigInt       @id @default(autoincrement())
+  rest_image      String?      @db.VarChar(50)
   location        String?      @db.VarChar(20)
   name            String?      @db.VarChar(60)
   keyword         String?      @db.VarChar(50)
   address         String?      @db.VarChar(60)
   detail_address  String?      @db.VarChar(60)
-  rating          Float?       @db.Float
-  monday          String?      @db.Text
-  tuesday         String?      @db.Text
-  wednesday       String?      @db.Text
-  thursday        String?      @db.Text
-  friday          String?      @db.Text
-  saturday        String?      @db.Text
-  sunday          String?      @db.Text
+  rating          Float?       @default(0) @db.Float
+  monday          String?      @default("휴무") @db.VarChar(20)
+  tuesday         String?      @default("휴뮤") @db.VarChar(20)
+  wednesday       String?      @default("휴무") @db.VarChar(20)
+  thursday        String?      @db.VarChar(20)
+  friday          String?      @default("휴무") @db.VarChar(20)
+  saturday        String?      @default("휴무") @db.VarChar(20)
+  sunday          String?      @default("휴무") @db.VarChar(20)
   google_place_id String?      @db.Text
   repre_menu      repre_menu[]
-  rest_image      rest_image[]
   rest_menu       rest_menu[]
   rest_tag        rest_tag[]
   review          review[]
+  user_rest       user_rest[]
   zzim            zzim[]
 }
 
@@ -162,6 +154,7 @@ model user {
   recommend_except recommend_except[]
   report           report[]
   review           review[]
+  user_rest        user_rest[]
   zzim             zzim[]
 }
 
@@ -228,6 +221,17 @@ model repre_menu {
   restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "repre_menu_restaurant_id_fk")
 
   @@index([rest_id], map: "repre_menu_restaurant_id_fk")
+}
+
+model user_rest {
+  id         BigInt     @id @default(autoincrement())
+  user_id    BigInt
+  rest_id    BigInt
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_rest_restaurant_id_fk")
+  user       user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_rest_user_id_fk")
+
+  @@index([rest_id], map: "user_rest_restaurant_id_fk")
+  @@index([user_id], map: "user_rest_user_id_fk")
 }
 
 enum allergy_type {
