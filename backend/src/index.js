@@ -72,7 +72,12 @@ const sessionStore = new MySQLSession({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    credentials: true,
+  })
+);
 // 세션 미들웨어 등록
 app.use(
   session({
@@ -135,12 +140,7 @@ app.get("/openapi.json", async (req, res, next) => {
 });
 
 // 기타 미들웨어
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
-    credentials: true,
-  })
-);
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
