@@ -230,3 +230,20 @@ export class FailToAddRepreMenu extends Error {
     this.data = data;
   }
 }
+
+export class InvalidVerificationCodeError extends Error {
+  errorCode = "V001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class VerificationCodeExpiredError extends Error {
+  errorCode = "V002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
