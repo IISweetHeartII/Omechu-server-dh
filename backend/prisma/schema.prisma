@@ -87,7 +87,7 @@ model restaurant {
   monday          String?      @default("휴무") @db.VarChar(20)
   tuesday         String?      @default("휴뮤") @db.VarChar(20)
   wednesday       String?      @default("휴무") @db.VarChar(20)
-  thursday        String?      @db.VarChar(20)
+  thursday        String?      @default("휴무") @db.VarChar(20)
   friday          String?      @default("휴무") @db.VarChar(20)
   saturday        String?      @default("휴무") @db.VarChar(20)
   sunday          String?      @default("휴무") @db.VarChar(20)
