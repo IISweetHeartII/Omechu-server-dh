@@ -145,7 +145,7 @@ jobs:
           # 환경변수 설정
           log "🌍 Setting up environment variables..."
           if [ -f .env.production ]; then
-              cp .env.production .env
+              cp .env.production ./backend/.env
               log "✅ Environment variables updated from .env.production"
           else
               log "⚠️ No .env.production file found"
