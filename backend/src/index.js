@@ -30,7 +30,6 @@ import {
   handleGetMenu,
   handleGetMenuInfo,
 } from "./controllers/menu.controller.js";
-
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
@@ -40,7 +39,7 @@ import {
   handleRemoveZzim,
   handleGetZzimList,
 } from "./controllers/mypage.controller.js";
-
+import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 dotenv.config();
 
 const app = express();
@@ -161,13 +160,15 @@ app.post("/image/upload", generatePresignedUrl);
 app.post("/auth/login", handleUserLogin);
 // 세션 재발급 API
 app.post("/auth/reissue", isLoggedIn, handleRenewSession);
-
+// 리뷰 작성하기 API
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
-
+//리뷰 좋아요/취소하기 API
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
+//리뷰 가져오기 API
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
-
+//맛집 등록하기 API
+app.post("/place", isLoggedIn, handleAddRestaurant);
 // 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);

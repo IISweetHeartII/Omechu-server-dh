@@ -160,12 +160,6 @@ exports.Prisma.ReportScalarFieldEnum = {
   text: 'text'
 };
 
-exports.Prisma.Rest_imageScalarFieldEnum = {
-  id: 'id',
-  rest_id: 'rest_id',
-  link: 'link'
-};
-
 exports.Prisma.Rest_menuScalarFieldEnum = {
   id: 'id',
   menu_id: 'menu_id',
@@ -174,6 +168,7 @@ exports.Prisma.Rest_menuScalarFieldEnum = {
 
 exports.Prisma.RestaurantScalarFieldEnum = {
   id: 'id',
+  rest_image: 'rest_image',
   location: 'location',
   name: 'name',
   keyword: 'keyword',
@@ -251,7 +246,8 @@ exports.Prisma.Email_verificationScalarFieldEnum = {
   id: 'id',
   email: 'email',
   code: 'code',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  expires_at: 'expires_at'
 };
 
 exports.Prisma.Rest_tagScalarFieldEnum = {
@@ -272,6 +268,12 @@ exports.Prisma.Repre_menuScalarFieldEnum = {
   id: 'id',
   rest_id: 'rest_id',
   menu: 'menu'
+};
+
+exports.Prisma.User_restScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  rest_id: 'rest_id'
 };
 
 exports.Prisma.SortOrder = {
@@ -305,11 +307,8 @@ exports.Prisma.reportOrderByRelevanceFieldEnum = {
   text: 'text'
 };
 
-exports.Prisma.rest_imageOrderByRelevanceFieldEnum = {
-  link: 'link'
-};
-
 exports.Prisma.restaurantOrderByRelevanceFieldEnum = {
+  rest_image: 'rest_image',
   location: 'location',
   name: 'name',
   keyword: 'keyword',
@@ -396,7 +395,6 @@ exports.Prisma.ModelName = {
   mukburim: 'mukburim',
   recommend_except: 'recommend_except',
   report: 'report',
-  rest_image: 'rest_image',
   rest_menu: 'rest_menu',
   restaurant: 'restaurant',
   review: 'review',
@@ -409,7 +407,8 @@ exports.Prisma.ModelName = {
   email_verification: 'email_verification',
   rest_tag: 'rest_tag',
   password_reset_token: 'password_reset_token',
-  repre_menu: 'repre_menu'
+  repre_menu: 'repre_menu',
+  user_rest: 'user_rest'
 };
 
 /**
