@@ -88,12 +88,19 @@ export const addRestaurantToDatabase = async (restaurantData, keyword) => {
     console.log("Converted location:", location);
     const result = await prisma.restaurant.create({
       data: {
-        repre_menu: repreMenu,
         google_place_id: googlePlaceId,
         location: location,
       },
     });
-
+    const menu = await prisma.menu.findFirst({
+      where: { name: repreMenu },
+    });
+    const result2 = await prisma.rest_menu.create({
+      data: {
+        rest_id: result.id,
+        menu_id: menu.id,
+      },
+    });
     console.log("Restaurant added to database:", name);
     return result;
   } catch (error) {

@@ -10,18 +10,18 @@ import {
   getMenuInfoService,
 } from "../services/menu.service.js";
 export const handleRecommendMenu = async (req, res) => {
-  const choice = bodyToChoice(req.body);
-  const userId = await getUserIdBySession(req.body.session);
-  console.log("User ID:", userId);
-  const newRecommendation = await recommendMenuService(choice, userId);
-  if (newRecommendation) {
-    res.status(StatusCodes.OK).json(newRecommendation);
-  } else {
-    res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ message: "No recommendation found" });
-  }
-  /*
+
+    
+    const choice = bodyToChoice(req.body);
+    const userId = req.session?.user?.id;
+    console.log("User ID:", userId);
+    const newRecommendation = await recommendMenuService(choice, userId);
+    if (newRecommendation) {
+        res.status(StatusCodes.OK).json(newRecommendation);
+    } else {
+        res.status(StatusCodes.NOT_FOUND).json({ message: "No recommendation found" });
+    }
+    /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "메뉴 추천 API"
     #swagger.description = "사용자의 선택 조건에 따라 메뉴를 추천하는 API입니다."
@@ -32,7 +32,7 @@ export const handleRecommendMenu = async (req, res) => {
         'application/json': {
           schema: {
             type: 'object',
-            required: ['meal_time', 'purpose', 'mood', 'with', 'budget', 'weather', 'session'],
+            required: ['meal_time', 'purpose', 'mood', 'with', 'budget', 'exceptions', 'weather'],
             properties: {
               meal_time: { 
                 type: 'integer', 
@@ -69,12 +69,8 @@ export const handleRecommendMenu = async (req, res) => {
                 type: 'string', 
                 example: "더움",
                 description: "현재 날씨"
-              },
-              session: { 
-                type: 'string', 
-                example: "HXEKhjr9mS7CuUT6AM9RsY4d_2C9Kuwx",
-                description: "사용자 세션 ID"
               }
+              
             }
           }
         }

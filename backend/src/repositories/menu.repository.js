@@ -2,6 +2,8 @@ import { OpenAI } from 'openai';
 import dotenv from "dotenv";
 import { pool } from "../db.config.js";
 import {prisma} from "../db.config.js";
+import { getUserInfoForMenu, getUserAllergies, getUserExceptedMenus, getUserPreferences } from './user.repository.js';
+import { getUser } from './auth.repository.js';
 dotenv.config();
 const key = process.env.OPENAI_API_KEY;
 
@@ -189,7 +191,7 @@ LA 갈비
 그릭요거트
 팥빙수`;
 
-export const recommendMenu = async (choice) => {
+export const recommendMenu = async (choice, userId) => {
     try {
         console.log("Received request for GPT processing");
 
@@ -197,7 +199,25 @@ export const recommendMenu = async (choice) => {
             apiKey: key
         });
         console.log("OpenAI client initialized successfully");
+        // 사용자 정보 가져오기
+        if(userId != undefined && userId != "") {
+            choice.exceptions2 = await getUserExceptedMenus(userId);
+            choice.allergy = await getUserAllergies(userId);
+            choice.prefer = await getUserPreferences(userId);
+            const userInfo = await getUserInfoForMenu(userId);
 
+            choice.gender = userInfo.gender;
+            choice.exercise = userInfo.exercise;
+            choice.body_type = userInfo.body_type;
+        }
+        else {
+            choice.exceptions2 = [];
+            choice.allergy = [];
+            choice.prefer = [];
+            choice.gender = 3; 
+            choice.exercise = 3; // 기본값: 상관 없음
+            choice.body_type = 5; // 기본값: 상관 없음
+        }
         const { meal_time, purpose, mood, with: withWhom, budget, exceptions, exceptions2, gender, exercise, prefer, body_type, allergy } = choice;
         console.log("Received choice data:", choice);
         // bigint -> 자연어 매핑
@@ -263,8 +283,9 @@ export const recommendMenu = async (choice) => {
         console.log("Gender:", genderText);
         console.log("Exercise:", exerciseText);
         console.log("Body Type:", bodyTypeText);
+        console.log("Exceptions:", exceptions);
         const exceptionsString = exceptions && exceptions.length > 0
-            ? exceptions.map(item => item.name).join(", ")
+            ? exceptions.join(", ")
             : "없음";
         console.log("exceptionsString:", exceptionsString);
         const preferencesString = prefer && prefer.length > 0

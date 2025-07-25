@@ -15,7 +15,6 @@ export const addUser = async (data) => {
       data: {
         email: data.email,
         password: data.password,
-        phone_num: data.phoneNumber,
         created_at: new Date(),
         updated_at: new Date(),
       },
