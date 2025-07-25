@@ -12677,7 +12677,6 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: bigint | null
     email: string | null
-    is_verified: boolean | null
     nickname: string | null
     body_type: number | null
     gender: number | null
@@ -12691,7 +12690,6 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: bigint | null
     email: string | null
-    is_verified: boolean | null
     nickname: string | null
     body_type: number | null
     gender: number | null
@@ -12705,7 +12703,6 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     email: number
-    is_verified: number
     nickname: number
     body_type: number
     gender: number
@@ -12735,7 +12732,6 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
-    is_verified?: true
     nickname?: true
     body_type?: true
     gender?: true
@@ -12749,7 +12745,6 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
-    is_verified?: true
     nickname?: true
     body_type?: true
     gender?: true
@@ -12763,7 +12758,6 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
-    is_verified?: true
     nickname?: true
     body_type?: true
     gender?: true
@@ -12864,7 +12858,6 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: bigint
     email: string | null
-    is_verified: boolean | null
     nickname: string | null
     body_type: number | null
     gender: number | null
@@ -12897,7 +12890,6 @@ export namespace Prisma {
   export type userSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    is_verified?: boolean
     nickname?: boolean
     body_type?: boolean
     gender?: boolean
@@ -12922,7 +12914,6 @@ export namespace Prisma {
   export type userSelectScalar = {
     id?: boolean
     email?: boolean
-    is_verified?: boolean
     nickname?: boolean
     body_type?: boolean
     gender?: boolean
@@ -12933,7 +12924,7 @@ export namespace Prisma {
     profileImageUrl?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "is_verified" | "nickname" | "body_type" | "gender" | "exercise" | "password" | "created_at" | "updated_at" | "profileImageUrl", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "nickname" | "body_type" | "gender" | "exercise" | "password" | "created_at" | "updated_at" | "profileImageUrl", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     allergy?: boolean | user$allergyArgs<ExtArgs>
     mukburim?: boolean | user$mukburimArgs<ExtArgs>
@@ -12961,7 +12952,6 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       email: string | null
-      is_verified: boolean | null
       nickname: string | null
       body_type: number | null
       gender: number | null
@@ -13349,7 +13339,6 @@ export namespace Prisma {
   interface userFieldRefs {
     readonly id: FieldRef<"user", 'BigInt'>
     readonly email: FieldRef<"user", 'String'>
-    readonly is_verified: FieldRef<"user", 'Boolean'>
     readonly nickname: FieldRef<"user", 'String'>
     readonly body_type: FieldRef<"user", 'Int'>
     readonly gender: FieldRef<"user", 'Int'>
@@ -21573,7 +21562,6 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    is_verified: 'is_verified',
     nickname: 'nickname',
     body_type: 'body_type',
     gender: 'gender',
@@ -22537,7 +22525,6 @@ export namespace Prisma {
     NOT?: userWhereInput | userWhereInput[]
     id?: BigIntFilter<"user"> | bigint | number
     email?: StringNullableFilter<"user"> | string | null
-    is_verified?: BoolNullableFilter<"user"> | boolean | null
     nickname?: StringNullableFilter<"user"> | string | null
     body_type?: IntNullableFilter<"user"> | number | null
     gender?: IntNullableFilter<"user"> | number | null
@@ -22559,7 +22546,6 @@ export namespace Prisma {
   export type userOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrderInput | SortOrder
-    is_verified?: SortOrderInput | SortOrder
     nickname?: SortOrderInput | SortOrder
     body_type?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
@@ -22585,7 +22571,6 @@ export namespace Prisma {
     AND?: userWhereInput | userWhereInput[]
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
-    is_verified?: BoolNullableFilter<"user"> | boolean | null
     nickname?: StringNullableFilter<"user"> | string | null
     body_type?: IntNullableFilter<"user"> | number | null
     gender?: IntNullableFilter<"user"> | number | null
@@ -22607,7 +22592,6 @@ export namespace Prisma {
   export type userOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrderInput | SortOrder
-    is_verified?: SortOrderInput | SortOrder
     nickname?: SortOrderInput | SortOrder
     body_type?: SortOrderInput | SortOrder
     gender?: SortOrderInput | SortOrder
@@ -22629,7 +22613,6 @@ export namespace Prisma {
     NOT?: userScalarWhereWithAggregatesInput | userScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"user"> | bigint | number
     email?: StringNullableWithAggregatesFilter<"user"> | string | null
-    is_verified?: BoolNullableWithAggregatesFilter<"user"> | boolean | null
     nickname?: StringNullableWithAggregatesFilter<"user"> | string | null
     body_type?: IntNullableWithAggregatesFilter<"user"> | number | null
     gender?: IntNullableWithAggregatesFilter<"user"> | number | null
@@ -23684,7 +23667,6 @@ export namespace Prisma {
   export type userCreateInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -23706,7 +23688,6 @@ export namespace Prisma {
   export type userUncheckedCreateInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -23728,7 +23709,6 @@ export namespace Prisma {
   export type userUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -23750,7 +23730,6 @@ export namespace Prisma {
   export type userUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -23772,7 +23751,6 @@ export namespace Prisma {
   export type userCreateManyInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -23786,7 +23764,6 @@ export namespace Prisma {
   export type userUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -23800,7 +23777,6 @@ export namespace Prisma {
   export type userUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25020,7 +24996,6 @@ export namespace Prisma {
   export type userCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    is_verified?: SortOrder
     nickname?: SortOrder
     body_type?: SortOrder
     gender?: SortOrder
@@ -25041,7 +25016,6 @@ export namespace Prisma {
   export type userMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    is_verified?: SortOrder
     nickname?: SortOrder
     body_type?: SortOrder
     gender?: SortOrder
@@ -25055,7 +25029,6 @@ export namespace Prisma {
   export type userMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    is_verified?: SortOrder
     nickname?: SortOrder
     body_type?: SortOrder
     gender?: SortOrder
@@ -27008,7 +26981,6 @@ export namespace Prisma {
   export type userCreateWithoutMukburimInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27029,7 +27001,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutMukburimInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27103,7 +27074,6 @@ export namespace Prisma {
   export type userUpdateWithoutMukburimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27124,7 +27094,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutMukburimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27225,7 +27194,6 @@ export namespace Prisma {
   export type userCreateWithoutRecommend_exceptInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27246,7 +27214,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutRecommend_exceptInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27326,7 +27293,6 @@ export namespace Prisma {
   export type userUpdateWithoutRecommend_exceptInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27347,7 +27313,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutRecommend_exceptInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27368,7 +27333,6 @@ export namespace Prisma {
   export type userCreateWithoutReportInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27389,7 +27353,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutReportInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -27455,7 +27418,6 @@ export namespace Prisma {
   export type userUpdateWithoutReportInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -27476,7 +27438,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutReportInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28021,7 +27982,6 @@ export namespace Prisma {
   export type userCreateWithoutReviewInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28042,7 +28002,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutReviewInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28174,7 +28133,6 @@ export namespace Prisma {
   export type userUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28195,7 +28153,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28686,7 +28643,6 @@ export namespace Prisma {
   export type userCreateWithoutAllergyInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28707,7 +28663,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutAllergyInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28744,7 +28699,6 @@ export namespace Prisma {
   export type userUpdateWithoutAllergyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28765,7 +28719,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutAllergyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28786,7 +28739,6 @@ export namespace Prisma {
   export type userCreateWithoutPreferInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28807,7 +28759,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutPreferInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28844,7 +28795,6 @@ export namespace Prisma {
   export type userUpdateWithoutPreferInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28865,7 +28815,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutPreferInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28886,7 +28835,6 @@ export namespace Prisma {
   export type userCreateWithoutZzimInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28907,7 +28855,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutZzimInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -28993,7 +28940,6 @@ export namespace Prisma {
   export type userUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29014,7 +28960,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutZzimInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29347,7 +29292,6 @@ export namespace Prisma {
   export type userCreateWithoutUser_restInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -29368,7 +29312,6 @@ export namespace Prisma {
   export type userUncheckedCreateWithoutUser_restInput = {
     id?: bigint | number
     email?: string | null
-    is_verified?: boolean | null
     nickname?: string | null
     body_type?: number | null
     gender?: number | null
@@ -29460,7 +29403,6 @@ export namespace Prisma {
   export type userUpdateWithoutUser_restInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null
@@ -29481,7 +29423,6 @@ export namespace Prisma {
   export type userUncheckedUpdateWithoutUser_restInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    is_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
     body_type?: NullableIntFieldUpdateOperationsInput | number | null
     gender?: NullableIntFieldUpdateOperationsInput | number | null

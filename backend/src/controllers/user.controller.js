@@ -19,7 +19,6 @@ export const handleUpdateUserInfo = async (req, res, next) => {
               gender: { type: "string", enum: ["남자", "여자"] },
               body_type: { type: "string" },
               state: { type: "string", enum: ["다이어트 중", "중량 중", "유지 중"] },
-              phoneNumber: { type: "string" },
               prefer: { type: "array", items: { type: "string" } },
               allergy: { type: "array", items: { type: "string" } }
             }
@@ -91,6 +90,6 @@ export const handleUpdateUserInfo = async (req, res, next) => {
 
     res.status(StatusCodes.OK).success(updatedUserInfo);
   } catch (error) {
-    throw new UserUpdateFailedError("회원 정보 수정 중 오류 발생", err);
+    throw new UserUpdateFailedError("회원 정보 수정 중 오류 발생", error);
   }
 };
