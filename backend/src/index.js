@@ -73,7 +73,12 @@ const sessionStore = new MySQLSession({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    credentials: true,
+  })
+);
 // 세션 미들웨어 등록
 app.use(
   session({
@@ -107,6 +112,7 @@ app.use(
     {
       swaggerOptions: {
         url: "/openapi.json",
+        withCredentials: true,
       },
     }
   )
@@ -125,23 +131,16 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "localhost:3000",
+    host: "omechu-api.log8.kr",
+    schemes: ["https"],
+    basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
   res.json(result ? result.data : null);
 });
 
 // 기타 미들웨어
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "https://omechu.log8.kr",
-      "https://omechu-api.log8.kr",
-    ],
-    credentials: true,
-  })
-);
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
