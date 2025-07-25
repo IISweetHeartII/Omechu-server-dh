@@ -12,11 +12,21 @@ export const findUserById = async (userId) => {
 };
 
 export const updateUserInfo = async (userId, data) => {
-  return await prisma.user.update({
-    where: { id: userId },
-    data,
-  });
+  try {
+    console.log("Prisma update data:", data);
+    return await prisma.user.update({
+      where: { id: userId },
+      data,
+    });
+  } catch (error) {
+    console.error("Prisma update 실패!");
+    console.error("message:", error.message);
+    console.error("meta:", error.meta);  // 핵심 정보
+    console.error("code:", error.code);
+    throw error;
+  }
 };
+
 
 export const createUserPreferences = async (userId, preferArray) => {
   if (!preferArray || preferArray.length === 0) return;
@@ -31,7 +41,6 @@ export const createUserAllergies = async (userId, allergyArray) => {
 };
 
 export const getUserInfoForMenu = async (userId) => {
-  //exceptions, gender,exercise,preference,body_type, allergy
   if (!userId) {
     throw new Error("User ID is required");
   }
