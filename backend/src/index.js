@@ -25,7 +25,10 @@ import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
-import { handleResetRequest, handleResetPassword } from "./controllers/passwordReset.controller.js";
+import {
+  handleResetRequest,
+  handleResetPassword,
+} from "./controllers/passwordReset.controller.js";
 import {
   handleGetMenu,
   handleGetMenuInfo,
@@ -169,7 +172,7 @@ app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 //리뷰 가져오기 API
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
 //맛집 등록하기 API
-app.post("/place/:id", isLoggedIn, handleAddRestaurant);
+app.post("/place", isLoggedIn, handleAddRestaurant);
 //특정 맛집 정보 수정하기 API
 app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 // 이메일 전송 API
