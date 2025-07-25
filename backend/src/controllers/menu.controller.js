@@ -7,7 +7,7 @@ export const handleRecommendMenu = async (req, res) => {
 
     
     const choice = bodyToChoice(req.body);
-    const userId = await getUserIdBySession(req.body.session);
+    const userId = req.session?.user?.id;
     console.log("User ID:", userId);
     const newRecommendation = await recommendMenuService(choice, userId);
     if (newRecommendation) {
