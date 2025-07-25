@@ -81,6 +81,19 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
 
     steps:
+      - name: Create .env.production from GitHub Secret
+        run: echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
+
+      - name: Upload .env.production to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          source: ".env.production"
+          target: "/home/ubuntu/foodapp"
+
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -145,13 +158,11 @@ jobs:
             # 환경변수 설정
             log "🌍 Setting up environment variables..."
             if [ -f .env.production ]; then
-                cp .env.production .env
-                log "✅ .env created from .env.production"
-            elif [ -f .env ]; then
-                log "⚠️ .env.production not found, but using existing .env"
+              cp .env.production .env
+              log "✅ Environment variables copied to .env"
             else
-                log "❌ No .env or .env.production found. Deployment aborted."
-                exit 1
+              log "❌ .env.production not found in EC2"
+              exit 1
             fi
 
             # Docker 컨테이너 현재 상태
