@@ -82,8 +82,6 @@ app.use(
     saveUninitialized: false,
     store: sessionStore, // 세션을 DB에 저장
     cookie: {
-      sameSite: "none", // CORS 설정을 위해 sameSite를 none으로 설정
-      secure: process.env.NODE_ENV === "production", // 프로덕션 환경에서는 secure를 true로 설정
       httpOnly: true,
       maxAge: 1000 * 60 * 60, // 1시간
     },
@@ -137,9 +135,9 @@ app.get("/openapi.json", async (req, res, next) => {
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", 
+      "http://localhost:3000",
       "https://omechu.log8.kr",
-      "https://omechu-api.log8.kr"
+      "https://omechu-api.log8.kr",
     ],
     credentials: true,
   })
