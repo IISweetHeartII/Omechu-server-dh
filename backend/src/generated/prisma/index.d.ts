@@ -935,7 +935,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_image" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu",
+      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_image" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -20462,8 +20462,6 @@ export namespace Prisma {
 
 
   /**
-<<<<<<< HEAD
-=======
    * Model repre_menu
    */
 
@@ -21409,7 +21407,6 @@ export namespace Prisma {
 
 
   /**
->>>>>>> develop
    * Enums
    */
 
