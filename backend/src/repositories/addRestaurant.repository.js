@@ -1,6 +1,7 @@
 import { prisma } from "../db.config.js";
 import axios from "axios";
 export const addRestData = async (restData) => {
+  console.log(restData.userId);
   if (
     !restData ||
     !(
@@ -48,6 +49,7 @@ export const addRestData = async (restData) => {
         sunday: restData.opening_hour.sunday,
       },
     });
+    // console.log("restId", restId);
     if (!restId || !restId.id) {
       return { error: "CANT_ADD_REST" };
     }
@@ -61,9 +63,12 @@ export const addRestData = async (restData) => {
     );
     if (!restRepreMenu) {
       return { error: "CANT_ADD_REPRE_MENU" };
-    } else {
-      return restId;
     }
+    const addUserRestData = await prisma.user_rest.create({
+      data: { user_id: restData.userId, rest_id: restId.id },
+    });
+    console.log("addUserRestData", addUserRestData);
+    return restId;
   } else {
     return { error: "DUPLICATED_REST" };
   }
