@@ -11,7 +11,7 @@ export const handleEditRestaurant = async (req, res) => {
   #swagger.summary = "특정 맛집 정보 수정하기 API" 
   #swagger.description = "특정 맛집 정보 수정하는 API입니다."
   #swagger.parameters["id"]={
-    id:"query",
+    in:"path",
     description:"가게 ID",
     required:true
     }
