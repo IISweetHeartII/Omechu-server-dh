@@ -7,7 +7,7 @@ export const bodyToProfileUpdate = (body, userId) => {
   return {
     userId: userId,
     email: body.email,
-    phone_num: body.phone_num || body.phoneNumber,
+    // phone_num: body.phone_num || body.phoneNumber, 
     nickname: body.nickname,
     body_type: body.body_type,
     gender: body.gender,
@@ -23,7 +23,7 @@ export const responseFromProfile = (user) => {
   return {
     id: user.id.toString(),
     email: user.email,
-    phone_num: user.phone_num,
+    // phone_num: user.phone_num,  
     nickname: user.nickname,
     body_type: convertBodyType(user.body_type),
     gender: convertGender(user.gender),
@@ -35,6 +35,7 @@ export const responseFromProfile = (user) => {
     updated_at: user.updated_at
   };
 };
+
 
 // 맛집 정보 수정 요청 데이터 변환
 export const bodyToRestaurantUpdate = (body, restaurantId, userId) => {

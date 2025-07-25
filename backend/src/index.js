@@ -36,6 +36,7 @@ import {
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
+  handleGetRestaurantDetail,
   handleGetMyRestaurants,
   handleUpdateRestaurant,
   handleAddZzim,
@@ -179,19 +180,25 @@ app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
-// 🆕 마이페이지 라우터들 추가
-app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
-app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
-app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
-app.patch(
-  "/mypage/restaurant/:restaurantId/edit",
-  isLoggedIn,
-  handleUpdateRestaurant
-);
-app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
-app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
-app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);
+// 실제 서비스용 라우터 (인증 필요)
+app.get("/profile/:id", isLoggedIn, handleGetUserProfile);
+app.patch("/profile/:id", isLoggedIn, handleUpdateUserProfile);
+app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
+app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
+app.patch("/restaurant/:id", isLoggedIn, handleUpdateRestaurant);
+app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
+app.post("/heart", isLoggedIn, handleAddZzim);
+app.delete("/heart", isLoggedIn, handleRemoveZzim);
 
+// 테스트용 라우터 (인증 없음) - 테스트할때 사용하시면 됩니다
+app.get("/test/profile/:id", handleGetUserProfile);
+app.patch("/test/profile/:id", handleUpdateUserProfile);
+app.get("/test/restaurant/:id", handleGetRestaurantDetail);
+app.get("/test/restaurants/:userId", handleGetMyRestaurants);
+app.patch("/test/restaurant/:id", handleUpdateRestaurant);
+app.get("/test/hearts/:userId", handleGetZzimList);
+app.post("/test/heart", handleAddZzim);
+app.delete("/test/heart", handleRemoveZzim);
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
   if (res.headersSent) {
