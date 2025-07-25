@@ -180,16 +180,17 @@ export class InvalidProfileData extends Error {
   }
 }
 
-export class FailToChangeLike extends Error {
-  errorCode = "C005";
+export class InvalidOrExpiredTokenError extends Error {
+  errorCode = "E001";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
     this.data = data;
   }
 }
-export class NoParams extends Error {
-  errorCode = "C005";
+
+export class UserNotFoundError extends Error {
+  errorCode = "E002";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
@@ -238,8 +239,36 @@ export class NotYourRest extends Error {
     this.data = data;
   }
 }
+
 export class FailToUpdateRestData extends Error {
   errorCode = "C011";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class InvalidVerificationCodeError extends Error {
+  errorCode = "V001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class VerificationCodeExpiredError extends Error {
+  errorCode = "V002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class NoParams extends Error {
+  errorCode = "C005";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
