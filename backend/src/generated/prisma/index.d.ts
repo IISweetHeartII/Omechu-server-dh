@@ -8536,7 +8536,6 @@ export namespace Prisma {
     name: string | null
     keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -8555,7 +8554,6 @@ export namespace Prisma {
     name: string | null
     keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -8574,7 +8572,6 @@ export namespace Prisma {
     name: number
     keyword: number
     address: number
-    detail_address: number
     rating: number
     monday: number
     tuesday: number
@@ -8605,7 +8602,6 @@ export namespace Prisma {
     name?: true
     keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -8624,7 +8620,6 @@ export namespace Prisma {
     name?: true
     keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -8643,7 +8638,6 @@ export namespace Prisma {
     name?: true
     keyword?: true
     address?: true
-    detail_address?: true
     rating?: true
     monday?: true
     tuesday?: true
@@ -8749,7 +8743,6 @@ export namespace Prisma {
     name: string | null
     keyword: string | null
     address: string | null
-    detail_address: string | null
     rating: number | null
     monday: string | null
     tuesday: string | null
@@ -8787,7 +8780,6 @@ export namespace Prisma {
     name?: boolean
     keyword?: boolean
     address?: boolean
-    detail_address?: boolean
     rating?: boolean
     monday?: boolean
     tuesday?: boolean
@@ -8815,7 +8807,6 @@ export namespace Prisma {
     name?: boolean
     keyword?: boolean
     address?: boolean
-    detail_address?: boolean
     rating?: boolean
     monday?: boolean
     tuesday?: boolean
@@ -8827,7 +8818,7 @@ export namespace Prisma {
     google_place_id?: boolean
   }
 
-  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_image" | "location" | "name" | "keyword" | "address" | "detail_address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
+  export type restaurantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_image" | "location" | "name" | "keyword" | "address" | "rating" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday" | "google_place_id", ExtArgs["result"]["restaurant"]>
   export type restaurantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     repre_menu?: boolean | restaurant$repre_menuArgs<ExtArgs>
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
@@ -8855,7 +8846,6 @@ export namespace Prisma {
       name: string | null
       keyword: string | null
       address: string | null
-      detail_address: string | null
       rating: number | null
       monday: string | null
       tuesday: string | null
@@ -9246,7 +9236,6 @@ export namespace Prisma {
     readonly name: FieldRef<"restaurant", 'String'>
     readonly keyword: FieldRef<"restaurant", 'String'>
     readonly address: FieldRef<"restaurant", 'String'>
-    readonly detail_address: FieldRef<"restaurant", 'String'>
     readonly rating: FieldRef<"restaurant", 'Float'>
     readonly monday: FieldRef<"restaurant", 'String'>
     readonly tuesday: FieldRef<"restaurant", 'String'>
@@ -21558,7 +21547,6 @@ export namespace Prisma {
     name: 'name',
     keyword: 'keyword',
     address: 'address',
-    detail_address: 'detail_address',
     rating: 'rating',
     monday: 'monday',
     tuesday: 'tuesday',
@@ -21755,7 +21743,6 @@ export namespace Prisma {
     name: 'name',
     keyword: 'keyword',
     address: 'address',
-    detail_address: 'detail_address',
     monday: 'monday',
     tuesday: 'tuesday',
     wednesday: 'wednesday',
@@ -22287,7 +22274,6 @@ export namespace Prisma {
     name?: StringNullableFilter<"restaurant"> | string | null
     keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
-    detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
     monday?: StringNullableFilter<"restaurant"> | string | null
     tuesday?: StringNullableFilter<"restaurant"> | string | null
@@ -22312,7 +22298,6 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
     monday?: SortOrderInput | SortOrder
     tuesday?: SortOrderInput | SortOrder
@@ -22341,7 +22326,6 @@ export namespace Prisma {
     name?: StringNullableFilter<"restaurant"> | string | null
     keyword?: StringNullableFilter<"restaurant"> | string | null
     address?: StringNullableFilter<"restaurant"> | string | null
-    detail_address?: StringNullableFilter<"restaurant"> | string | null
     rating?: FloatNullableFilter<"restaurant"> | number | null
     monday?: StringNullableFilter<"restaurant"> | string | null
     tuesday?: StringNullableFilter<"restaurant"> | string | null
@@ -22366,7 +22350,6 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     keyword?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
-    detail_address?: SortOrderInput | SortOrder
     rating?: SortOrderInput | SortOrder
     monday?: SortOrderInput | SortOrder
     tuesday?: SortOrderInput | SortOrder
@@ -22393,7 +22376,6 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     keyword?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
-    detail_address?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     rating?: FloatNullableWithAggregatesFilter<"restaurant"> | number | null
     monday?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
     tuesday?: StringNullableWithAggregatesFilter<"restaurant"> | string | null
@@ -23433,7 +23415,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -23458,7 +23439,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -23483,7 +23463,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23508,7 +23487,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23533,7 +23511,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -23552,7 +23529,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23571,7 +23547,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24754,7 +24729,6 @@ export namespace Prisma {
     name?: SortOrder
     keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -24778,7 +24752,6 @@ export namespace Prisma {
     name?: SortOrder
     keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -24797,7 +24770,6 @@ export namespace Prisma {
     name?: SortOrder
     keyword?: SortOrder
     address?: SortOrder
-    detail_address?: SortOrder
     rating?: SortOrder
     monday?: SortOrder
     tuesday?: SortOrder
@@ -27669,7 +27641,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -27693,7 +27664,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -27776,7 +27746,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -27800,7 +27769,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28178,7 +28146,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -28202,7 +28169,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -28343,7 +28309,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28367,7 +28332,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29063,7 +29027,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29087,7 +29050,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29182,7 +29144,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29206,7 +29167,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29230,7 +29190,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29254,7 +29213,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29294,7 +29252,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29318,7 +29275,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29342,7 +29298,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29366,7 +29321,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29406,7 +29360,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29430,7 +29383,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29454,7 +29406,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29478,7 +29429,6 @@ export namespace Prisma {
     name?: string | null
     keyword?: string | null
     address?: string | null
-    detail_address?: string | null
     rating?: number | null
     monday?: string | null
     tuesday?: string | null
@@ -29567,7 +29517,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29591,7 +29540,6 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     keyword?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
-    detail_address?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
     monday?: NullableStringFieldUpdateOperationsInput | string | null
     tuesday?: NullableStringFieldUpdateOperationsInput | string | null

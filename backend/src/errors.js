@@ -231,6 +231,24 @@ export class FailToAddRepreMenu extends Error {
   }
 }
 
+export class NotYourRest extends Error {
+  errorCode = "C010";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class FailToUpdateRestData extends Error {
+  errorCode = "C011";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
 export class InvalidVerificationCodeError extends Error {
   errorCode = "V001";
   constructor(reason, data) {
@@ -239,6 +257,7 @@ export class InvalidVerificationCodeError extends Error {
     this.data = data;
   }
 }
+
 export class VerificationCodeExpiredError extends Error {
   errorCode = "V002";
   constructor(reason, data) {
