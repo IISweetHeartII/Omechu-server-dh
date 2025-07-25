@@ -25,6 +25,7 @@ import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
 import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+import { handleResetRequest, handleResetPassword } from "./controllers/passwordReset.controller.js";
 import {
   handleGetMenu,
   handleGetMenuInfo,
@@ -151,6 +152,8 @@ app.post("/find-related-menu", handleFindRelatedMenu);
 app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
+app.post("/auth/reset-request", handleResetRequest);
+app.patch("/auth/reset-passwd", handleResetPassword);
 
 // 프로필 이미지 presigned url 생성 API
 app.post("/image/upload", generatePresignedUrl);

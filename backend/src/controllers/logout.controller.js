@@ -3,7 +3,7 @@ import { SessionDestroyError, SessionNotFoundError } from "../errors.js";
 
 export const handleUserLogout = async (req, res, next) => {
     /*
-#swagger.tags = ["auth"]
+#swagger.tags = ["Auth"]
 #swagger.summary = "로그아웃"
 #swagger.description = "현재 세션을 삭제하고 로그아웃합니다."
 
