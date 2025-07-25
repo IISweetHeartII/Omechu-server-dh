@@ -268,7 +268,7 @@ export class VerificationCodeExpiredError extends Error {
 }
 
 export class NoParams extends Error {
-  errorCode = "C005";
+  errorCode = "P001";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
