@@ -87,7 +87,7 @@ model restaurant {
   monday          String?      @default("휴무") @db.VarChar(20)
   tuesday         String?      @default("휴뮤") @db.VarChar(20)
   wednesday       String?      @default("휴무") @db.VarChar(20)
-  thursday        String?      @db.VarChar(20)
+  thursday        String?      @default("휴무") @db.VarChar(20)
   friday          String?      @default("휴무") @db.VarChar(20)
   saturday        String?      @default("휴무") @db.VarChar(20)
   sunday          String?      @default("휴무") @db.VarChar(20)
@@ -136,7 +136,6 @@ model sessions {
 model user {
   id               BigInt             @id @default(autoincrement())
   email            String?            @unique(map: "user_pk") @db.VarChar(30)
-  is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
   body_type        Int?
   gender           Int?
