@@ -166,7 +166,7 @@ export const fetchPlaceDetail = async (placeId) => {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": process.env.GOOGLE_MAPS_API_KEY,
         "X-Goog-FieldMask":
-          "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress",
+          "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress,location",
       },
     });
 
