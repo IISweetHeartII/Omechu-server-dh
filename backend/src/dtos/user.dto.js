@@ -1,15 +1,17 @@
 export const bodyToUserInfo = (body, userId) => {
-  return {
-    id: userId,
-    password: body.password,
+  const user = {
     nickname: body.nickname,
-    is_verified: body.isVerified,
     profileImageUrl: body.profileImageUrl,
-    body_type: convertBodyTypeToEnum(body.body_type),  // String → Int
-    exercise: convertExerciseToEnum(body.state),       // String → Int
-    gender: convertGenderToEnum(body.gender),          // String → Int
-    phone_num: body.phoneNumber,
+    body_type: convertBodyTypeToEnum(body.body_type),
+    exercise: convertExerciseToEnum(body.state),
+    gender: convertGenderToEnum(body.gender),
   };
+
+  if (body.password) {
+    user.password = body.password;
+  }
+
+  return user;
 };
 
 

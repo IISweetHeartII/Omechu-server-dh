@@ -209,7 +209,6 @@ exports.Prisma.SessionsScalarFieldEnum = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  is_verified: 'is_verified',
   nickname: 'nickname',
   body_type: 'body_type',
   gender: 'gender',

@@ -136,7 +136,6 @@ model sessions {
 model user {
   id               BigInt             @id @default(autoincrement())
   email            String?            @unique(map: "user_pk") @db.VarChar(30)
-  is_verified      Boolean?
   nickname         String?            @db.VarChar(30)
   body_type        Int?
   gender           Int?
