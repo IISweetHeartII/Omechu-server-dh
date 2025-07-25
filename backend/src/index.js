@@ -134,7 +134,11 @@ app.get("/openapi.json", async (req, res, next) => {
 // 기타 미들웨어
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    origin: [
+      "http://localhost:3000", 
+      "https://omechu.log8.kr",
+      "https://omechu-api.log8.kr"
+    ],
     credentials: true,
   })
 );
