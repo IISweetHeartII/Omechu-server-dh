@@ -200,13 +200,16 @@ export const recommendMenu = async (choice, userId) => {
         });
         console.log("OpenAI client initialized successfully");
         // 사용자 정보 가져오기
-        choice.exceptions2 = await getUserExceptedMenus(userId);
-        choice.allergy = await getUserAllergies(userId);
-        choice.prefer = await getUserPreferences(userId);
-        const userInfo = await getUserInfoForMenu(userId);
-        choice.gender = userInfo.gender;
-        choice.exercise = userInfo.exercise;
-        choice.body_type = userInfo.body_type;
+        if(userId != NULL && userId != undefined && userId != "") {
+            choice.exceptions2 = await getUserExceptedMenus(userId);
+            choice.allergy = await getUserAllergies(userId);
+            choice.prefer = await getUserPreferences(userId);
+            const userInfo = await getUserInfoForMenu(userId);
+
+            choice.gender = userInfo.gender;
+            choice.exercise = userInfo.exercise;
+            choice.body_type = userInfo.body_type;
+        }
         const { meal_time, purpose, mood, with: withWhom, budget, exceptions, exceptions2, gender, exercise, prefer, body_type, allergy } = choice;
         console.log("Received choice data:", choice);
         // bigint -> 자연어 매핑
