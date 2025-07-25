@@ -171,7 +171,6 @@ exports.Prisma.RestaurantScalarFieldEnum = {
   rest_image: 'rest_image',
   location: 'location',
   name: 'name',
-  keyword: 'keyword',
   address: 'address',
   rating: 'rating',
   monday: 'monday',
@@ -210,8 +209,6 @@ exports.Prisma.SessionsScalarFieldEnum = {
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  phone_num: 'phone_num',
-  is_verified: 'is_verified',
   nickname: 'nickname',
   body_type: 'body_type',
   gender: 'gender',
@@ -310,7 +307,6 @@ exports.Prisma.restaurantOrderByRelevanceFieldEnum = {
   rest_image: 'rest_image',
   location: 'location',
   name: 'name',
-  keyword: 'keyword',
   address: 'address',
   monday: 'monday',
   tuesday: 'tuesday',
@@ -348,7 +344,6 @@ exports.Prisma.sessionsOrderByRelevanceFieldEnum = {
 
 exports.Prisma.userOrderByRelevanceFieldEnum = {
   email: 'email',
-  phone_num: 'phone_num',
   nickname: 'nickname',
   password: 'password',
   profileImageUrl: 'profileImageUrl'
