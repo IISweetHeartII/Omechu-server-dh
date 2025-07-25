@@ -200,7 +200,7 @@ export const recommendMenu = async (choice, userId) => {
         });
         console.log("OpenAI client initialized successfully");
         // 사용자 정보 가져오기
-        if(userId != NULL && userId != undefined && userId != "") {
+        if(userId != undefined && userId != "") {
             choice.exceptions2 = await getUserExceptedMenus(userId);
             choice.allergy = await getUserAllergies(userId);
             choice.prefer = await getUserPreferences(userId);
@@ -209,6 +209,14 @@ export const recommendMenu = async (choice, userId) => {
             choice.gender = userInfo.gender;
             choice.exercise = userInfo.exercise;
             choice.body_type = userInfo.body_type;
+        }
+        else {
+            choice.exceptions2 = [];
+            choice.allergy = [];
+            choice.prefer = [];
+            choice.gender = 3; 
+            choice.exercise = 3; // 기본값: 상관 없음
+            choice.body_type = 5; // 기본값: 상관 없음
         }
         const { meal_time, purpose, mood, with: withWhom, budget, exceptions, exceptions2, gender, exercise, prefer, body_type, allergy } = choice;
         console.log("Received choice data:", choice);
