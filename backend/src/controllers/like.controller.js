@@ -14,11 +14,11 @@ export const handleLike = async (req, res) => {
   #swagger.summary="좋아요 누르기/취소하기"
   #swagger.description="좋아요를 누르거나 취소할 때 사용하는 API 입니다"
   #swagger.parameters["restId"]={
-    in:"query",
+    in:"path",
     description:"해당 가게의 ID"
 }
   #swagger.parameters["reviewId"]={
-    in:"query",
+    in:"path",
     description:"해당 리뷰의 ID"
 }
   #swagger.requestBody = {
