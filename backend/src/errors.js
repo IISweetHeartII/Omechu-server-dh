@@ -247,3 +247,12 @@ export class VerificationCodeExpiredError extends Error {
     this.data = data;
   }
 }
+
+export class NoParams extends Error {
+  errorCode = "P001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
