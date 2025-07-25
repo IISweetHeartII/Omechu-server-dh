@@ -3,7 +3,7 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 /**
- * 사용자 프로필 조회 (실제 DB 구조에 맞게 수정)
+ * 사용자 프로필 조회 
  */
 export const findUserProfile = async (userId) => {
   try {
@@ -12,7 +12,7 @@ export const findUserProfile = async (userId) => {
       select: {
         id: true,
         email: true,
-        phone_num: true,
+        // phone_num: true,  
         nickname: true,
         body_type: true,
         gender: true,
@@ -20,7 +20,6 @@ export const findUserProfile = async (userId) => {
         profileImageUrl: true,
         created_at: true,
         updated_at: true
-        // prefer와 allergy는 별도 테이블이므로 제거
       }
     });
 
@@ -43,10 +42,10 @@ export const findUserProfile = async (userId) => {
  */
 export const updateUserProfile = async (userId, data) => {
   try {
-    // enum 필드들은 제외하고 업데이트 (숫자 변환 문제 때문)
+    // 실제 DB 필드에 맞게 수정
     const updateData = {
       email: data.email,
-      phone_num: data.phone_num,
+      // phone_num: data.phone_num, 
       nickname: data.nickname,
       profileImageUrl: data.profileImageUrl,
       updated_at: new Date()
