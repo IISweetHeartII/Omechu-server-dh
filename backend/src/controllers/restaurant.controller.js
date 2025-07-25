@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { fetchKakaoPlacesService } from "../services/restaurant.service.js";
 import { fetchGooglePlacesService } from "../services/restaurant.service.js";
 import { fetchPlaceDetailService } from "../services/restaurant.service.js";
+import { openingHoursDto } from "../dtos/restaurant.dto.js";
 export const handleFetchKakaoPlaces = async (req, res) => {
   const info = {
     y: req.body.y,
@@ -163,6 +164,7 @@ export const handleFetchPlaceDetail = async (req, res) => {
 
   try {
     const placeDetail = await fetchPlaceDetailService(placeId);
+    placeDetail.currentOpeningHours.weekdayDescriptions = openingHoursDto(placeDetail.currentOpeningHours.weekdayDescriptions);
     if (placeDetail) {
       res.status(StatusCodes.OK).json(placeDetail);
     } else {
@@ -213,23 +215,34 @@ export const handleFetchPlaceDetail = async (req, res) => {
             },
             
             currentOpeningHours: {
+        type: 'object',
+        properties: {
+          weekdayDescriptions: {
+            type: 'array',
+            items: {
               type: 'object',
               properties: {
-                weekdayDescriptions: {
-                  type: 'array',
-                  items: { type: 'string' },
-                  example: [
-                    "월요일: 오전 10:00~오후 10:00",
-                    "화요일: 오전 10:00~오후 10:00",
-                    "수요일: 오전 10:00~오후 10:00",
-                    "목요일: 오전 10:00~오후 10:00",
-                    "금요일: 오전 10:00~오후 11:00",
-                    "토요일: 오전 10:00~오후 11:00",
-                    "일요일: 오전 11:00~오후 9:00"
-                  ]
+                days_of_the_week: { 
+                  type: 'string', 
+                  example: '월',
+                  description: '요일 (월, 화, 수, 목, 금, 토, 일)'
+                },
+                time: { 
+                  type: 'string', 
+                  example: '10:00 - 22:00',
+                  description: '영업시간 (휴일인 경우 "휴일")'
                 }
               }
-            }
+            },
+            example: [
+              { days_of_the_week: "월", time: "10:00 - 22:00" },
+              { days_of_the_week: "화", time: "10:00 - 22:00" },
+              { days_of_the_week: "수", time: "10:00 - 22:00" },
+              { days_of_the_week: "목", time: "10:00 - 22:00" },
+              { days_of_the_week: "금", time: "10:00 - 23:00" },
+              { days_of_the_week: "토", time: "10:00 - 23:00" },
+              { days_of_the_week: "일", time: "휴일" }
+            ]
           }
         }
       }
