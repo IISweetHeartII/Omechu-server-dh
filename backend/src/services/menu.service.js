@@ -1,8 +1,8 @@
 import { recommendMenu,checkMenuExists,addMenuToDatabase,findRelatedMenu } from "../repositories/menu.repository.js";
 import { fetchKakaoPlaces } from "../repositories/restaurant.repository.js";
 import {getMenu, getMenuInfo} from "../repositories/menu.repository.js";
-export const recommendMenuService = async (choice) => {
-    const menus = await recommendMenu(choice);
+export const recommendMenuService = async (choice, userId) => {
+    const menus = await recommendMenu(choice, userId);
     console.log("Menu recommendation from service:", menus);
     if (!menus) {
         console.error("No menu recommendation found in service");

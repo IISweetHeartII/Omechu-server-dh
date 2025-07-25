@@ -4,15 +4,19 @@ export const bodyToChoice = (body) => {
         purpose: body.purpose,
         mood: body.mood,
         with: body.with,
-        budget: body.budget
+        budget: body.budget,
+        exceptions: body.exceptions,
+        weather: body.weather
     };
 }
 
 
 // {
-// "meal_time" : "breakfast",
-// "purpose" : "meal",
-// "mood" : "tired",
-// "with" : "solo",
-// "budget" : "less_then_10000"
+// "meal_time" : 3,
+// "purpose" : 1,
+// "mood" : 2,
+// "with" : 3,
+// "budget" : 2,
+// "exceptions" : ["건강한 음식", "면"],
+// "weather" : "더움"
 // }
