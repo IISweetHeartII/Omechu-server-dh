@@ -35,7 +35,6 @@ export const getReviewData = async (data) => {
           skip: 1,
         }),
   });
-  console.log(reviews);
   if (!reviews || reviews.length === 0) {
     return { error: "NO_RES_DATA" };
   }
