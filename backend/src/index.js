@@ -184,7 +184,7 @@ app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);
-app.get("/place/coordinates", isLoggedIn, handleGetCoordinates);
+app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
