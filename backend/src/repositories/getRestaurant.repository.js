@@ -25,6 +25,10 @@ export const getRestData = async (location, keyword, cursor, limit) => {
       take: limit + 1,
       ...(isFirstPage ? {} : { cursor: { id: BigInt(cursor) }, skip: 1 }),
     });
+    if (restData.length == 0) {
+      return { error: "NO_DATA" };
+    }
+
     hasNextPage = restData.length > limit;
     lastData = hasNextPage
       ? restData[limit - 1].id.toString()
@@ -62,7 +66,9 @@ export const getRestData = async (location, keyword, cursor, limit) => {
       ...(isFirstPage ? {} : { cursor: { id: BigInt(cursor) } }),
       skip: 1,
     });
-
+    if (restData.length == 0) {
+      return { error: "NO_REST_DATA" };
+    }
     hasNextPage = restData.length > limit;
     lastData = hasNextPage
       ? restData[limit - 1].id.toString()
@@ -97,7 +103,9 @@ export const getRestData = async (location, keyword, cursor, limit) => {
       ...(cursor ? [cursor] : []),
       limit + 1
     );
-
+    if (restData.length == 0) {
+      return { error: "NO_KEYWORD_REST_DATA" };
+    }
     hasNextPage = restData.length > limit;
     lastData = hasNextPage
       ? restData[limit - 1].id.toString()
@@ -161,7 +169,9 @@ export const getRestData = async (location, keyword, cursor, limit) => {
     ...(cursor ? [cursor] : []),
     limit + 1
   );
-
+  if (restData.length == 0) {
+    return { error: "NO_REST_AND_KEYAWORD_DATA" };
+  }
   hasNextPage = restData.length > limit;
   lastData = hasNextPage
     ? restData[limit - 1].id.toString()
