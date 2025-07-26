@@ -47,6 +47,7 @@ import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 import { handleReportReview } from "./controllers/reportReveiw.controller.js";
+import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 dotenv.config();
 
 const app = express();
@@ -183,7 +184,7 @@ app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);
-
+app.get("/place/coordinates", isLoggedIn, handleGetCoordinates);
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
