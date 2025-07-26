@@ -25,20 +25,18 @@ model menu {
   allergic         String?            @db.Text
   sodium           BigInt?
   image_link       String?
-  mukburim         mukburim[]
   recommend_except recommend_except[]
   rest_menu        rest_menu[]
 }
 
 model mukburim {
-  id      BigInt    @id @default(autoincrement())
-  user_id BigInt
-  menu_id BigInt
-  date    DateTime? @db.DateTime(0)
-  user    user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "mukburim_ibfk_1")
-  menu    menu      @relation(fields: [menu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "mukburim_ibfk_2")
+  id        BigInt    @id @default(autoincrement())
+  user_id   BigInt
+  menu_name String    @db.VarChar(30)
+  date      DateTime? @db.DateTime(0)
+  user      user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "mukburim_ibfk_1")
 
-  @@index([menu_id], map: "menu_id")
+  @@index([menu_name], map: "menu_id")
   @@index([user_id], map: "user_id")
 }
 

@@ -45,6 +45,7 @@ import {
 } from "./controllers/mypage.controller.js";
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
+import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 dotenv.config();
 
 const app = express();
@@ -179,6 +180,8 @@ app.get("/place/review/:id", isLoggedIn, handleGetReview);
 app.post("/place", isLoggedIn, handleAddRestaurant);
 //특정 맛집 정보 수정하기 API
 app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
+//맛집 가져오기 API
+app.get("/place", isLoggedIn, handleGetRestaurant);
 // 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
