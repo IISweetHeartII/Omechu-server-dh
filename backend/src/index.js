@@ -46,6 +46,7 @@ import {
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
+import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 dotenv.config();
 
 const app = express();
@@ -150,6 +151,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
+
 app.get("/fetch-places", handleFetchKakaoPlaces);
 
 // Auth
@@ -179,6 +181,7 @@ app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
 app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
 app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
+app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);
 
 // ImageUpload
