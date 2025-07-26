@@ -7,7 +7,7 @@ export const handleRecommendMenu = async (req, res) => {
 
     
     const choice = bodyToChoice(req.body);
-    const userId = await getUserIdBySession(req.body.session);
+    const userId = req.session?.user?.id;
     console.log("User ID:", userId);
     const newRecommendation = await recommendMenuService(choice, userId);
     if (newRecommendation) {
@@ -26,7 +26,7 @@ export const handleRecommendMenu = async (req, res) => {
         'application/json': {
           schema: {
             type: 'object',
-            required: ['meal_time', 'purpose', 'mood', 'with', 'budget', 'weather', 'session'],
+            required: ['meal_time', 'purpose', 'mood', 'with', 'budget', 'exceptions', 'weather'],
             properties: {
               meal_time: { 
                 type: 'integer', 
@@ -63,12 +63,8 @@ export const handleRecommendMenu = async (req, res) => {
                 type: 'string', 
                 example: "더움",
                 description: "현재 날씨"
-              },
-              session: { 
-                type: 'string', 
-                example: "HXEKhjr9mS7CuUT6AM9RsY4d_2C9Kuwx",
-                description: "사용자 세션 ID"
               }
+              
             }
           }
         }

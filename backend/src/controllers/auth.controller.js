@@ -13,16 +13,16 @@ export const handleUserSignUp = async (req, res, next) => {
       'application/json': {
         schema: {
           type: 'object',
-          required: ['email', 'password', 'phoneNumber'],
+          required: ['email', 'password'],
           properties: {
             email: { type: 'string', example: 'user@example.com' },
-            password: { type: 'string', example: 'user1234!' },
-            phoneNumber: { type: 'string', example: '010-1234-5678' }
+            password: { type: 'string', example: 'user1234!' }
           }
         }
       }
     }
   }
+
   #swagger.responses[200] = {
     description: "회원가입 성공",
     content: {
@@ -37,7 +37,6 @@ export const handleUserSignUp = async (req, res, next) => {
               properties: {
                 id: { type: "number", example: 1 },
                 email: { type: "string", example: "user@example.com" },
-                phoneNumber: { type: "string", example: "010-1234-5678" },
                 created_at: { type: "string", example: "2023-01-01T00:00:00.000Z" },
                 updated_at: { type: "string", example: "2023-01-01T00:00:00.000Z" }
               }
@@ -91,7 +90,6 @@ export const handleUserSignUp = async (req, res, next) => {
                   type: "object",
                   properties: {
                     email: { type: "string", example: "user@example.com" },
-                    phoneNumber: { type: "string", example: "010-1234-5678" }
                   }
                 }
               }
