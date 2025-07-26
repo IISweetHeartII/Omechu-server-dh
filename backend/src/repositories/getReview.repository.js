@@ -20,7 +20,7 @@ export const getReviewData = async (data) => {
       text: true,
       created_at: true,
       like: true,
-      user: { select: { nickname: true } },
+      user: { select: { nickname: true, profileImageUrl: true } },
       review_image: { select: { link: true } },
     },
     where: {
@@ -35,7 +35,6 @@ export const getReviewData = async (data) => {
           skip: 1,
         }),
   });
-
   if (!reviews || reviews.length === 0) {
     return { error: "NO_RES_DATA" };
   }

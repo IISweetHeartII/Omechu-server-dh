@@ -142,7 +142,7 @@ exports.Prisma.MenuScalarFieldEnum = {
 exports.Prisma.MukburimScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  menu_id: 'menu_id',
+  menu_name: 'menu_name',
   date: 'date'
 };
 
@@ -297,6 +297,10 @@ exports.Prisma.menuOrderByRelevanceFieldEnum = {
   vitamin: 'vitamin',
   allergic: 'allergic',
   image_link: 'image_link'
+};
+
+exports.Prisma.mukburimOrderByRelevanceFieldEnum = {
+  menu_name: 'menu_name'
 };
 
 exports.Prisma.reportOrderByRelevanceFieldEnum = {
