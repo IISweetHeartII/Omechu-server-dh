@@ -256,23 +256,25 @@ export const recommendMenu = async (choice, userId) => {
             2: "0원 이상 3만 원 이하",
             3: "가격 제한 없음",
         }[budget] || "";
-
+        console.log("gender: ", gender);
+        console.log("exercise: ", exercise);
+        console.log("body_type: ", body_type);
         const genderText = {
-            1: "여성",
-            2: "남성",
+            "female": "여성",
+            "male": "남성",
         }[gender] || "";
 
         const exerciseText = {
-            1: "다이어트 중",
-            2: "벌크업 중",
-            3: "상관 없음",
+            "dieting": "다이어트 중",
+            "bulking": "벌크업 중",
+            "maintaining": "상관 없음",
         }[exercise] || "";
 
         const bodyTypeText = {
-            1: "감기에 잘 걸리는 편",
-            2: "소화가 잘 안 되는 편",
-            3: "열이 많아서 더위를 잘 타는 편",
-            4: "추위를 잘 타고 몸이 쉽게 차가워지는 편"
+            "cold": "감기에 잘 걸리는 편",
+            "indigestion": "소화가 잘 안 되는 편",
+            "heat_sensitive": "열이 많아서 더위를 잘 타는 편",
+            "cold_sensitive": "추위를 잘 타고 몸이 쉽게 차가워지는 편"
         }[body_type] || "";
 
         console.log("Meal Time:", mealTimeText);
@@ -298,7 +300,7 @@ export const recommendMenu = async (choice, userId) => {
         console.log("allergyString:", allergyString);
 
         const exceptedMenus2String = exceptions2 && exceptions2.length > 0
-            ? exceptions2.join(", ")
+            ? exceptions2.map(item => item.name || item).join(", ")  // 객체에서 name 속성 추출
             : "없음";
         console.log("exceptedMenus2String:", exceptedMenus2String);
 
