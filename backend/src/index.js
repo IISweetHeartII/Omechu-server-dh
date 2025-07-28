@@ -36,6 +36,7 @@ import {
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
+  handleGetRestaurantDetail,
   handleGetMyRestaurants,
   handleUpdateRestaurant,
   handleAddZzim,
@@ -44,6 +45,9 @@ import {
 } from "./controllers/mypage.controller.js";
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
+import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
+import { handleReportReview } from "./controllers/reportReveiw.controller.js";
+import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 dotenv.config();
 
@@ -73,7 +77,12 @@ const sessionStore = new MySQLSession({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
+    credentials: true,
+  })
+);
 // 세션 미들웨어 등록
 app.use(
   session({
@@ -82,8 +91,6 @@ app.use(
     saveUninitialized: false,
     store: sessionStore, // 세션을 DB에 저장
     cookie: {
-      sameSite: "none", // CORS 설정을 위해 sameSite를 none으로 설정
-      secure: process.env.NODE_ENV === "production", // 프로덕션 환경에서는 secure를 true로 설정
       httpOnly: true,
       maxAge: 1000 * 60 * 60, // 1시간
     },
@@ -109,6 +116,7 @@ app.use(
     {
       swaggerOptions: {
         url: "/openapi.json",
+        withCredentials: true,
       },
     }
   )
@@ -127,19 +135,16 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "localhost:3000",
+    host: "omechu-api.log8.kr",
+    schemes: ["https"],
+    basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
   res.json(result ? result.data : null);
 });
 
 // 기타 미들웨어
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://omechu.log8.kr"],
-    credentials: true,
-  })
-);
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -149,12 +154,13 @@ app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
 
-// 회원가입 라우터 (POST /auth/signup)
-app.post("/auth/signup", handleUserSignUp);
+
 
 //메인페이지 관련
 app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
+
+
 app.post("/fetch-google-places", handleFetchGooglePlaces);
 app.get("/place-detail/:id", handleFetchPlaceDetail);
 app.post("/find-related-menu", handleFindRelatedMenu);
@@ -162,43 +168,47 @@ app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
 app.post("/mukburim", handleInsertMukburim);
 
-
+// Auth
+app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
 app.patch("/auth/reset-passwd", handleResetPassword);
-
-// 프로필 이미지 presigned url 생성 API
-app.post("/image/upload", generatePresignedUrl);
 app.post("/auth/login", handleUserLogin);
-// 세션 재발급 API
 app.post("/auth/reissue", isLoggedIn, handleRenewSession);
-// 리뷰 작성하기 API
-app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
-//리뷰 좋아요/취소하기 API
-app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
-//리뷰 가져오기 API
-app.get("/place/review/:id", isLoggedIn, handleGetReview);
-//맛집 등록하기 API
-app.post("/place", isLoggedIn, handleAddRestaurant);
-//특정 맛집 정보 수정하기 API
-app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
-// 이메일 전송 API
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
-// 🆕 마이페이지 라우터들 추가
-app.get("/mypage/profile", isLoggedIn, handleGetUserProfile);
-app.patch("/mypage/profile/edit", isLoggedIn, handleUpdateUserProfile);
-app.get("/mypage/restaurants", isLoggedIn, handleGetMyRestaurants);
-app.patch(
-  "/mypage/restaurant/:restaurantId/edit",
-  isLoggedIn,
-  handleUpdateRestaurant
-);
-app.post("/mypage/zzim", isLoggedIn, handleAddZzim);
-app.patch("/mypage/zzim", isLoggedIn, handleRemoveZzim);
-app.get("/mypage/zzim", isLoggedIn, handleGetZzimList);
+
+
+app.post("/place/review/:id", isLoggedIn, handleAddReview);
+app.get("/place/review/:id", isLoggedIn, handleGetReview);
+app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
+app.post("/place", isLoggedIn, handleAddRestaurant);
+app.get("/place", isLoggedIn, handleGetRestaurant);
+app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
+app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
+app.post("/place/:id/report", isLoggedIn, handleReportReview);
+app.get("/test/restaurant/:id", handleGetRestaurantDetail);
+app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
+// ImageUpload
+app.post("/image/upload", generatePresignedUrl);
+
+// MyPage
+app.get("/profile/:id", isLoggedIn, handleGetUserProfile);
+app.patch("/profile/:id", isLoggedIn, handleUpdateUserProfile);
+app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
+app.get("/test/profile/:id", handleGetUserProfile);
+app.patch("/test/profile/:id", handleUpdateUserProfile);
+app.get("/test/restaurants/:userId", handleGetMyRestaurants);
+
+// Heart
+app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
+app.post("/heart", isLoggedIn, handleAddZzim);
+app.delete("/heart", isLoggedIn, handleRemoveZzim);
+app.get("/test/hearts/:userId", handleGetZzimList);
+app.post("/test/heart", handleAddZzim);
+app.delete("/test/heart", handleRemoveZzim);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
