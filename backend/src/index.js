@@ -44,6 +44,7 @@ import {
 } from "./controllers/mypage.controller.js";
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
+import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 dotenv.config();
 
 const app = express();
@@ -150,6 +151,8 @@ app.get("/", (req, res) => {
 
 // 회원가입 라우터 (POST /auth/signup)
 app.post("/auth/signup", handleUserSignUp);
+
+//메인페이지 관련
 app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
 app.post("/fetch-google-places", handleFetchGooglePlaces);
@@ -157,6 +160,9 @@ app.get("/place-detail/:id", handleFetchPlaceDetail);
 app.post("/find-related-menu", handleFindRelatedMenu);
 app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
+app.post("/mukburim", handleInsertMukburim);
+
+
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
 app.patch("/auth/reset-passwd", handleResetPassword);

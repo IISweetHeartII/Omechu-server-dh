@@ -134,6 +134,33 @@ export const prefer_type: {
 
 export type prefer_type = (typeof prefer_type)[keyof typeof prefer_type]
 
+
+export const user_body_type: {
+  cold: 'cold',
+  indigestion: 'indigestion',
+  heat_sensitive: 'heat_sensitive',
+  cold_sensitive: 'cold_sensitive'
+};
+
+export type user_body_type = (typeof user_body_type)[keyof typeof user_body_type]
+
+
+export const user_gender: {
+  female: 'female',
+  male: 'male'
+};
+
+export type user_gender = (typeof user_gender)[keyof typeof user_gender]
+
+
+export const user_exercise: {
+  dieting: 'dieting',
+  bulking: 'bulking',
+  maintaining: 'maintaining'
+};
+
+export type user_exercise = (typeof user_exercise)[keyof typeof user_exercise]
+
 }
 
 export type allergy_type = $Enums.allergy_type
@@ -143,6 +170,18 @@ export const allergy_type: typeof $Enums.allergy_type
 export type prefer_type = $Enums.prefer_type
 
 export const prefer_type: typeof $Enums.prefer_type
+
+export type user_body_type = $Enums.user_body_type
+
+export const user_body_type: typeof $Enums.user_body_type
+
+export type user_gender = $Enums.user_gender
+
+export const user_gender: typeof $Enums.user_gender
+
+export type user_exercise = $Enums.user_exercise
+
+export const user_exercise: typeof $Enums.user_exercise
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2390,13 +2429,11 @@ export namespace Prisma {
    */
 
   export type MenuCountOutputType = {
-    mukburim: number
     recommend_except: number
     rest_menu: number
   }
 
   export type MenuCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mukburim?: boolean | MenuCountOutputTypeCountMukburimArgs
     recommend_except?: boolean | MenuCountOutputTypeCountRecommend_exceptArgs
     rest_menu?: boolean | MenuCountOutputTypeCountRest_menuArgs
   }
@@ -2410,13 +2447,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the MenuCountOutputType
      */
     select?: MenuCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * MenuCountOutputType without action
-   */
-  export type MenuCountOutputTypeCountMukburimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: mukburimWhereInput
   }
 
   /**
@@ -3797,7 +3827,6 @@ export namespace Prisma {
     allergic?: boolean
     sodium?: boolean
     image_link?: boolean
-    mukburim?: boolean | menu$mukburimArgs<ExtArgs>
     recommend_except?: boolean | menu$recommend_exceptArgs<ExtArgs>
     rest_menu?: boolean | menu$rest_menuArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
@@ -3821,7 +3850,6 @@ export namespace Prisma {
 
   export type menuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "calory" | "carbo" | "protein" | "fat" | "vitamin" | "allergic" | "sodium" | "image_link", ExtArgs["result"]["menu"]>
   export type menuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mukburim?: boolean | menu$mukburimArgs<ExtArgs>
     recommend_except?: boolean | menu$recommend_exceptArgs<ExtArgs>
     rest_menu?: boolean | menu$rest_menuArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
@@ -3830,7 +3858,6 @@ export namespace Prisma {
   export type $menuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "menu"
     objects: {
-      mukburim: Prisma.$mukburimPayload<ExtArgs>[]
       recommend_except: Prisma.$recommend_exceptPayload<ExtArgs>[]
       rest_menu: Prisma.$rest_menuPayload<ExtArgs>[]
     }
@@ -4186,7 +4213,6 @@ export namespace Prisma {
    */
   export interface Prisma__menuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    mukburim<T extends menu$mukburimArgs<ExtArgs> = {}>(args?: Subset<T, menu$mukburimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mukburimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recommend_except<T extends menu$recommend_exceptArgs<ExtArgs> = {}>(args?: Subset<T, menu$recommend_exceptArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$recommend_exceptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_menu<T extends menu$rest_menuArgs<ExtArgs> = {}>(args?: Subset<T, menu$rest_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4572,30 +4598,6 @@ export namespace Prisma {
   }
 
   /**
-   * menu.mukburim
-   */
-  export type menu$mukburimArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the mukburim
-     */
-    select?: mukburimSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the mukburim
-     */
-    omit?: mukburimOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: mukburimInclude<ExtArgs> | null
-    where?: mukburimWhereInput
-    orderBy?: mukburimOrderByWithRelationInput | mukburimOrderByWithRelationInput[]
-    cursor?: mukburimWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MukburimScalarFieldEnum | MukburimScalarFieldEnum[]
-  }
-
-  /**
    * menu.recommend_except
    */
   export type menu$recommend_exceptArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4677,33 +4679,31 @@ export namespace Prisma {
   export type MukburimAvgAggregateOutputType = {
     id: number | null
     user_id: number | null
-    menu_id: number | null
   }
 
   export type MukburimSumAggregateOutputType = {
     id: bigint | null
     user_id: bigint | null
-    menu_id: bigint | null
   }
 
   export type MukburimMinAggregateOutputType = {
     id: bigint | null
     user_id: bigint | null
-    menu_id: bigint | null
+    menu_name: string | null
     date: Date | null
   }
 
   export type MukburimMaxAggregateOutputType = {
     id: bigint | null
     user_id: bigint | null
-    menu_id: bigint | null
+    menu_name: string | null
     date: Date | null
   }
 
   export type MukburimCountAggregateOutputType = {
     id: number
     user_id: number
-    menu_id: number
+    menu_name: number
     date: number
     _all: number
   }
@@ -4712,33 +4712,31 @@ export namespace Prisma {
   export type MukburimAvgAggregateInputType = {
     id?: true
     user_id?: true
-    menu_id?: true
   }
 
   export type MukburimSumAggregateInputType = {
     id?: true
     user_id?: true
-    menu_id?: true
   }
 
   export type MukburimMinAggregateInputType = {
     id?: true
     user_id?: true
-    menu_id?: true
+    menu_name?: true
     date?: true
   }
 
   export type MukburimMaxAggregateInputType = {
     id?: true
     user_id?: true
-    menu_id?: true
+    menu_name?: true
     date?: true
   }
 
   export type MukburimCountAggregateInputType = {
     id?: true
     user_id?: true
-    menu_id?: true
+    menu_name?: true
     date?: true
     _all?: true
   }
@@ -4832,7 +4830,7 @@ export namespace Prisma {
   export type MukburimGroupByOutputType = {
     id: bigint
     user_id: bigint
-    menu_id: bigint
+    menu_name: string
     date: Date | null
     _count: MukburimCountAggregateOutputType | null
     _avg: MukburimAvgAggregateOutputType | null
@@ -4858,10 +4856,9 @@ export namespace Prisma {
   export type mukburimSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     user_id?: boolean
-    menu_id?: boolean
+    menu_name?: boolean
     date?: boolean
     user?: boolean | userDefaultArgs<ExtArgs>
-    menu?: boolean | menuDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mukburim"]>
 
 
@@ -4869,26 +4866,24 @@ export namespace Prisma {
   export type mukburimSelectScalar = {
     id?: boolean
     user_id?: boolean
-    menu_id?: boolean
+    menu_name?: boolean
     date?: boolean
   }
 
-  export type mukburimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "menu_id" | "date", ExtArgs["result"]["mukburim"]>
+  export type mukburimOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "menu_name" | "date", ExtArgs["result"]["mukburim"]>
   export type mukburimInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
-    menu?: boolean | menuDefaultArgs<ExtArgs>
   }
 
   export type $mukburimPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "mukburim"
     objects: {
       user: Prisma.$userPayload<ExtArgs>
-      menu: Prisma.$menuPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
       user_id: bigint
-      menu_id: bigint
+      menu_name: string
       date: Date | null
     }, ExtArgs["result"]["mukburim"]>
     composites: {}
@@ -5231,7 +5226,6 @@ export namespace Prisma {
   export interface Prisma__mukburimClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    menu<T extends menuDefaultArgs<ExtArgs> = {}>(args?: Subset<T, menuDefaultArgs<ExtArgs>>): Prisma__menuClient<$Result.GetResult<Prisma.$menuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5263,7 +5257,7 @@ export namespace Prisma {
   interface mukburimFieldRefs {
     readonly id: FieldRef<"mukburim", 'BigInt'>
     readonly user_id: FieldRef<"mukburim", 'BigInt'>
-    readonly menu_id: FieldRef<"mukburim", 'BigInt'>
+    readonly menu_name: FieldRef<"mukburim", 'String'>
     readonly date: FieldRef<"mukburim", 'DateTime'>
   }
     
@@ -12662,25 +12656,19 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: bigint | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
   }
 
   export type UserMinAggregateOutputType = {
     id: bigint | null
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -12691,9 +12679,9 @@ export namespace Prisma {
     id: bigint | null
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -12717,16 +12705,10 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
-    body_type?: true
-    gender?: true
-    exercise?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    body_type?: true
-    gender?: true
-    exercise?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -12859,9 +12841,9 @@ export namespace Prisma {
     id: bigint
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string
     created_at: Date | null
     updated_at: Date | null
@@ -12953,9 +12935,9 @@ export namespace Prisma {
       id: bigint
       email: string | null
       nickname: string | null
-      body_type: number | null
-      gender: number | null
-      exercise: number | null
+      body_type: $Enums.user_body_type | null
+      gender: $Enums.user_gender | null
+      exercise: $Enums.user_exercise | null
       password: string
       created_at: Date | null
       updated_at: Date | null
@@ -13340,9 +13322,9 @@ export namespace Prisma {
     readonly id: FieldRef<"user", 'BigInt'>
     readonly email: FieldRef<"user", 'String'>
     readonly nickname: FieldRef<"user", 'String'>
-    readonly body_type: FieldRef<"user", 'Int'>
-    readonly gender: FieldRef<"user", 'Int'>
-    readonly exercise: FieldRef<"user", 'Int'>
+    readonly body_type: FieldRef<"user", 'user_body_type'>
+    readonly gender: FieldRef<"user", 'user_gender'>
+    readonly exercise: FieldRef<"user", 'user_exercise'>
     readonly password: FieldRef<"user", 'String'>
     readonly created_at: FieldRef<"user", 'DateTime'>
     readonly updated_at: FieldRef<"user", 'DateTime'>
@@ -21471,7 +21453,7 @@ export namespace Prisma {
   export const MukburimScalarFieldEnum: {
     id: 'id',
     user_id: 'user_id',
-    menu_id: 'menu_id',
+    menu_name: 'menu_name',
     date: 'date'
   };
 
@@ -21694,6 +21676,13 @@ export namespace Prisma {
   export type menuOrderByRelevanceFieldEnum = (typeof menuOrderByRelevanceFieldEnum)[keyof typeof menuOrderByRelevanceFieldEnum]
 
 
+  export const mukburimOrderByRelevanceFieldEnum: {
+    menu_name: 'menu_name'
+  };
+
+  export type mukburimOrderByRelevanceFieldEnum = (typeof mukburimOrderByRelevanceFieldEnum)[keyof typeof mukburimOrderByRelevanceFieldEnum]
+
+
   export const reportOrderByRelevanceFieldEnum: {
     text: 'text'
   };
@@ -21860,6 +21849,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'user_body_type'
+   */
+  export type Enumuser_body_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_body_type'>
+    
+
+
+  /**
+   * Reference to a field of type 'user_gender'
+   */
+  export type Enumuser_genderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'user_exercise'
+   */
+  export type Enumuser_exerciseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_exercise'>
+    
+
+
+  /**
    * Reference to a field of type 'allergy_type'
    */
   export type Enumallergy_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'allergy_type'>
@@ -21931,7 +21941,6 @@ export namespace Prisma {
     allergic?: StringNullableFilter<"menu"> | string | null
     sodium?: BigIntNullableFilter<"menu"> | bigint | number | null
     image_link?: StringNullableFilter<"menu"> | string | null
-    mukburim?: MukburimListRelationFilter
     recommend_except?: Recommend_exceptListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
   }
@@ -21948,7 +21957,6 @@ export namespace Prisma {
     allergic?: SortOrderInput | SortOrder
     sodium?: SortOrderInput | SortOrder
     image_link?: SortOrderInput | SortOrder
-    mukburim?: mukburimOrderByRelationAggregateInput
     recommend_except?: recommend_exceptOrderByRelationAggregateInput
     rest_menu?: rest_menuOrderByRelationAggregateInput
     _relevance?: menuOrderByRelevanceInput
@@ -21969,7 +21977,6 @@ export namespace Prisma {
     allergic?: StringNullableFilter<"menu"> | string | null
     sodium?: BigIntNullableFilter<"menu"> | bigint | number | null
     image_link?: StringNullableFilter<"menu"> | string | null
-    mukburim?: MukburimListRelationFilter
     recommend_except?: Recommend_exceptListRelationFilter
     rest_menu?: Rest_menuListRelationFilter
   }, "id" | "name">
@@ -22016,19 +22023,18 @@ export namespace Prisma {
     NOT?: mukburimWhereInput | mukburimWhereInput[]
     id?: BigIntFilter<"mukburim"> | bigint | number
     user_id?: BigIntFilter<"mukburim"> | bigint | number
-    menu_id?: BigIntFilter<"mukburim"> | bigint | number
+    menu_name?: StringFilter<"mukburim"> | string
     date?: DateTimeNullableFilter<"mukburim"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-    menu?: XOR<MenuScalarRelationFilter, menuWhereInput>
   }
 
   export type mukburimOrderByWithRelationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
+    menu_name?: SortOrder
     date?: SortOrderInput | SortOrder
     user?: userOrderByWithRelationInput
-    menu?: menuOrderByWithRelationInput
+    _relevance?: mukburimOrderByRelevanceInput
   }
 
   export type mukburimWhereUniqueInput = Prisma.AtLeast<{
@@ -22037,16 +22043,15 @@ export namespace Prisma {
     OR?: mukburimWhereInput[]
     NOT?: mukburimWhereInput | mukburimWhereInput[]
     user_id?: BigIntFilter<"mukburim"> | bigint | number
-    menu_id?: BigIntFilter<"mukburim"> | bigint | number
+    menu_name?: StringFilter<"mukburim"> | string
     date?: DateTimeNullableFilter<"mukburim"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-    menu?: XOR<MenuScalarRelationFilter, menuWhereInput>
   }, "id">
 
   export type mukburimOrderByWithAggregationInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
+    menu_name?: SortOrder
     date?: SortOrderInput | SortOrder
     _count?: mukburimCountOrderByAggregateInput
     _avg?: mukburimAvgOrderByAggregateInput
@@ -22061,7 +22066,7 @@ export namespace Prisma {
     NOT?: mukburimScalarWhereWithAggregatesInput | mukburimScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"mukburim"> | bigint | number
     user_id?: BigIntWithAggregatesFilter<"mukburim"> | bigint | number
-    menu_id?: BigIntWithAggregatesFilter<"mukburim"> | bigint | number
+    menu_name?: StringWithAggregatesFilter<"mukburim"> | string
     date?: DateTimeNullableWithAggregatesFilter<"mukburim"> | Date | string | null
   }
 
@@ -22526,9 +22531,9 @@ export namespace Prisma {
     id?: BigIntFilter<"user"> | bigint | number
     email?: StringNullableFilter<"user"> | string | null
     nickname?: StringNullableFilter<"user"> | string | null
-    body_type?: IntNullableFilter<"user"> | number | null
-    gender?: IntNullableFilter<"user"> | number | null
-    exercise?: IntNullableFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableFilter<"user"> | $Enums.user_exercise | null
     password?: StringFilter<"user"> | string
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
@@ -22572,9 +22577,9 @@ export namespace Prisma {
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
     nickname?: StringNullableFilter<"user"> | string | null
-    body_type?: IntNullableFilter<"user"> | number | null
-    gender?: IntNullableFilter<"user"> | number | null
-    exercise?: IntNullableFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableFilter<"user"> | $Enums.user_exercise | null
     password?: StringFilter<"user"> | string
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
@@ -22614,9 +22619,9 @@ export namespace Prisma {
     id?: BigIntWithAggregatesFilter<"user"> | bigint | number
     email?: StringNullableWithAggregatesFilter<"user"> | string | null
     nickname?: StringNullableWithAggregatesFilter<"user"> | string | null
-    body_type?: IntNullableWithAggregatesFilter<"user"> | number | null
-    gender?: IntNullableWithAggregatesFilter<"user"> | number | null
-    exercise?: IntNullableWithAggregatesFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableWithAggregatesFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableWithAggregatesFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableWithAggregatesFilter<"user"> | $Enums.user_exercise | null
     password?: StringWithAggregatesFilter<"user"> | string
     created_at?: DateTimeNullableWithAggregatesFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"user"> | Date | string | null
@@ -23076,7 +23081,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimCreateNestedManyWithoutMenuInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutMenuInput
     rest_menu?: rest_menuCreateNestedManyWithoutMenuInput
   }
@@ -23093,7 +23097,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimUncheckedCreateNestedManyWithoutMenuInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutMenuInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutMenuInput
   }
@@ -23110,7 +23113,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUpdateManyWithoutMenuNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutMenuNestedInput
     rest_menu?: rest_menuUpdateManyWithoutMenuNestedInput
   }
@@ -23127,7 +23129,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUncheckedUpdateManyWithoutMenuNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutMenuNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutMenuNestedInput
   }
@@ -23176,48 +23177,49 @@ export namespace Prisma {
 
   export type mukburimCreateInput = {
     id?: bigint | number
+    menu_name: string
     date?: Date | string | null
     user: userCreateNestedOneWithoutMukburimInput
-    menu: menuCreateNestedOneWithoutMukburimInput
   }
 
   export type mukburimUncheckedCreateInput = {
     id?: bigint | number
     user_id: bigint | number
-    menu_id: bigint | number
+    menu_name: string
     date?: Date | string | null
   }
 
   export type mukburimUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: userUpdateOneRequiredWithoutMukburimNestedInput
-    menu?: menuUpdateOneRequiredWithoutMukburimNestedInput
   }
 
   export type mukburimUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     user_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    menu_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type mukburimCreateManyInput = {
     id?: bigint | number
     user_id: bigint | number
-    menu_id: bigint | number
+    menu_name: string
     date?: Date | string | null
   }
 
   export type mukburimUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type mukburimUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     user_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    menu_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -23668,9 +23670,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23689,9 +23691,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23710,9 +23712,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23731,9 +23733,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23752,9 +23754,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23765,9 +23767,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23778,9 +23780,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24258,12 +24260,6 @@ export namespace Prisma {
     not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
   }
 
-  export type MukburimListRelationFilter = {
-    every?: mukburimWhereInput
-    some?: mukburimWhereInput
-    none?: mukburimWhereInput
-  }
-
   export type Recommend_exceptListRelationFilter = {
     every?: recommend_exceptWhereInput
     some?: recommend_exceptWhereInput
@@ -24274,10 +24270,6 @@ export namespace Prisma {
     every?: rest_menuWhereInput
     some?: rest_menuWhereInput
     none?: rest_menuWhereInput
-  }
-
-  export type mukburimOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type recommend_exceptOrderByRelationAggregateInput = {
@@ -24404,42 +24396,41 @@ export namespace Prisma {
     isNot?: userWhereInput
   }
 
-  export type MenuScalarRelationFilter = {
-    is?: menuWhereInput
-    isNot?: menuWhereInput
+  export type mukburimOrderByRelevanceInput = {
+    fields: mukburimOrderByRelevanceFieldEnum | mukburimOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
   }
 
   export type mukburimCountOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
+    menu_name?: SortOrder
     date?: SortOrder
   }
 
   export type mukburimAvgOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
   }
 
   export type mukburimMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
+    menu_name?: SortOrder
     date?: SortOrder
   }
 
   export type mukburimMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
+    menu_name?: SortOrder
     date?: SortOrder
   }
 
   export type mukburimSumOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
-    menu_id?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -24459,6 +24450,11 @@ export namespace Prisma {
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type MenuScalarRelationFilter = {
+    is?: menuWhereInput
+    isNot?: menuWhereInput
   }
 
   export type recommend_exceptCountOrderByAggregateInput = {
@@ -24967,10 +24963,37 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type Enumuser_body_typeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableFilter<$PrismaModel> | $Enums.user_body_type | null
+  }
+
+  export type Enumuser_genderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableFilter<$PrismaModel> | $Enums.user_gender | null
+  }
+
+  export type Enumuser_exerciseNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableFilter<$PrismaModel> | $Enums.user_exercise | null
+  }
+
   export type AllergyListRelationFilter = {
     every?: allergyWhereInput
     some?: allergyWhereInput
     none?: allergyWhereInput
+  }
+
+  export type MukburimListRelationFilter = {
+    every?: mukburimWhereInput
+    some?: mukburimWhereInput
+    none?: mukburimWhereInput
   }
 
   export type PreferListRelationFilter = {
@@ -24980,6 +25003,10 @@ export namespace Prisma {
   }
 
   export type allergyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type mukburimOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -25008,9 +25035,6 @@ export namespace Prisma {
 
   export type userAvgOrderByAggregateInput = {
     id?: SortOrder
-    body_type?: SortOrder
-    gender?: SortOrder
-    exercise?: SortOrder
   }
 
   export type userMaxOrderByAggregateInput = {
@@ -25041,9 +25065,36 @@ export namespace Prisma {
 
   export type userSumOrderByAggregateInput = {
     id?: SortOrder
-    body_type?: SortOrder
-    gender?: SortOrder
-    exercise?: SortOrder
+  }
+
+  export type Enumuser_body_typeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_body_type | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+  }
+
+  export type Enumuser_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+  }
+
+  export type Enumuser_exerciseNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_exercise | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
   }
 
   export type Enumallergy_typeFilter<$PrismaModel = never> = {
@@ -25385,13 +25436,6 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type mukburimCreateNestedManyWithoutMenuInput = {
-    create?: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput> | mukburimCreateWithoutMenuInput[] | mukburimUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: mukburimCreateOrConnectWithoutMenuInput | mukburimCreateOrConnectWithoutMenuInput[]
-    createMany?: mukburimCreateManyMenuInputEnvelope
-    connect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-  }
-
   export type recommend_exceptCreateNestedManyWithoutMenuInput = {
     create?: XOR<recommend_exceptCreateWithoutMenuInput, recommend_exceptUncheckedCreateWithoutMenuInput> | recommend_exceptCreateWithoutMenuInput[] | recommend_exceptUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: recommend_exceptCreateOrConnectWithoutMenuInput | recommend_exceptCreateOrConnectWithoutMenuInput[]
@@ -25404,13 +25448,6 @@ export namespace Prisma {
     connectOrCreate?: rest_menuCreateOrConnectWithoutMenuInput | rest_menuCreateOrConnectWithoutMenuInput[]
     createMany?: rest_menuCreateManyMenuInputEnvelope
     connect?: rest_menuWhereUniqueInput | rest_menuWhereUniqueInput[]
-  }
-
-  export type mukburimUncheckedCreateNestedManyWithoutMenuInput = {
-    create?: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput> | mukburimCreateWithoutMenuInput[] | mukburimUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: mukburimCreateOrConnectWithoutMenuInput | mukburimCreateOrConnectWithoutMenuInput[]
-    createMany?: mukburimCreateManyMenuInputEnvelope
-    connect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
   }
 
   export type recommend_exceptUncheckedCreateNestedManyWithoutMenuInput = {
@@ -25439,20 +25476,6 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
-  export type mukburimUpdateManyWithoutMenuNestedInput = {
-    create?: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput> | mukburimCreateWithoutMenuInput[] | mukburimUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: mukburimCreateOrConnectWithoutMenuInput | mukburimCreateOrConnectWithoutMenuInput[]
-    upsert?: mukburimUpsertWithWhereUniqueWithoutMenuInput | mukburimUpsertWithWhereUniqueWithoutMenuInput[]
-    createMany?: mukburimCreateManyMenuInputEnvelope
-    set?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    disconnect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    delete?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    connect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    update?: mukburimUpdateWithWhereUniqueWithoutMenuInput | mukburimUpdateWithWhereUniqueWithoutMenuInput[]
-    updateMany?: mukburimUpdateManyWithWhereWithoutMenuInput | mukburimUpdateManyWithWhereWithoutMenuInput[]
-    deleteMany?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
-  }
-
   export type recommend_exceptUpdateManyWithoutMenuNestedInput = {
     create?: XOR<recommend_exceptCreateWithoutMenuInput, recommend_exceptUncheckedCreateWithoutMenuInput> | recommend_exceptCreateWithoutMenuInput[] | recommend_exceptUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: recommend_exceptCreateOrConnectWithoutMenuInput | recommend_exceptCreateOrConnectWithoutMenuInput[]
@@ -25479,20 +25502,6 @@ export namespace Prisma {
     update?: rest_menuUpdateWithWhereUniqueWithoutMenuInput | rest_menuUpdateWithWhereUniqueWithoutMenuInput[]
     updateMany?: rest_menuUpdateManyWithWhereWithoutMenuInput | rest_menuUpdateManyWithWhereWithoutMenuInput[]
     deleteMany?: rest_menuScalarWhereInput | rest_menuScalarWhereInput[]
-  }
-
-  export type mukburimUncheckedUpdateManyWithoutMenuNestedInput = {
-    create?: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput> | mukburimCreateWithoutMenuInput[] | mukburimUncheckedCreateWithoutMenuInput[]
-    connectOrCreate?: mukburimCreateOrConnectWithoutMenuInput | mukburimCreateOrConnectWithoutMenuInput[]
-    upsert?: mukburimUpsertWithWhereUniqueWithoutMenuInput | mukburimUpsertWithWhereUniqueWithoutMenuInput[]
-    createMany?: mukburimCreateManyMenuInputEnvelope
-    set?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    disconnect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    delete?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    connect?: mukburimWhereUniqueInput | mukburimWhereUniqueInput[]
-    update?: mukburimUpdateWithWhereUniqueWithoutMenuInput | mukburimUpdateWithWhereUniqueWithoutMenuInput[]
-    updateMany?: mukburimUpdateManyWithWhereWithoutMenuInput | mukburimUpdateManyWithWhereWithoutMenuInput[]
-    deleteMany?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
   }
 
   export type recommend_exceptUncheckedUpdateManyWithoutMenuNestedInput = {
@@ -25529,12 +25538,6 @@ export namespace Prisma {
     connect?: userWhereUniqueInput
   }
 
-  export type menuCreateNestedOneWithoutMukburimInput = {
-    create?: XOR<menuCreateWithoutMukburimInput, menuUncheckedCreateWithoutMukburimInput>
-    connectOrCreate?: menuCreateOrConnectWithoutMukburimInput
-    connect?: menuWhereUniqueInput
-  }
-
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -25545,14 +25548,6 @@ export namespace Prisma {
     upsert?: userUpsertWithoutMukburimInput
     connect?: userWhereUniqueInput
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutMukburimInput, userUpdateWithoutMukburimInput>, userUncheckedUpdateWithoutMukburimInput>
-  }
-
-  export type menuUpdateOneRequiredWithoutMukburimNestedInput = {
-    create?: XOR<menuCreateWithoutMukburimInput, menuUncheckedCreateWithoutMukburimInput>
-    connectOrCreate?: menuCreateOrConnectWithoutMukburimInput
-    upsert?: menuUpsertWithoutMukburimInput
-    connect?: menuWhereUniqueInput
-    update?: XOR<XOR<menuUpdateToOneWithWhereWithoutMukburimInput, menuUpdateWithoutMukburimInput>, menuUncheckedUpdateWithoutMukburimInput>
   }
 
   export type menuCreateNestedOneWithoutRecommend_exceptInput = {
@@ -26155,6 +26150,18 @@ export namespace Prisma {
     connectOrCreate?: zzimCreateOrConnectWithoutUserInput | zzimCreateOrConnectWithoutUserInput[]
     createMany?: zzimCreateManyUserInputEnvelope
     connect?: zzimWhereUniqueInput | zzimWhereUniqueInput[]
+  }
+
+  export type NullableEnumuser_body_typeFieldUpdateOperationsInput = {
+    set?: $Enums.user_body_type | null
+  }
+
+  export type NullableEnumuser_genderFieldUpdateOperationsInput = {
+    set?: $Enums.user_gender | null
+  }
+
+  export type NullableEnumuser_exerciseFieldUpdateOperationsInput = {
+    set?: $Enums.user_exercise | null
   }
 
   export type allergyUpdateManyWithoutUserNestedInput = {
@@ -26778,6 +26785,57 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type NestedEnumuser_body_typeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableFilter<$PrismaModel> | $Enums.user_body_type | null
+  }
+
+  export type NestedEnumuser_genderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableFilter<$PrismaModel> | $Enums.user_gender | null
+  }
+
+  export type NestedEnumuser_exerciseNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableFilter<$PrismaModel> | $Enums.user_exercise | null
+  }
+
+  export type NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_body_type | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_exercise | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumallergy_typeFilter<$PrismaModel = never> = {
     equals?: $Enums.allergy_type | Enumallergy_typeFieldRefInput<$PrismaModel>
     in?: $Enums.allergy_type[]
@@ -26837,28 +26895,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type mukburimCreateWithoutMenuInput = {
-    id?: bigint | number
-    date?: Date | string | null
-    user: userCreateNestedOneWithoutMukburimInput
-  }
-
-  export type mukburimUncheckedCreateWithoutMenuInput = {
-    id?: bigint | number
-    user_id: bigint | number
-    date?: Date | string | null
-  }
-
-  export type mukburimCreateOrConnectWithoutMenuInput = {
-    where: mukburimWhereUniqueInput
-    create: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput>
-  }
-
-  export type mukburimCreateManyMenuInputEnvelope = {
-    data: mukburimCreateManyMenuInput | mukburimCreateManyMenuInput[]
-    skipDuplicates?: boolean
-  }
-
   export type recommend_exceptCreateWithoutMenuInput = {
     id?: bigint | number
     bit?: boolean | null
@@ -26899,32 +26935,6 @@ export namespace Prisma {
   export type rest_menuCreateManyMenuInputEnvelope = {
     data: rest_menuCreateManyMenuInput | rest_menuCreateManyMenuInput[]
     skipDuplicates?: boolean
-  }
-
-  export type mukburimUpsertWithWhereUniqueWithoutMenuInput = {
-    where: mukburimWhereUniqueInput
-    update: XOR<mukburimUpdateWithoutMenuInput, mukburimUncheckedUpdateWithoutMenuInput>
-    create: XOR<mukburimCreateWithoutMenuInput, mukburimUncheckedCreateWithoutMenuInput>
-  }
-
-  export type mukburimUpdateWithWhereUniqueWithoutMenuInput = {
-    where: mukburimWhereUniqueInput
-    data: XOR<mukburimUpdateWithoutMenuInput, mukburimUncheckedUpdateWithoutMenuInput>
-  }
-
-  export type mukburimUpdateManyWithWhereWithoutMenuInput = {
-    where: mukburimScalarWhereInput
-    data: XOR<mukburimUpdateManyMutationInput, mukburimUncheckedUpdateManyWithoutMenuInput>
-  }
-
-  export type mukburimScalarWhereInput = {
-    AND?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
-    OR?: mukburimScalarWhereInput[]
-    NOT?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
-    id?: BigIntFilter<"mukburim"> | bigint | number
-    user_id?: BigIntFilter<"mukburim"> | bigint | number
-    menu_id?: BigIntFilter<"mukburim"> | bigint | number
-    date?: DateTimeNullableFilter<"mukburim"> | Date | string | null
   }
 
   export type recommend_exceptUpsertWithWhereUniqueWithoutMenuInput = {
@@ -26982,9 +26992,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27002,9 +27012,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27023,43 +27033,6 @@ export namespace Prisma {
     create: XOR<userCreateWithoutMukburimInput, userUncheckedCreateWithoutMukburimInput>
   }
 
-  export type menuCreateWithoutMukburimInput = {
-    id?: bigint | number
-    name: string
-    description?: string | null
-    calory?: bigint | number | null
-    carbo?: bigint | number | null
-    protein?: bigint | number | null
-    fat?: bigint | number | null
-    vitamin?: string | null
-    allergic?: string | null
-    sodium?: bigint | number | null
-    image_link?: string | null
-    recommend_except?: recommend_exceptCreateNestedManyWithoutMenuInput
-    rest_menu?: rest_menuCreateNestedManyWithoutMenuInput
-  }
-
-  export type menuUncheckedCreateWithoutMukburimInput = {
-    id?: bigint | number
-    name: string
-    description?: string | null
-    calory?: bigint | number | null
-    carbo?: bigint | number | null
-    protein?: bigint | number | null
-    fat?: bigint | number | null
-    vitamin?: string | null
-    allergic?: string | null
-    sodium?: bigint | number | null
-    image_link?: string | null
-    recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutMenuInput
-    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutMenuInput
-  }
-
-  export type menuCreateOrConnectWithoutMukburimInput = {
-    where: menuWhereUniqueInput
-    create: XOR<menuCreateWithoutMukburimInput, menuUncheckedCreateWithoutMukburimInput>
-  }
-
   export type userUpsertWithoutMukburimInput = {
     update: XOR<userUpdateWithoutMukburimInput, userUncheckedUpdateWithoutMukburimInput>
     create: XOR<userCreateWithoutMukburimInput, userUncheckedCreateWithoutMukburimInput>
@@ -27075,9 +27048,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27095,9 +27068,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27109,49 +27082,6 @@ export namespace Prisma {
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type menuUpsertWithoutMukburimInput = {
-    update: XOR<menuUpdateWithoutMukburimInput, menuUncheckedUpdateWithoutMukburimInput>
-    create: XOR<menuCreateWithoutMukburimInput, menuUncheckedCreateWithoutMukburimInput>
-    where?: menuWhereInput
-  }
-
-  export type menuUpdateToOneWithWhereWithoutMukburimInput = {
-    where?: menuWhereInput
-    data: XOR<menuUpdateWithoutMukburimInput, menuUncheckedUpdateWithoutMukburimInput>
-  }
-
-  export type menuUpdateWithoutMukburimInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    calory?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    carbo?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    protein?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    fat?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    vitamin?: NullableStringFieldUpdateOperationsInput | string | null
-    allergic?: NullableStringFieldUpdateOperationsInput | string | null
-    sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    recommend_except?: recommend_exceptUpdateManyWithoutMenuNestedInput
-    rest_menu?: rest_menuUpdateManyWithoutMenuNestedInput
-  }
-
-  export type menuUncheckedUpdateWithoutMukburimInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    calory?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    carbo?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    protein?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    fat?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    vitamin?: NullableStringFieldUpdateOperationsInput | string | null
-    allergic?: NullableStringFieldUpdateOperationsInput | string | null
-    sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    recommend_except?: recommend_exceptUncheckedUpdateManyWithoutMenuNestedInput
-    rest_menu?: rest_menuUncheckedUpdateManyWithoutMenuNestedInput
   }
 
   export type menuCreateWithoutRecommend_exceptInput = {
@@ -27166,7 +27096,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimCreateNestedManyWithoutMenuInput
     rest_menu?: rest_menuCreateNestedManyWithoutMenuInput
   }
 
@@ -27182,7 +27111,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimUncheckedCreateNestedManyWithoutMenuInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutMenuInput
   }
 
@@ -27195,9 +27123,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27215,9 +27143,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27259,7 +27187,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUpdateManyWithoutMenuNestedInput
     rest_menu?: rest_menuUpdateManyWithoutMenuNestedInput
   }
 
@@ -27275,7 +27202,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUncheckedUpdateManyWithoutMenuNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutMenuNestedInput
   }
 
@@ -27294,9 +27220,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27314,9 +27240,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27334,9 +27260,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27354,9 +27280,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27419,9 +27345,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27439,9 +27365,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27502,7 +27428,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimCreateNestedManyWithoutMenuInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutMenuInput
   }
 
@@ -27518,7 +27443,6 @@ export namespace Prisma {
     allergic?: string | null
     sodium?: bigint | number | null
     image_link?: string | null
-    mukburim?: mukburimUncheckedCreateNestedManyWithoutMenuInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutMenuInput
   }
 
@@ -27599,7 +27523,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUpdateManyWithoutMenuNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutMenuNestedInput
   }
 
@@ -27615,7 +27538,6 @@ export namespace Prisma {
     allergic?: NullableStringFieldUpdateOperationsInput | string | null
     sodium?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     image_link?: NullableStringFieldUpdateOperationsInput | string | null
-    mukburim?: mukburimUncheckedUpdateManyWithoutMenuNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutMenuNestedInput
   }
 
@@ -27983,9 +27905,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28003,9 +27925,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28134,9 +28056,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28154,9 +28076,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28335,13 +28257,13 @@ export namespace Prisma {
 
   export type mukburimCreateWithoutUserInput = {
     id?: bigint | number
+    menu_name: string
     date?: Date | string | null
-    menu: menuCreateNestedOneWithoutMukburimInput
   }
 
   export type mukburimUncheckedCreateWithoutUserInput = {
     id?: bigint | number
-    menu_id: bigint | number
+    menu_name: string
     date?: Date | string | null
   }
 
@@ -28535,6 +28457,16 @@ export namespace Prisma {
     data: XOR<mukburimUpdateManyMutationInput, mukburimUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type mukburimScalarWhereInput = {
+    AND?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
+    OR?: mukburimScalarWhereInput[]
+    NOT?: mukburimScalarWhereInput | mukburimScalarWhereInput[]
+    id?: BigIntFilter<"mukburim"> | bigint | number
+    user_id?: BigIntFilter<"mukburim"> | bigint | number
+    menu_name?: StringFilter<"mukburim"> | string
+    date?: DateTimeNullableFilter<"mukburim"> | Date | string | null
+  }
+
   export type preferUpsertWithWhereUniqueWithoutUserInput = {
     where: preferWhereUniqueInput
     update: XOR<preferUpdateWithoutUserInput, preferUncheckedUpdateWithoutUserInput>
@@ -28644,9 +28576,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28664,9 +28596,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28700,9 +28632,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28720,9 +28652,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28740,9 +28672,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28760,9 +28692,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28796,9 +28728,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28816,9 +28748,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28836,9 +28768,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28856,9 +28788,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28941,9 +28873,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28961,9 +28893,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29293,9 +29225,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29313,9 +29245,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29404,9 +29336,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29424,9 +29356,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29440,12 +29372,6 @@ export namespace Prisma {
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type mukburimCreateManyMenuInput = {
-    id?: bigint | number
-    user_id: bigint | number
-    date?: Date | string | null
-  }
-
   export type recommend_exceptCreateManyMenuInput = {
     id?: bigint | number
     user_id: bigint | number
@@ -29455,24 +29381,6 @@ export namespace Prisma {
   export type rest_menuCreateManyMenuInput = {
     id?: bigint | number
     rest_id: bigint | number
-  }
-
-  export type mukburimUpdateWithoutMenuInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: userUpdateOneRequiredWithoutMukburimNestedInput
-  }
-
-  export type mukburimUncheckedUpdateWithoutMenuInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type mukburimUncheckedUpdateManyWithoutMenuInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type recommend_exceptUpdateWithoutMenuInput = {
@@ -29707,7 +29615,7 @@ export namespace Prisma {
 
   export type mukburimCreateManyUserInput = {
     id?: bigint | number
-    menu_id: bigint | number
+    menu_name: string
     date?: Date | string | null
   }
 
@@ -29765,19 +29673,19 @@ export namespace Prisma {
 
   export type mukburimUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    menu?: menuUpdateOneRequiredWithoutMukburimNestedInput
   }
 
   export type mukburimUncheckedUpdateWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    menu_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type mukburimUncheckedUpdateManyWithoutUserInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
-    menu_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    menu_name?: StringFieldUpdateOperationsInput | string
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 

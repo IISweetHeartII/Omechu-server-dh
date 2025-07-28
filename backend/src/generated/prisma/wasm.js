@@ -142,7 +142,7 @@ exports.Prisma.MenuScalarFieldEnum = {
 exports.Prisma.MukburimScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
-  menu_id: 'menu_id',
+  menu_name: 'menu_name',
   date: 'date'
 };
 
@@ -299,6 +299,10 @@ exports.Prisma.menuOrderByRelevanceFieldEnum = {
   image_link: 'image_link'
 };
 
+exports.Prisma.mukburimOrderByRelevanceFieldEnum = {
+  menu_name: 'menu_name'
+};
+
 exports.Prisma.reportOrderByRelevanceFieldEnum = {
   text: 'text'
 };
@@ -366,6 +370,24 @@ exports.Prisma.password_reset_tokenOrderByRelevanceFieldEnum = {
 exports.Prisma.repre_menuOrderByRelevanceFieldEnum = {
   menu: 'menu'
 };
+exports.user_body_type = exports.$Enums.user_body_type = {
+  cold: 'cold',
+  indigestion: 'indigestion',
+  heat_sensitive: 'heat_sensitive',
+  cold_sensitive: 'cold_sensitive'
+};
+
+exports.user_gender = exports.$Enums.user_gender = {
+  female: 'female',
+  male: 'male'
+};
+
+exports.user_exercise = exports.$Enums.user_exercise = {
+  dieting: 'dieting',
+  bulking: 'bulking',
+  maintaining: 'maintaining'
+};
+
 exports.allergy_type = exports.$Enums.allergy_type = {
   egg: 'egg',
   milk: 'milk',
