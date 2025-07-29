@@ -14,7 +14,7 @@ export const editRestData = async (newData, params, userId) => {
   const restUserData = await prisma.user_rest.findFirst({
     where: { rest_id: params },
   });
-  console.log(restUserData);
+  console.log("restUserData", restUserData);
   if (restUserData === null) {
     return { error: "NO_DATA" };
   } else if (restUserData.user_id.toString() !== userId) {

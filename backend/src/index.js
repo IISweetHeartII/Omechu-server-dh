@@ -177,12 +177,12 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
-app.post("/place/review/:id", isLoggedIn, handleAddReview);
-app.get("/place/review/:id", isLoggedIn, handleGetReview);
+app.post("/place/review", isLoggedIn, handleAddReview);
+app.get("/place/review/:restId", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
-app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
+app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
 app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);
