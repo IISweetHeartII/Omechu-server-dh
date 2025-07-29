@@ -135,15 +135,15 @@ app.get("/openapi.json", async (req, res, next) => {
     writeOutputFile: false,
   };
   const outputFile = "/dev/null";
-  const routes = ["./src/index.js"];
+  const routes = ["./src/index.js", "./src/controllers/*.js"];
   const doc = {
     info: {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    // host: "omechu-api.log8.kr",
-    // schemes: ["https"],
-    host: "localhost:3000",
+    host: "omechu-api.log8.kr",
+    schemes: ["https"],
+    // host: "localhost:3000",
     basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
