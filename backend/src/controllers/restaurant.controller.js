@@ -98,34 +98,27 @@ export const handleFetchGooglePlaces = async (req, res) => {
           items: {
             type: 'object',
             properties: {
-              id: { type: 'string', example: 'ChIJN1t_tDeuEmsRUsoyG83frY4' },
+              id: { type: 'string', example: 'ChIJ86MmmAGhfDUR1C6TNesYXDM' },
+              formattedAddress: { 
+                type: 'string', 
+                example: '대한민국 서울특별시 서초구 방배본동 동광로 67' 
+              },
+              rating: { type: 'number', example: 4.1 },
+              userRatingCount: { type: 'integer', example: 335 },
               displayName: { 
                 type: 'object',
                 properties: {
-                  text: { type: 'string', example: '젤라또 카페' }
+                  text: { type: 'string', example: '일일향 방배점' },
+                  languageCode: { type: 'string', example: 'ko' }
                 }
-              },
-              formattedAddress: { 
-                type: 'string', 
-                example: '서울특별시 강남구 테헤란로 123' 
-              },
-              location: {
-                type: 'object',
-                properties: {
-                  latitude: { type: 'number', example: 37.4895246 },
-                  longitude: { type: 'number', example: 126.986331 }
-                }
-              },
-              rating: { type: 'number', example: 4.5 },
-              userRatingCount: { type: 'integer', example: 120 },
-              priceLevel: { type: 'string', example: 'PRICE_LEVEL_MODERATE' },
-              businessStatus: { type: 'string', example: 'OPERATIONAL' }
+              }
             }
           }
         }
       }
     }
   }
+//
 
   #swagger.responses[404] = {
     description: "장소를 찾을 수 없음",
