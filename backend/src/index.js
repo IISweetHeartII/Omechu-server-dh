@@ -94,7 +94,7 @@ app.use(
       httpOnly: true,
       maxAge: 1000 * 60 * 60, // 1시간
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
-      sameSite: "None", 
+      sameSite: "None",
     },
   })
 );
@@ -156,12 +156,9 @@ app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
 
-
-
 //메인페이지 관련
 app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
-
 
 app.post("/fetch-google-places", handleFetchGooglePlaces);
 app.get("/place-detail/:id", handleFetchPlaceDetail);
@@ -180,8 +177,6 @@ app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
-
-
 
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
