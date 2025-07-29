@@ -50,7 +50,7 @@ import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 dotenv.config();
-
+const isProduction = process.env.NODE_ENV === "production";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -93,6 +93,8 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60, // 1시간
+      secure: isProduction, // 프로덕션 환경에서만 secure 활성화
+      sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
     },
   })
 );
