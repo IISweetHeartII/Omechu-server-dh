@@ -83,7 +83,7 @@ app.use(
   })
 );
 const isProduction = process.env.NODE_ENV === "production";
-
+// console.log("isProduction", isProduction);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -93,6 +93,8 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
+      secure: isProduction, // 프로덕션 환경에서만 secure 활성화
+      sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
     },
   })
 );
@@ -135,8 +137,7 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "omechu-api.log8.kr",
-    schemes: ["https"],
+    host: "localhost:3000",
     basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
@@ -166,7 +167,8 @@ app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
-
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("isProduction", isProduction);
 // Menu
 app.post("/recommend", handleRecommendMenu);
 app.post("/find-related-menu", handleFindRelatedMenu);
