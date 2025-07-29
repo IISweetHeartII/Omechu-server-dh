@@ -135,9 +135,9 @@ model user {
   id               BigInt             @id @default(autoincrement())
   email            String?            @unique(map: "user_pk") @db.VarChar(30)
   nickname         String?            @db.VarChar(30)
-  body_type        Int?
-  gender           Int?
-  exercise         Int?
+  body_type        user_body_type?
+  gender           user_gender?
+  exercise         user_exercise?
   password         String             @db.VarChar(50)
   created_at       DateTime?          @default(now()) @db.DateTime(0)
   updated_at       DateTime?          @default(now()) @db.DateTime(0)
@@ -242,4 +242,22 @@ enum prefer_type {
   chinese  @map("중식")
   japanese @map("일식")
   other    @map("다른나라")
+}
+
+enum user_body_type {
+  cold           @map("감기")
+  indigestion    @map("소화불량")
+  heat_sensitive @map("더위잘탐")
+  cold_sensitive @map("추위잘탐")
+}
+
+enum user_gender {
+  female @map("여성")
+  male   @map("남성")
+}
+
+enum user_exercise {
+  dieting     @map("다이어트 중")
+  bulking     @map("증량 중")
+  maintaining @map("유지 중")
 }
