@@ -57,7 +57,7 @@ export const fetchGooglePlaces = async ({ info }) => {
       "Content-Type": "application/json",
       "X-Goog-Api-Key": KEY,
       "X-Goog-FieldMask":
-        "places.displayName,places.formattedAddress,places.id",
+        "places.displayName,places.formattedAddress,places.id,places.rating,places.userRatingCount",
     },
     body: JSON.stringify(body),
   });
