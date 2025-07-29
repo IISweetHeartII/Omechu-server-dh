@@ -1,6 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import { findUser } from "../services/login.service.js";
 export const handleUserLogin = async (req, res) => {
+  console.log("하이");
+  console.log(req.session);
   const loginUser = await findUser(req.body);
   if (loginUser) {
     req.session.user = {
@@ -8,7 +10,7 @@ export const handleUserLogin = async (req, res) => {
       email: loginUser.email,
     };
   }
-
+  console.log(loginUser);
   res.status(StatusCodes.OK);
   res.success({
     id: loginUser.id.toString(),

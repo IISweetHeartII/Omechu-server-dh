@@ -12,8 +12,8 @@ import {
   handleFindRelatedMenu,
 } from "./controllers/menu.controller.js";
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
-import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
-import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
+// import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
+// import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
 import { generatePresignedUrl } from "./controllers/image.uploader.js";
 import { handleUserLogin } from "./controllers/login.controller.js";
 import { handleRenewSession } from "./controllers/session.controller.js";
@@ -24,7 +24,7 @@ import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
-import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+// import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
 import {
   handleResetRequest,
   handleResetPassword,
@@ -82,16 +82,17 @@ app.use(
     credentials: true,
   })
 );
-// 세션 미들웨어 등록
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: sessionStore, // 세션을 DB에 저장
+    store: sessionStore,
     cookie: {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60, // 1시간
+      maxAge: 1000 * 60 * 60,
     },
   })
 );
@@ -153,7 +154,7 @@ app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
 
-app.get("/fetch-places", handleFetchKakaoPlaces);
+// app.get("/fetch-places", handleFetchKakaoPlaces);
 
 // Auth
 app.post("/auth/signup", handleUserSignUp);
@@ -172,9 +173,9 @@ app.post("/find-related-menu", handleFindRelatedMenu);
 app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
 
-// Restaurant
-app.post("/fetch-google-places", handleFetchGooglePlaces);
-app.get("/place-detail/:id", handleFetchPlaceDetail);
+// // Restaurant
+// app.post("/fetch-google-places", handleFetchGooglePlaces);
+// app.get("/place-detail/:id", handleFetchPlaceDetail);
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
