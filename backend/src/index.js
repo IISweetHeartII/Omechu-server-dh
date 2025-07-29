@@ -50,7 +50,6 @@ import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 dotenv.config();
-const isProduction = process.env.NODE_ENV === "production";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -83,18 +82,19 @@ app.use(
     credentials: true,
   })
 );
-// 세션 미들웨어 등록
+const isProduction = process.env.NODE_ENV === "production";
+// console.log("isProduction", isProduction);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: sessionStore, // 세션을 DB에 저장
+    store: sessionStore,
     cookie: {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60, // 1시간
+      maxAge: 1000 * 60 * 60,
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
-      sameSite: "None",
+      sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
     },
   })
 );
