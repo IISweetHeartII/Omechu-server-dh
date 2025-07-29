@@ -83,9 +83,9 @@ app.use(
   })
 );
 const isProduction = process.env.NODE_ENV === "production";
-// if (isProduction) {
-//   app.set("trust proxy", 1); // Nginx 같은 리버스 프록시 뒤에서 실행되는 것을 알림
-// }
+if (isProduction) {
+  app.set("trust proxy", 1); // Nginx 같은 리버스 프록시 뒤에서 실행되는 것을 알림
+}
 // console.log("isProduction", isProduction);
 app.use(
   session({
