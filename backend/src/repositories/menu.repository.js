@@ -226,21 +226,21 @@ export const recommendMenu = async (choice, userId) => {
             2: "점심 식사: 활동을 위한 에너지를 줄 수 있는 먹을거",
             3: "저녁 식사: 포만감 높은 먹을거",
             4: "야식: 부담이 적고 간편하거나 입맛 당기는 음식"
-        }[meal_time] || "식사";
+        }[meal_time] || "상관 없음";
 
         const purposeText = {
             1: "든든한 한끼 식사: 국, 찌개 혹은 단일 고열량 식사 ",
             2: "술 안주 겸: 짭조름하거나 자극적인 음식, 소스가 강하거나 튀김류",
             3: "간식: 양이 적거나 간편식, 디저트류 ",
             4: "기념일 식사: 예쁘거나 고급진 느낌, 공유하기 좋은 메뉴 ",
-        }[purpose] || "";
+        }[purpose] || "상관 없음";
 
         const moodText = {
             1: "들뜨고 신나요 : 새롭거나 특이한 메뉴, 강한 자극을 줄 수 있는 음식",
             2: "지치고 피곤해요 : 따뜻하거나 국물이 있는 음식, 속 편한 식사",
             3: "슬프고 울적해요 : 부드럽고 달달하고, 자극적인 음식",
             4: "화나고 답답해요 : 매운 음식, 자극적인 음식",
-        }[mood] || "";
+        }[mood] || "상관 없음";
 
 
         const withText = {
@@ -248,32 +248,34 @@ export const recommendMenu = async (choice, userId) => {
             2: "연인 : 비주얼 좋고 나눠먹기 좋은 메뉴",
             3: "친구들 : 공유 가능한 양 많거나 취향 다양한 메뉴",
             4: "가족들 : 따뜻하고 밥반찬 구성"
-        }[withWhom] || "";
+        }[withWhom] || "상관 없음";
 
 
         const budgetText = {
             1: "0원 이상 1만원 미만",
             2: "0원 이상 3만 원 이하",
             3: "가격 제한 없음",
-        }[budget] || "";
-
+        }[budget] || "상관 없음";
+        console.log("gender: ", gender);
+        console.log("exercise: ", exercise);
+        console.log("body_type: ", body_type);
         const genderText = {
-            1: "여성",
-            2: "남성",
-        }[gender] || "";
+            "female": "여성",
+            "male": "남성",
+        }[gender] || "정보 없음";
 
         const exerciseText = {
-            1: "다이어트 중",
-            2: "벌크업 중",
-            3: "상관 없음",
-        }[exercise] || "";
+            "dieting": "다이어트 중",
+            "bulking": "벌크업 중",
+            "maintaining": "상관 없음",
+        }[exercise] || "정보 없음";
 
         const bodyTypeText = {
-            1: "감기에 잘 걸리는 편",
-            2: "소화가 잘 안 되는 편",
-            3: "열이 많아서 더위를 잘 타는 편",
-            4: "추위를 잘 타고 몸이 쉽게 차가워지는 편"
-        }[body_type] || "";
+            "cold": "감기에 잘 걸리는 편",
+            "indigestion": "소화가 잘 안 되는 편",
+            "heat_sensitive": "열이 많아서 더위를 잘 타는 편",
+            "cold_sensitive": "추위를 잘 타고 몸이 쉽게 차가워지는 편"
+        }[body_type] || "정보 없음";
 
         console.log("Meal Time:", mealTimeText);
         console.log("Purpose:", purposeText);
@@ -298,7 +300,7 @@ export const recommendMenu = async (choice, userId) => {
         console.log("allergyString:", allergyString);
 
         const exceptedMenus2String = exceptions2 && exceptions2.length > 0
-            ? exceptions2.join(", ")
+            ? exceptions2.map(item => item.name || item).join(", ")  // 객체에서 name 속성 추출
             : "없음";
         console.log("exceptedMenus2String:", exceptedMenus2String);
 
@@ -324,6 +326,7 @@ export const recommendMenu = async (choice, userId) => {
                         현재 날씨: ${choice.weather}
                         각각의 정보들에 딱 들어 맞을 필요까지는 없고, 각 요소를 최대한 반영해줘.
                         추천은 다음 목록 안에서 이루어져야해.
+                        다음 리스트의 메뉴 이름을 그대로 사용해줘.
                         ${menuList}
                         추천할 때 아래 형식의 JSON으로 3개의 메뉴를 3개의 json 배열로 답해줘(마크다운 없이):
                         {
