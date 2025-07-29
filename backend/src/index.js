@@ -95,6 +95,7 @@ app.use(
       maxAge: 1000 * 60 * 60,
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
       sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
+      domain: isProduction ? ".log8.kr" : undefined,
     },
   })
 );
