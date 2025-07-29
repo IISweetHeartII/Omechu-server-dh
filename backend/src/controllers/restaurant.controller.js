@@ -58,28 +58,28 @@ export const handleFetchGooglePlaces = async (req, res) => {
           type: 'object',
           required: ['latitude', 'longitude', 'radius', 'keyword', 'pageSize'],
           properties: {
-            latitude: { 
-              type: 'number', 
+            latitude: {
+              type: 'number',
               example: 37.4895246,
               description: "검색할 위치의 위도"
             },
-            longitude: { 
-              type: 'number', 
+            longitude: {
+              type: 'number',
               example: 126.986331,
               description: "검색할 위치의 경도"
             },
-            radius: { 
-              type: 'integer', 
+            radius: {
+              type: 'integer',
               example: 3000,
               description: "검색 반경 (미터 단위)"
             },
-            keyword: { 
-              type: 'string', 
+            keyword: {
+              type: 'string',
               example: "젤라또",
               description: "검색할 키워드"
             },
-            pageSize: { 
-              type: 'integer', 
+            pageSize: {
+              type: 'integer',
               example: 5,
               description: "반환할 결과 개수"
             }
@@ -99,15 +99,15 @@ export const handleFetchGooglePlaces = async (req, res) => {
             type: 'object',
             properties: {
               id: { type: 'string', example: 'ChIJN1t_tDeuEmsRUsoyG83frY4' },
-              displayName: { 
+              displayName: {
                 type: 'object',
                 properties: {
                   text: { type: 'string', example: '젤라또 카페' }
                 }
               },
-              formattedAddress: { 
-                type: 'string', 
-                example: '서울특별시 강남구 테헤란로 123' 
+              formattedAddress: {
+                type: 'string',
+                example: '서울특별시 강남구 테헤란로 123'
               },
               location: {
                 type: 'object',
@@ -157,135 +157,134 @@ export const handleFetchGooglePlaces = async (req, res) => {
   */
 };
 
-
 export const handleFetchPlaceDetail = async (req, res) => {
-  /*
-    #swagger.tags = ["Restaurant"]
-    #swagger.summary = "Google Places 장소 상세 정보 조회 API"
-    #swagger.description = "Google Places API를 사용하여 특정 장소의 상세 정보를 조회하는 API입니다."
-
-    #swagger.parameters['id'] = {
-      in: 'path',
-      name: 'id',
-      required: true,
-      type: 'string',
-      example: 'ChIJm26UcZyhfDURkuYARFNUpp8',
-      description: 'Google Place ID'
-    }
-
-    #swagger.responses[200] = {
-      description: "장소 상세 정보 조회 성공",
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {
-              formattedAddress: { 
-                type: 'string', 
-                example: '서울특별시 강남구 테헤란로 123' 
-              },
-              location: {
-                type: 'object',
-                properties: {
-                  latitude: { type: 'number', example: 37.4895246 },
-                  longitude: { type: 'number', example: 126.986331 }
-                }
-              },
-              displayName: {
-                type: 'object',
-                properties: {
-                  text: { type: 'string', example: '맛있는 레스토랑' }
-                }
-              },
-              currentOpeningHours: {
-                type: 'object',
-                properties: {
-                  weekdayDescriptions: {
-                    type: 'array',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        days_of_the_week: { 
-                          type: 'string', 
-                          example: '월',
-                          description: '요일 (월, 화, 수, 목, 금, 토, 일)'
-                        },
-                        time: { 
-                          type: 'string', 
-                          example: '10:00 - 22:00',
-                          description: '영업시간 (휴일인 경우 "휴일")'
-                        }
-                      }
-                    },
-                    example: [
-                      { days_of_the_week: "월", time: "10:00 - 22:00" },
-                      { days_of_the_week: "화", time: "10:00 - 22:00" },
-                      { days_of_the_week: "수", time: "10:00 - 22:00" },
-                      { days_of_the_week: "목", time: "10:00 - 22:00" },
-                      { days_of_the_week: "금", time: "10:00 - 23:00" },
-                      { days_of_the_week: "토", time: "10:00 - 23:00" },
-                      { days_of_the_week: "일", time: "휴일" }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-    #swagger.responses[404] = {
-      description: "장소 상세 정보를 찾을 수 없음",
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {
-              message: { type: 'string', example: 'Place detail not found' }
-            }
-          }
-        }
-      }
-    }
-
-    #swagger.responses[500] = {
-      description: "서버 내부 오류",
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {
-              message: { type: 'string', example: 'Internal server error' }
-            }
-          }
-        }
-      }
-    }
-  */
-
   const placeId = req.params.id;
 
   try {
     const placeDetail = await fetchPlaceDetailService(placeId);
-
-    if (placeDetail?.currentOpeningHours?.weekdayDescriptions) {
-      placeDetail.currentOpeningHours.weekdayDescriptions = openingHoursDto(
-        placeDetail.currentOpeningHours.weekdayDescriptions
-      );
-    }
-
+    placeDetail.currentOpeningHours.weekdayDescriptions = openingHoursDto(
+      placeDetail.currentOpeningHours.weekdayDescriptions
+    );
     if (placeDetail) {
-      return res.status(StatusCodes.OK).json(placeDetail);
+      res.status(StatusCodes.OK).json(placeDetail);
     } else {
-      return res
+      res
         .status(StatusCodes.NOT_FOUND)
         .json({ message: "Place detail not found" });
     }
   } catch (error) {
     console.error("Error fetching place detail:", error);
-    return res
+    res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Internal server error" });
   }
+  /*
+    #swagger.tags = ["Restaurant"]
+    #swagger.summary = "Google Places 장소 상세 정보 조회 API"
+    #swagger.description = "Google Places API를 사용하여 특정 장소의 상세 정보를 조회하는 API입니다."
+
+  
+
+  /*
+  #swagger.tags = ["Restaurant"]
+  #swagger.summary = "Google Places 장소 상세 정보 조회 API"
+  #swagger.description = "Google Places API를 사용하여 특정 장소의 상세 정보를 조회하는 API입니다."
+
+  #swagger.parameters['id'] = {
+    in: 'path',
+    name: 'id',
+    required: true,
+    type: 'string',
+    example: 'ChIJm26UcZyhfDURkuYARFNUpp8',
+    description: 'Google Place ID'
+  }
+
+  #swagger.responses[200] = {
+    description: "장소 상세 정보 조회 성공",
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+          formattedAddress: {
+              type: 'string',
+              example: '서울특별시 강남구 테헤란로 123'
+            },
+            location: {
+              type: 'object',
+              properties: {
+                latitude: { type: 'number', example: 37.4895246 },
+                longitude: { type: 'number', example: 126.986331 }
+              }
+            },
+            displayName: {
+              type: 'object',
+              properties: {
+                text: { type: 'string', example: '맛있는 레스토랑' }
+              }
+            },
+
+            currentOpeningHours: {
+        type: 'object',
+        properties: {
+          weekdayDescriptions: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                days_of_the_week: {
+                  type: 'string',
+                  example: '월',
+                  description: '요일 (월, 화, 수, 목, 금, 토, 일)'
+                },
+                time: {
+                  type: 'string',
+                  example: '10:00 - 22:00',
+                  description: '영업시간 (휴일인 경우 "휴일")'
+                }
+              }
+            },
+            example: [
+              { days_of_the_week: "월", time: "10:00 - 22:00" },
+              { days_of_the_week: "화", time: "10:00 - 22:00" },
+              { days_of_the_week: "수", time: "10:00 - 22:00" },
+              { days_of_the_week: "목", time: "10:00 - 22:00" },
+              { days_of_the_week: "금", time: "10:00 - 23:00" },
+              { days_of_the_week: "토", time: "10:00 - 23:00" },
+              { days_of_the_week: "일", time: "휴일" }
+            ]
+          }
+        }
+      }
+    }
+  }
+
+  #swagger.responses[404] = {
+    description: "장소 상세 정보를 찾을 수 없음",
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Place detail not found' }
+          }
+        }
+      }
+    }
+  }
+
+  #swagger.responses[500] = {
+    description: "서버 내부 오류",
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            message: { type: 'string', example: 'Internal server error' }
+          }
+        }
+      }
+    }
+  }
+  */
 };
