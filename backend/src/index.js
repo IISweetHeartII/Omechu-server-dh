@@ -94,7 +94,7 @@ app.use(
       httpOnly: true,
       maxAge: 1000 * 60 * 60, // 1시간
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
-      sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
+      sameSite: "None", 
     },
   })
 );
