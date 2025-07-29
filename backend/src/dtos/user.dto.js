@@ -2,18 +2,13 @@ export const bodyToUserInfo = (body, userId) => {
   const user = {
     nickname: body.nickname,
     profileImageUrl: body.profileImageUrl,
-    body_type: convertBodyTypeToEnum(body.body_type),
-    exercise: convertExerciseToEnum(body.state),
-    gender: convertGenderToEnum(body.gender),
+    body_type: convertBodyTypeToEnum(body.body_type), 
+    exercise: convertExerciseToEnum(body.state),      
+    gender: convertGenderToEnum(body.gender),      
   };
-
-  if (body.password) {
-    user.password = body.password;
-  }
 
   return user;
 };
-
 
 export const responseFromUser = (user) => {
   const prefer = user.prefer || [];
@@ -26,9 +21,9 @@ export const responseFromUser = (user) => {
     email: user.email,
     nickname: user.nickname,
     profileImageUrl: user.profileImageUrl,
-    gender: convertGender(user.gender),
-    body_type: convertBodyType(user.body_type),
-    state: convertExercise(user.exercise),
+    gender: convertGender(user.gender),          
+    body_type: convertBodyType(user.body_type),  
+    state: convertExercise(user.exercise),   
     prefer: preferCategories,
     allergy: allergyTypes,
   };
@@ -36,29 +31,56 @@ export const responseFromUser = (user) => {
 
 function convertGenderToEnum(gender) {
   const map = {
-    "남자": 1,
-    "여자": 2,
+    "남성": "male",
+    "여성": "female",
   };
   return map[gender] ?? null;
 }
 
 function convertExerciseToEnum(state) {
   const map = {
-    "다이어트 중": 1,
-    "중량 중": 2,
-    "유지 중": 3,
+    "다이어트 중": "dieting",
+    "증량 중": "bulking",
+    "유지 중": "maintaining",
   };
   return map[state] ?? null;
 }
 
 function convertBodyTypeToEnum(type) {
   const map = {
-    "감기": 1,
-    "소화불량": 2,
-    "더위잘탐": 3,
-    "추위잘탐": 4,
+    "감기": "cold",
+    "소화불량": "indigestion",
+    "더위잘탐": "heat_sensitive",
+    "추위잘탐": "cold_sensitive",
   };
   return map[type] ?? null;
+}
+
+function convertGender(gender) {
+  const map = {
+    male: "남성",
+    female: "여성",
+  };
+  return map[gender] ?? gender;
+}
+
+function convertExercise(ex) {
+  const map = {
+    dieting: "다이어트 중",
+    bulking: "증량 중",
+    maintaining: "유지 중",
+  };
+  return map[ex] ?? ex;
+}
+
+function convertBodyType(type) {
+  const map = {
+    cold: "감기",
+    indigestion: "소화불량",
+    heat_sensitive: "더위잘탐",
+    cold_sensitive: "추위잘탐",
+  };
+  return map[type] ?? type;
 }
 
 function convertPrefer(prefer) {
@@ -81,31 +103,4 @@ function convertAllergy(allergy) {
     nuts: "견과류 알레르기",
   };
   return map[allergy] ?? allergy;
-}
-
-function convertGender(gender) {
-  const map = {
-    1: "남자",
-    2: "여자",
-  };
-  return map[gender] ?? gender;
-}
-
-function convertExercise(ex) {
-  const map = {
-    1: "다이어트 중",
-    2: "중량 중",
-    3: "유지 중",
-  };
-  return map[ex] ?? ex;
-}
-
-function convertBodyType(type) {
-  const map = {
-    1: "감기",
-    2: "소화불량",
-    3: "더위잘탐",
-    4: "추위잘탐",
-  };
-  return map[type] ?? type;
 }

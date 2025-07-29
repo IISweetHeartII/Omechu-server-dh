@@ -245,19 +245,19 @@ enum prefer_type {
 }
 
 enum user_body_type {
-  cold @map("감기")
-  indigestion @map("소화불량")
+  cold           @map("감기")
+  indigestion    @map("소화불량")
   heat_sensitive @map("더위잘탐")
   cold_sensitive @map("추위잘탐")
 }
 
 enum user_gender {
   female @map("여성")
-  male @map("남성")
+  male   @map("남성")
 }
 
 enum user_exercise {
-  dieting @map("다이어트 중")
-  bulking @map("증량 중")
+  dieting     @map("다이어트 중")
+  bulking     @map("증량 중")
   maintaining @map("유지 중")
 }
