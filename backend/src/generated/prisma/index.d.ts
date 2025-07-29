@@ -134,6 +134,33 @@ export const prefer_type: {
 
 export type prefer_type = (typeof prefer_type)[keyof typeof prefer_type]
 
+
+export const user_body_type: {
+  cold: 'cold',
+  indigestion: 'indigestion',
+  heat_sensitive: 'heat_sensitive',
+  cold_sensitive: 'cold_sensitive'
+};
+
+export type user_body_type = (typeof user_body_type)[keyof typeof user_body_type]
+
+
+export const user_gender: {
+  female: 'female',
+  male: 'male'
+};
+
+export type user_gender = (typeof user_gender)[keyof typeof user_gender]
+
+
+export const user_exercise: {
+  dieting: 'dieting',
+  bulking: 'bulking',
+  maintaining: 'maintaining'
+};
+
+export type user_exercise = (typeof user_exercise)[keyof typeof user_exercise]
+
 }
 
 export type allergy_type = $Enums.allergy_type
@@ -143,6 +170,18 @@ export const allergy_type: typeof $Enums.allergy_type
 export type prefer_type = $Enums.prefer_type
 
 export const prefer_type: typeof $Enums.prefer_type
+
+export type user_body_type = $Enums.user_body_type
+
+export const user_body_type: typeof $Enums.user_body_type
+
+export type user_gender = $Enums.user_gender
+
+export const user_gender: typeof $Enums.user_gender
+
+export type user_exercise = $Enums.user_exercise
+
+export const user_exercise: typeof $Enums.user_exercise
 
 /**
  * ##  Prisma Client ʲˢ
@@ -12617,25 +12656,19 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: bigint | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
   }
 
   export type UserMinAggregateOutputType = {
     id: bigint | null
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -12646,9 +12679,9 @@ export namespace Prisma {
     id: bigint | null
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -12672,16 +12705,10 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
-    body_type?: true
-    gender?: true
-    exercise?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    body_type?: true
-    gender?: true
-    exercise?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -12814,9 +12841,9 @@ export namespace Prisma {
     id: bigint
     email: string | null
     nickname: string | null
-    body_type: number | null
-    gender: number | null
-    exercise: number | null
+    body_type: $Enums.user_body_type | null
+    gender: $Enums.user_gender | null
+    exercise: $Enums.user_exercise | null
     password: string
     created_at: Date | null
     updated_at: Date | null
@@ -12908,9 +12935,9 @@ export namespace Prisma {
       id: bigint
       email: string | null
       nickname: string | null
-      body_type: number | null
-      gender: number | null
-      exercise: number | null
+      body_type: $Enums.user_body_type | null
+      gender: $Enums.user_gender | null
+      exercise: $Enums.user_exercise | null
       password: string
       created_at: Date | null
       updated_at: Date | null
@@ -13295,9 +13322,9 @@ export namespace Prisma {
     readonly id: FieldRef<"user", 'BigInt'>
     readonly email: FieldRef<"user", 'String'>
     readonly nickname: FieldRef<"user", 'String'>
-    readonly body_type: FieldRef<"user", 'Int'>
-    readonly gender: FieldRef<"user", 'Int'>
-    readonly exercise: FieldRef<"user", 'Int'>
+    readonly body_type: FieldRef<"user", 'user_body_type'>
+    readonly gender: FieldRef<"user", 'user_gender'>
+    readonly exercise: FieldRef<"user", 'user_exercise'>
     readonly password: FieldRef<"user", 'String'>
     readonly created_at: FieldRef<"user", 'DateTime'>
     readonly updated_at: FieldRef<"user", 'DateTime'>
@@ -21822,6 +21849,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'user_body_type'
+   */
+  export type Enumuser_body_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_body_type'>
+    
+
+
+  /**
+   * Reference to a field of type 'user_gender'
+   */
+  export type Enumuser_genderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'user_exercise'
+   */
+  export type Enumuser_exerciseFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_exercise'>
+    
+
+
+  /**
    * Reference to a field of type 'allergy_type'
    */
   export type Enumallergy_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'allergy_type'>
@@ -22483,9 +22531,9 @@ export namespace Prisma {
     id?: BigIntFilter<"user"> | bigint | number
     email?: StringNullableFilter<"user"> | string | null
     nickname?: StringNullableFilter<"user"> | string | null
-    body_type?: IntNullableFilter<"user"> | number | null
-    gender?: IntNullableFilter<"user"> | number | null
-    exercise?: IntNullableFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableFilter<"user"> | $Enums.user_exercise | null
     password?: StringFilter<"user"> | string
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
@@ -22529,9 +22577,9 @@ export namespace Prisma {
     OR?: userWhereInput[]
     NOT?: userWhereInput | userWhereInput[]
     nickname?: StringNullableFilter<"user"> | string | null
-    body_type?: IntNullableFilter<"user"> | number | null
-    gender?: IntNullableFilter<"user"> | number | null
-    exercise?: IntNullableFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableFilter<"user"> | $Enums.user_exercise | null
     password?: StringFilter<"user"> | string
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
@@ -22571,9 +22619,9 @@ export namespace Prisma {
     id?: BigIntWithAggregatesFilter<"user"> | bigint | number
     email?: StringNullableWithAggregatesFilter<"user"> | string | null
     nickname?: StringNullableWithAggregatesFilter<"user"> | string | null
-    body_type?: IntNullableWithAggregatesFilter<"user"> | number | null
-    gender?: IntNullableWithAggregatesFilter<"user"> | number | null
-    exercise?: IntNullableWithAggregatesFilter<"user"> | number | null
+    body_type?: Enumuser_body_typeNullableWithAggregatesFilter<"user"> | $Enums.user_body_type | null
+    gender?: Enumuser_genderNullableWithAggregatesFilter<"user"> | $Enums.user_gender | null
+    exercise?: Enumuser_exerciseNullableWithAggregatesFilter<"user"> | $Enums.user_exercise | null
     password?: StringWithAggregatesFilter<"user"> | string
     created_at?: DateTimeNullableWithAggregatesFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"user"> | Date | string | null
@@ -23622,9 +23670,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23643,9 +23691,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23664,9 +23712,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23685,9 +23733,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23706,9 +23754,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -23719,9 +23767,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23732,9 +23780,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24915,6 +24963,27 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type Enumuser_body_typeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableFilter<$PrismaModel> | $Enums.user_body_type | null
+  }
+
+  export type Enumuser_genderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableFilter<$PrismaModel> | $Enums.user_gender | null
+  }
+
+  export type Enumuser_exerciseNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableFilter<$PrismaModel> | $Enums.user_exercise | null
+  }
+
   export type AllergyListRelationFilter = {
     every?: allergyWhereInput
     some?: allergyWhereInput
@@ -24966,9 +25035,6 @@ export namespace Prisma {
 
   export type userAvgOrderByAggregateInput = {
     id?: SortOrder
-    body_type?: SortOrder
-    gender?: SortOrder
-    exercise?: SortOrder
   }
 
   export type userMaxOrderByAggregateInput = {
@@ -24999,9 +25065,36 @@ export namespace Prisma {
 
   export type userSumOrderByAggregateInput = {
     id?: SortOrder
-    body_type?: SortOrder
-    gender?: SortOrder
-    exercise?: SortOrder
+  }
+
+  export type Enumuser_body_typeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_body_type | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+  }
+
+  export type Enumuser_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+  }
+
+  export type Enumuser_exerciseNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_exercise | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
   }
 
   export type Enumallergy_typeFilter<$PrismaModel = never> = {
@@ -26059,6 +26152,18 @@ export namespace Prisma {
     connect?: zzimWhereUniqueInput | zzimWhereUniqueInput[]
   }
 
+  export type NullableEnumuser_body_typeFieldUpdateOperationsInput = {
+    set?: $Enums.user_body_type | null
+  }
+
+  export type NullableEnumuser_genderFieldUpdateOperationsInput = {
+    set?: $Enums.user_gender | null
+  }
+
+  export type NullableEnumuser_exerciseFieldUpdateOperationsInput = {
+    set?: $Enums.user_exercise | null
+  }
+
   export type allergyUpdateManyWithoutUserNestedInput = {
     create?: XOR<allergyCreateWithoutUserInput, allergyUncheckedCreateWithoutUserInput> | allergyCreateWithoutUserInput[] | allergyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: allergyCreateOrConnectWithoutUserInput | allergyCreateOrConnectWithoutUserInput[]
@@ -26680,6 +26785,57 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type NestedEnumuser_body_typeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableFilter<$PrismaModel> | $Enums.user_body_type | null
+  }
+
+  export type NestedEnumuser_genderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableFilter<$PrismaModel> | $Enums.user_gender | null
+  }
+
+  export type NestedEnumuser_exerciseNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableFilter<$PrismaModel> | $Enums.user_exercise | null
+  }
+
+  export type NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_body_type | Enumuser_body_typeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_body_type[] | null
+    notIn?: $Enums.user_body_type[] | null
+    not?: NestedEnumuser_body_typeNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_body_type | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_body_typeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_gender | Enumuser_genderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_gender[] | null
+    notIn?: $Enums.user_gender[] | null
+    not?: NestedEnumuser_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_genderNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.user_exercise | Enumuser_exerciseFieldRefInput<$PrismaModel> | null
+    in?: $Enums.user_exercise[] | null
+    notIn?: $Enums.user_exercise[] | null
+    not?: NestedEnumuser_exerciseNullableWithAggregatesFilter<$PrismaModel> | $Enums.user_exercise | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+    _max?: NestedEnumuser_exerciseNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumallergy_typeFilter<$PrismaModel = never> = {
     equals?: $Enums.allergy_type | Enumallergy_typeFieldRefInput<$PrismaModel>
     in?: $Enums.allergy_type[]
@@ -26836,9 +26992,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -26856,9 +27012,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -26892,9 +27048,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26912,9 +27068,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26967,9 +27123,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -26987,9 +27143,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27064,9 +27220,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27084,9 +27240,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27104,9 +27260,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27124,9 +27280,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27189,9 +27345,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27209,9 +27365,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27749,9 +27905,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27769,9 +27925,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -27900,9 +28056,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27920,9 +28076,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28420,9 +28576,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28440,9 +28596,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28476,9 +28632,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28496,9 +28652,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28516,9 +28672,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28536,9 +28692,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28572,9 +28728,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28592,9 +28748,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28612,9 +28768,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28632,9 +28788,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -28717,9 +28873,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28737,9 +28893,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29069,9 +29225,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29089,9 +29245,9 @@ export namespace Prisma {
     id?: bigint | number
     email?: string | null
     nickname?: string | null
-    body_type?: number | null
-    gender?: number | null
-    exercise?: number | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
     password: string
     created_at?: Date | string | null
     updated_at?: Date | string | null
@@ -29180,9 +29336,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29200,9 +29356,9 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: NullableStringFieldUpdateOperationsInput | string | null
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    body_type?: NullableIntFieldUpdateOperationsInput | number | null
-    gender?: NullableIntFieldUpdateOperationsInput | number | null
-    exercise?: NullableIntFieldUpdateOperationsInput | number | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

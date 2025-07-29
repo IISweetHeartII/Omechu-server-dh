@@ -48,6 +48,7 @@ import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
+import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 dotenv.config();
 
 const app = express();
@@ -153,7 +154,19 @@ app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
 
+
+
+//메인페이지 관련
+app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
+
+
+app.post("/fetch-google-places", handleFetchGooglePlaces);
+app.get("/place-detail/:id", handleFetchPlaceDetail);
+app.post("/find-related-menu", handleFindRelatedMenu);
+app.get("/menu", handleGetMenu);
+app.post("/menu-info", handleGetMenuInfo);
+app.post("/mukburim", handleInsertMukburim);
 
 // Auth
 app.post("/auth/signup", handleUserSignUp);
@@ -166,15 +179,8 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
-// Menu
-app.post("/recommend", handleRecommendMenu);
-app.post("/find-related-menu", handleFindRelatedMenu);
-app.get("/menu", handleGetMenu);
-app.post("/menu-info", handleGetMenuInfo);
 
-// Restaurant
-app.post("/fetch-google-places", handleFetchGooglePlaces);
-app.get("/place-detail/:id", handleFetchPlaceDetail);
+
 app.post("/place/review/:id", isLoggedIn, handleAddReview);
 app.get("/place/review/:id", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
