@@ -13,12 +13,11 @@ export const handleUpdateUserInfo = async (req, res, next) => {
           schema: {
             type: "object",
             properties: {
-              password: { type: "string" },
               nickname: { type: "string" },
               profileImageUrl: { type: "string" },
-              gender: { type: "string", enum: ["남자", "여자"] },
+              gender: { type: "string", enum: ["남성", "여성"] },
               body_type: { type: "string" },
-              state: { type: "string", enum: ["다이어트 중", "중량 중", "유지 중"] },
+              state: { type: "string", enum: ["다이어트 중", "증량 중", "유지 중"] },
               prefer: { type: "array", items: { type: "string" } },
               allergy: { type: "array", items: { type: "string" } }
             }
