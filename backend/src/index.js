@@ -83,10 +83,6 @@ app.use(
   })
 );
 const isProduction = process.env.NODE_ENV === "production";
-// if (isProduction) {
-//   app.set("trust proxy", 1); // Nginx 같은 리버스 프록시 뒤에서 실행되는 것을 알림
-// }
-console.log("isProduction", isProduction);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -98,7 +94,6 @@ app.use(
       maxAge: 1000 * 60 * 60,
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
       sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
-      // domain: isProduction ? ".log8.kr" : undefined,
     },
   })
 );
@@ -183,12 +178,12 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
-app.post("/place/review/:id", isLoggedIn, handleAddReview);
-app.get("/place/review/:id", isLoggedIn, handleGetReview);
+app.post("/place/review", isLoggedIn, handleAddReview);
+app.get("/place/review/:restId", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
-app.patch("/place/detail/:id/edit", isLoggedIn, handleEditRestaurant);
+app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
 app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);

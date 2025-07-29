@@ -3,7 +3,7 @@ import { getReview } from "../services/getReview.service.js";
 
 export const handleGetReview = async (req, res) => {
   const review = await getReview({
-    rest_id: parseInt(req.params.id),
+    rest_id: parseInt(req.params.restId),
     limit: parseInt(req.query.limit),
     cursor: parseInt(req.query.cursor),
   });
@@ -13,7 +13,7 @@ export const handleGetReview = async (req, res) => {
   #swagger.tags=["Restaurant"];
   #swagger.summary="리뷰 가져오기 API" 
   #swagger.description="리뷰 가져오기 API 입니다"
-  #swagger.parameters['id']={
+  #swagger.parameters['restId']={
     id:'query',
     description:"가게 ID",
     required:'true'}

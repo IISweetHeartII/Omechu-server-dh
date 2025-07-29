@@ -17,9 +17,12 @@ export const editRestaurant = async ({ data, params, userId }) => {
       data
     );
   } else if (restId.error == "NO_DATA" || restId.error == "NO_REST_DATA") {
-    throw new NoRestData("해당 가게의 정보가 없습니다", {
-      rest_id: params,
-    });
+    throw new NoRestData(
+      "해당 가게의 정보가 없거나 본인이 작성한 가게가 아닙니다",
+      {
+        rest_id: params,
+      }
+    );
   } else {
     return restId;
   }

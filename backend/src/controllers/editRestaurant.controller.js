@@ -3,14 +3,14 @@ import { bodyToEditRestaurant } from "../dtos/editRestaurant.dto.js";
 import { StatusCodes } from "http-status-codes";
 export const handleEditRestaurant = async (req, res) => {
   const restId = await editRestaurant(
-    bodyToEditRestaurant(req.body, req.params.id, req.session.user.id)
+    bodyToEditRestaurant(req.body, req.params.restId, req.session.user.id)
   );
   res.status(StatusCodes.OK).success(restId);
   /**
   #swagger.tags = ["Restaurant"]
   #swagger.summary = "특정 맛집 정보 수정하기 API" 
   #swagger.description = "특정 맛집 정보 수정하는 API입니다."
-  #swagger.parameters["id"]={
+  #swagger.parameters["restId"]={
     in:"path",
     description:"가게 ID",
     required:true
