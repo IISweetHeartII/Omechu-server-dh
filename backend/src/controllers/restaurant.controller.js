@@ -57,28 +57,28 @@ export const handleFetchGooglePlaces = async (req, res) => {
           type: 'object',
           required: ['latitude', 'longitude', 'radius', 'keyword', 'pageSize'],
           properties: {
-            latitude: {
-              type: 'number',
+            latitude: { 
+              type: 'number', 
               example: 37.4895246,
               description: "검색할 위치의 위도"
             },
-            longitude: {
-              type: 'number',
+            longitude: { 
+              type: 'number', 
               example: 126.986331,
               description: "검색할 위치의 경도"
             },
-            radius: {
-              type: 'integer',
+            radius: { 
+              type: 'integer', 
               example: 3000,
               description: "검색 반경 (미터 단위)"
             },
-            keyword: {
-              type: 'string',
+            keyword: { 
+              type: 'string', 
               example: "젤라또",
               description: "검색할 키워드"
             },
-            pageSize: {
-              type: 'integer',
+            pageSize: { 
+              type: 'integer', 
               example: 5,
               description: "반환할 결과 개수"
             }
@@ -97,34 +97,27 @@ export const handleFetchGooglePlaces = async (req, res) => {
           items: {
             type: 'object',
             properties: {
-              id: { type: 'string', example: 'ChIJN1t_tDeuEmsRUsoyG83frY4' },
-              displayName: {
+              id: { type: 'string', example: 'ChIJ86MmmAGhfDUR1C6TNesYXDM' },
+              formattedAddress: { 
+                type: 'string', 
+                example: '대한민국 서울특별시 서초구 방배본동 동광로 67' 
+              },
+              rating: { type: 'number', example: 4.1 },
+              userRatingCount: { type: 'integer', example: 335 },
+              displayName: { 
                 type: 'object',
                 properties: {
-                  text: { type: 'string', example: '젤라또 카페' }
+                  text: { type: 'string', example: '일일향 방배점' },
+                  languageCode: { type: 'string', example: 'ko' }
                 }
-              },
-              formattedAddress: {
-                type: 'string',
-                example: '서울특별시 강남구 테헤란로 123'
-              },
-              location: {
-                type: 'object',
-                properties: {
-                  latitude: { type: 'number', example: 37.4895246 },
-                  longitude: { type: 'number', example: 126.986331 }
-                }
-              },
-              rating: { type: 'number', example: 4.5 },
-              userRatingCount: { type: 'integer', example: 120 },
-              priceLevel: { type: 'string', example: 'PRICE_LEVEL_MODERATE' },
-              businessStatus: { type: 'string', example: 'OPERATIONAL' }
+              }
             }
           }
         }
       }
     }
   }
+//
 
   #swagger.responses[404] = {
     description: "장소를 찾을 수 없음",
@@ -177,12 +170,6 @@ export const handleFetchPlaceDetail = async (req, res) => {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "Internal server error" });
   }
-  /*
-    #swagger.tags = ["Restaurant"]
-    #swagger.summary = "Google Places 장소 상세 정보 조회 API"
-    #swagger.description = "Google Places API를 사용하여 특정 장소의 상세 정보를 조회하는 API입니다."
-
-  
 
   /*
   #swagger.tags = ["Restaurant"]
@@ -205,9 +192,9 @@ export const handleFetchPlaceDetail = async (req, res) => {
         schema: {
           type: 'object',
           properties: {
-          formattedAddress: {
-              type: 'string',
-              example: '서울특별시 강남구 테헤란로 123'
+          formattedAddress: { 
+              type: 'string', 
+              example: '서울특별시 강남구 테헤란로 123' 
             },
             location: {
               type: 'object',
@@ -222,7 +209,7 @@ export const handleFetchPlaceDetail = async (req, res) => {
                 text: { type: 'string', example: '맛있는 레스토랑' }
               }
             },
-
+            
             currentOpeningHours: {
         type: 'object',
         properties: {
@@ -231,13 +218,13 @@ export const handleFetchPlaceDetail = async (req, res) => {
             items: {
               type: 'object',
               properties: {
-                days_of_the_week: {
-                  type: 'string',
+                days_of_the_week: { 
+                  type: 'string', 
                   example: '월',
                   description: '요일 (월, 화, 수, 목, 금, 토, 일)'
                 },
-                time: {
-                  type: 'string',
+                time: { 
+                  type: 'string', 
                   example: '10:00 - 22:00',
                   description: '영업시간 (휴일인 경우 "휴일")'
                 }

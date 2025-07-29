@@ -14,8 +14,6 @@ import {
 import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
 import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
-import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
-import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
 import { generatePresignedUrl } from "./controllers/image.uploader.js";
 import { handleUserLogin } from "./controllers/login.controller.js";
 import { handleRenewSession } from "./controllers/session.controller.js";
@@ -85,9 +83,9 @@ app.use(
   })
 );
 const isProduction = process.env.NODE_ENV === "production";
-if (isProduction) {
-  app.set("trust proxy", 1); // Nginx 같은 리버스 프록시 뒤에서 실행되는 것을 알림
-}
+// if (isProduction) {
+//   app.set("trust proxy", 1); // Nginx 같은 리버스 프록시 뒤에서 실행되는 것을 알림
+// }
 console.log("isProduction", isProduction);
 app.use(
   session({
@@ -100,7 +98,7 @@ app.use(
       maxAge: 1000 * 60 * 60,
       secure: isProduction, // 프로덕션 환경에서만 secure 활성화
       sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
-      domain: isProduction ? ".log8.kr" : undefined,
+      // domain: isProduction ? ".log8.kr" : undefined,
     },
   })
 );
@@ -143,8 +141,9 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "omechu-api.log8.kr",
-    schemes: ["https"],
+    // host: "omechu-api.log8.kr",
+    // schemes: ["https"],
+    host: "localhost:3000",
     basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
