@@ -76,24 +76,25 @@ model rest_menu {
 }
 
 model restaurant {
-  id              BigInt       @id @default(autoincrement())
-  rest_image      String?      @db.VarChar(50)
-  location        String?      @db.VarChar(20)
-  name            String?      @db.VarChar(60)
-  address         String?      @db.VarChar(60)
-  rating          Float?       @default(0) @db.Float
-  monday          String?      @default("휴무") @db.VarChar(20)
-  tuesday         String?      @default("휴뮤") @db.VarChar(20)
-  wednesday       String?      @default("휴무") @db.VarChar(20)
-  thursday        String?      @default("휴무") @db.VarChar(20)
-  friday          String?      @default("휴무") @db.VarChar(20)
-  saturday        String?      @default("휴무") @db.VarChar(20)
-  sunday          String?      @default("휴무") @db.VarChar(20)
-  google_place_id String?      @db.Text
+  id              BigInt         @id @default(autoincrement())
+  rest_image      String?        @db.VarChar(50)
+  location        String?        @db.VarChar(20)
+  name            String?        @db.VarChar(60)
+  address         String?        @db.VarChar(60)
+  rating          Float?         @default(0) @db.Float
+  monday          String?        @default("휴무") @db.VarChar(20)
+  tuesday         String?        @default("휴뮤") @db.VarChar(20)
+  wednesday       String?        @default("휴무") @db.VarChar(20)
+  thursday        String?        @default("휴무") @db.VarChar(20)
+  friday          String?        @default("휴무") @db.VarChar(20)
+  saturday        String?        @default("휴무") @db.VarChar(20)
+  sunday          String?        @default("휴무") @db.VarChar(20)
+  google_place_id String?        @db.Text
   repre_menu      repre_menu[]
   rest_menu       rest_menu[]
   rest_tag        rest_tag[]
   review          review[]
+  review_image    review_image[]
   user_rest       user_rest[]
   zzim            zzim[]
 }
@@ -117,12 +118,15 @@ model review {
 }
 
 model review_image {
-  id        BigInt  @id @default(autoincrement())
-  review_id BigInt
-  link      String? @db.VarChar(50)
-  review    review  @relation(fields: [review_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_image_ibfk_1")
+  id         BigInt     @id @default(autoincrement())
+  rest_id    BigInt
+  review_id  BigInt
+  link       String?    @db.VarChar(50)
+  review     review     @relation(fields: [review_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_image_ibfk_1")
+  restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_image_restaurant_id_fk")
 
   @@index([review_id], map: "review_id")
+  @@index([rest_id], map: "review_image_restaurant_id_fk")
 }
 
 model sessions {

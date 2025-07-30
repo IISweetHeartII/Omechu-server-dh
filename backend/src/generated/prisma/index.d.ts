@@ -2473,6 +2473,7 @@ export namespace Prisma {
     rest_menu: number
     rest_tag: number
     review: number
+    review_image: number
     user_rest: number
     zzim: number
   }
@@ -2482,6 +2483,7 @@ export namespace Prisma {
     rest_menu?: boolean | RestaurantCountOutputTypeCountRest_menuArgs
     rest_tag?: boolean | RestaurantCountOutputTypeCountRest_tagArgs
     review?: boolean | RestaurantCountOutputTypeCountReviewArgs
+    review_image?: boolean | RestaurantCountOutputTypeCountReview_imageArgs
     user_rest?: boolean | RestaurantCountOutputTypeCountUser_restArgs
     zzim?: boolean | RestaurantCountOutputTypeCountZzimArgs
   }
@@ -2523,6 +2525,13 @@ export namespace Prisma {
    */
   export type RestaurantCountOutputTypeCountReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: reviewWhereInput
+  }
+
+  /**
+   * RestaurantCountOutputType without action
+   */
+  export type RestaurantCountOutputTypeCountReview_imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: review_imageWhereInput
   }
 
   /**
@@ -8779,6 +8788,7 @@ export namespace Prisma {
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
     review?: boolean | restaurant$reviewArgs<ExtArgs>
+    review_image?: boolean | restaurant$review_imageArgs<ExtArgs>
     user_rest?: boolean | restaurant$user_restArgs<ExtArgs>
     zzim?: boolean | restaurant$zzimArgs<ExtArgs>
     _count?: boolean | RestaurantCountOutputTypeDefaultArgs<ExtArgs>
@@ -8809,6 +8819,7 @@ export namespace Prisma {
     rest_menu?: boolean | restaurant$rest_menuArgs<ExtArgs>
     rest_tag?: boolean | restaurant$rest_tagArgs<ExtArgs>
     review?: boolean | restaurant$reviewArgs<ExtArgs>
+    review_image?: boolean | restaurant$review_imageArgs<ExtArgs>
     user_rest?: boolean | restaurant$user_restArgs<ExtArgs>
     zzim?: boolean | restaurant$zzimArgs<ExtArgs>
     _count?: boolean | RestaurantCountOutputTypeDefaultArgs<ExtArgs>
@@ -8821,6 +8832,7 @@ export namespace Prisma {
       rest_menu: Prisma.$rest_menuPayload<ExtArgs>[]
       rest_tag: Prisma.$rest_tagPayload<ExtArgs>[]
       review: Prisma.$reviewPayload<ExtArgs>[]
+      review_image: Prisma.$review_imagePayload<ExtArgs>[]
       user_rest: Prisma.$user_restPayload<ExtArgs>[]
       zzim: Prisma.$zzimPayload<ExtArgs>[]
     }
@@ -9183,6 +9195,7 @@ export namespace Prisma {
     rest_menu<T extends restaurant$rest_menuArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_menuArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_menuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rest_tag<T extends restaurant$rest_tagArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$rest_tagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$rest_tagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     review<T extends restaurant$reviewArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$reviewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    review_image<T extends restaurant$review_imageArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$review_imageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$review_imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user_rest<T extends restaurant$user_restArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$user_restArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$user_restPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     zzim<T extends restaurant$zzimArgs<ExtArgs> = {}>(args?: Subset<T, restaurant$zzimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$zzimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -9664,6 +9677,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * restaurant.review_image
+   */
+  export type restaurant$review_imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the review_image
+     */
+    select?: review_imageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the review_image
+     */
+    omit?: review_imageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: review_imageInclude<ExtArgs> | null
+    where?: review_imageWhereInput
+    orderBy?: review_imageOrderByWithRelationInput | review_imageOrderByWithRelationInput[]
+    cursor?: review_imageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Review_imageScalarFieldEnum | Review_imageScalarFieldEnum[]
   }
 
   /**
@@ -10817,28 +10854,33 @@ export namespace Prisma {
 
   export type Review_imageAvgAggregateOutputType = {
     id: number | null
+    rest_id: number | null
     review_id: number | null
   }
 
   export type Review_imageSumAggregateOutputType = {
     id: bigint | null
+    rest_id: bigint | null
     review_id: bigint | null
   }
 
   export type Review_imageMinAggregateOutputType = {
     id: bigint | null
+    rest_id: bigint | null
     review_id: bigint | null
     link: string | null
   }
 
   export type Review_imageMaxAggregateOutputType = {
     id: bigint | null
+    rest_id: bigint | null
     review_id: bigint | null
     link: string | null
   }
 
   export type Review_imageCountAggregateOutputType = {
     id: number
+    rest_id: number
     review_id: number
     link: number
     _all: number
@@ -10847,28 +10889,33 @@ export namespace Prisma {
 
   export type Review_imageAvgAggregateInputType = {
     id?: true
+    rest_id?: true
     review_id?: true
   }
 
   export type Review_imageSumAggregateInputType = {
     id?: true
+    rest_id?: true
     review_id?: true
   }
 
   export type Review_imageMinAggregateInputType = {
     id?: true
+    rest_id?: true
     review_id?: true
     link?: true
   }
 
   export type Review_imageMaxAggregateInputType = {
     id?: true
+    rest_id?: true
     review_id?: true
     link?: true
   }
 
   export type Review_imageCountAggregateInputType = {
     id?: true
+    rest_id?: true
     review_id?: true
     link?: true
     _all?: true
@@ -10962,6 +11009,7 @@ export namespace Prisma {
 
   export type Review_imageGroupByOutputType = {
     id: bigint
+    rest_id: bigint
     review_id: bigint
     link: string | null
     _count: Review_imageCountAggregateOutputType | null
@@ -10987,31 +11035,37 @@ export namespace Prisma {
 
   export type review_imageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    rest_id?: boolean
     review_id?: boolean
     link?: boolean
     review?: boolean | reviewDefaultArgs<ExtArgs>
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["review_image"]>
 
 
 
   export type review_imageSelectScalar = {
     id?: boolean
+    rest_id?: boolean
     review_id?: boolean
     link?: boolean
   }
 
-  export type review_imageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "review_id" | "link", ExtArgs["result"]["review_image"]>
+  export type review_imageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rest_id" | "review_id" | "link", ExtArgs["result"]["review_image"]>
   export type review_imageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     review?: boolean | reviewDefaultArgs<ExtArgs>
+    restaurant?: boolean | restaurantDefaultArgs<ExtArgs>
   }
 
   export type $review_imagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "review_image"
     objects: {
       review: Prisma.$reviewPayload<ExtArgs>
+      restaurant: Prisma.$restaurantPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
+      rest_id: bigint
       review_id: bigint
       link: string | null
     }, ExtArgs["result"]["review_image"]>
@@ -11355,6 +11409,7 @@ export namespace Prisma {
   export interface Prisma__review_imageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     review<T extends reviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, reviewDefaultArgs<ExtArgs>>): Prisma__reviewClient<$Result.GetResult<Prisma.$reviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    restaurant<T extends restaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, restaurantDefaultArgs<ExtArgs>>): Prisma__restaurantClient<$Result.GetResult<Prisma.$restaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11385,6 +11440,7 @@ export namespace Prisma {
    */
   interface review_imageFieldRefs {
     readonly id: FieldRef<"review_image", 'BigInt'>
+    readonly rest_id: FieldRef<"review_image", 'BigInt'>
     readonly review_id: FieldRef<"review_image", 'BigInt'>
     readonly link: FieldRef<"review_image", 'String'>
   }
@@ -21525,6 +21581,7 @@ export namespace Prisma {
 
   export const Review_imageScalarFieldEnum: {
     id: 'id',
+    rest_id: 'rest_id',
     review_id: 'review_id',
     link: 'link'
   };
@@ -22253,6 +22310,7 @@ export namespace Prisma {
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
     review?: ReviewListRelationFilter
+    review_image?: Review_imageListRelationFilter
     user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
   }
@@ -22276,6 +22334,7 @@ export namespace Prisma {
     rest_menu?: rest_menuOrderByRelationAggregateInput
     rest_tag?: rest_tagOrderByRelationAggregateInput
     review?: reviewOrderByRelationAggregateInput
+    review_image?: review_imageOrderByRelationAggregateInput
     user_rest?: user_restOrderByRelationAggregateInput
     zzim?: zzimOrderByRelationAggregateInput
     _relevance?: restaurantOrderByRelevanceInput
@@ -22303,6 +22362,7 @@ export namespace Prisma {
     rest_menu?: Rest_menuListRelationFilter
     rest_tag?: Rest_tagListRelationFilter
     review?: ReviewListRelationFilter
+    review_image?: Review_imageListRelationFilter
     user_rest?: User_restListRelationFilter
     zzim?: ZzimListRelationFilter
   }, "id">
@@ -22436,16 +22496,20 @@ export namespace Prisma {
     OR?: review_imageWhereInput[]
     NOT?: review_imageWhereInput | review_imageWhereInput[]
     id?: BigIntFilter<"review_image"> | bigint | number
+    rest_id?: BigIntFilter<"review_image"> | bigint | number
     review_id?: BigIntFilter<"review_image"> | bigint | number
     link?: StringNullableFilter<"review_image"> | string | null
     review?: XOR<ReviewScalarRelationFilter, reviewWhereInput>
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
   }
 
   export type review_imageOrderByWithRelationInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
     link?: SortOrderInput | SortOrder
     review?: reviewOrderByWithRelationInput
+    restaurant?: restaurantOrderByWithRelationInput
     _relevance?: review_imageOrderByRelevanceInput
   }
 
@@ -22454,13 +22518,16 @@ export namespace Prisma {
     AND?: review_imageWhereInput | review_imageWhereInput[]
     OR?: review_imageWhereInput[]
     NOT?: review_imageWhereInput | review_imageWhereInput[]
+    rest_id?: BigIntFilter<"review_image"> | bigint | number
     review_id?: BigIntFilter<"review_image"> | bigint | number
     link?: StringNullableFilter<"review_image"> | string | null
     review?: XOR<ReviewScalarRelationFilter, reviewWhereInput>
+    restaurant?: XOR<RestaurantScalarRelationFilter, restaurantWhereInput>
   }, "id">
 
   export type review_imageOrderByWithAggregationInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
     link?: SortOrderInput | SortOrder
     _count?: review_imageCountOrderByAggregateInput
@@ -22475,6 +22542,7 @@ export namespace Prisma {
     OR?: review_imageScalarWhereWithAggregatesInput[]
     NOT?: review_imageScalarWhereWithAggregatesInput | review_imageScalarWhereWithAggregatesInput[]
     id?: BigIntWithAggregatesFilter<"review_image"> | bigint | number
+    rest_id?: BigIntWithAggregatesFilter<"review_image"> | bigint | number
     review_id?: BigIntWithAggregatesFilter<"review_image"> | bigint | number
     link?: StringNullableWithAggregatesFilter<"review_image"> | string | null
   }
@@ -23376,6 +23444,7 @@ export namespace Prisma {
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
@@ -23399,6 +23468,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
@@ -23422,6 +23492,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
@@ -23445,6 +23516,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -23587,10 +23659,12 @@ export namespace Prisma {
     id?: bigint | number
     link?: string | null
     review: reviewCreateNestedOneWithoutReview_imageInput
+    restaurant: restaurantCreateNestedOneWithoutReview_imageInput
   }
 
   export type review_imageUncheckedCreateInput = {
     id?: bigint | number
+    rest_id: bigint | number
     review_id: bigint | number
     link?: string | null
   }
@@ -23599,16 +23673,19 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
     review?: reviewUpdateOneRequiredWithoutReview_imageNestedInput
+    restaurant?: restaurantUpdateOneRequiredWithoutReview_imageNestedInput
   }
 
   export type review_imageUncheckedUpdateInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
     review_id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type review_imageCreateManyInput = {
     id?: bigint | number
+    rest_id: bigint | number
     review_id: bigint | number
     link?: string | null
   }
@@ -23620,6 +23697,7 @@ export namespace Prisma {
 
   export type review_imageUncheckedUpdateManyInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
     review_id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -24606,6 +24684,12 @@ export namespace Prisma {
     none?: reviewWhereInput
   }
 
+  export type Review_imageListRelationFilter = {
+    every?: review_imageWhereInput
+    some?: review_imageWhereInput
+    none?: review_imageWhereInput
+  }
+
   export type User_restListRelationFilter = {
     every?: user_restWhereInput
     some?: user_restWhereInput
@@ -24627,6 +24711,10 @@ export namespace Prisma {
   }
 
   export type reviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type review_imageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24761,17 +24849,7 @@ export namespace Prisma {
     none?: reportWhereInput
   }
 
-  export type Review_imageListRelationFilter = {
-    every?: review_imageWhereInput
-    some?: review_imageWhereInput
-    none?: review_imageWhereInput
-  }
-
   export type reportOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type review_imageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -24878,29 +24956,34 @@ export namespace Prisma {
 
   export type review_imageCountOrderByAggregateInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
     link?: SortOrder
   }
 
   export type review_imageAvgOrderByAggregateInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
   }
 
   export type review_imageMaxOrderByAggregateInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
     link?: SortOrder
   }
 
   export type review_imageMinOrderByAggregateInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
     link?: SortOrder
   }
 
   export type review_imageSumOrderByAggregateInput = {
     id?: SortOrder
+    rest_id?: SortOrder
     review_id?: SortOrder
   }
 
@@ -25666,6 +25749,13 @@ export namespace Prisma {
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
   }
 
+  export type review_imageCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput> | review_imageCreateWithoutRestaurantInput[] | review_imageUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: review_imageCreateOrConnectWithoutRestaurantInput | review_imageCreateOrConnectWithoutRestaurantInput[]
+    createMany?: review_imageCreateManyRestaurantInputEnvelope
+    connect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+  }
+
   export type user_restCreateNestedManyWithoutRestaurantInput = {
     create?: XOR<user_restCreateWithoutRestaurantInput, user_restUncheckedCreateWithoutRestaurantInput> | user_restCreateWithoutRestaurantInput[] | user_restUncheckedCreateWithoutRestaurantInput[]
     connectOrCreate?: user_restCreateOrConnectWithoutRestaurantInput | user_restCreateOrConnectWithoutRestaurantInput[]
@@ -25706,6 +25796,13 @@ export namespace Prisma {
     connectOrCreate?: reviewCreateOrConnectWithoutRestaurantInput | reviewCreateOrConnectWithoutRestaurantInput[]
     createMany?: reviewCreateManyRestaurantInputEnvelope
     connect?: reviewWhereUniqueInput | reviewWhereUniqueInput[]
+  }
+
+  export type review_imageUncheckedCreateNestedManyWithoutRestaurantInput = {
+    create?: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput> | review_imageCreateWithoutRestaurantInput[] | review_imageUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: review_imageCreateOrConnectWithoutRestaurantInput | review_imageCreateOrConnectWithoutRestaurantInput[]
+    createMany?: review_imageCreateManyRestaurantInputEnvelope
+    connect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
   }
 
   export type user_restUncheckedCreateNestedManyWithoutRestaurantInput = {
@@ -25784,6 +25881,20 @@ export namespace Prisma {
     update?: reviewUpdateWithWhereUniqueWithoutRestaurantInput | reviewUpdateWithWhereUniqueWithoutRestaurantInput[]
     updateMany?: reviewUpdateManyWithWhereWithoutRestaurantInput | reviewUpdateManyWithWhereWithoutRestaurantInput[]
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
+  }
+
+  export type review_imageUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput> | review_imageCreateWithoutRestaurantInput[] | review_imageUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: review_imageCreateOrConnectWithoutRestaurantInput | review_imageCreateOrConnectWithoutRestaurantInput[]
+    upsert?: review_imageUpsertWithWhereUniqueWithoutRestaurantInput | review_imageUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: review_imageCreateManyRestaurantInputEnvelope
+    set?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    disconnect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    delete?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    connect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    update?: review_imageUpdateWithWhereUniqueWithoutRestaurantInput | review_imageUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: review_imageUpdateManyWithWhereWithoutRestaurantInput | review_imageUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
   }
 
   export type user_restUpdateManyWithoutRestaurantNestedInput = {
@@ -25868,6 +25979,20 @@ export namespace Prisma {
     update?: reviewUpdateWithWhereUniqueWithoutRestaurantInput | reviewUpdateWithWhereUniqueWithoutRestaurantInput[]
     updateMany?: reviewUpdateManyWithWhereWithoutRestaurantInput | reviewUpdateManyWithWhereWithoutRestaurantInput[]
     deleteMany?: reviewScalarWhereInput | reviewScalarWhereInput[]
+  }
+
+  export type review_imageUncheckedUpdateManyWithoutRestaurantNestedInput = {
+    create?: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput> | review_imageCreateWithoutRestaurantInput[] | review_imageUncheckedCreateWithoutRestaurantInput[]
+    connectOrCreate?: review_imageCreateOrConnectWithoutRestaurantInput | review_imageCreateOrConnectWithoutRestaurantInput[]
+    upsert?: review_imageUpsertWithWhereUniqueWithoutRestaurantInput | review_imageUpsertWithWhereUniqueWithoutRestaurantInput[]
+    createMany?: review_imageCreateManyRestaurantInputEnvelope
+    set?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    disconnect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    delete?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    connect?: review_imageWhereUniqueInput | review_imageWhereUniqueInput[]
+    update?: review_imageUpdateWithWhereUniqueWithoutRestaurantInput | review_imageUpdateWithWhereUniqueWithoutRestaurantInput[]
+    updateMany?: review_imageUpdateManyWithWhereWithoutRestaurantInput | review_imageUpdateManyWithWhereWithoutRestaurantInput[]
+    deleteMany?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
   }
 
   export type user_restUncheckedUpdateManyWithoutRestaurantNestedInput = {
@@ -26024,12 +26149,26 @@ export namespace Prisma {
     connect?: reviewWhereUniqueInput
   }
 
+  export type restaurantCreateNestedOneWithoutReview_imageInput = {
+    create?: XOR<restaurantCreateWithoutReview_imageInput, restaurantUncheckedCreateWithoutReview_imageInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutReview_imageInput
+    connect?: restaurantWhereUniqueInput
+  }
+
   export type reviewUpdateOneRequiredWithoutReview_imageNestedInput = {
     create?: XOR<reviewCreateWithoutReview_imageInput, reviewUncheckedCreateWithoutReview_imageInput>
     connectOrCreate?: reviewCreateOrConnectWithoutReview_imageInput
     upsert?: reviewUpsertWithoutReview_imageInput
     connect?: reviewWhereUniqueInput
     update?: XOR<XOR<reviewUpdateToOneWithWhereWithoutReview_imageInput, reviewUpdateWithoutReview_imageInput>, reviewUncheckedUpdateWithoutReview_imageInput>
+  }
+
+  export type restaurantUpdateOneRequiredWithoutReview_imageNestedInput = {
+    create?: XOR<restaurantCreateWithoutReview_imageInput, restaurantUncheckedCreateWithoutReview_imageInput>
+    connectOrCreate?: restaurantCreateOrConnectWithoutReview_imageInput
+    upsert?: restaurantUpsertWithoutReview_imageInput
+    connect?: restaurantWhereUniqueInput
+    update?: XOR<XOR<restaurantUpdateToOneWithWhereWithoutReview_imageInput, restaurantUpdateWithoutReview_imageInput>, restaurantUncheckedUpdateWithoutReview_imageInput>
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -27469,6 +27608,7 @@ export namespace Prisma {
     repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
@@ -27491,6 +27631,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
@@ -27570,6 +27711,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
@@ -27592,6 +27734,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -27687,6 +27830,28 @@ export namespace Prisma {
 
   export type reviewCreateManyRestaurantInputEnvelope = {
     data: reviewCreateManyRestaurantInput | reviewCreateManyRestaurantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type review_imageCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    link?: string | null
+    review: reviewCreateNestedOneWithoutReview_imageInput
+  }
+
+  export type review_imageUncheckedCreateWithoutRestaurantInput = {
+    id?: bigint | number
+    review_id: bigint | number
+    link?: string | null
+  }
+
+  export type review_imageCreateOrConnectWithoutRestaurantInput = {
+    where: review_imageWhereUniqueInput
+    create: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type review_imageCreateManyRestaurantInputEnvelope = {
+    data: review_imageCreateManyRestaurantInput | review_imageCreateManyRestaurantInput[]
     skipDuplicates?: boolean
   }
 
@@ -27828,6 +27993,32 @@ export namespace Prisma {
     like?: IntNullableFilter<"review"> | number | null
   }
 
+  export type review_imageUpsertWithWhereUniqueWithoutRestaurantInput = {
+    where: review_imageWhereUniqueInput
+    update: XOR<review_imageUpdateWithoutRestaurantInput, review_imageUncheckedUpdateWithoutRestaurantInput>
+    create: XOR<review_imageCreateWithoutRestaurantInput, review_imageUncheckedCreateWithoutRestaurantInput>
+  }
+
+  export type review_imageUpdateWithWhereUniqueWithoutRestaurantInput = {
+    where: review_imageWhereUniqueInput
+    data: XOR<review_imageUpdateWithoutRestaurantInput, review_imageUncheckedUpdateWithoutRestaurantInput>
+  }
+
+  export type review_imageUpdateManyWithWhereWithoutRestaurantInput = {
+    where: review_imageScalarWhereInput
+    data: XOR<review_imageUpdateManyMutationInput, review_imageUncheckedUpdateManyWithoutRestaurantInput>
+  }
+
+  export type review_imageScalarWhereInput = {
+    AND?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
+    OR?: review_imageScalarWhereInput[]
+    NOT?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
+    id?: BigIntFilter<"review_image"> | bigint | number
+    rest_id?: BigIntFilter<"review_image"> | bigint | number
+    review_id?: BigIntFilter<"review_image"> | bigint | number
+    link?: StringNullableFilter<"review_image"> | string | null
+  }
+
   export type user_restUpsertWithWhereUniqueWithoutRestaurantInput = {
     where: user_restWhereUniqueInput
     update: XOR<user_restUpdateWithoutRestaurantInput, user_restUncheckedUpdateWithoutRestaurantInput>
@@ -27964,6 +28155,7 @@ export namespace Prisma {
     repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
@@ -27986,6 +28178,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
@@ -27998,10 +28191,12 @@ export namespace Prisma {
   export type review_imageCreateWithoutReviewInput = {
     id?: bigint | number
     link?: string | null
+    restaurant: restaurantCreateNestedOneWithoutReview_imageInput
   }
 
   export type review_imageUncheckedCreateWithoutReviewInput = {
     id?: bigint | number
+    rest_id: bigint | number
     link?: string | null
   }
 
@@ -28121,6 +28316,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
@@ -28143,6 +28339,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -28161,15 +28358,6 @@ export namespace Prisma {
   export type review_imageUpdateManyWithWhereWithoutReviewInput = {
     where: review_imageScalarWhereInput
     data: XOR<review_imageUpdateManyMutationInput, review_imageUncheckedUpdateManyWithoutReviewInput>
-  }
-
-  export type review_imageScalarWhereInput = {
-    AND?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
-    OR?: review_imageScalarWhereInput[]
-    NOT?: review_imageScalarWhereInput | review_imageScalarWhereInput[]
-    id?: BigIntFilter<"review_image"> | bigint | number
-    review_id?: BigIntFilter<"review_image"> | bigint | number
-    link?: StringNullableFilter<"review_image"> | string | null
   }
 
   export type reviewCreateWithoutReview_imageInput = {
@@ -28199,6 +28387,57 @@ export namespace Prisma {
   export type reviewCreateOrConnectWithoutReview_imageInput = {
     where: reviewWhereUniqueInput
     create: XOR<reviewCreateWithoutReview_imageInput, reviewUncheckedCreateWithoutReview_imageInput>
+  }
+
+  export type restaurantCreateWithoutReview_imageInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
+    review?: reviewCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantUncheckedCreateWithoutReview_imageInput = {
+    id?: bigint | number
+    rest_image?: string | null
+    location?: string | null
+    name?: string | null
+    address?: string | null
+    rating?: number | null
+    monday?: string | null
+    tuesday?: string | null
+    wednesday?: string | null
+    thursday?: string | null
+    friday?: string | null
+    saturday?: string | null
+    sunday?: string | null
+    google_place_id?: string | null
+    repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
+    rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
+    review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
+  }
+
+  export type restaurantCreateOrConnectWithoutReview_imageInput = {
+    where: restaurantWhereUniqueInput
+    create: XOR<restaurantCreateWithoutReview_imageInput, restaurantUncheckedCreateWithoutReview_imageInput>
   }
 
   export type reviewUpsertWithoutReview_imageInput = {
@@ -28234,6 +28473,63 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     like?: NullableIntFieldUpdateOperationsInput | number | null
     report?: reportUncheckedUpdateManyWithoutReviewNestedInput
+  }
+
+  export type restaurantUpsertWithoutReview_imageInput = {
+    update: XOR<restaurantUpdateWithoutReview_imageInput, restaurantUncheckedUpdateWithoutReview_imageInput>
+    create: XOR<restaurantCreateWithoutReview_imageInput, restaurantUncheckedCreateWithoutReview_imageInput>
+    where?: restaurantWhereInput
+  }
+
+  export type restaurantUpdateToOneWithWhereWithoutReview_imageInput = {
+    where?: restaurantWhereInput
+    data: XOR<restaurantUpdateWithoutReview_imageInput, restaurantUncheckedUpdateWithoutReview_imageInput>
+  }
+
+  export type restaurantUpdateWithoutReview_imageInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUpdateManyWithoutRestaurantNestedInput
+  }
+
+  export type restaurantUncheckedUpdateWithoutReview_imageInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    monday?: NullableStringFieldUpdateOperationsInput | string | null
+    tuesday?: NullableStringFieldUpdateOperationsInput | string | null
+    wednesday?: NullableStringFieldUpdateOperationsInput | string | null
+    thursday?: NullableStringFieldUpdateOperationsInput | string | null
+    friday?: NullableStringFieldUpdateOperationsInput | string | null
+    saturday?: NullableStringFieldUpdateOperationsInput | string | null
+    sunday?: NullableStringFieldUpdateOperationsInput | string | null
+    google_place_id?: NullableStringFieldUpdateOperationsInput | string | null
+    repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
+    rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
+    review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
   export type allergyCreateWithoutUserInput = {
@@ -28828,6 +29124,7 @@ export namespace Prisma {
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
   }
 
@@ -28850,6 +29147,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
@@ -28939,6 +29237,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
   }
 
@@ -28961,6 +29260,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
@@ -28982,6 +29282,7 @@ export namespace Prisma {
     repre_menu?: repre_menuCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
@@ -29004,6 +29305,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
@@ -29042,6 +29344,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
@@ -29064,6 +29367,7 @@ export namespace Prisma {
     repre_menu?: repre_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -29086,6 +29390,7 @@ export namespace Prisma {
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
@@ -29108,6 +29413,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     user_rest?: user_restUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
@@ -29146,6 +29452,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
@@ -29168,6 +29475,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     user_rest?: user_restUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
@@ -29191,6 +29499,7 @@ export namespace Prisma {
     rest_menu?: rest_menuCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagCreateNestedManyWithoutRestaurantInput
     review?: reviewCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageCreateNestedManyWithoutRestaurantInput
     zzim?: zzimCreateNestedManyWithoutRestaurantInput
   }
 
@@ -29213,6 +29522,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedCreateNestedManyWithoutRestaurantInput
     rest_tag?: rest_tagUncheckedCreateNestedManyWithoutRestaurantInput
     review?: reviewUncheckedCreateNestedManyWithoutRestaurantInput
+    review_image?: review_imageUncheckedCreateNestedManyWithoutRestaurantInput
     zzim?: zzimUncheckedCreateNestedManyWithoutRestaurantInput
   }
 
@@ -29296,6 +29606,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUpdateManyWithoutRestaurantNestedInput
     review?: reviewUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUpdateManyWithoutRestaurantNestedInput
   }
 
@@ -29318,6 +29629,7 @@ export namespace Prisma {
     rest_menu?: rest_menuUncheckedUpdateManyWithoutRestaurantNestedInput
     rest_tag?: rest_tagUncheckedUpdateManyWithoutRestaurantNestedInput
     review?: reviewUncheckedUpdateManyWithoutRestaurantNestedInput
+    review_image?: review_imageUncheckedUpdateManyWithoutRestaurantNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
@@ -29441,6 +29753,12 @@ export namespace Prisma {
     like?: number | null
   }
 
+  export type review_imageCreateManyRestaurantInput = {
+    id?: bigint | number
+    review_id: bigint | number
+    link?: string | null
+  }
+
   export type user_restCreateManyRestaurantInput = {
     id?: bigint | number
     user_id: bigint | number
@@ -29531,6 +29849,24 @@ export namespace Prisma {
     like?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type review_imageUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    review?: reviewUpdateOneRequiredWithoutReview_imageNestedInput
+  }
+
+  export type review_imageUncheckedUpdateWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    review_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type review_imageUncheckedUpdateManyWithoutRestaurantInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    review_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type user_restUpdateWithoutRestaurantInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     user?: userUpdateOneRequiredWithoutUser_restNestedInput
@@ -29572,6 +29908,7 @@ export namespace Prisma {
 
   export type review_imageCreateManyReviewInput = {
     id?: bigint | number
+    rest_id: bigint | number
     link?: string | null
   }
 
@@ -29596,15 +29933,18 @@ export namespace Prisma {
   export type review_imageUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurant?: restaurantUpdateOneRequiredWithoutReview_imageNestedInput
   }
 
   export type review_imageUncheckedUpdateWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type review_imageUncheckedUpdateManyWithoutReviewInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
+    rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
     link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

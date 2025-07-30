@@ -39,3 +39,10 @@ export const findUserByEmail = async (email) => {
     where: { email },
   });
 };
+
+export const updateUserPasswordById = async (id, newPassword) => {
+  return prisma.user.update({
+    where: { id: Number(id) },
+    data: { password: newPassword },
+  });
+};
