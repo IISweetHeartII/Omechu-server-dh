@@ -140,8 +140,12 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
+<<<<<<< HEAD
     host: "omechu-api.log8.kr",
     schemes: ["https"],
+=======
+    host: "localhost:3000",
+>>>>>>> develop
     basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
@@ -179,7 +183,7 @@ app.post("/menu-info", handleGetMenuInfo);
 app.post("/mukburim", handleInsertMukburim);
 
 // Restaurant & Review
-app.post("/place/review", isLoggedIn, handleAddReview);
+app.post("/place/review/:restId", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.post("/place", isLoggedIn, handleAddRestaurant);

@@ -1,6 +1,7 @@
 import { prisma } from "../db.config.js";
 
 export const addReviewData = async (data) => {
+  console.log("data", data);
   const userId = await prisma.user.findFirst({ where: { id: data.userId } });
   if (!userId) {
     return { error: "NO_USER" };
@@ -24,14 +25,19 @@ export const addReviewData = async (data) => {
       text: data.reviewText,
     },
   });
+  console.log("reviewId", reviewId);
   const reviewImageId = await Promise.all(
     data.imageUrl.map((url) => {
       return prisma.review_image.create({
-        data: { review_id: reviewId.id, link: url },
+        data: {
+          review_id: BigInt(reviewId.id),
+          link: url,
+          rest_id: BigInt(reviewId.rest_id),
+        },
       });
     })
   );
-
+  console.log("reviewImageId", reviewImageId);
   const updateTag = await Promise.all(
     data.tag.map(async (unit) => {
       const restTag = await prisma.rest_tag.upsert({
