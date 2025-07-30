@@ -156,9 +156,44 @@ export const addressToLocation = async (address) => {
   }
 };
 
-export const fetchPlaceDetail = async (placeId) => {
-  try {
-    const url = `https://places.googleapis.com/v1/places/${placeId}?languageCode=ko`;
+export const getPlaceDetail = async (restId) => {
+  const placeId = await prisma.restaurant.findFirst({
+    where: { id: restId },
+  });
+  console.log("placeId", placeId);
+  if (placeId.google_place_id === null) {
+    const restData = await prisma.rest_tag.findMany({
+      where: { rest_id: restId },
+      select: { tag: true },
+      take: 3,
+      orderBy: { count: "asc" },
+    });
+    const reviewImage = await prisma.review_image.findMany({
+      where: { review_id: restData.id },
+      select: { id: true, link: true },
+    });
+    const reviewImageToInt = await reviewImage.map((data) => {
+      return { ...data, id: data.id.toString() };
+    });
+
+    return {
+      id: placeId.id.toString(),
+      name: placeId.name,
+      address: placeId.address,
+      rating: placeId.rating,
+      monday: placeId.monday,
+      tuesday: placeId.tuesday,
+      wednesday: placeId.wednesday,
+      thursday: placeId.thursday,
+      friday: placeId.friday,
+      saturday: placeId.saturday,
+      sunday: placeId.sunday,
+      googlePlaceId: placeId.google_place_id,
+      restTag: restData,
+      reviewImage: reviewImageToInt,
+    };
+  } else {
+    const url = `https://places.googleapis.com/v1/places/${placeId.google_place_id}?languageCode=ko`;
 
     const response = await fetch(url, {
       method: "GET",
@@ -166,20 +201,39 @@ export const fetchPlaceDetail = async (placeId) => {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": process.env.GOOGLE_MAPS_API_KEY,
         "X-Goog-FieldMask":
-          "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress,location",
+          "currentOpeningHours.weekdayDescriptions,displayName,formattedAddress,location,rating,photos",
       },
     });
-
     if (!response.ok) {
       console.error("Google Places API 요청 실패:", response.statusText);
       return null;
     }
 
-    const data = await response.json();
-    console.log("Fetched place detail:", data);
-    return data;
-  } catch (error) {
+    const { location, displayName, currentOpeningHours, rating, photos } =
+      await response.json();
+    const reviewImage = photos.map((image, index) => {
+      return { [`name${index}`]: image.name };
+    });
+
+    const newUrl = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.longitude}&y=${location.latitude}`;
+
+    const response2 = await fetch(newUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `KakaoAK ${process.env.KAKAO_REST_API_KEY}`,
+      },
+    });
+    const data = await response2.json();
+    return {
+      id: placeId.id.toString(),
+      name: displayName.text,
+      address: data.documents[0].road_address.address_name,
+      rating: rating,
+      currentOpeningHours: currentOpeningHours.weekdayDescriptions,
+      googlePlaceId: placeId.google_place_id,
+      reviewImage: reviewImage,
+    };
+
     console.error("Google Places 요청 중 에러 발생:", error);
-    return null;
   }
 };
