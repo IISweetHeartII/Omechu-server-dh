@@ -6,7 +6,6 @@ import {
   FailToAddReview,
 } from "../errors.js";
 import { addReviewData } from "../repositories/addReview.repository.js";
-// improt {addReviewData} from ""
 export const addReview = async (data) => {
   if (!data) {
     throw new NoReviewData("리뷰 정보가 없습니다", data);
