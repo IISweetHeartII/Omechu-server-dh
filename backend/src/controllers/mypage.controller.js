@@ -22,7 +22,6 @@ import {
 
 /**
  * 내 프로필 조회 - GET /profile/{id}
- *
  */
 export const handleGetUserProfile = async (req, res, next) => {
   /*
@@ -53,7 +52,17 @@ export const handleGetUserProfile = async (req, res, next) => {
                 body_type: { type: "string", example: "감기" },
                 gender: { type: "string", example: "남성" },
                 exercise: { type: "string", example: "다이어트 중" },
-                profileImageUrl: { type: "string", example: "https://s3.amazonaws.com/profile.jpg" },
+                prefer: { 
+                  type: "array", 
+                  items: { type: "string" },
+                  example: ["한식", "양식"]
+                },
+                allergy: { 
+                  type: "array", 
+                  items: { type: "string" },
+                  example: ["달걀(난류) 알레르기", "우유 알레르기"]
+                },
+                profileImageUrl: { type: "string", example: "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/profile/123.jpg" },
                 created_at: { type: "string", example: "2023-01-01T00:00:00.000Z" },
                 updated_at: { type: "string", example: "2023-01-01T00:00:00.000Z" }
               }
@@ -66,17 +75,6 @@ export const handleGetUserProfile = async (req, res, next) => {
   */
 
   try {
-    // 테스트용: 인증 체크 우회 (실제 서비스에서는 아래 주석 해제)
-    // const sessionUserId = req.session.user?.id;
-    // if (!sessionUserId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "로그인이 필요합니다.",
-    //     data: null
-    //   });
-    // }
-
-    // path parameter에서 userId만 받기
     const { id: userId } = req.params;
 
     if (!userId) {
@@ -87,7 +85,6 @@ export const handleGetUserProfile = async (req, res, next) => {
       });
     }
 
-    // 모든 프로필 정보를 한 번에 조회
     const userProfile = await getUserProfile(parseInt(userId));
     const responseData = responseFromProfile(userProfile);
 
@@ -100,7 +97,6 @@ export const handleGetUserProfile = async (req, res, next) => {
 
 /**
  * 프로필 정보 수정 - PATCH /profile/{id}
- * 
  */
 export const handleUpdateUserProfile = async (req, res, next) => {
   /*
@@ -122,10 +118,20 @@ export const handleUpdateUserProfile = async (req, res, next) => {
           properties: {
             email: { type: 'string', example: 'user@example.com' },
             nickname: { type: 'string', example: '새닉네임' },
-            body_type: { type: 'integer', example: 1 },
-            gender: { type: 'integer', example: 1 },
-            exercise: { type: 'integer', example: 1 },
-            profileImageUrl: { type: 'string', example: 'https://s3.amazonaws.com/profile.jpg' }
+            body_type: { type: 'string', example: '감기', enum: ['감기', '소화불량', '더위잘탐', '추위잘탐'] },
+            gender: { type: 'string', example: '남성', enum: ['남성', '여성'] },
+            exercise: { type: 'string', example: '다이어트 중', enum: ['다이어트 중', '증량 중', '유지 중'] },
+            prefer: { 
+              type: 'array', 
+              items: { type: 'string', enum: ['한식', '양식', '중식', '일식', '다른나라'] },
+              example: ['한식', '양식']
+            },
+            allergy: { 
+              type: 'array', 
+              items: { type: 'string', enum: ['달걀(난류) 알레르기', '우유 알레르기', '갑각류 알레르기', '해산물 알레르기', '견과류 알레르기'] },
+              example: ['달걀(난류) 알레르기']
+            },
+            profileImageUrl: { type: 'string', example: 'https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/profile/123.jpg' }
           }
         }
       }
@@ -146,102 +152,22 @@ export const handleUpdateUserProfile = async (req, res, next) => {
                 id: { type: "string", example: "1" },
                 email: { type: "string", example: "user@example.com" },
                 nickname: { type: "string", example: "새닉네임" },
-                profileImageUrl: { type: "string", example: "https://s3.amazonaws.com/profile.jpg" }
+                body_type: { type: "string", example: "감기" },
+                gender: { type: "string", example: "남성" },
+                exercise: { type: "string", example: "다이어트 중" },
+                prefer: { 
+                  type: "array", 
+                  items: { type: "string" },
+                  example: ["한식", "양식"]
+                },
+                allergy: { 
+                  type: "array", 
+                  items: { type: "string" },
+                  example: ["달걀(난류) 알레르기"]
+                },
+                profileImageUrl: { type: "string", example: "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/profile/123.jpg" }
               }
             }
-          }
-        }
-      }
-    }
-  }
-  #swagger.responses[400] = {
-    description: "잘못된 요청 (필수 값 누락, 잘못된 형식 등)",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "C006" },
-                reason: { type: "string", example: "사용자 ID가 필요합니다." },
-                data: { type: "object", example: null }
-              }
-            },
-            success: { type: "object", example: null }
-          }
-        }
-      }
-    }
-  }
-  #swagger.responses[401] = {
-    description: "인증 필요",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "AUTH_REQUIRED" },
-                reason: { type: "string", example: "로그인이 필요합니다." },
-                data: { type: "object", example: null }
-              }
-            },
-            success: { type: "object", example: null }
-          }
-        }
-      }
-    }
-  }
-  #swagger.responses[409] = {
-    description: "이메일 중복",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "M002" },
-                reason: { type: "string", example: "이미 사용중인 이메일입니다." },
-                data: { 
-                  type: "object",
-                  properties: {
-                    email: { type: "string", example: "duplicate@example.com" }
-                  }
-                }
-              }
-            },
-            success: { type: "object", example: null }
-          }
-        }
-      }
-    }
-  }
-  #swagger.responses[500] = {
-    description: "서버 내부 오류",
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          properties: {
-            resultType: { type: "string", example: "FAIL" },
-            error: {
-              type: "object",
-              properties: {
-                errorCode: { type: "string", example: "SERVER_ERROR" },
-                reason: { type: "string", example: "서버 내부 오류가 발생했습니다." },
-                data: { type: "object", example: null }
-              }
-            },
-            success: { type: "object", example: null }
           }
         }
       }
@@ -250,18 +176,6 @@ export const handleUpdateUserProfile = async (req, res, next) => {
   */
 
   try {
-    // 테스트용: 인증 체크 우회 (실제 서비스에서는 아래 주석 해제)
-    // const sessionUserId = req.session.user?.id;
-    // const { id: userId } = req.params;
-    // if (!sessionUserId || sessionUserId !== userId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "본인만 수정할 수 있습니다.",
-    //     data: null
-    //   });
-    // }
-
-    // path parameter에서 userId 받기
     const { id: userId } = req.params;
     
     if (!userId) {
@@ -285,7 +199,6 @@ export const handleUpdateUserProfile = async (req, res, next) => {
 
 /**
  * 특정 맛집 정보 조회 - GET /restaurant/{id}
- * 
  */
 export const handleGetRestaurantDetail = async (req, res, next) => {
   /*
@@ -303,8 +216,7 @@ export const handleGetRestaurantDetail = async (req, res, next) => {
   try {
     const { id: restaurantId } = req.params;
     
-    // 특정 맛집의 모든 정보를 조회
-    const result = await getMyRestaurants(null, 1000, null); // 전체에서 찾기
+    const result = await getMyRestaurants(null, 1000, null);
     const restaurant = result.data.find(r => r.id === restaurantId);
     
     if (!restaurant) {
@@ -325,7 +237,6 @@ export const handleGetRestaurantDetail = async (req, res, next) => {
 
 /**
  * 사용자의 모든 등록 맛집 조회 - GET /restaurants/{userId}
- *
  */
 export const handleGetMyRestaurants = async (req, res, next) => {
   /*
@@ -341,17 +252,6 @@ export const handleGetMyRestaurants = async (req, res, next) => {
   */
 
   try {
-    // 인증 체크 우회
-    // const sessionUserId = req.session.user?.id;
-    // const { userId } = req.params;
-    // if (!sessionUserId || sessionUserId !== userId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "본인의 맛집만 조회할 수 있습니다.",
-    //     data: null
-    //   });
-    // }
-
     const { userId } = req.params;
     
     if (!userId) {
@@ -362,7 +262,6 @@ export const handleGetMyRestaurants = async (req, res, next) => {
       });
     }
 
-    // 🚀 해당 사용자의 모든 맛집을 조회 (페이지네이션 없이 전체)
     const result = await getMyRestaurants(parseInt(userId), 1000, null);
     const responseData = responseFromRestaurantList(result.data, false, null);
 
@@ -375,7 +274,6 @@ export const handleGetMyRestaurants = async (req, res, next) => {
 
 /**
  * 맛집 정보 수정 - PATCH /restaurant/{id}
- *
  */
 export const handleUpdateRestaurant = async (req, res, next) => {
   /*
@@ -407,18 +305,8 @@ export const handleUpdateRestaurant = async (req, res, next) => {
   */
 
   try {
-    // 🔥 테스트용: 인증 체크 우회
-    // const sessionUserId = req.session.user?.id;
-    // if (!sessionUserId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "로그인이 필요합니다.",
-    //     data: null
-    //   });
-    // }
-
     const { id: restaurantId } = req.params;
-    const { userId } = req.body; // 테스트용으로만 사용
+    const { userId } = req.body;
     
     if (!restaurantId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
@@ -447,7 +335,6 @@ export const handleUpdateRestaurant = async (req, res, next) => {
 
 /**
  * 사용자의 모든 찜 목록 조회 - GET /hearts/{userId}
- * 🎯 프론트엔드 친화적: 사용자 ID만으로 모든 찜 목록 반환
  */
 export const handleGetZzimList = async (req, res, next) => {
   /*
@@ -463,17 +350,6 @@ export const handleGetZzimList = async (req, res, next) => {
   */
 
   try {
-    // 🔥 테스트용: 인증 체크 우회
-    // const sessionUserId = req.session.user?.id;
-    // const { userId } = req.params;
-    // if (!sessionUserId || sessionUserId !== userId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "본인의 찜 목록만 조회할 수 있습니다.",
-    //     data: null
-    //   });
-    // }
-
     const { userId } = req.params;
     
     if (!userId) {
@@ -484,7 +360,6 @@ export const handleGetZzimList = async (req, res, next) => {
       });
     }
 
-    //  해당 사용자의 모든 찜 목록을 조회 (페이지네이션 없이 전체)
     const result = await getZzimList(parseInt(userId), 1000, null);
     const responseData = responseFromZzimList(result.data, false, null);
 
@@ -497,7 +372,6 @@ export const handleGetZzimList = async (req, res, next) => {
 
 /**
  * 찜 등록 - POST /heart
- * 
  */
 export const handleAddZzim = async (req, res, next) => {
   /*
@@ -522,17 +396,6 @@ export const handleAddZzim = async (req, res, next) => {
   */
 
   try {
-    // 인증 체크 우회
-    // const sessionUserId = req.session.user?.id;
-    // const { userId } = req.body;
-    // if (!sessionUserId || sessionUserId !== userId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "본인만 찜할 수 있습니다.",
-    //     data: null
-    //   });
-    // }
-
     const { userId, restaurantId } = req.body;
     
     if (!userId || !restaurantId) {
@@ -555,7 +418,6 @@ export const handleAddZzim = async (req, res, next) => {
 
 /**
  * 찜 해제 - DELETE /heart
- *  
  */
 export const handleRemoveZzim = async (req, res, next) => {
   /*
@@ -580,17 +442,6 @@ export const handleRemoveZzim = async (req, res, next) => {
   */
 
   try {
-    // 테스트용: 인증 체크 우회
-    // const sessionUserId = req.session.user?.id;
-    // const { userId } = req.body;
-    // if (!sessionUserId || sessionUserId !== userId) {
-    //   return res.status(StatusCodes.UNAUTHORIZED).error({
-    //     errorCode: "AUTH_REQUIRED",
-    //     reason: "본인만 찜 해제할 수 있습니다.",
-    //     data: null
-    //   });
-    // }
-
     const { userId, restaurantId } = req.body;
     
     if (!userId || !restaurantId) {
