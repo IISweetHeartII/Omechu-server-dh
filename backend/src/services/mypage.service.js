@@ -46,7 +46,7 @@ export const updateUserProfileService = async (userId, data) => {
   }
 
   // 업데이트할 데이터가 있는지 확인
-  const updateFields = ['email', 'phone_num', 'nickname', 'profileImageUrl'];
+  const updateFields = ['email', 'nickname', 'body_type', 'gender', 'exercise', 'prefer', 'allergy', 'profileImageUrl'];
   const hasUpdateData = updateFields.some(field => data[field] !== undefined);
   
   if (!hasUpdateData) {
@@ -83,12 +83,6 @@ export const getMyRestaurants = async (userId, limit = 10, cursor = null) => {
  * 맛집 정보 수정
  */
 export const updateRestaurantService = async (restaurantId, userId, data) => {
-  // 맛집 존재 확인을 임시로 건너뛰기 (DB 스키마 문제 때문)
-  // const existingRestaurant = await findRestaurantById(restaurantId);
-  // if (!existingRestaurant) {
-  //   throw new NoRestData("맛집을 찾을 수 없습니다.", { restaurantId });
-  // }
-
   // 업데이트할 데이터 필터링 (실제 존재하는 컬럼만)
   const updateFields = ['name', 'repre_menu', 'address'];
   
@@ -112,7 +106,7 @@ export const updateRestaurantService = async (restaurantId, userId, data) => {
 };
 
 /**
- * 찜 등록 (맛집 존재 확인 제거)
+ * 찜 등록
  */
 export const addZzimService = async (userId, restaurantId) => {
   // 사용자 존재 확인
@@ -120,12 +114,6 @@ export const addZzimService = async (userId, restaurantId) => {
   if (!user) {
     throw new NoProfileData("사용자를 찾을 수 없습니다.", { userId });
   }
-
-  // 🔧 맛집 존재 확인을 임시로 건너뛰기 (DB 스키마 문제)
-  // const restaurant = await findRestaurantById(restaurantId);
-  // if (!restaurant) {
-  //   throw new NoRestData("맛집을 찾을 수 없습니다.", { restaurantId });
-  // }
 
   // 이미 찜했는지 확인
   const existingZzim = await findZzim(userId, restaurantId);

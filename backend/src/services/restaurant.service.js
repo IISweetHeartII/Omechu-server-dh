@@ -4,7 +4,7 @@ import {
   addRestaurantToDatabase,
   checkRestaurantExists,
 } from "../repositories/restaurant.repository.js";
-import { fetchPlaceDetail } from "../repositories/restaurant.repository.js";
+import { getPlaceDetail } from "../repositories/restaurant.repository.js";
 export const fetchKakaoPlacesService = async (info) => {
   console.log("Service called with info:", info);
   const documents = await fetchKakaoPlaces(info);
@@ -37,13 +37,13 @@ export const fetchGooglePlacesService = async (info) => {
   return response.places;
 };
 
-export const fetchPlaceDetailService = async (placeId) => {
-  console.log("Fetching Google Place detail for ID:", placeId);
-  const placeDetail = await fetchPlaceDetail(placeId);
+export const getPlaceDetailService = async (restId) => {
+  console.log("Get Google Place detail for ID:", restId);
+  const placeDetail = await getPlaceDetail(restId);
+  console.log("placeDetail", placeDetail);
   if (!placeDetail) {
-    console.error("No place detail found for ID:", placeId);
+    console.error("No place detail found for ID:", restId);
     return null;
   }
-  console.log("Fetched place detail from service:", placeDetail);
   return placeDetail;
 };

@@ -24,7 +24,7 @@ import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
-import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+import { handleGetPlaceDetail } from "./controllers/restaurant.controller.js";
 import {
   handleResetRequest,
   handleResetPassword,
@@ -49,6 +49,7 @@ import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
+import { handleChangePassword } from "./controllers/passwordChange.controller.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -76,12 +77,14 @@ const sessionStore = new MySQLSession({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
+
 app.use(
   cors({
     origin: ["http://localhost:3000", "https://omechu.log8.kr"],
     credentials: true,
   })
 );
+
 const isProduction = process.env.NODE_ENV === "production";
 app.use(
   session({
@@ -92,11 +95,12 @@ app.use(
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
-      secure: isProduction, // 프로덕션 환경에서만 secure 활성화
-      sameSite: isProduction ? "None" : "Lax", // 프로덕션은 None, 개발은 Lax
+      secure: isProduction,
+      sameSite: isProduction ? "None" : "Lax",
     },
   })
 );
+
 // 세션 검증 미들웨어
 const isLoggedIn = (req, res, next) => {
   if (req.session.user) {
@@ -146,7 +150,6 @@ app.get("/openapi.json", async (req, res, next) => {
 });
 
 // 기타 미들웨어
-
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -155,18 +158,6 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
-
-//메인페이지 관련
-app.post("/recommend", handleRecommendMenu);
-app.get("/fetch-places", handleFetchKakaoPlaces);
-
-app.post("/fetch-google-places", handleFetchGooglePlaces);
-app.get("/place-detail/:id", handleFetchPlaceDetail);
-app.post("/find-related-menu", handleFindRelatedMenu);
-app.get("/menu", handleGetMenu);
-app.post("/menu-info", handleGetMenuInfo);
-app.post("/mukburim", handleInsertMukburim);
-
 // Auth
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
@@ -177,17 +168,28 @@ app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
+app.patch("/auth/change-passwd", handleChangePassword);
 
+//메인페이지 관련
+app.post("/recommend", handleRecommendMenu);
+app.get("/fetch-places", handleFetchKakaoPlaces);
+app.post("/fetch-google-places", handleFetchGooglePlaces);
+app.post("/find-related-menu", handleFindRelatedMenu);
+app.get("/menu", handleGetMenu);
+app.post("/menu-info", handleGetMenuInfo);
+app.post("/mukburim", handleInsertMukburim);
+
+// Restaurant & Review
 app.post("/place/review", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
+app.get("/place/detail/:restId", isLoggedIn, handleGetPlaceDetail);
 app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
-app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
-app.get("/test/restaurant/:id", handleGetRestaurantDetail);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
+
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
@@ -195,17 +197,11 @@ app.post("/image/upload", generatePresignedUrl);
 app.get("/profile/:id", isLoggedIn, handleGetUserProfile);
 app.patch("/profile/:id", isLoggedIn, handleUpdateUserProfile);
 app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
-app.get("/test/profile/:id", handleGetUserProfile);
-app.patch("/test/profile/:id", handleUpdateUserProfile);
-app.get("/test/restaurants/:userId", handleGetMyRestaurants);
 
 // Heart
 app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
-app.get("/test/hearts/:userId", handleGetZzimList);
-app.post("/test/heart", handleAddZzim);
-app.delete("/test/heart", handleRemoveZzim);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {

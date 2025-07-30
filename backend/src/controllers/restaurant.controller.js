@@ -1,8 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { fetchKakaoPlacesService } from "../services/restaurant.service.js";
 import { fetchGooglePlacesService } from "../services/restaurant.service.js";
-import { fetchPlaceDetailService } from "../services/restaurant.service.js";
-import { openingHoursDto } from "../dtos/restaurant.dto.js";
+import { getPlaceDetailService } from "../services/restaurant.service.js";
+import {
+  openingHoursDto,
+  responseFromGetRestData,
+} from "../dtos/restaurant.dto.js";
 export const handleFetchKakaoPlaces = async (req, res) => {
   const info = {
     y: req.body.y,
@@ -149,14 +152,19 @@ export const handleFetchGooglePlaces = async (req, res) => {
   */
 };
 
-export const handleFetchPlaceDetail = async (req, res) => {
-  const placeId = req.params.id;
-
+export const handleGetPlaceDetail = async (req, res) => {
+  const placeId = BigInt(req.params.restId);
   try {
-    const placeDetail = await fetchPlaceDetailService(placeId);
-    placeDetail.currentOpeningHours.weekdayDescriptions = openingHoursDto(
-      placeDetail.currentOpeningHours.weekdayDescriptions
-    );
+    let placeDetail = await getPlaceDetailService(placeId);
+
+    if (placeDetail.googlePlaceId !== null) {
+      placeDetail.currentOpeningHours = openingHoursDto(
+        placeDetail.currentOpeningHours
+      );
+    } else {
+      placeDetail = responseFromGetRestData(placeDetail);
+    }
+    console.log("placeDetail2", placeDetail);
     if (placeDetail) {
       res.status(StatusCodes.OK).json(placeDetail);
     } else {
@@ -173,19 +181,20 @@ export const handleFetchPlaceDetail = async (req, res) => {
 
   /*
   #swagger.tags = ["Restaurant"]
-  #swagger.summary = "Google Places 장소 상세 정보 조회 API"
+  #swagger.summary = "특정 맛집 정보 조회하기 API"
   #swagger.description = "Google Places API를 사용하여 특정 장소의 상세 정보를 조회하는 API입니다."
 
-  #swagger.parameters['id'] = {
+  #swagger.parameters['restId'] = {
     in: 'path',
-    name: 'id',
+    name: 'restId',
     required: true,
     type: 'string',
-    example: 'ChIJm26UcZyhfDURkuYARFNUpp8',
-    description: 'Google Place ID'
+    example: '1 or 129',
+    description: '해당 가게의 ID'
   }
 
   #swagger.responses[200] = {
+<<<<<<< HEAD
     description: "장소 상세 정보 조회 성공",
     content: {
       'application/json': {
@@ -211,9 +220,19 @@ export const handleFetchPlaceDetail = async (req, res) => {
             },
             
             currentOpeningHours: {
+=======
+  description: "장소 상세 정보 조회 성공",
+  content: {
+    'application/json': {
+      schema: {
+>>>>>>> develop
         type: 'object',
         properties: {
-          weekdayDescriptions: {
+          id: { type: 'string', example: '1' },
+          name: { type: 'string', example: "루뽀 LUPO" },
+          address: { type: 'string', example: "서울특별시 성동구 왕십리로 100" },
+          rating: { type: 'number', example: 4.6 },
+          currentOpeningHours: {
             type: 'array',
             items: {
               type: 'object',
@@ -226,7 +245,7 @@ export const handleFetchPlaceDetail = async (req, res) => {
                 time: { 
                   type: 'string', 
                   example: '10:00 - 22:00',
-                  description: '영업시간 (휴일인 경우 "휴일")'
+                  description: '영업시간 (휴일인 경우 "휴무")'
                 }
               }
             },
@@ -236,7 +255,7 @@ export const handleFetchPlaceDetail = async (req, res) => {
               { days_of_the_week: "수", time: "10:00 - 22:00" },
               { days_of_the_week: "목", time: "10:00 - 22:00" },
               { days_of_the_week: "금", time: "10:00 - 23:00" },
-              { days_of_the_week: "토", time: "10:00 - 23:00" },
+              { days_of_the_week: "토", time: "24시간 영업" },
               { days_of_the_week: "일", time: "휴일" }
             ]
           }
@@ -244,7 +263,30 @@ export const handleFetchPlaceDetail = async (req, res) => {
       }
     }
   }
-
+}
+  #swagger.responses[401] = {
+  description: "인가되지 않은 사용자일 때",
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          resultType: { type: 'string', example: 'FAIL' },
+          error: {
+            type: 'object',
+            properties: {
+              errorCode: { type: 'string', example: 'AUTH_REQUIRED' },
+              reason: { type: 'string', example: '로그인이 필요합니다' },
+              data: { type: 'string', example: null }
+            }
+          },
+          success: { type: 'object', example: null }
+        }
+      }
+    }
+  }
+}              
+       
   #swagger.responses[404] = {
     description: "장소 상세 정보를 찾을 수 없음",
     content: {

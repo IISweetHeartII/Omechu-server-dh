@@ -196,6 +196,7 @@ exports.Prisma.ReviewScalarFieldEnum = {
 
 exports.Prisma.Review_imageScalarFieldEnum = {
   id: 'id',
+  rest_id: 'rest_id',
   review_id: 'review_id',
   link: 'link'
 };
