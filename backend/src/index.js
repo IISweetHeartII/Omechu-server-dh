@@ -142,7 +142,6 @@ app.get("/openapi.json", async (req, res, next) => {
     },
     host: "omechu-api.log8.kr",
     schemes: ["https"],
-    // host: "localhost:3000",
     basePath: "/",
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
