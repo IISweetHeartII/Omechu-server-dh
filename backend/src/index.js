@@ -49,6 +49,7 @@ import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
+import { handleChangePassword } from "./controllers/passwordChange.controller.js";
 dotenv.config();
 
 const app = express();
@@ -176,6 +177,7 @@ app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
+app.patch("/auth/change-passwd", handleChangePassword);
 
 app.post("/place/review", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);

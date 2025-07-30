@@ -284,3 +284,13 @@ export class FailToReportReview extends Error {
     this.data = data;
   }
 }
+
+
+export class InvalidPasswordError extends Error {
+  errorCode = "V003";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
