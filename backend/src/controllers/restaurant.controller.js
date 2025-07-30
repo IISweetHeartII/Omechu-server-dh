@@ -153,7 +153,7 @@ export const handleFetchGooglePlaces = async (req, res) => {
 };
 
 export const handleGetPlaceDetail = async (req, res) => {
-  const placeId = req.params.restId;
+  const placeId = BigInt(req.params.restId);
   try {
     let placeDetail = await getPlaceDetailService(placeId);
 
