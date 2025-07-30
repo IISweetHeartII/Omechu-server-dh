@@ -154,7 +154,6 @@ export const handleFetchGooglePlaces = async (req, res) => {
 
 export const handleGetPlaceDetail = async (req, res) => {
   const placeId = req.params.restId;
-
   try {
     let placeDetail = await getPlaceDetailService(placeId);
 
@@ -187,10 +186,10 @@ export const handleGetPlaceDetail = async (req, res) => {
 
   #swagger.parameters['restId'] = {
     in: 'path',
-    name: 'id',
+    name: 'restId',
     required: true,
     type: 'string',
-    example: '1',
+    example: '1 or 129',
     description: '해당 가게의 ID'
   }
 

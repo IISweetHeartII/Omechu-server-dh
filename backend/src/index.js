@@ -157,17 +157,6 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
-
-//메인페이지 관련
-app.post("/recommend", handleRecommendMenu);
-app.get("/fetch-places", handleFetchKakaoPlaces);
-app.post("/fetch-google-places", handleFetchGooglePlaces);
-
-app.post("/find-related-menu", handleFindRelatedMenu);
-app.get("/menu", handleGetMenu);
-app.post("/menu-info", handleGetMenuInfo);
-app.post("/mukburim", handleInsertMukburim);
-
 // Auth
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
@@ -179,6 +168,15 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 app.patch("/auth/change-passwd", handleChangePassword);
+
+//메인페이지 관련
+app.post("/recommend", handleRecommendMenu);
+app.get("/fetch-places", handleFetchKakaoPlaces);
+app.post("/fetch-google-places", handleFetchGooglePlaces);
+app.post("/find-related-menu", handleFindRelatedMenu);
+app.get("/menu", handleGetMenu);
+app.post("/menu-info", handleGetMenuInfo);
+app.post("/mukburim", handleInsertMukburim);
 
 // Restaurant & Review
 app.post("/place/review", isLoggedIn, handleAddReview);
