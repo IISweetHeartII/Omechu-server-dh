@@ -24,7 +24,7 @@ import { handleLike } from "./controllers/like.controller.js";
 import { handleGetReview } from "./controllers/getReview.controller.js";
 import { handleSendEmailCode } from "./controllers/email.controller.js";
 import { handleVerifyEmailCode } from "./controllers/email.controller.js";
-import { handleFetchPlaceDetail } from "./controllers/restaurant.controller.js";
+import { handleGetPlaceDetail } from "./controllers/restaurant.controller.js";
 import {
   handleResetRequest,
   handleResetPassword,
@@ -49,6 +49,7 @@ import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
 import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
+
 dotenv.config();
 
 const app = express();
@@ -160,7 +161,7 @@ app.post("/recommend", handleRecommendMenu);
 app.get("/fetch-places", handleFetchKakaoPlaces);
 
 app.post("/fetch-google-places", handleFetchGooglePlaces);
-app.get("/place-detail/:id", handleFetchPlaceDetail);
+
 app.post("/find-related-menu", handleFindRelatedMenu);
 app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
@@ -177,16 +178,18 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 
+//Restaurant
 app.post("/place/review", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);
 app.patch("/place/:restId/like/:reviewId", isLoggedIn, handleLike);
 app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
+app.get("/place/detail/:restId", isLoggedIn, handleGetPlaceDetail);
 app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
-app.get("/restaurant/:id", isLoggedIn, handleGetRestaurantDetail);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.get("/test/restaurant/:id", handleGetRestaurantDetail);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
+
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
