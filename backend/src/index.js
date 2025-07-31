@@ -36,9 +36,7 @@ import {
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
-  handleGetRestaurantDetail,
   handleGetMyRestaurants,
-  handleUpdateRestaurant,
   handleAddZzim,
   handleRemoveZzim,
   handleGetZzimList,
@@ -57,7 +55,6 @@ import {
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
-
 app.use((req, res, next) => {
   res.success = (success) => {
     return res.json({ resultType: "SUCCESS", error: null, success });
@@ -110,10 +107,9 @@ app.use(
 const isLoggedIn = (req, res, next) => {
   console.log("🔥 isLoggedIn middleware called");
   if (req.session.user) {
-    console.log("✅ session user:", req.session.user);
+    console.log("하이2");
     next();
   } else {
-    console.log("❌ session not found");
     res
       .status(401)
       .error({ errorCode: "AUTH_REQUIRED", reason: "로그인이 필요합니다" });
@@ -127,10 +123,7 @@ app.use(
   swaggerUiExpress.setup(
     {},
     {
-      swaggerOptions: {
-        url: "/openapi.json",
-        withCredentials: true,
-      },
+      swaggerOptions: { url: "/openapi.json", withCredentials: true },
     }
   )
 );
