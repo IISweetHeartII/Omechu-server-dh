@@ -97,7 +97,7 @@ export const responseFromRestaurantList = (restaurants, hasNextPage, nextCursor)
   };
 };
 
-// Enum 변환 함수들 - 피그마 텍스트와 DB enum 간 변환
+// ============= Enum 변환 함수들 (user.dto.js와 통일) =============
 
 // 성별: "여성", "남성" ↔ "female", "male"
 function convertGenderToEnum(gender) {
@@ -136,6 +136,7 @@ function convertExercise(exercise) {
 }
 
 // 체질: "감기", "소화불량", "더위잘탐", "추위잘탐" ↔ "cold", "indigestion", "heat_sensitive", "cold_sensitive"
+// user.dto.js와 일관성을 위해 heat_sensitive, cold_sensitive 사용
 function convertBodyTypeToEnum(bodyType) {
   const map = {
     "감기": "cold",

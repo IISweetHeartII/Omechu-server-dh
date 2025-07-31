@@ -3,6 +3,26 @@ import { PrismaClient } from '../generated/prisma/index.js';
 const prisma = new PrismaClient();
 
 /**
+ * 이메일로 사용자 조회 (중복 체크용)
+ */
+export const findUserByEmail = async (email) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+      select: {
+        id: true,
+        email: true
+      }
+    });
+
+    return user;
+  } catch (error) {
+    console.error('이메일로 사용자 조회 오류:', error);
+    throw error;
+  }
+};
+
+/**
  * 사용자 프로필 조회 
  */
 export const findUserProfile = async (userId) => {
@@ -12,7 +32,6 @@ export const findUserProfile = async (userId) => {
       select: {
         id: true,
         email: true,
-        // phone_num: true,  
         nickname: true,
         body_type: true,
         gender: true,
@@ -42,11 +61,13 @@ export const findUserProfile = async (userId) => {
  */
 export const updateUserProfile = async (userId, data) => {
   try {
-    // 실제 DB 필드에 맞게 수정
+    // 실제 DB 필드에 맞게 수정 (prefer, allergy는 별도 테이블이므로 제외)
     const updateData = {
       email: data.email,
-      // phone_num: data.phone_num, 
       nickname: data.nickname,
+      body_type: data.body_type,
+      gender: data.gender,
+      exercise: data.exercise,
       profileImageUrl: data.profileImageUrl,
       updated_at: new Date()
     };
@@ -58,14 +79,73 @@ export const updateUserProfile = async (userId, data) => {
       }
     });
 
-    const updatedUser = await prisma.user.update({
+    // 트랜잭션으로 처리
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. 기본 사용자 정보 업데이트
+      const updatedUser = await tx.user.update({
+        where: { id: BigInt(userId) },
+        data: updateData
+      });
+
+      // 2. prefer 데이터 처리 (기존 데이터 삭제 후 새로 추가)
+      if (data.prefer !== undefined) {
+        await tx.prefer.deleteMany({
+          where: { userId: BigInt(userId) }
+        });
+
+        if (data.prefer && data.prefer.length > 0) {
+          // 피그마 텍스트를 enum으로 변환
+          const preferEnums = data.prefer.map(p => convertPreferToEnum(p)).filter(p => p !== null);
+          
+          if (preferEnums.length > 0) {
+            await tx.prefer.createMany({
+              data: preferEnums.map(prefer => ({
+                userId: BigInt(userId),
+                prefer: prefer
+              }))
+            });
+          }
+        }
+      }
+
+      // 3. allergy 데이터 처리 (기존 데이터 삭제 후 새로 추가)
+      if (data.allergy !== undefined) {
+        await tx.allergy.deleteMany({
+          where: { userId: BigInt(userId) }
+        });
+
+        if (data.allergy && data.allergy.length > 0) {
+          // 피그마 텍스트를 enum으로 변환
+          const allergyEnums = data.allergy.map(a => convertAllergyToEnum(a)).filter(a => a !== null);
+          
+          if (allergyEnums.length > 0) {
+            await tx.allergy.createMany({
+              data: allergyEnums.map(allergy => ({
+                userId: BigInt(userId),
+                allergy: allergy
+              }))
+            });
+          }
+        }
+      }
+
+      return updatedUser;
+    });
+
+    // 최종 사용자 정보 조회 (prefer, allergy 포함)
+    const finalUser = await prisma.user.findUnique({
       where: { id: BigInt(userId) },
-      data: updateData
+      include: {
+        prefer: true,
+        allergy: true
+      }
     });
 
     return {
-      ...updatedUser,
-      id: updatedUser.id.toString()
+      ...finalUser,
+      id: finalUser.id.toString(),
+      prefer: finalUser.prefer.map(p => convertPrefer(p.prefer)),
+      allergy: finalUser.allergy.map(a => convertAllergy(a.allergy))
     };
 
   } catch (error) {
@@ -81,7 +161,6 @@ export const findRestaurantById = async (restaurantId) => {
   try {
     const restaurant = await prisma.restaurant.findUnique({
       where: { id: BigInt(restaurantId) }
-      // include 제거 - 실제 DB 구조가 다름
     });
 
     if (!restaurant) return null;
@@ -102,7 +181,6 @@ export const findRestaurantById = async (restaurantId) => {
  */
 export const countUserRestaurants = async (userId) => {
   try {
-    // 전체 맛집 개수 반환 (등록자 필드가 없으므로)
     const count = await prisma.restaurant.count();
     return count;
 
@@ -270,7 +348,7 @@ export const findUserZzims = async (userId, limit, cursor) => {
     const zzimList = await prisma.zzim.findMany({
       where: { user_id: BigInt(userId) },
       include: {
-        restaurant: true // 단순 include만 사용
+        restaurant: true
       },
       take: limit + 1,
       ...(cursor ? {
@@ -307,3 +385,49 @@ export const findUserZzims = async (userId, limit, cursor) => {
     throw error;
   }
 };
+
+// ============= Enum 변환 함수들 (user.dto.js와 일관성 유지) =============
+
+function convertPreferToEnum(prefer) {
+  const map = {
+    "한식": "korean",
+    "양식": "western", 
+    "중식": "chinese",
+    "일식": "japanese",
+    "다른나라": "other",
+  };
+  return map[prefer] ?? null;
+}
+
+function convertPrefer(prefer) {
+  const map = {
+    korean: "한식",
+    western: "양식",
+    chinese: "중식", 
+    japanese: "일식",
+    other: "다른나라",
+  };
+  return map[prefer] ?? prefer;
+}
+
+function convertAllergyToEnum(allergy) {
+  const map = {
+    "달걀(난류) 알레르기": "egg",
+    "우유 알레르기": "milk",
+    "갑각류 알레르기": "shellfish", 
+    "해산물 알레르기": "seafood",
+    "견과류 알레르기": "nuts",
+  };
+  return map[allergy] ?? null;
+}
+
+function convertAllergy(allergy) {
+  const map = {
+    egg: "달걀(난류) 알레르기",
+    milk: "우유 알레르기",
+    shellfish: "갑각류 알레르기",
+    seafood: "해산물 알레르기", 
+    nuts: "견과류 알레르기",
+  };
+  return map[allergy] ?? allergy;
+}
