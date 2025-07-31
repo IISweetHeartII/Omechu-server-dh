@@ -108,9 +108,12 @@ app.use(
 
 // 세션 검증 미들웨어
 const isLoggedIn = (req, res, next) => {
+  console.log("🔥 isLoggedIn middleware called");
   if (req.session.user) {
+    console.log("✅ session user:", req.session.user);
     next();
   } else {
+    console.log("❌ session not found");
     res
       .status(401)
       .error({ errorCode: "AUTH_REQUIRED", reason: "로그인이 필요합니다" });
