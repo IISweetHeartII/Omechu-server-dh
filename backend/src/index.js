@@ -127,6 +127,10 @@ app.use(
       swaggerOptions: {
         url: "/openapi.json",
         withCredentials: true,
+        requestInterceptor: (req) => {
+          req.credentials = "include";
+          return req;
+        },
       },
     }
   )
