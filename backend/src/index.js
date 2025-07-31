@@ -41,6 +41,21 @@ import {
   handleRemoveZzim,
   handleGetZzimList,
 } from "./controllers/mypage.controller.js";
+
+//마이페이지의 먹부림 조회
+import {
+  handleGetMukburimStatistics,
+  handleGetMukburimCalendar,
+  handleGetMukburimByDate
+} from "./controllers/mukburim.statistics.controller.js";
+//마이페이지의 추천 목록 관리
+import {
+  handleGetRecommendManagement,
+  handleAddMenuToExcept,
+  handleRemoveMenuFromExcept
+} from "./controllers/recommend.management.controller.js";
+
+
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
@@ -181,6 +196,14 @@ app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
 app.post("/mukburim", handleInsertMukburim);
 
+// Mukburim 기본 기능
+app.post("/mukburim", isLoggedIn, handleInsertMukburim);
+
+// Mukburim 통계 기능
+app.get("/mukburim/statistics/:userId", isLoggedIn, handleGetMukburimStatistics);
+app.get("/mukburim/calendar/:userId", isLoggedIn, handleGetMukburimCalendar);
+app.get("/mukburim/date/:userId", isLoggedIn, handleGetMukburimByDate);
+
 // Restaurant & Review
 app.post("/place/review/:restId", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);
@@ -204,6 +227,12 @@ app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
 app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
+
+// 추천 목록 관리
+app.get("/recommend/management/:userId", isLoggedIn, handleGetRecommendManagement);
+app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
+app.post("/recommend/except/:userId/remove", isLoggedIn, handleRemoveMenuFromExcept);
+
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
