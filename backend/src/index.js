@@ -85,7 +85,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.set("trust proxy", 1);
 const isProduction = process.env.NODE_ENV === "production";
 console.log("isProduction", isProduction);
 app.use(
