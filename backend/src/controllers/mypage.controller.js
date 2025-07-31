@@ -6,8 +6,8 @@ import {
   updateRestaurantService,
   addZzimService,
   removeZzimService,
-  getZzimList
-} from '../services/mypage.service.js';
+  getZzimList,
+} from "../services/mypage.service.js";
 
 import {
   bodyToProfileUpdate,
@@ -17,8 +17,8 @@ import {
   bodyToZzimRequest,
   responseFromZzim,
   responseFromZzimList,
-  responseFromRestaurantList
-} from '../dtos/mypage.dto.js';
+  responseFromRestaurantList,
+} from "../dtos/mypage.dto.js";
 
 /**
  * 내 프로필 조회 - GET /profile/{id}
@@ -81,7 +81,7 @@ export const handleGetUserProfile = async (req, res, next) => {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
@@ -89,7 +89,6 @@ export const handleGetUserProfile = async (req, res, next) => {
     const responseData = responseFromProfile(userProfile);
 
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -177,21 +176,23 @@ export const handleUpdateUserProfile = async (req, res, next) => {
 
   try {
     const { id: userId } = req.params;
-    
+
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
     const profileData = bodyToProfileUpdate(req.body, userId);
-    const updatedProfile = await updateUserProfileService(parseInt(userId), profileData);
+    const updatedProfile = await updateUserProfileService(
+      parseInt(userId),
+      profileData
+    );
     const responseData = responseFromProfile(updatedProfile);
 
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -215,21 +216,20 @@ export const handleGetRestaurantDetail = async (req, res, next) => {
 
   try {
     const { id: restaurantId } = req.params;
-    
+
     const result = await getMyRestaurants(null, 1000, null);
-    const restaurant = result.data.find(r => r.id === restaurantId);
-    
+    const restaurant = result.data.find((r) => r.id === restaurantId);
+
     if (!restaurant) {
       return res.status(StatusCodes.NOT_FOUND).error({
         errorCode: "M001",
         reason: "맛집을 찾을 수 없습니다.",
-        data: { restaurantId }
+        data: { restaurantId },
       });
     }
 
     const responseData = responseFromRestaurant(restaurant);
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -253,12 +253,12 @@ export const handleGetMyRestaurants = async (req, res, next) => {
 
   try {
     const { userId } = req.params;
-    
+
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
@@ -266,7 +266,6 @@ export const handleGetMyRestaurants = async (req, res, next) => {
     const responseData = responseFromRestaurantList(result.data, false, null);
 
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -307,27 +306,30 @@ export const handleUpdateRestaurant = async (req, res, next) => {
   try {
     const { id: restaurantId } = req.params;
     const { userId } = req.body;
-    
+
     if (!restaurantId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "맛집 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
-    const restaurantData = bodyToRestaurantUpdate(req.body, restaurantId, userId);
-    
+    const restaurantData = bodyToRestaurantUpdate(
+      req.body,
+      restaurantId,
+      userId
+    );
+
     const updatedRestaurant = await updateRestaurantService(
-      parseInt(restaurantId), 
-      parseInt(userId), 
+      parseInt(restaurantId),
+      parseInt(userId),
       restaurantData
     );
-    
+
     const responseData = responseFromRestaurant(updatedRestaurant);
 
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -351,12 +353,12 @@ export const handleGetZzimList = async (req, res, next) => {
 
   try {
     const { userId } = req.params;
-    
+
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
@@ -364,7 +366,6 @@ export const handleGetZzimList = async (req, res, next) => {
     const responseData = responseFromZzimList(result.data, false, null);
 
     res.status(StatusCodes.OK).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -397,20 +398,22 @@ export const handleAddZzim = async (req, res, next) => {
 
   try {
     const { userId, restaurantId } = req.body;
-    
+
     if (!userId || !restaurantId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID와 맛집 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
-    const newZzim = await addZzimService(parseInt(userId), parseInt(restaurantId));
+    const newZzim = await addZzimService(
+      parseInt(userId),
+      parseInt(restaurantId)
+    );
     const responseData = responseFromZzim(newZzim);
 
     res.status(StatusCodes.CREATED).success(responseData);
-
   } catch (error) {
     next(error);
   }
@@ -443,21 +446,20 @@ export const handleRemoveZzim = async (req, res, next) => {
 
   try {
     const { userId, restaurantId } = req.body;
-    
+
     if (!userId || !restaurantId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
         reason: "사용자 ID와 맛집 ID가 필요합니다.",
-        data: null
+        data: null,
       });
     }
 
     await removeZzimService(parseInt(userId), parseInt(restaurantId));
 
     res.status(StatusCodes.OK).success({
-      message: "찜이 성공적으로 해제되었습니다."
+      message: "찜이 성공적으로 해제되었습니다.",
     });
-
   } catch (error) {
     next(error);
   }

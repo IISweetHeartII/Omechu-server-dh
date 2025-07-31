@@ -194,38 +194,10 @@ export const handleGetPlaceDetail = async (req, res) => {
   }
 
   #swagger.responses[200] = {
-<<<<<<< HEAD
-    description: "장소 상세 정보 조회 성공",
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {
-          formattedAddress: { 
-              type: 'string', 
-              example: '서울특별시 강남구 테헤란로 123' 
-            },
-            location: {
-              type: 'object',
-              properties: {
-                latitude: { type: 'number', example: 37.4895246 },
-                longitude: { type: 'number', example: 126.986331 }
-              }
-            },
-            displayName: {
-              type: 'object',
-              properties: {
-                text: { type: 'string', example: '맛있는 레스토랑' }
-              }
-            },
-            
-            currentOpeningHours: {
-=======
   description: "장소 상세 정보 조회 성공",
   content: {
     'application/json': {
       schema: {
->>>>>>> develop
         type: 'object',
         properties: {
           id: { type: 'string', example: '1' },

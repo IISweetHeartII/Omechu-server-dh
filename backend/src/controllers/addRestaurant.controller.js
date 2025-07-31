@@ -5,7 +5,7 @@ import { responsesFromAddRest } from "../dtos/addRestaurant.dto.js";
 export const handleAddRestaurant = async (req, res) => {
   const rest = await addRest(bodyToAddRest(req.body, req.session.user.id));
   res.status(StatusCodes.OK).success(responsesFromAddRest(rest));
-  /**
+  /*
   #swagger.tags = ["Restaurant"]
   #swagger.summary = "맛집 추가하기 API" 
   #swagger.description = "맛집을 추가하는 API입니다. <br> opening_hour에서는 모든 요일을 입력하지 않아도 됩니다. 각 요일 모두 default 값으로 <b>\"휴무\"</b> 가 들어가도록 설정했습니다. 영업하는 날의 영업시간만 넘겨주시면 됩니다"
