@@ -160,7 +160,7 @@ model allergy {
   id      Int          @id @default(autoincrement())
   userId  BigInt
   allergy allergy_type
-  user    user         @relation(fields: [userId], references: [id], map: "allergy_ibfk_1")
+  user    user         @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "allergy_ibfk_1")
 
   @@index([userId], map: "allergy_userId_fkey")
 }
@@ -178,7 +178,7 @@ model zzim {
   id         BigInt     @id @default(autoincrement())
   user_id    BigInt
   rest_id    BigInt
-  created_at DateTime?  @db.DateTime(0)
+  created_at DateTime?  @default(dbgenerated("(now())")) @db.DateTime(0)
   user       user       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "zzim_ibfk_1")
   restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "zzim_ibfk_2")
 

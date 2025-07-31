@@ -1,14 +1,11 @@
 import { getRestaurant } from "../services/getRestaurant.service.js";
-import { bodyToGetRest } from "../dtos/getRestaurant.dto.js";
 import { StatusCodes } from "http-status-codes";
 export const handleGetRestaurant = async (req, res) => {
-  const restData = await getRestaurant(
-    bodyToGetRest({
-      data: req.body,
-      cursor: req.query.cursor,
-      limit: req.query.limit,
-    })
-  );
+  const restData = await getRestaurant({
+    userId: BigInt(req.session.user.id),
+    cursor: parseInt(req.query.cursor),
+    limit: parseInt(req.query.limit),
+  });
   res.status(StatusCodes.OK).success(restData);
   /*
   #swagger.tags=["Restaurant"]
