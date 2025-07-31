@@ -110,6 +110,7 @@ const isLoggedIn = (req, res, next) => {
     console.log("하이2");
     next();
   } else {
+    console.log("하이3");
     res
       .status(401)
       .error({ errorCode: "AUTH_REQUIRED", reason: "로그인이 필요합니다" });
