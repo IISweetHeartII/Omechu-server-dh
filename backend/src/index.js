@@ -36,9 +36,7 @@ import {
 import {
   handleGetUserProfile,
   handleUpdateUserProfile,
-  handleGetRestaurantDetail,
   handleGetMyRestaurants,
-  handleUpdateRestaurant,
   handleAddZzim,
   handleRemoveZzim,
   handleGetZzimList,
@@ -58,7 +56,6 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
 app.use((req, res, next) => {
   res.success = (success) => {
     return res.json({ resultType: "SUCCESS", error: null, success });
@@ -110,6 +107,7 @@ app.use(
 // 세션 검증 미들웨어
 const isLoggedIn = (req, res, next) => {
   if (req.session.user) {
+    console.log("하이2");
     next();
   } else {
     res
@@ -125,10 +123,7 @@ app.use(
   swaggerUiExpress.setup(
     {},
     {
-      swaggerOptions: {
-        url: "/openapi.json",
-        withCredentials: true,
-      },
+      swaggerOptions: { url: "/openapi.json", withCredentials: true },
     }
   )
 );
