@@ -44,15 +44,27 @@ export const updateUserInfo = async (userId, data) => {
 
 export const createUserPreferences = async (userId, preferArray) => {
   if (!preferArray || preferArray.length === 0) return;
+
+  await prisma.prefer.deleteMany({
+    where: { userId },
+  });
+
   const data = preferArray.map((p) => ({ userId, prefer: p }));
   await prisma.prefer.createMany({ data });
 };
 
+
 export const createUserAllergies = async (userId, allergyArray) => {
   if (!allergyArray || allergyArray.length === 0) return;
+
+  await prisma.allergy.deleteMany({
+    where: { userId },
+  });
+
   const data = allergyArray.map((a) => ({ userId, allergy: a }));
   await prisma.allergy.createMany({ data });
 };
+
 
 
 export const getUserInfoForMenu = async (userId) => {

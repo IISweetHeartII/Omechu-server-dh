@@ -17,7 +17,7 @@ export const handleUpdateUserInfo = async (req, res, next) => {
               profileImageUrl: { type: "string" },
               gender: { type: "string", enum: ["남성", "여성"] },
               body_type: { type: "string" },
-              state: { type: "string", enum: ["다이어트 중", "증량 중", "유지 중"] },
+              exercise: { type: "string", enum: ["다이어트 중", "증량 중", "유지 중"] },
               prefer: { type: "array", items: { type: "string" } },
               allergy: { type: "array", items: { type: "string" } }
             }
@@ -42,7 +42,7 @@ export const handleUpdateUserInfo = async (req, res, next) => {
                   profileImageUrl: { type: "string" },
                   gender: { type: "string" },
                   body_type: { type: "string" },
-                  state: { type: "string" },
+                  exercise: { type: "string" },
                   prefer: { type: "array", items: { type: "string" } },
                   allergy: { type: "array", items: { type: "string" } }
                 }
