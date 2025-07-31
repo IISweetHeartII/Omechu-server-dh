@@ -7,9 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "prisma generate",
-    "swagger": "node swagger.js",
-    "dev": "npm run generate && npm run swagger && nodemon src/index.js",
-    "start": "npm run swagger && node src/index.js"
+    "dev": "npm run generate && nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
