@@ -50,7 +50,10 @@ import { handleReportReview } from "./controllers/reportReveiw.controller.js";
 import { handleGetCoordinates } from "./controllers/getCoordinates.controller.js";
 import { handleInsertMukburim } from "./controllers/mukburim.controller.js";
 import { handleChangePassword } from "./controllers/passwordChange.controller.js";
-import { handleKakaoRedirect, handleKakaoCallback } from "./controllers/kakao.controller.js";
+import {
+  handleKakaoRedirect,
+  handleKakaoCallback,
+} from "./controllers/kakao.controller.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -87,6 +90,7 @@ app.use(
 );
 
 const isProduction = process.env.NODE_ENV === "production";
+console.log("isProduction", isProduction);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -97,7 +101,7 @@ app.use(
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
       secure: isProduction,
-      sameSite: isProduction ? "None" : "Lax",
+      sameSite: "None",
     },
   })
 );
