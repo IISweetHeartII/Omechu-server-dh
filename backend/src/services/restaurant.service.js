@@ -3,6 +3,7 @@ import {
   fetchGooglePlaces,
   addRestaurantToDatabase,
   checkRestaurantExists,
+  googlePlaceIdtoId
 } from "../repositories/restaurant.repository.js";
 import { getPlaceDetail } from "../repositories/restaurant.repository.js";
 export const fetchKakaoPlacesService = async (info) => {
@@ -13,6 +14,8 @@ export const fetchKakaoPlacesService = async (info) => {
   console.log("Fetched places from service:", places);
   return places;
 };
+
+
 
 export const fetchGooglePlacesService = async (info) => {
   console.log("Service called with info:", info);
@@ -26,11 +29,14 @@ export const fetchGooglePlacesService = async (info) => {
     response.places.map(async (place) => {
       const exists = await checkRestaurantExists(place.id);
       if (!exists) {
-        await addRestaurantToDatabase(place, info.keyword);
+        const result = await addRestaurantToDatabase(place, info.keyword);
+        place.id2 = result.id.toString();
       } else {
         console.log(
           `Restaurant with ID ${place.id} already exists in the database.`
         );
+        const id2 = await googlePlaceIdtoId(place.id);
+        place.id2 = id2;
       }
     })
   );
