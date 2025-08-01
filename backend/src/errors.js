@@ -285,7 +285,6 @@ export class FailToReportReview extends Error {
   }
 }
 
-
 export class InvalidPasswordError extends Error {
   errorCode = "V003";
   constructor(reason, data) {
@@ -333,6 +332,14 @@ export class FailToInsertMukburim extends Error {
 
 export class MukburimStatisticsError extends Error {
   errorCode = "MK005";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class DuplicatedUserData extends Error {
+  errorCode = "C006";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;
