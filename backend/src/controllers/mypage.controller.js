@@ -272,7 +272,7 @@ export const handleGetMyRestaurants = async (req, res, next) => {
     cursor: parseInt(req.query.cursor),
     limit: parseInt(req.query.limit),
   });
-  console.log("result", result);
+  console.log(result);
   res.status(StatusCodes.OK).success(result);
 
   /*
@@ -471,8 +471,8 @@ export const handleAddZzim = async (req, res, next) => {
           type: 'object',
           required: ['userId', 'restaurantId'],
           properties: {
-            userId: { type: 'integer', example: 1 },
-            restaurantId: { type: 'integer', example: 1 }
+            userId: { type: 'number', example: 1 },
+            restaurantId: { type: 'number', example: 1 }
           }
         }
       }
@@ -515,8 +515,8 @@ export const handleRemoveZzim = async (req, res, next) => {
           type: 'object',
           required: ['userId', 'restaurantId'],
           properties: {
-            userId: { type: 'integer', example: 1 },
-            restaurantId: { type: 'integer', example: 1 }
+            userId: { type: 'number', example: 1 },
+            restaurantId: { type: 'number', example: 1 }
           }
         }
       }
