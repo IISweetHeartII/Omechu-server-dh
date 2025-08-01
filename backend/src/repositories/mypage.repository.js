@@ -227,6 +227,7 @@ export const findUserRestaurants = async (userId, cursor, limit) => {
       select: {
         id: true,
         rest_image: true,
+        name: true,
         address: true,
         rating: true,
         repre_menu: {
