@@ -53,7 +53,7 @@ import {
 import {
   handleGetRecommendManagement,
   handleAddMenuToExcept,
-  handleRemoveMenuFromExcept,
+  handleRemoveMenuExcept,
 } from "./controllers/recommend.management.controller.js";
 
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
@@ -239,11 +239,11 @@ app.get(
   handleGetRecommendManagement
 );
 app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
-// app.post(
-//   "/recommend/except/:userId/remove",
-//   isLoggedIn,
-//   handleRemoveMenuFromExcept
-// );
+app.post(
+  "/recommend/except/:userId/remove",
+  isLoggedIn,
+  handleRemoveMenuExcept
+);
 //내 활동 내역
 app.get("/reviews/:userId", isLoggedIn, handleGetUserReviews);
 
