@@ -46,15 +46,14 @@ import {
 import {
   handleGetMukburimStatistics,
   handleGetMukburimCalendar,
-  handleGetMukburimByDate
+  handleGetMukburimByDate,
 } from "./controllers/mukburim.statistics.controller.js";
 //마이페이지의 추천 목록 관리
 import {
   handleGetRecommendManagement,
   handleAddMenuToExcept,
-  handleRemoveMenuFromExcept
+  handleRemoveMenuFromExcept,
 } from "./controllers/recommend.management.controller.js";
-
 
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
@@ -122,7 +121,7 @@ app.use(
 // 세션 검증 미들웨어
 const isLoggedIn = (req, res, next) => {
   if (req.session.user) {
-    console.log("하이2");
+    console.log("하이");
     next();
   } else {
     res
@@ -200,7 +199,11 @@ app.post("/mukburim", handleInsertMukburim);
 app.post("/mukburim", isLoggedIn, handleInsertMukburim);
 
 // Mukburim 통계 기능
-app.get("/mukburim/statistics/:userId", isLoggedIn, handleGetMukburimStatistics);
+app.get(
+  "/mukburim/statistics/:userId",
+  isLoggedIn,
+  handleGetMukburimStatistics
+);
 app.get("/mukburim/calendar/:userId", isLoggedIn, handleGetMukburimCalendar);
 app.get("/mukburim/date/:userId", isLoggedIn, handleGetMukburimByDate);
 
@@ -219,9 +222,9 @@ app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 app.post("/image/upload", generatePresignedUrl);
 
 // MyPage
-app.get("/profile/:id", isLoggedIn, handleGetUserProfile);
-app.patch("/profile/:id", isLoggedIn, handleUpdateUserProfile);
-app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
+app.get("/profile", isLoggedIn, handleGetUserProfile);
+app.patch("/profile", isLoggedIn, handleUpdateUserProfile);
+app.get("/profile/myPlace", isLoggedIn, handleGetMyRestaurants);
 
 // Heart
 app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
@@ -229,10 +232,17 @@ app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
 
 // 추천 목록 관리
-app.get("/recommend/management/:userId", isLoggedIn, handleGetRecommendManagement);
+app.get(
+  "/recommend/management/:userId",
+  isLoggedIn,
+  handleGetRecommendManagement
+);
 app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
-app.post("/recommend/except/:userId/remove", isLoggedIn, handleRemoveMenuFromExcept);
-
+// app.post(
+//   "/recommend/except/:userId/remove",
+//   isLoggedIn,
+//   handleRemoveMenuFromExcept
+// );
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {

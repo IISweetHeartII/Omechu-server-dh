@@ -13,7 +13,7 @@ export const bodyToProfileUpdate = (body, userId) => {
     exercise: convertExerciseToEnum(body.exercise),
     prefer: body.prefer,
     allergy: body.allergy,
-    profileImageUrl: body.profileImageUrl
+    profileImageUrl: body.profileImageUrl,
   };
 };
 
@@ -30,7 +30,7 @@ export const responseFromProfile = (user) => {
     allergy: user.allergy || [],
     profileImageUrl: user.profileImageUrl,
     created_at: user.created_at,
-    updated_at: user.updated_at
+    updated_at: user.updated_at,
   };
 };
 
@@ -41,7 +41,7 @@ export const bodyToRestaurantUpdate = (body, restaurantId, userId) => {
     userId: userId,
     name: body.name,
     repre_menu: body.repre_menu,
-    address: body.address
+    address: body.address,
   };
 };
 
@@ -52,7 +52,7 @@ export const responseFromRestaurant = (restaurant) => {
     name: restaurant.name,
     repre_menu: restaurant.repre_menu,
     address: restaurant.address,
-    rating: restaurant.rating
+    rating: restaurant.rating,
   };
 };
 
@@ -60,7 +60,7 @@ export const responseFromRestaurant = (restaurant) => {
 export const bodyToZzimRequest = (body) => {
   return {
     userId: body.userId,
-    restaurantId: body.restaurantId || body.restId
+    restaurantId: body.restaurantId || body.restId,
   };
 };
 
@@ -71,29 +71,20 @@ export const responseFromZzim = (zzim) => {
     userId: zzim.user_id.toString(),
     restaurantId: zzim.rest_id.toString(),
     created_at: zzim.created_at,
-    restaurant: zzim.restaurant ? responseFromRestaurant(zzim.restaurant) : null
+    restaurant: zzim.restaurant
+      ? responseFromRestaurant(zzim.restaurant)
+      : null,
   };
 };
 
 // 찜 목록 응답 데이터 변환
 export const responseFromZzimList = (zzimList, hasNextPage, nextCursor) => {
-  const transformedList = zzimList.map(zzim => responseFromZzim(zzim));
-  
-  return {
-    data: transformedList,
-    hasNextPage: hasNextPage,
-    nextCursor: nextCursor
-  };
-};
+  const transformedList = zzimList.map((zzim) => responseFromZzim(zzim));
 
-// 맛집 목록 응답 데이터 변환
-export const responseFromRestaurantList = (restaurants, hasNextPage, nextCursor) => {
-  const transformedList = restaurants.map(restaurant => responseFromRestaurant(restaurant));
-  
   return {
     data: transformedList,
     hasNextPage: hasNextPage,
-    nextCursor: nextCursor
+    nextCursor: nextCursor,
   };
 };
 
@@ -102,8 +93,8 @@ export const responseFromRestaurantList = (restaurants, hasNextPage, nextCursor)
 // 성별: "여성", "남성" ↔ "female", "male"
 function convertGenderToEnum(gender) {
   const map = {
-    "남성": "male",
-    "여성": "female",
+    남성: "male",
+    여성: "female",
   };
   return map[gender] ?? null;
 }
@@ -139,10 +130,10 @@ function convertExercise(exercise) {
 // user.dto.js와 일관성을 위해 heat_sensitive, cold_sensitive 사용
 function convertBodyTypeToEnum(bodyType) {
   const map = {
-    "감기": "cold",
-    "소화불량": "indigestion",
-    "더위잘탐": "heat_sensitive",
-    "추위잘탐": "cold_sensitive",
+    감기: "cold",
+    소화불량: "indigestion",
+    더위잘탐: "heat_sensitive",
+    추위잘탐: "cold_sensitive",
   };
   return map[bodyType] ?? null;
 }
@@ -160,11 +151,11 @@ function convertBodyType(bodyType) {
 // 선호 음식: "한식", "양식", "중식", "일식", "다른나라" ↔ "korean", "western", "chinese", "japanese", "other"
 function convertPreferToEnum(prefer) {
   const map = {
-    "한식": "korean",
-    "양식": "western", 
-    "중식": "chinese",
-    "일식": "japanese",
-    "다른나라": "other",
+    한식: "korean",
+    양식: "western",
+    중식: "chinese",
+    일식: "japanese",
+    다른나라: "other",
   };
   return map[prefer] ?? null;
 }
@@ -173,7 +164,7 @@ function convertPrefer(prefer) {
   const map = {
     korean: "한식",
     western: "양식",
-    chinese: "중식", 
+    chinese: "중식",
     japanese: "일식",
     other: "다른나라",
   };
@@ -185,7 +176,7 @@ function convertAllergyToEnum(allergy) {
   const map = {
     "달걀(난류) 알레르기": "egg",
     "우유 알레르기": "milk",
-    "갑각류 알레르기": "shellfish", 
+    "갑각류 알레르기": "shellfish",
     "해산물 알레르기": "seafood",
     "견과류 알레르기": "nuts",
   };
@@ -197,7 +188,7 @@ function convertAllergy(allergy) {
     egg: "달걀(난류) 알레르기",
     milk: "우유 알레르기",
     shellfish: "갑각류 알레르기",
-    seafood: "해산물 알레르기", 
+    seafood: "해산물 알레르기",
     nuts: "견과류 알레르기",
   };
   return map[allergy] ?? allergy;
