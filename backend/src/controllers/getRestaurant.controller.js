@@ -22,30 +22,6 @@ export const handleGetRestaurant = async (req, res) => {
     description:"한 번에 가져오는 데이터의 양",
     required:true
     }
-  
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      'application/json': {
-        schema: {
-          type: "object",
-          required: ["location", "keyword"],
-          properties: {
-            location: {
-              type: "array",
-              items: { type: "string" },
-              example: ["서울 강북구 송중동", "서울 강남구 신사동"]
-            },
-            keyword: {
-              type: "array",
-              items: { type: "string" },
-              example: ["야식", "저녁식사"]
-            }
-          }
-        }
-      }
-    }
-  }
   #swagger.responses[200] = {
   description: "올바른 맛집 정보를 가져왔을 때",
   content: {

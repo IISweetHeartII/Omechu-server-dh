@@ -37,13 +37,7 @@ export const handleGetUserProfile = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "사용자 프로필 조회"
-  #swagger.description = "사용자 ID만으로 전체 프로필 정보를 조회합니다."
-  #swagger.parameters['id'] = {
-    in: 'path',
-    description: '사용자 ID',
-    required: true,
-    type: 'string'
-  }
+  #swagger.description = "사용자 프로필 정보를 조회합니다."
   #swagger.responses[200] = {
     description: "프로필 조회 성공",
     content: {
@@ -82,6 +76,48 @@ export const handleGetUserProfile = async (req, res, next) => {
       }
     }
   }
+  #swagger.responses[401] = {
+  description: "인가되지 않은 사용자일 때",
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          resultType: { type: 'string', example: 'FAIL' },
+          error: {
+            type: 'object',
+            properties: {
+              errorCode: { type: 'string', example: 'AUTH_REQUIRED' },
+              reason: { type: 'string', example: '로그인이 필요합니다' },
+              data: { type: 'string', example: null }
+            }
+          },
+          success: { type: 'object', example: null }
+        }
+      }
+    }
+  }
+}
+  #swagger.responses[500] = {
+  description: "서버 에러",
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          resultType: { type: 'string', example: 'FAIL' },
+          error: {
+            type: 'object',
+            properties: {
+              reason: { type: 'string', example: '서버 에러' }
+            }
+          },
+          success: { type: 'object', example: null }
+        }
+      }
+    }
+  }
+}
   */
 };
 
@@ -96,7 +132,6 @@ export const handleUpdateUserProfile = async (req, res, next) => {
   }
 
   const profileData = bodyToProfileUpdate(req.body, parseInt(userId));
-  console.log("profileData", profileData);
   const updatedProfile = await updateUserProfileService(
     parseInt(userId),
     profileData
@@ -107,13 +142,7 @@ export const handleUpdateUserProfile = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "프로필 정보 수정"
-  #swagger.description = "사용자 ID로 프로필 정보를 수정합니다."
-  #swagger.parameters['id'] = {
-    in: 'path',
-    description: '사용자 ID',
-    required: true,
-    type: 'string'
-  }
+  #swagger.description = "사용자 프로필 정보를 수정합니다."
   #swagger.requestBody = {
     required: true,
     content: {
@@ -178,6 +207,48 @@ export const handleUpdateUserProfile = async (req, res, next) => {
       }
     }
   }
+  #swagger.responses[401] = {
+  description: "인가되지 않은 사용자일 때",
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          resultType: { type: 'string', example: 'FAIL' },
+          error: {
+            type: 'object',
+            properties: {
+              errorCode: { type: 'string', example: 'AUTH_REQUIRED' },
+              reason: { type: 'string', example: '로그인이 필요합니다' },
+              data: { type: 'string', example: null }
+            }
+          },
+          success: { type: 'object', example: null }
+        }
+      }
+    }
+  }
+}
+  #swagger.responses[500] = {
+  description: "서버 에러",
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          resultType: { type: 'string', example: 'FAIL' },
+          error: {
+            type: 'object',
+            properties: {
+              reason: { type: 'string', example: '서버 에러' }
+            }
+          },
+          success: { type: 'object', example: null }
+        }
+      }
+    }
+  }
+}
   */
 };
 
@@ -227,6 +298,90 @@ export const handleGetMyRestaurants = async (req, res, next) => {
   #swagger.tags = ["MyPage"]
   #swagger.summary = "내가 등록한 모든 맛집 조회"
   #swagger.description = "사용자 ID만으로 등록한 모든 맛집을 조회합니다."
+  #swagger.parameters['limit'] = {
+    in: 'query',
+    required: false,
+    description: '한 페이지에 가져올 레스토랑 개수',
+    example: 10
+  }
+  #swagger.parameters['cursor'] = {
+    in: 'query',
+    required: false,
+    description: '페이지네이션을 위한 마지막 레스토랑 ID',
+    example: '10'
+  }
+
+  #swagger.responses[200] = {
+    description: "추천 레스토랑 목록 조회 성공",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            resultType: { type: "string", example: "SUCCESS" },
+            error: { type: "object", example: null },
+            success: {
+              type: "object",
+              properties: {
+                data: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      id: { type: "string", example: "1" },
+                      rest_image: { type: "string", example: "https://s3.amazonaws.com/img4.jpg" },
+                      address: { type: "string", example: "서울특별시 강남구 언주로164길 17 지하 1층" },
+                      rating: { type: "number", example: 4.6 },
+                      repre_menu: {
+                        type: "array",
+                        items: {
+                          type: "object",
+                          properties: {
+                            menu: { type: "string", example: "트러플 리조또" }
+                          }
+                        }
+                      },
+                      _count: {
+                        type: "object",
+                        properties: {
+                          review: { type: "integer", example: 35 }
+                        }
+                      }
+                    }
+                  }
+                },
+                hasNextPage: { type: "boolean", example: true },
+                nextCursor: { type: "string", example: "10" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #swagger.responses[500] = {
+    description: "서버 내부 오류",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            resultType: { type: "string", example: "FAIL" },
+            error: {
+              type: "object",
+              properties: {
+                errorCode: { type: "string", example: "SERVER_ERROR" },
+                reason: { type: "string", example: "서버 오류" },
+                data: { type: "string", example: null }
+              }
+            },
+            success: { type: "string", example: null }
+          }
+        }
+      }
+    }
+  }
 */
 };
 
