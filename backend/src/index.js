@@ -177,7 +177,7 @@ app.get("/", (req, res) => {
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
-app.patch("/auth/reset-passwd", handleResetPassword);
+app.patch("/reset-passwd", handleResetPassword);
 app.post("/auth/login", handleUserLogin);
 app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
