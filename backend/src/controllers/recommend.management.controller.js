@@ -187,41 +187,49 @@ export const handleAddMenuToExcept = async (req, res, next) => {
     required: true,
   }
   #swagger.requestBody = {
-    required: true,
-    description: '제외 목록에 추가할 메뉴의 ID 또는 이름',
-    content: {
-      'application/json': {
-        schema: {
-          oneOf: [ 
-            {
-              type: 'object',
-              required: ['menuId'],
-              properties: {
-                menuId: { type: 'string', example: 'menu_001', description: '추가할 메뉴의 고유 ID' }
-              }
-            },
-            {
-              type: 'object',
-              required: ['menuName'],
-              properties: {
-                menuName: { type: 'string', example: '짜장면', description: '추가할 메뉴의 이름' }
+  required: true,
+  description: "제외 목록에서 제거할 메뉴의 ID 또는 이름 (둘 중 하나를 반드시 제공)",
+  content: {
+    "application/json": {
+      schema: {
+        oneOf: [
+          {
+            type: "object",
+            required: ["menuId"],
+            properties: {
+              menuId: {
+                type: "string",
+                example: "menu_005",
+                description: "제거할 메뉴의 고유 ID"
               }
             }
-          ]
-        },
-        examples: {
-          menuIdExample: {
-            summary: '메뉴 ID로 추가',
-            value: { menuId: 'menu_001' }
           },
-          menuNameExample: {
-            summary: '메뉴 이름으로 추가',
-            value: { menuName: '짜장면' }
+          {
+            type: "object",
+            required: ["menuName"],
+            properties: {
+              menuName: {
+                type: "string",
+                example: "라멘",
+                description: "제거할 메뉴의 이름"
+              }
+            }
           }
+        ]
+      },
+      examples: {
+        menuIdExample: {
+          summary: "메뉴 ID로 제거",
+          value: { menuId: "menu_005" }
+        },
+        menuNameExample: {
+          summary: "메뉴 이름으로 제거",
+          value: { menuName: "라멘" }
         }
       }
     }
   }
+}
   #swagger.responses[200] = {
     description: "메뉴 제외 목록에 성공적으로 추가됨",
     content: {
@@ -364,7 +372,22 @@ export const handleAddMenuToExcept = async (req, res, next) => {
   }
 */
 };
-export const handleRemoveMenuFromExcept = async (req, res, next) => {
+
+export const handleRemoveMenuExcept = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { menuId, menuName } = req.body;
+
+    const result = await removeMenuFromExceptService(
+      parseInt(userId),
+      menuId ? parseInt(menuId) : null,
+      menuName
+    );
+
+    res.status(StatusCodes.OK).success(result);
+  } catch (error) {
+    next(error);
+  }
   /*
   #swagger.tags = ["Recommend"]
   #swagger.summary = "메뉴 제외 목록에서 제거"
@@ -497,18 +520,4 @@ export const handleRemoveMenuFromExcept = async (req, res, next) => {
     }
   }
 */
-  try {
-    const { userId } = req.params;
-    const { menuId, menuName } = req.body;
-
-    const result = await removeMenuFromExceptService(
-      parseInt(userId),
-      menuId ? parseInt(menuId) : null,
-      menuName
-    );
-
-    res.status(StatusCodes.OK).success(result);
-  } catch (error) {
-    next(error);
-  }
 };
