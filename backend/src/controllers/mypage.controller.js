@@ -22,19 +22,6 @@ import {
 import { getUserReviews } from "../services/mypage.service.js";
 
 export const handleGetUserProfile = async (req, res, next) => {
-  const userId = req.session.user.id;
-  if (!userId) {
-    return res.status(StatusCodes.BAD_REQUEST).error({
-      errorCode: "C006",
-      reason: "사용자 ID가 필요합니다.",
-      data: null,
-    });
-  }
-
-  const userProfile = await getUserProfile(parseInt(userId));
-  const responseData = responseFromProfile(userProfile);
-  res.status(StatusCodes.OK).success(responseData);
-
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "사용자 프로필 조회"
@@ -120,9 +107,6 @@ export const handleGetUserProfile = async (req, res, next) => {
   }
 }
   */
-};
-
-export const handleUpdateUserProfile = async (req, res, next) => {
   const userId = req.session.user.id;
   if (!userId) {
     return res.status(StatusCodes.BAD_REQUEST).error({
@@ -132,14 +116,12 @@ export const handleUpdateUserProfile = async (req, res, next) => {
     });
   }
 
-  const profileData = bodyToProfileUpdate(req.body, parseInt(userId));
-  const updatedProfile = await updateUserProfileService(
-    parseInt(userId),
-    profileData
-  );
-  const responseData = responseFromProfile(updatedProfile);
-
+  const userProfile = await getUserProfile(parseInt(userId));
+  const responseData = responseFromProfile(userProfile);
   res.status(StatusCodes.OK).success(responseData);
+};
+
+export const handleUpdateUserProfile = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "프로필 정보 수정"
@@ -251,28 +233,26 @@ export const handleUpdateUserProfile = async (req, res, next) => {
   }
 }
   */
+  const userId = req.session.user.id;
+  if (!userId) {
+    return res.status(StatusCodes.BAD_REQUEST).error({
+      errorCode: "C006",
+      reason: "사용자 ID가 필요합니다.",
+      data: null,
+    });
+  }
+
+  const profileData = bodyToProfileUpdate(req.body, parseInt(userId));
+  const updatedProfile = await updateUserProfileService(
+    parseInt(userId),
+    profileData
+  );
+  const responseData = responseFromProfile(updatedProfile);
+
+  res.status(StatusCodes.OK).success(responseData);
 };
 
 export const handleGetRestaurantDetail = async (req, res, next) => {
-  try {
-    const { id: restaurantId } = req.params;
-
-    const result = await getMyRestaurants(null, 1000, null);
-    const restaurant = result.data.find((r) => r.id === restaurantId);
-
-    if (!restaurant) {
-      return res.status(StatusCodes.NOT_FOUND).error({
-        errorCode: "M001",
-        reason: "맛집을 찾을 수 없습니다.",
-        data: { restaurantId },
-      });
-    }
-
-    const responseData = responseFromRestaurant(restaurant);
-    res.status(StatusCodes.OK).success(responseData);
-  } catch (error) {
-    next(error);
-  }
   /*
   #swagger.tags = ["Restaurant"]
   #swagger.summary = "맛집 상세 정보 조회"
@@ -384,9 +364,55 @@ export const handleGetMyRestaurants = async (req, res, next) => {
     }
   }
 */
+  try {
+    const { id: restaurantId } = req.params;
+
+    const result = await getMyRestaurants(null, 1000, null);
+    const restaurant = result.data.find((r) => r.id === restaurantId);
+
+    if (!restaurant) {
+      return res.status(StatusCodes.NOT_FOUND).error({
+        errorCode: "M001",
+        reason: "맛집을 찾을 수 없습니다.",
+        data: { restaurantId },
+      });
+    }
+
+    const responseData = responseFromRestaurant(restaurant);
+    res.status(StatusCodes.OK).success(responseData);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const handleUpdateRestaurant = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Restaurant"]
+  #swagger.summary = "맛집 정보 수정"
+  #swagger.description = "맛집 ID로 정보를 수정합니다."
+  #swagger.parameters['id'] = {
+    in: 'path',
+    description: '맛집 ID',
+    required: true,
+    type: 'string'
+  }
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            userId: { type: 'integer', example: 1, description: '테스트용: 수정 권한 확인용 사용자 ID' },
+            name: { type: 'string', example: '수정된 맛집 이름' },
+            address: { type: 'string', example: '서울시 강남구 테헤란로' },
+            repre_menu: { type: 'string', example: '대표메뉴' }
+          }
+        }
+      }
+    }
+  }
+  */
   try {
     const { id: restaurantId } = req.params;
     const { userId } = req.body;
@@ -417,36 +443,20 @@ export const handleUpdateRestaurant = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  /*
-  #swagger.tags = ["Restaurant"]
-  #swagger.summary = "맛집 정보 수정"
-  #swagger.description = "맛집 ID로 정보를 수정합니다."
-  #swagger.parameters['id'] = {
-    in: 'path',
-    description: '맛집 ID',
-    required: true,
-    type: 'string'
-  }
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          properties: {
-            userId: { type: 'integer', example: 1, description: '테스트용: 수정 권한 확인용 사용자 ID' },
-            name: { type: 'string', example: '수정된 맛집 이름' },
-            address: { type: 'string', example: '서울시 강남구 테헤란로' },
-            repre_menu: { type: 'string', example: '대표메뉴' }
-          }
-        }
-      }
-    }
-  }
-  */
 };
 
 export const handleGetZzimList = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Heart"]
+  #swagger.summary = "사용자의 모든 찜 목록 조회"
+  #swagger.description = "사용자 ID만으로 모든 찜 목록을 조회합니다."
+  #swagger.parameters['userId'] = {
+    in: 'path',
+    description: '사용자 ID',
+    required: true,
+    type: 'string'
+  }
+  */
   try {
     const { userId } = req.params;
 
@@ -465,20 +475,29 @@ export const handleGetZzimList = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  /*
-  #swagger.tags = ["Heart"]
-  #swagger.summary = "사용자의 모든 찜 목록 조회"
-  #swagger.description = "사용자 ID만으로 모든 찜 목록을 조회합니다."
-  #swagger.parameters['userId'] = {
-    in: 'path',
-    description: '사용자 ID',
-    required: true,
-    type: 'string'
-  }
-  */
 };
 
 export const handleAddZzim = async (req, res, next) => {
+  /*
+  #swagger.tags = ["Heart"]
+  #swagger.summary = "찜 등록"
+  #swagger.description = "맛집을 찜 목록에 추가합니다."
+  #swagger.requestBody = {
+    required: true,
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          required: ['userId', 'restaurantId'],
+          properties: {
+            userId: { type: 'integer', example: 1 },
+            restaurantId: { type: 'integer', example: 1 }
+          }
+        }
+      }
+    }
+  }
+  */
   try {
     const { userId, restaurantId } = req.body;
 
@@ -500,48 +519,9 @@ export const handleAddZzim = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  /*
-  #swagger.tags = ["Heart"]
-  #swagger.summary = "찜 등록"
-  #swagger.description = "맛집을 찜 목록에 추가합니다."
-  #swagger.requestBody = {
-    required: true,
-    content: {
-      'application/json': {
-        schema: {
-          type: 'object',
-          required: ['userId', 'restaurantId'],
-          properties: {
-            userId: { type: 'integer', example: 1 },
-            restaurantId: { type: 'integer', example: 1 }
-          }
-        }
-      }
-    }
-  }
-  */
 };
 
 export const handleRemoveZzim = async (req, res, next) => {
-  try {
-    const { userId, restaurantId } = req.body;
-
-    if (!userId || !restaurantId) {
-      return res.status(StatusCodes.BAD_REQUEST).error({
-        errorCode: "C006",
-        reason: "사용자 ID와 맛집 ID가 필요합니다.",
-        data: null,
-      });
-    }
-
-    await removeZzimService(parseInt(userId), parseInt(restaurantId));
-
-    res.status(StatusCodes.OK).success({
-      message: "찜이 성공적으로 해제되었습니다.",
-    });
-  } catch (error) {
-    next(error);
-  }
   /*
   #swagger.tags = ["Heart"]
   #swagger.summary = "찜 해제"
@@ -562,6 +542,25 @@ export const handleRemoveZzim = async (req, res, next) => {
     }
   }
   */
+  try {
+    const { userId, restaurantId } = req.body;
+
+    if (!userId || !restaurantId) {
+      return res.status(StatusCodes.BAD_REQUEST).error({
+        errorCode: "C006",
+        reason: "사용자 ID와 맛집 ID가 필요합니다.",
+        data: null,
+      });
+    }
+
+    await removeZzimService(parseInt(userId), parseInt(restaurantId));
+
+    res.status(StatusCodes.OK).success({
+      message: "찜이 성공적으로 해제되었습니다.",
+    });
+  } catch (error) {
+    next(error);
+  }
 
   try {
     const { userId, restaurantId } = req.body;
@@ -584,9 +583,6 @@ export const handleRemoveZzim = async (req, res, next) => {
   }
 };
 
-/**
- * 사용자가 작성한 모든 리뷰 목록 조회 - GET /reviews/{userId}
- */
 export const handleGetUserReviews = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
@@ -599,7 +595,6 @@ export const handleGetUserReviews = async (req, res, next) => {
     type: 'string'
   }
   */
-
   try {
     const { userId } = req.params;
 
