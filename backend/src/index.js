@@ -40,6 +40,7 @@ import {
   handleAddZzim,
   handleRemoveZzim,
   handleGetZzimList,
+  handleGetUserReviews,
 } from "./controllers/mypage.controller.js";
 
 //마이페이지의 먹부림 조회
@@ -175,7 +176,7 @@ app.get("/", (req, res) => {
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
-app.patch("/auth/reset-passwd", handleResetPassword);
+app.patch("/reset-passwd", handleResetPassword);
 app.post("/auth/login", handleUserLogin);
 app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
@@ -243,6 +244,8 @@ app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
 //   isLoggedIn,
 //   handleRemoveMenuFromExcept
 // );
+//내 활동 내역
+app.get("/reviews/:userId", isLoggedIn, handleGetUserReviews);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {

@@ -381,14 +381,42 @@ export const countUserZzims = async (userId) => {
 };
 
 /**
- * 사용자 찜 목록 조회 (단순화)
+ * 사용자 찜 목록 조회
  */
 export const findUserZzims = async (userId, limit, cursor) => {
   try {
     const zzimList = await prisma.zzim.findMany({
       where: { user_id: BigInt(userId) },
       include: {
-        restaurant: true,
+        restaurant: {
+          include: {
+            // 대표 메뉴 정보
+            repre_menu: {
+              select: {
+                menu: true,
+              },
+              take: 3, // 대표 메뉴 최대 3개
+            },
+            // 리뷰 정보 (개수 계산용)
+            review: {
+              select: {
+                id: true,
+                rating: true,
+              },
+            },
+            // 태그 정보
+            rest_tag: {
+              select: {
+                tag: true,
+                count: true,
+              },
+              orderBy: {
+                count: "desc",
+              },
+              take: 3, // 상위 태그 3개
+            },
+          },
+        },
       },
       take: limit + 1,
       ...(cursor
@@ -406,17 +434,55 @@ export const findUserZzims = async (userId, limit, cursor) => {
       ? slicedZzims[slicedZzims.length - 1].id
       : null;
 
-    // BigInt 변환
-    const formattedZzimList = slicedZzims.map((zzim) => ({
-      ...zzim,
-      id: zzim.id.toString(),
-      user_id: zzim.user_id.toString(),
-      rest_id: zzim.rest_id.toString(),
-      restaurant: {
-        ...zzim.restaurant,
-        id: zzim.restaurant.id.toString(),
-      },
-    }));
+    // 데이터 가공
+    const formattedZzimList = slicedZzims.map((zzim) => {
+      const restaurant = zzim.restaurant;
+
+      // 리뷰 개수 계산
+      const reviewCount = restaurant.review.length;
+
+      // 평균 평점 계산 (BigInt 변환 처리)
+      let averageRating = restaurant.rating || 0;
+      if (restaurant.review.length > 0) {
+        const totalRating = restaurant.review.reduce((sum, review) => {
+          // BigInt를 Number로 변환해서 계산
+          const ratingValue = review.rating ? Number(review.rating) : 0;
+          return sum + ratingValue;
+        }, 0);
+        averageRating =
+          Math.round((totalRating / restaurant.review.length) * 10) / 10;
+      }
+
+      // 대표 메뉴 추출
+      const representativeMenus = restaurant.repre_menu.map(
+        (item) => item.menu
+      );
+
+      // 태그 정보 추출
+      const tags = restaurant.rest_tag.map((tagItem) => ({
+        tag: tagItem.tag,
+        count: tagItem.count,
+      }));
+
+      return {
+        ...zzim,
+        id: zzim.id.toString(),
+        user_id: zzim.user_id.toString(),
+        rest_id: zzim.rest_id.toString(),
+        restaurant: {
+          ...restaurant,
+          id: restaurant.id.toString(),
+          rating: averageRating, // 계산된 평균 평점
+          reviewCount: reviewCount, // 리뷰 개수
+          representativeMenus: representativeMenus, // 대표 메뉴들
+          tags: tags, // 태그 정보
+          // review 데이터는 제거 (내부 계산용이므로)
+          review: undefined,
+          repre_menu: undefined,
+          rest_tag: undefined,
+        },
+      };
+    });
 
     return {
       data: formattedZzimList,
@@ -425,11 +491,11 @@ export const findUserZzims = async (userId, limit, cursor) => {
     };
   } catch (error) {
     console.error("사용자 찜 목록 조회 오류:", error);
-    throw error;
+    throw new Error(`Failed to fetch user zzims: ${error.message}`);
   }
 };
 
-// ============= Enum 변환 함수들 (user.dto.js와 일관성 유지) =============
+// ============= Enum 변환 함수들 =============
 
 function convertPreferToEnum(prefer) {
   const map = {
@@ -474,3 +540,109 @@ function convertAllergy(allergy) {
   };
   return map[allergy] ?? allergy;
 }
+
+// ====================== 1. mypage.repository.js에 추가 ======================
+
+/**
+ * 사용자가 작성한 리뷰 목록 조회 (레스토랑 정보 포함)
+ */
+export const findUserReviews = async (userId, limit, cursor) => {
+  try {
+    const reviewList = await prisma.review.findMany({
+      where: { user_id: BigInt(userId) },
+      include: {
+        restaurant: {
+          include: {
+            // 대표 메뉴 정보
+            repre_menu: {
+              select: {
+                menu: true,
+              },
+              take: 3,
+            },
+            // 태그 정보
+            rest_tag: {
+              select: {
+                tag: true,
+                count: true,
+              },
+              orderBy: {
+                count: "desc",
+              },
+              take: 3,
+            },
+          },
+        },
+        // 리뷰 이미지 정보
+        review_image: {
+          select: {
+            link: true,
+          },
+        },
+      },
+      take: limit + 1,
+      ...(cursor
+        ? {
+            cursor: { id: BigInt(cursor) },
+            skip: 1,
+          }
+        : {}),
+      orderBy: { created_at: "desc" },
+    });
+
+    const hasNextPage = reviewList.length > limit;
+    const slicedReviews = hasNextPage ? reviewList.slice(0, limit) : reviewList;
+    const nextCursor = hasNextPage
+      ? slicedReviews[slicedReviews.length - 1].id
+      : null;
+
+    // 데이터 가공
+    const formattedReviewList = slicedReviews.map((review) => {
+      const restaurant = review.restaurant;
+
+      // 대표 메뉴 추출
+      const representativeMenus = restaurant.repre_menu.map(
+        (item) => item.menu
+      );
+
+      // 태그 정보 추출
+      const tags = restaurant.rest_tag.map((tagItem) => ({
+        tag: tagItem.tag,
+        count: tagItem.count,
+      }));
+
+      // 리뷰 이미지 추출
+      const reviewImages = review.review_image.map((img) => img.link);
+
+      return {
+        ...review,
+        id: review.id.toString(),
+        user_id: review.user_id.toString(),
+        rest_id: review.rest_id.toString(),
+        rating: Number(review.rating), // BigInt 변환
+        restaurant: {
+          ...restaurant,
+          id: restaurant.id.toString(),
+          rating: restaurant.rating || 0,
+          representativeMenus: representativeMenus,
+          tags: tags,
+          // 불필요한 데이터 제거
+          repre_menu: undefined,
+          rest_tag: undefined,
+        },
+        reviewImages: reviewImages,
+        // 불필요한 데이터 제거
+        review_image: undefined,
+      };
+    });
+
+    return {
+      data: formattedReviewList,
+      hasNextPage,
+      nextCursor: nextCursor ? nextCursor.toString() : null,
+    };
+  } catch (error) {
+    console.error("사용자 리뷰 목록 조회 오류:", error);
+    throw new Error(`Failed to fetch user reviews: ${error.message}`);
+  }
+};

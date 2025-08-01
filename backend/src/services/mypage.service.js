@@ -22,6 +22,8 @@ import {
   InvalidProfileData,
 } from "../errors.js";
 
+import { findUserReviews } from "../repositories/mypage.repository.js";
+
 /**
  * 사용자 프로필 조회
  */
@@ -174,6 +176,24 @@ export const getZzimList = async (userId, limit = 10, cursor = null) => {
     return result;
   } catch (error) {
     console.error("찜 목록 조회 상세 오류:", error);
+    // 에러 발생시 빈 결과 반환
+    return {
+      data: [],
+      hasNextPage: false,
+      nextCursor: null,
+    };
+  }
+};
+
+/**
+ * 사용자 작성 리뷰 목록 조회
+ */
+export const getUserReviews = async (userId, limit = 10, cursor = null) => {
+  try {
+    const result = await findUserReviews(parseInt(userId), limit, cursor);
+    return result;
+  } catch (error) {
+    console.error("리뷰 목록 조회 상세 오류:", error);
     // 에러 발생시 빈 결과 반환
     return {
       data: [],
