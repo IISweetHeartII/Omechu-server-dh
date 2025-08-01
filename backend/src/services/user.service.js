@@ -20,7 +20,7 @@ export const patchUserProfileService = async (userId, body) => {
     }
 
     if (body.allergy?.length) {
-      const allergyEnums = body.allergy; 
+      const allergyEnums = body.allergy;
       await createUserAllergies(userId, allergyEnums);
     }
 
@@ -32,4 +32,3 @@ export const patchUserProfileService = async (userId, body) => {
     throw error;
   }
 };
-

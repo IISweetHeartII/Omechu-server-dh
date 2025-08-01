@@ -3,7 +3,7 @@ import { patchUserProfileService } from "../services/user.service.js";
 import { LoginRequiredError, UserUpdateFailedError } from "../errors.js";
 
 export const handleUpdateUserInfo = async (req, res, next) => {
-      /*
+  /*
     #swagger.summary = '회원 정보 수정 API'
     #swagger.tags = ['Auth']
     #swagger.requestBody = {

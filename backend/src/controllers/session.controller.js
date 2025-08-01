@@ -1,8 +1,12 @@
 import { StatusCodes } from "http-status-codes";
-import { SessionDestroyError, SessionNotFoundError, SessionRegenerateError } from "../errors.js";
+import {
+  SessionDestroyError,
+  SessionNotFoundError,
+  SessionRegenerateError,
+} from "../errors.js";
 
 export const handleRenewSession = async (req, res, next) => {
-    /*
+  /*
 #swagger.tags = ["Auth"]
 #swagger.summary = "세션 재발급"
 #swagger.description = "세션 재발급 API입니다. 기존 세션을 삭제하고 새로운 세션을 발급합니다."
@@ -96,8 +100,7 @@ export const handleRenewSession = async (req, res, next) => {
     res.status(StatusCodes.OK).success({
       message: "세션이 재발급되었습니다.",
       session: req.session.user,
-      sessionId: req.sessionID, 
+      sessionId: req.sessionID,
     });
   });
 };
-

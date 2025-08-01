@@ -1,7 +1,7 @@
-import { changeUserPasswordService } from '../services/passwordChange.service.js';
-import { bodyToChangePasswordDto } from '../dtos/passwordChange.dto.js';
-import { LoginRequiredError, InvalidPasswordError } from '../errors.js';
-import { StatusCodes } from 'http-status-codes';
+import { changeUserPasswordService } from "../services/passwordChange.service.js";
+import { bodyToChangePasswordDto } from "../dtos/passwordChange.dto.js";
+import { LoginRequiredError, InvalidPasswordError } from "../errors.js";
+import { StatusCodes } from "http-status-codes";
 
 export const handleChangePassword = async (req, res, next) => {
   /*
@@ -114,26 +114,26 @@ export const handleChangePassword = async (req, res, next) => {
     const { currentPassword, newPassword } = bodyToChangePasswordDto(req.body);
     await changeUserPasswordService(userId, currentPassword, newPassword);
 
-    res.success('비밀번호가 성공적으로 변경되었습니다');
+    res.success("비밀번호가 성공적으로 변경되었습니다");
   } catch (err) {
     if (err instanceof InvalidPasswordError) {
       return res.status(StatusCodes.BAD_REQUEST).error({
-        errorCode: 'INVALID_PASSWORD',
+        errorCode: "INVALID_PASSWORD",
         reason: err.message,
       });
     }
 
     if (err instanceof LoginRequiredError) {
       return res.status(StatusCodes.UNAUTHORIZED).error({
-        errorCode: 'LOGIN_REQUIRED',
+        errorCode: "LOGIN_REQUIRED",
         reason: err.message,
       });
     }
 
-    console.error('비밀번호 변경 오류:', err);
+    console.error("비밀번호 변경 오류:", err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).error({
-      errorCode: 'SERVER_ERROR',
-      reason: '서버 내부 오류가 발생했습니다.',
+      errorCode: "SERVER_ERROR",
+      reason: "서버 내부 오류가 발생했습니다.",
     });
   }
 };

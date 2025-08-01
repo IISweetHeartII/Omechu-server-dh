@@ -1,4 +1,4 @@
-import { PrismaClient } from '../generated/prisma/index.js'
+import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 export const createEmailVerification = async (email, code) => {
@@ -10,7 +10,6 @@ export const createEmailVerification = async (email, code) => {
     create: { email, code, expires_at: expiresAt },
   });
 };
-
 
 export const findEmailVerification = async (email) => {
   return await prisma.email_verification.findFirst({

@@ -10,18 +10,18 @@ import {
   getMenuInfoService,
 } from "../services/menu.service.js";
 export const handleRecommendMenu = async (req, res) => {
-
-    
-    const choice = bodyToChoice(req.body);
-    const userId = req.session?.user?.id;
-    console.log("User ID:", userId);
-    const newRecommendation = await recommendMenuService(choice, userId);
-    if (newRecommendation) {
-        res.status(StatusCodes.OK).json(newRecommendation);
-    } else {
-        res.status(StatusCodes.NOT_FOUND).json({ message: "No recommendation found" });
-    }
-    /*
+  const choice = bodyToChoice(req.body);
+  const userId = req.session?.user?.id;
+  console.log("User ID:", userId);
+  const newRecommendation = await recommendMenuService(choice, userId);
+  if (newRecommendation) {
+    res.status(StatusCodes.OK).json(newRecommendation);
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No recommendation found" });
+  }
+  /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "메뉴 추천 API"
     #swagger.description = "사용자의 선택 조건에 따라 메뉴를 추천하는 API입니다."

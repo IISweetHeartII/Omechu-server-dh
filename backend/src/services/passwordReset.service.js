@@ -1,16 +1,16 @@
-import crypto from 'crypto';
-import nodemailer from 'nodemailer';
+import crypto from "crypto";
+import nodemailer from "nodemailer";
 import {
   upsertPasswordResetToken,
   findPasswordResetToken,
   deletePasswordResetToken,
   updateUserPasswordByEmail,
   findUserByEmail,
-} from '../repositories/passwordReset.repository.js';
-import { InvalidOrExpiredTokenError, UserNotFoundError } from '../errors.js';
+} from "../repositories/passwordReset.repository.js";
+import { InvalidOrExpiredTokenError, UserNotFoundError } from "../errors.js";
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
@@ -19,11 +19,12 @@ const transporter = nodemailer.createTransport({
 
 const sendResetEmail = async (email, token) => {
   const resetLink = `https://omechu.log8.kr/auth/reset-password?token=${token}`;
-  const imageUrl = "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/email/a4e1f2ed-62bb-491d-93a0-3b88de6a64b3.jpg";
+  const imageUrl =
+    "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/email/a4e1f2ed-62bb-491d-93a0-3b88de6a64b3.jpg";
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,
-    subject: '[오메추] 비밀번호 재설정 안내',
+    subject: "[오메추] 비밀번호 재설정 안내",
     html: `
       <div style="font-family: Arial, sans-serif;">
         <h2>[오메추] 비밀번호 재설정 안내</h2>
@@ -36,7 +37,7 @@ const sendResetEmail = async (email, token) => {
 
         <img src="${imageUrl}" alt="오메추 배너" style="width: 600px; max-width: 100%; height: auto; display: block;"/>
       </div>
-    `
+    `,
   });
 };
 
@@ -46,7 +47,7 @@ export const createPasswordResetTokenService = async (email) => {
     throw new UserNotFoundError("해당 이메일의 사용자가 존재하지 않습니다.");
   }
 
-  const token = crypto.randomBytes(32).toString('hex');
+  const token = crypto.randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
 
   await upsertPasswordResetToken(email, token, expiresAt);
@@ -58,12 +59,12 @@ export const createPasswordResetTokenService = async (email) => {
 export const validatePasswordResetTokenService = async (token) => {
   const tokenData = await findPasswordResetToken(token);
   if (!tokenData || tokenData.expires_at < new Date()) {
-    throw new InvalidOrExpiredTokenError('유효하지 않거나 만료된 토큰입니다.');
+    throw new InvalidOrExpiredTokenError("유효하지 않거나 만료된 토큰입니다.");
   }
   return tokenData.email;
 };
 
 export const resetUserPasswordService = async (email, newPassword, token) => {
-  await updateUserPasswordByEmail(email, newPassword);  
+  await updateUserPasswordByEmail(email, newPassword);
   await deletePasswordResetToken(token);
 };

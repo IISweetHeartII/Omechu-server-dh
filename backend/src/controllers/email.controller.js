@@ -1,4 +1,7 @@
-import { sendVerificationCodeService, verifyCodeService } from "../services/email.service.js";
+import {
+  sendVerificationCodeService,
+  verifyCodeService,
+} from "../services/email.service.js";
 import { StatusCodes } from "http-status-codes";
 
 export const handleSendEmailCode = async (req, res, next) => {
@@ -58,7 +61,6 @@ export const handleSendEmailCode = async (req, res, next) => {
     next(err);
   }
 };
-
 
 export const handleVerifyEmailCode = async (req, res, next) => {
   /*

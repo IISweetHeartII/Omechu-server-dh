@@ -1,7 +1,4 @@
-import {
-  addUser,
-  getUser,
-} from "../repositories/auth.repository.js";
+import { addUser, getUser } from "../repositories/auth.repository.js";
 import { responseFromUser } from "../dtos/auth.dto.js";
 
 export const userSignUp = async (data) => {
