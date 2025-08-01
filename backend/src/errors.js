@@ -294,9 +294,61 @@ export class FailToReportReview extends Error {
   }
 }
 
-
 export class InvalidPasswordError extends Error {
   errorCode = "V003";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class NoMukburimData extends Error {
+  errorCode = "MK001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class InvalidMukburimPeriod extends Error {
+  errorCode = "MK002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class InvalidDateRange extends Error {
+  errorCode = "MK003";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class FailToInsertMukburim extends Error {
+  errorCode = "MK004";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class MukburimStatisticsError extends Error {
+  errorCode = "MK005";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+export class DuplicatedUserData extends Error {
+  errorCode = "C006";
   constructor(reason, data) {
     super(reason);
     this.reason = reason;

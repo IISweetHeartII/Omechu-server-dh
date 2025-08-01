@@ -14,7 +14,6 @@ export const createUser = async ({ email, kakao_id }) => {
   });
 };
 
-
 export const findUserById = async (userId) => {
   return await prisma.user.findUnique({
     where: { id: Number(userId) },
@@ -35,21 +34,30 @@ export const updateUserInfo = async (userId, data) => {
   } catch (error) {
     console.error("Prisma update 실패!");
     console.error("message:", error.message);
-    console.error("meta:", error.meta);  // 핵심 정보
+    console.error("meta:", error.meta); // 핵심 정보
     console.error("code:", error.code);
     throw error;
   }
 };
 
-
 export const createUserPreferences = async (userId, preferArray) => {
   if (!preferArray || preferArray.length === 0) return;
+
+  await prisma.prefer.deleteMany({
+    where: { userId },
+  });
+
   const data = preferArray.map((p) => ({ userId, prefer: p }));
   await prisma.prefer.createMany({ data });
 };
 
 export const createUserAllergies = async (userId, allergyArray) => {
   if (!allergyArray || allergyArray.length === 0) return;
+
+  await prisma.allergy.deleteMany({
+    where: { userId },
+  });
+
   const data = allergyArray.map((a) => ({ userId, allergy: a }));
   await prisma.allergy.createMany({ data });
 };

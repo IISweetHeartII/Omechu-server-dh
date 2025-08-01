@@ -3,7 +3,7 @@ export const bodyToUserInfo = (body, userId) => {
     nickname: body.nickname,
     profileImageUrl: body.profileImageUrl,
     body_type: convertBodyTypeToEnum(body.body_type), 
-    exercise: convertExerciseToEnum(body.state),      
+    exercise: convertExerciseToEnum(body.exercise),      
     gender: convertGenderToEnum(body.gender),      
   };
 
@@ -23,7 +23,7 @@ export const responseFromUser = (user) => {
     profileImageUrl: user.profileImageUrl,
     gender: convertGender(user.gender),          
     body_type: convertBodyType(user.body_type),  
-    state: convertExercise(user.exercise),   
+    exercise: convertExercise(user.exercise),   
     prefer: preferCategories,
     allergy: allergyTypes,
   };
@@ -37,13 +37,13 @@ function convertGenderToEnum(gender) {
   return map[gender] ?? null;
 }
 
-function convertExerciseToEnum(state) {
+function convertExerciseToEnum(exercise) {
   const map = {
     "다이어트 중": "dieting",
     "증량 중": "bulking",
     "유지 중": "maintaining",
   };
-  return map[state] ?? null;
+  return map[exercise] ?? null;
 }
 
 function convertBodyTypeToEnum(type) {

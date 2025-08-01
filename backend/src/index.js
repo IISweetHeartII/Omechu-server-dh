@@ -40,7 +40,22 @@ import {
   handleAddZzim,
   handleRemoveZzim,
   handleGetZzimList,
+  handleGetUserReviews,
 } from "./controllers/mypage.controller.js";
+
+//마이페이지의 먹부림 조회
+import {
+  handleGetMukburimStatistics,
+  handleGetMukburimCalendar,
+  handleGetMukburimByDate,
+} from "./controllers/mukburim.statistics.controller.js";
+//마이페이지의 추천 목록 관리
+import {
+  handleGetRecommendManagement,
+  handleAddMenuToExcept,
+  handleRemoveMenuFromExcept,
+} from "./controllers/recommend.management.controller.js";
+
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
@@ -107,7 +122,7 @@ app.use(
 const isLoggedIn = (req, res, next) => {
   console.log("🔥 isLoggedIn middleware called");
   if (req.session.user) {
-    console.log("하이2");
+    console.log("하이");
     next();
   } else {
     console.log("하이3");
@@ -163,7 +178,7 @@ app.get("/", (req, res) => {
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
-app.patch("/auth/reset-passwd", handleResetPassword);
+app.patch("/reset-passwd", handleResetPassword);
 app.post("/auth/login", handleUserLogin);
 app.post("/auth/reissue", isLoggedIn, handleRenewSession);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
@@ -183,6 +198,18 @@ app.get("/menu", handleGetMenu);
 app.post("/menu-info", handleGetMenuInfo);
 app.post("/mukburim", handleInsertMukburim);
 
+// Mukburim 기본 기능
+app.post("/mukburim", isLoggedIn, handleInsertMukburim);
+
+// Mukburim 통계 기능
+app.get(
+  "/mukburim/statistics/:userId",
+  isLoggedIn,
+  handleGetMukburimStatistics
+);
+app.get("/mukburim/calendar/:userId", isLoggedIn, handleGetMukburimCalendar);
+app.get("/mukburim/date/:userId", isLoggedIn, handleGetMukburimByDate);
+
 // Restaurant & Review
 app.post("/place/review/:restId", isLoggedIn, handleAddReview);
 app.get("/place/review/:restId", isLoggedIn, handleGetReview);
@@ -198,14 +225,29 @@ app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 app.post("/image/upload", generatePresignedUrl);
 
 // MyPage
-app.get("/profile/:id", isLoggedIn, handleGetUserProfile);
-app.patch("/profile/:id", isLoggedIn, handleUpdateUserProfile);
-app.get("/restaurants/:userId", isLoggedIn, handleGetMyRestaurants);
+app.get("/profile", isLoggedIn, handleGetUserProfile);
+app.patch("/profile", isLoggedIn, handleUpdateUserProfile);
+app.get("/profile/myPlace", isLoggedIn, handleGetMyRestaurants);
 
 // Heart
 app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
+
+// Recommend
+app.get(
+  "/recommend/management/:userId",
+  isLoggedIn,
+  handleGetRecommendManagement
+);
+app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
+app.post(
+  "/recommend/except/:userId/remove",
+  isLoggedIn,
+  handleRemoveMenuFromExcept
+);
+//내 활동 내역
+app.get("/reviews/:userId", isLoggedIn, handleGetUserReviews);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
