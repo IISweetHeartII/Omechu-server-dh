@@ -40,11 +40,17 @@ export const findUserProfile = async (userId) => {
         profileImageUrl: true,
         created_at: true,
         updated_at: true,
+        prefer: {
+          where: { userId: userId },
+          select: { prefer: true },
+        },
+        allergy: {
+          where: { userId: userId },
+          select: { allergy: true },
+        },
       },
     });
-
     if (!user) return null;
-
     // BigInt 변환
     return {
       ...user,

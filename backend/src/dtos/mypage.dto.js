@@ -19,6 +19,8 @@ export const bodyToProfileUpdate = (body, userId) => {
 
 // 프로필 응답 데이터 변환
 export const responseFromProfile = (user) => {
+  const preferData = user.prefer.map((data) => convertPrefer(data.prefer));
+  const allergyData = user.allergy.map((data) => convertAllergy(data.allergy));
   return {
     id: user.id.toString(),
     email: user.email,
@@ -26,8 +28,8 @@ export const responseFromProfile = (user) => {
     body_type: convertBodyType(user.body_type),
     gender: convertGender(user.gender),
     exercise: convertExercise(user.exercise),
-    prefer: user.prefer || [],
-    allergy: user.allergy || [],
+    prefer: preferData || [],
+    allergy: allergyData || [],
     profileImageUrl: user.profileImageUrl,
     created_at: user.created_at,
     updated_at: user.updated_at,
