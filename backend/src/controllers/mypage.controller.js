@@ -325,7 +325,7 @@ export const handleGetMyRestaurants = async (req, res, next) => {
                       _count: {
                         type: "object",
                         properties: {
-                          review: { type: "integer", example: 35 }
+                          review: { type: "number", example: 35 }
                         }
                       }
                     }
@@ -364,25 +364,6 @@ export const handleGetMyRestaurants = async (req, res, next) => {
     }
   }
 */
-  try {
-    const { id: restaurantId } = req.params;
-
-    const result = await getMyRestaurants(null, 1000, null);
-    const restaurant = result.data.find((r) => r.id === restaurantId);
-
-    if (!restaurant) {
-      return res.status(StatusCodes.NOT_FOUND).error({
-        errorCode: "M001",
-        reason: "맛집을 찾을 수 없습니다.",
-        data: { restaurantId },
-      });
-    }
-
-    const responseData = responseFromRestaurant(restaurant);
-    res.status(StatusCodes.OK).success(responseData);
-  } catch (error) {
-    next(error);
-  }
 };
 
 export const handleUpdateRestaurant = async (req, res, next) => {
@@ -403,7 +384,7 @@ export const handleUpdateRestaurant = async (req, res, next) => {
         schema: {
           type: 'object',
           properties: {
-            userId: { type: 'integer', example: 1, description: '테스트용: 수정 권한 확인용 사용자 ID' },
+            userId: { type: 'number', example: 1, description: '테스트용: 수정 권한 확인용 사용자 ID' },
             name: { type: 'string', example: '수정된 맛집 이름' },
             address: { type: 'string', example: '서울시 강남구 테헤란로' },
             repre_menu: { type: 'string', example: '대표메뉴' }
@@ -490,8 +471,8 @@ export const handleAddZzim = async (req, res, next) => {
           type: 'object',
           required: ['userId', 'restaurantId'],
           properties: {
-            userId: { type: 'integer', example: 1 },
-            restaurantId: { type: 'integer', example: 1 }
+            userId: { type: 'number', example: 1 },
+            restaurantId: { type: 'number', example: 1 }
           }
         }
       }
@@ -534,8 +515,8 @@ export const handleRemoveZzim = async (req, res, next) => {
           type: 'object',
           required: ['userId', 'restaurantId'],
           properties: {
-            userId: { type: 'integer', example: 1 },
-            restaurantId: { type: 'integer', example: 1 }
+            userId: { type: 'number', example: 1 },
+            restaurantId: { type: 'number', example: 1 }
           }
         }
       }
