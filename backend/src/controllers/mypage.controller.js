@@ -20,6 +20,8 @@ import {
   responseFromRestaurantList
 } from '../dtos/mypage.dto.js';
 
+import { getUserReviews } from '../services/mypage.service.js';
+
 /**
  * 내 프로필 조회 - GET /profile/{id}
  */
@@ -456,6 +458,48 @@ export const handleRemoveZzim = async (req, res, next) => {
 
     res.status(StatusCodes.OK).success({
       message: "찜이 성공적으로 해제되었습니다."
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * 사용자가 작성한 모든 리뷰 목록 조회 - GET /reviews/{userId}
+ */
+export const handleGetUserReviews = async (req, res, next) => {
+  /*
+  #swagger.tags = ["MyPage"]
+  #swagger.summary = "사용자가 작성한 모든 리뷰 목록 조회"
+  #swagger.description = "사용자 ID로 해당 사용자가 작성한 모든 리뷰를 조회합니다."
+  #swagger.parameters['userId'] = {
+    in: 'path',
+    description: '사용자 ID',
+    required: true,
+    type: 'string'
+  }
+  */
+
+  try {
+    const { userId } = req.params;
+    
+    if (!userId) {
+      return res.status(StatusCodes.BAD_REQUEST).error({
+        errorCode: "C006",
+        reason: "사용자 ID가 필요합니다.",
+        data: null
+      });
+    }
+
+    // 해당 사용자의 모든 리뷰 목록을 조회 (페이지네이션 없이 전체)
+    const result = await getUserReviews(parseInt(userId), 1000, null);
+
+    // 직접 반환 (DTO 변환 없이)
+    res.status(StatusCodes.OK).success({
+      data: result.data,
+      hasNextPage: result.hasNextPage,
+      nextCursor: result.nextCursor
     });
 
   } catch (error) {

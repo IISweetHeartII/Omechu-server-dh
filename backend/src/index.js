@@ -40,6 +40,7 @@ import {
   handleAddZzim,
   handleRemoveZzim,
   handleGetZzimList,
+  handleGetUserReviews,
 } from "./controllers/mypage.controller.js";
 
 //마이페이지의 먹부림 조회
@@ -233,6 +234,8 @@ app.get("/recommend/management/:userId", isLoggedIn, handleGetRecommendManagemen
 app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
 app.post("/recommend/except/:userId/remove", isLoggedIn, handleRemoveMenuFromExcept);
 
+//내 활동 내역
+app.get("/reviews/:userId", isLoggedIn, handleGetUserReviews);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
