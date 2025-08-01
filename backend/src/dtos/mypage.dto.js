@@ -71,7 +71,17 @@ export const responseFromZzim = (zzim) => {
     userId: zzim.user_id.toString(),
     restaurantId: zzim.rest_id.toString(),
     created_at: zzim.created_at,
-    restaurant: zzim.restaurant ? responseFromRestaurant(zzim.restaurant) : null
+    restaurant: zzim.restaurant ? {
+      id: zzim.restaurant.id.toString(),
+      name: zzim.restaurant.name,
+      address: zzim.restaurant.address,
+      rating: zzim.restaurant.rating,
+      // 🆕 추가된 필드들
+      reviewCount: zzim.restaurant.reviewCount || 0,
+      representativeMenus: zzim.restaurant.representativeMenus || [],
+      tags: zzim.restaurant.tags || [],
+      rest_image: zzim.restaurant.rest_image // 이미지도 추가
+    } : null
   };
 };
 
