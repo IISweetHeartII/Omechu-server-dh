@@ -5,10 +5,6 @@ import {
   removeMenuFromExceptService,
 } from "../services/recommend.management.service.js";
 
-/**
- * 추천 목록 관리 조회 컨트롤러
- */
-
 export const handleGetRecommendManagement = async (req, res, next) => {
   /*
   #swagger.tags = ["Recommend"]
@@ -147,10 +143,6 @@ export const handleGetRecommendManagement = async (req, res, next) => {
     next(error);
   }
 };
-
-/**
- * 메뉴 제외 추가 컨트롤러 (추천 받지 않기)
- */
 
 export const handleAddMenuToExcept = async (req, res, next) => {
   try {
@@ -356,25 +348,7 @@ export const handleAddMenuToExcept = async (req, res, next) => {
 */
 };
 
-/**
- * 메뉴 제외 해제 컨트롤러 (다시 추천 받기)
- */
-
 export const handleRemoveMenuFromExcept = async (req, res, next) => {
-  try {
-    const { userId } = req.params;
-    const { menuId, menuName } = req.body;
-
-    const result = await removeMenuFromExceptService(
-      parseInt(userId),
-      menuId ? parseInt(menuId) : null,
-      menuName
-    );
-
-    res.status(StatusCodes.OK).success(result);
-  } catch (error) {
-    next(error);
-  }
   /*
   #swagger.tags = ["Recommend"]
   #swagger.summary = "메뉴 제외 목록에서 제거"
@@ -542,4 +516,18 @@ export const handleRemoveMenuFromExcept = async (req, res, next) => {
     }
   }
 */
+  try {
+    const { userId } = req.params;
+    const { menuId, menuName } = req.body;
+
+    const result = await removeMenuFromExceptService(
+      parseInt(userId),
+      menuId ? parseInt(menuId) : null,
+      menuName
+    );
+
+    res.status(StatusCodes.OK).success(result);
+  } catch (error) {
+    next(error);
+  }
 };
