@@ -33,7 +33,6 @@ export const handleGetUserProfile = async (req, res, next) => {
 
   const userProfile = await getUserProfile(parseInt(userId));
   const responseData = responseFromProfile(userProfile);
-
   res.status(StatusCodes.OK).success(responseData);
 
   /*
