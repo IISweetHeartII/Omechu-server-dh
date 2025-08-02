@@ -235,3 +235,20 @@ export const getPlaceDetail = async (restId) => {
     };
   }
 };
+
+
+export const googlePlaceIdtoId = async (googlePlaceId) => {
+  try {
+    const restaurant = await prisma.restaurant.findFirst({
+      where: { google_place_id: googlePlaceId },
+    });
+    if (!restaurant) {
+      console.error("Restaurant not found for Google Place ID:", googlePlaceId);
+      return null;
+    }
+    return restaurant.id.toString();
+  } catch (error) {
+    console.error("Error fetching restaurant by Google Place ID:", error);
+    throw error;
+  }
+}

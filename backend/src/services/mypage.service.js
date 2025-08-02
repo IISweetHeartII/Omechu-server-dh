@@ -65,11 +65,6 @@ export const updateUserProfileService = async (userId, data) => {
   const updatedUser = await updateUserProfile(userId, data);
   console.log("updatedUser", updatedUser);
   return updatedUser;
-
-  // throw new ProfileUpdateFailed("프로필 수정에 실패했습니다.", {
-  //   userId,
-  //   error: error.message,
-  // });
 };
 
 /**
@@ -81,7 +76,6 @@ export const getMyRestaurants = async ({ userId, cursor = 0, limit = 10 }) => {
     return result;
   } catch (error) {
     console.error("맛집 목록 조회 상세 오류:", error);
-    // 에러 발생시 빈 결과 반환
     return {
       data: [],
       hasNextPage: false,

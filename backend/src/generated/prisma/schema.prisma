@@ -77,7 +77,7 @@ model rest_menu {
 
 model restaurant {
   id              BigInt         @id @default(autoincrement())
-  rest_image      String?        @db.VarChar(50)
+  rest_image      String?        @db.VarChar(500)
   location        String?        @db.VarChar(20)
   name            String?        @db.VarChar(60)
   address         String?        @db.VarChar(60)
@@ -121,7 +121,7 @@ model review_image {
   id         BigInt     @id @default(autoincrement())
   rest_id    BigInt
   review_id  BigInt
-  link       String?    @db.VarChar(50)
+  link       String?    @db.VarChar(400)
   review     review     @relation(fields: [review_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_image_ibfk_1")
   restaurant restaurant @relation(fields: [rest_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "review_image_restaurant_id_fk")
 
@@ -145,7 +145,7 @@ model user {
   password         String             @db.VarChar(50)
   created_at       DateTime?          @default(now()) @db.DateTime(0)
   updated_at       DateTime?          @default(now()) @db.DateTime(0)
-  profileImageUrl  String?            @db.VarChar(255)
+  profileImageUrl  String?            @db.VarChar(400)
   allergy          allergy[]
   mukburim         mukburim[]
   prefer           prefer[]
