@@ -2,7 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import { exchangeCodeForTokenService, findOrCreateKakaoUserService } from "../services/kakao.service.js";
 
 export const handleKakaoRedirect = (req, res) => {
-  const redirectUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}`;
+  const redirectUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_LOGIN_REST_API_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}`;
+  console.log("최종 Redirect URL:", redirectUrl);
   res.redirect(redirectUrl);
 };
 
@@ -44,10 +45,7 @@ export const handleKakaoCallback = async (req, res, next) => {
       email: user.email,
     };
 
-    res.status(StatusCodes.OK).success({
-        id: user.id.toString(), 
-        email: user.email,
-    });
+    res.redirect("https://omechu.log8.kr/");
   } catch (err) {
     console.error("카카오 로그인 에러:", err);
     next(err);

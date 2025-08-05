@@ -346,3 +346,12 @@ export class DuplicatedUserData extends Error {
     this.data = data;
   }
 }
+
+export class InvalidRequestError extends Error {
+  errorCode = "R001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}

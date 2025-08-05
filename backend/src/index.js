@@ -67,6 +67,8 @@ import {
   handleKakaoRedirect,
   handleKakaoCallback,
 } from "./controllers/kakao.controller.js";
+
+import { handleAgreementConsent, getAgreementConsent } from "./controllers/agreement.controller.js";
 dotenv.config();
 
 const app = express();
@@ -183,6 +185,9 @@ app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 app.patch("/auth/change-passwd", handleChangePassword);
+app.post("/agreements/consent", isLoggedIn, handleAgreementConsent);
+app.get("/agreements/consent", isLoggedIn, getAgreementConsent);
+
 // 카카오 로그인
 app.get("/auth/kakao", handleKakaoRedirect); // 인가코드 받기
 app.get("/auth/kakao/callback", handleKakaoCallback); // 토큰 → 사용자 정보 → 세션 저장
