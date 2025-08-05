@@ -67,6 +67,7 @@ import {
   handleKakaoRedirect,
   handleKakaoCallback,
 } from "./controllers/kakao.controller.js";
+import { handleSearchRestaurant } from "./controllers/getSearchRestaurant.controller.js";
 dotenv.config();
 
 const app = express();
@@ -218,7 +219,7 @@ app.get("/place/detail/:restId", isLoggedIn, handleGetPlaceDetail);
 app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
 app.post("/place/:id/report", isLoggedIn, handleReportReview);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
-
+app.get("/place/search", isLoggedIn, handleSearchRestaurant);
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
