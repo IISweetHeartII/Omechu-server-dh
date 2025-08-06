@@ -1,28 +1,32 @@
 import { StatusCodes } from "http-status-codes";
 import { findUser } from "../services/login.service.js";
-export const handleUserLogin = async (req, res) => {
-  console.log("하이");
-  console.log(req.session);
+import { generateAccessToken, generateRefreshToken } from "../utils/token.js";
+import { createClient } from "redis";
+
+const redisClient = createClient({
+  url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+});
+
+await redisClient.connect();
+export const handleUserLoginJWT = async (req, res) => {
   const loginUser = await findUser(req.body);
   if (loginUser) {
-    req.session.user = {
-      id: loginUser.id.toString(),
-      email: loginUser.email,
-    };
+    const accessToken = generateAccessToken({
+      payload: loginUser.id.toString(),
+    });
+    const refreshToken = generateRefreshToken({
+      payload: loginUser.id.toString(),
+    });
+    await redisClient.set(`refresh:${loginUser.id}`, refreshToken, {
+      EX: 60 * 60 * 24 * 7,
+    });
+    res.status(StatusCodes.OK).success({
+      userId: loginUser.id.toString(),
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+    });
   }
-  console.log(loginUser);
-  res.status(StatusCodes.OK);
-  res.success({
-    id: loginUser.id.toString(),
-    email: loginUser.email,
-    gender: loginUser.gender,
-    nickname: loginUser.nickname,
-    created_at: loginUser.created_at,
-    updated_at: loginUser.updated_at,
-  });
-  console.log(req.session);
-  console.log(req.headers.cookie);
-  console.log(req.session);
+
   /*
   #swagger.tags= ["Auth"]
   #swagger.summary= "로그인"

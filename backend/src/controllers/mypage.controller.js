@@ -107,7 +107,7 @@ export const handleGetUserProfile = async (req, res, next) => {
   }
 }
   */
-  const userId = req.session.user.id;
+  const userId = req.user.id;
   if (!userId) {
     return res.status(StatusCodes.BAD_REQUEST).error({
       errorCode: "C006",
@@ -233,7 +233,7 @@ export const handleUpdateUserProfile = async (req, res, next) => {
   }
 }
   */
-  const userId = req.session.user.id;
+  const userId = req.user.id;
   if (!userId) {
     return res.status(StatusCodes.BAD_REQUEST).error({
       errorCode: "C006",
@@ -268,11 +268,10 @@ export const handleGetRestaurantDetail = async (req, res, next) => {
 
 export const handleGetMyRestaurants = async (req, res, next) => {
   const result = await getMyRestaurants({
-    userId: parseInt(req.session.user.id),
+    userId: parseInt(req.user.id),
     cursor: parseInt(req.query.cursor),
     limit: parseInt(req.query.limit),
   });
-  console.log(result);
   res.status(StatusCodes.OK).success(result);
 
   /*

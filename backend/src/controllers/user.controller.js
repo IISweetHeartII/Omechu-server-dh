@@ -3,7 +3,7 @@ import { patchUserProfileService } from "../services/user.service.js";
 import { LoginRequiredError, UserUpdateFailedError } from "../errors.js";
 
 export const handleUpdateUserInfo = async (req, res, next) => {
-      /*
+  /*
     #swagger.summary = '회원 정보 수정 API'
     #swagger.tags = ['Auth']
     #swagger.requestBody = {
@@ -80,7 +80,7 @@ export const handleUpdateUserInfo = async (req, res, next) => {
     console.log("회원 정보 수정을 요청했습니다!");
     console.log("body:", req.body);
 
-    const userId = req.session.user?.id;
+    const userId = req.user?.id;
     if (!userId) {
       throw new LoginRequiredError("로그인이 필요한 서비스입니다.");
     }

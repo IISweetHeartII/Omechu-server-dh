@@ -355,3 +355,39 @@ export class InvalidRequestError extends Error {
     this.data = data;
   }
 }
+
+export class ExpireToken extends Error {
+  errorCode = "T001";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class NoBearerToken extends Error {
+  errorCode = "T002";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class BearerTokenError extends Error {
+  errorCode = "T003";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
+
+export class BearerTokenServerError extends Error {
+  errorCode = "T003";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}

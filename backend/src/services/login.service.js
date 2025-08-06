@@ -8,7 +8,6 @@ export const findUser = async (data) => {
     );
   }
   const user = await userLogin(data);
-  console.log("user", user);
   if (user === null) {
     throw new InCorrectPasswd("비밀번호가 틀렸습니다", data);
   } else {
