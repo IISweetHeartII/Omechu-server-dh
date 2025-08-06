@@ -7,6 +7,9 @@ export const handleAgreementConsent = async (req, res, next) => {
   #swagger.tags = ["Auth"]
   #swagger.summary = "약관 동의 저장"
   #swagger.description = "회원가입 시 약관 동의 여부를 저장합니다."
+  #swagger.security = [{
+    "bearerAuth": []
+  }]
 
   #swagger.requestBody = {
     required: true,
@@ -71,7 +74,7 @@ export const handleAgreementConsent = async (req, res, next) => {
   }
   */
   try {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     const agreementData = bodyToAgreementDto(req.body, userId);
 
     await handleAgreementConsentService(agreementData);
@@ -80,8 +83,9 @@ export const handleAgreementConsent = async (req, res, next) => {
       message: "약관 동의가 완료되었습니다."
     });
   } catch (error) {
+     console.error("Controller Error:", error);  
     next(error);
-  }
+}
 };
 
 export const getAgreementConsent = async (req, res, next) => {
@@ -89,6 +93,9 @@ export const getAgreementConsent = async (req, res, next) => {
   #swagger.tags = ["Auth"]
   #swagger.summary = "약관 동의 조회"
   #swagger.description = "사용자의 가장 최신 약관 동의 내역을 조회합니다."
+  #swagger.security = [{
+    "bearerAuth": []
+  }]
 
   #swagger.responses[200] = {
     description: "약관 동의 조회 성공",
@@ -138,7 +145,7 @@ export const getAgreementConsent = async (req, res, next) => {
   }
   */
   try {
-    const userId = req.session.user.id;
+    const userId = req.user.id;
     const consent = await getAgreementConsentService(userId);
 
     const serializedConsent = JSON.parse(JSON.stringify(consent, (key, value) =>
