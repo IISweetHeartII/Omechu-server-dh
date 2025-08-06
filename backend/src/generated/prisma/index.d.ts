@@ -108,6 +108,11 @@ export type repre_menu = $Result.DefaultSelection<Prisma.$repre_menuPayload>
  * 
  */
 export type user_rest = $Result.DefaultSelection<Prisma.$user_restPayload>
+/**
+ * Model agreement_consent
+ * 
+ */
+export type agreement_consent = $Result.DefaultSelection<Prisma.$agreement_consentPayload>
 
 /**
  * Enums
@@ -497,6 +502,16 @@ export class PrismaClient<
     * ```
     */
   get user_rest(): Prisma.user_restDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.agreement_consent`: Exposes CRUD operations for the **agreement_consent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Agreement_consents
+    * const agreement_consents = await prisma.agreement_consent.findMany()
+    * ```
+    */
+  get agreement_consent(): Prisma.agreement_consentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -955,7 +970,8 @@ export namespace Prisma {
     rest_tag: 'rest_tag',
     password_reset_token: 'password_reset_token',
     repre_menu: 'repre_menu',
-    user_rest: 'user_rest'
+    user_rest: 'user_rest',
+    agreement_consent: 'agreement_consent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -974,7 +990,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu" | "user_rest"
+      modelProps: "choice" | "menu" | "mukburim" | "recommend_except" | "report" | "rest_menu" | "restaurant" | "review" | "review_image" | "sessions" | "user" | "allergy" | "prefer" | "zzim" | "email_verification" | "rest_tag" | "password_reset_token" | "repre_menu" | "user_rest" | "agreement_consent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2232,6 +2248,72 @@ export namespace Prisma {
           }
         }
       }
+      agreement_consent: {
+        payload: Prisma.$agreement_consentPayload<ExtArgs>
+        fields: Prisma.agreement_consentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.agreement_consentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.agreement_consentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          findFirst: {
+            args: Prisma.agreement_consentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.agreement_consentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          findMany: {
+            args: Prisma.agreement_consentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>[]
+          }
+          create: {
+            args: Prisma.agreement_consentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          createMany: {
+            args: Prisma.agreement_consentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.agreement_consentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          update: {
+            args: Prisma.agreement_consentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          deleteMany: {
+            args: Prisma.agreement_consentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.agreement_consentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.agreement_consentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$agreement_consentPayload>
+          }
+          aggregate: {
+            args: Prisma.Agreement_consentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAgreement_consent>
+          }
+          groupBy: {
+            args: Prisma.agreement_consentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Agreement_consentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.agreement_consentCountArgs<ExtArgs>
+            result: $Utils.Optional<Agreement_consentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2335,6 +2417,7 @@ export namespace Prisma {
     password_reset_token?: password_reset_tokenOmit
     repre_menu?: repre_menuOmit
     user_rest?: user_restOmit
+    agreement_consent?: agreement_consentOmit
   }
 
   /* Types for Logging */
@@ -2594,6 +2677,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    agreement_consent: number
     allergy: number
     mukburim: number
     prefer: number
@@ -2605,6 +2689,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    agreement_consent?: boolean | UserCountOutputTypeCountAgreement_consentArgs
     allergy?: boolean | UserCountOutputTypeCountAllergyArgs
     mukburim?: boolean | UserCountOutputTypeCountMukburimArgs
     prefer?: boolean | UserCountOutputTypeCountPreferArgs
@@ -2624,6 +2709,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAgreement_consentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: agreement_consentWhereInput
   }
 
   /**
@@ -12936,6 +13028,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     profileImageUrl?: boolean
+    agreement_consent?: boolean | user$agreement_consentArgs<ExtArgs>
     allergy?: boolean | user$allergyArgs<ExtArgs>
     mukburim?: boolean | user$mukburimArgs<ExtArgs>
     prefer?: boolean | user$preferArgs<ExtArgs>
@@ -12964,6 +13057,7 @@ export namespace Prisma {
 
   export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "nickname" | "body_type" | "gender" | "exercise" | "password" | "created_at" | "updated_at" | "profileImageUrl", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    agreement_consent?: boolean | user$agreement_consentArgs<ExtArgs>
     allergy?: boolean | user$allergyArgs<ExtArgs>
     mukburim?: boolean | user$mukburimArgs<ExtArgs>
     prefer?: boolean | user$preferArgs<ExtArgs>
@@ -12978,6 +13072,7 @@ export namespace Prisma {
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
     objects: {
+      agreement_consent: Prisma.$agreement_consentPayload<ExtArgs>[]
       allergy: Prisma.$allergyPayload<ExtArgs>[]
       mukburim: Prisma.$mukburimPayload<ExtArgs>[]
       prefer: Prisma.$preferPayload<ExtArgs>[]
@@ -13338,6 +13433,7 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    agreement_consent<T extends user$agreement_consentArgs<ExtArgs> = {}>(args?: Subset<T, user$agreement_consentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     allergy<T extends user$allergyArgs<ExtArgs> = {}>(args?: Subset<T, user$allergyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$allergyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mukburim<T extends user$mukburimArgs<ExtArgs> = {}>(args?: Subset<T, user$mukburimArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$mukburimPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     prefer<T extends user$preferArgs<ExtArgs> = {}>(args?: Subset<T, user$preferArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$preferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13725,6 +13821,30 @@ export namespace Prisma {
      * Limit how many users to delete.
      */
     limit?: number
+  }
+
+  /**
+   * user.agreement_consent
+   */
+  export type user$agreement_consentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    where?: agreement_consentWhereInput
+    orderBy?: agreement_consentOrderByWithRelationInput | agreement_consentOrderByWithRelationInput[]
+    cursor?: agreement_consentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Agreement_consentScalarFieldEnum | Agreement_consentScalarFieldEnum[]
   }
 
   /**
@@ -21468,6 +21588,995 @@ export namespace Prisma {
 
 
   /**
+   * Model agreement_consent
+   */
+
+  export type AggregateAgreement_consent = {
+    _count: Agreement_consentCountAggregateOutputType | null
+    _avg: Agreement_consentAvgAggregateOutputType | null
+    _sum: Agreement_consentSumAggregateOutputType | null
+    _min: Agreement_consentMinAggregateOutputType | null
+    _max: Agreement_consentMaxAggregateOutputType | null
+  }
+
+  export type Agreement_consentAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type Agreement_consentSumAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+  }
+
+  export type Agreement_consentMinAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    terms_of_service: boolean | null
+    privacy_policy: boolean | null
+    location_service: boolean | null
+    is_over14: boolean | null
+    created_at: Date | null
+  }
+
+  export type Agreement_consentMaxAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    terms_of_service: boolean | null
+    privacy_policy: boolean | null
+    location_service: boolean | null
+    is_over14: boolean | null
+    created_at: Date | null
+  }
+
+  export type Agreement_consentCountAggregateOutputType = {
+    id: number
+    user_id: number
+    terms_of_service: number
+    privacy_policy: number
+    location_service: number
+    is_over14: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type Agreement_consentAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type Agreement_consentSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type Agreement_consentMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    terms_of_service?: true
+    privacy_policy?: true
+    location_service?: true
+    is_over14?: true
+    created_at?: true
+  }
+
+  export type Agreement_consentMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    terms_of_service?: true
+    privacy_policy?: true
+    location_service?: true
+    is_over14?: true
+    created_at?: true
+  }
+
+  export type Agreement_consentCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    terms_of_service?: true
+    privacy_policy?: true
+    location_service?: true
+    is_over14?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type Agreement_consentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which agreement_consent to aggregate.
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agreement_consents to fetch.
+     */
+    orderBy?: agreement_consentOrderByWithRelationInput | agreement_consentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: agreement_consentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agreement_consents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agreement_consents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned agreement_consents
+    **/
+    _count?: true | Agreement_consentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Agreement_consentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Agreement_consentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Agreement_consentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Agreement_consentMaxAggregateInputType
+  }
+
+  export type GetAgreement_consentAggregateType<T extends Agreement_consentAggregateArgs> = {
+        [P in keyof T & keyof AggregateAgreement_consent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAgreement_consent[P]>
+      : GetScalarType<T[P], AggregateAgreement_consent[P]>
+  }
+
+
+
+
+  export type agreement_consentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: agreement_consentWhereInput
+    orderBy?: agreement_consentOrderByWithAggregationInput | agreement_consentOrderByWithAggregationInput[]
+    by: Agreement_consentScalarFieldEnum[] | Agreement_consentScalarFieldEnum
+    having?: agreement_consentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Agreement_consentCountAggregateInputType | true
+    _avg?: Agreement_consentAvgAggregateInputType
+    _sum?: Agreement_consentSumAggregateInputType
+    _min?: Agreement_consentMinAggregateInputType
+    _max?: Agreement_consentMaxAggregateInputType
+  }
+
+  export type Agreement_consentGroupByOutputType = {
+    id: bigint
+    user_id: bigint
+    terms_of_service: boolean
+    privacy_policy: boolean
+    location_service: boolean
+    is_over14: boolean
+    created_at: Date
+    _count: Agreement_consentCountAggregateOutputType | null
+    _avg: Agreement_consentAvgAggregateOutputType | null
+    _sum: Agreement_consentSumAggregateOutputType | null
+    _min: Agreement_consentMinAggregateOutputType | null
+    _max: Agreement_consentMaxAggregateOutputType | null
+  }
+
+  type GetAgreement_consentGroupByPayload<T extends agreement_consentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Agreement_consentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Agreement_consentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Agreement_consentGroupByOutputType[P]>
+            : GetScalarType<T[P], Agreement_consentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type agreement_consentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: boolean
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["agreement_consent"]>
+
+
+
+  export type agreement_consentSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: boolean
+  }
+
+  export type agreement_consentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "terms_of_service" | "privacy_policy" | "location_service" | "is_over14" | "created_at", ExtArgs["result"]["agreement_consent"]>
+  export type agreement_consentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | userDefaultArgs<ExtArgs>
+  }
+
+  export type $agreement_consentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "agreement_consent"
+    objects: {
+      user: Prisma.$userPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      user_id: bigint
+      terms_of_service: boolean
+      privacy_policy: boolean
+      location_service: boolean
+      is_over14: boolean
+      created_at: Date
+    }, ExtArgs["result"]["agreement_consent"]>
+    composites: {}
+  }
+
+  type agreement_consentGetPayload<S extends boolean | null | undefined | agreement_consentDefaultArgs> = $Result.GetResult<Prisma.$agreement_consentPayload, S>
+
+  type agreement_consentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<agreement_consentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Agreement_consentCountAggregateInputType | true
+    }
+
+  export interface agreement_consentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['agreement_consent'], meta: { name: 'agreement_consent' } }
+    /**
+     * Find zero or one Agreement_consent that matches the filter.
+     * @param {agreement_consentFindUniqueArgs} args - Arguments to find a Agreement_consent
+     * @example
+     * // Get one Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends agreement_consentFindUniqueArgs>(args: SelectSubset<T, agreement_consentFindUniqueArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Agreement_consent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {agreement_consentFindUniqueOrThrowArgs} args - Arguments to find a Agreement_consent
+     * @example
+     * // Get one Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends agreement_consentFindUniqueOrThrowArgs>(args: SelectSubset<T, agreement_consentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agreement_consent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentFindFirstArgs} args - Arguments to find a Agreement_consent
+     * @example
+     * // Get one Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends agreement_consentFindFirstArgs>(args?: SelectSubset<T, agreement_consentFindFirstArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Agreement_consent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentFindFirstOrThrowArgs} args - Arguments to find a Agreement_consent
+     * @example
+     * // Get one Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends agreement_consentFindFirstOrThrowArgs>(args?: SelectSubset<T, agreement_consentFindFirstOrThrowArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Agreement_consents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Agreement_consents
+     * const agreement_consents = await prisma.agreement_consent.findMany()
+     * 
+     * // Get first 10 Agreement_consents
+     * const agreement_consents = await prisma.agreement_consent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const agreement_consentWithIdOnly = await prisma.agreement_consent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends agreement_consentFindManyArgs>(args?: SelectSubset<T, agreement_consentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Agreement_consent.
+     * @param {agreement_consentCreateArgs} args - Arguments to create a Agreement_consent.
+     * @example
+     * // Create one Agreement_consent
+     * const Agreement_consent = await prisma.agreement_consent.create({
+     *   data: {
+     *     // ... data to create a Agreement_consent
+     *   }
+     * })
+     * 
+     */
+    create<T extends agreement_consentCreateArgs>(args: SelectSubset<T, agreement_consentCreateArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Agreement_consents.
+     * @param {agreement_consentCreateManyArgs} args - Arguments to create many Agreement_consents.
+     * @example
+     * // Create many Agreement_consents
+     * const agreement_consent = await prisma.agreement_consent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends agreement_consentCreateManyArgs>(args?: SelectSubset<T, agreement_consentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Agreement_consent.
+     * @param {agreement_consentDeleteArgs} args - Arguments to delete one Agreement_consent.
+     * @example
+     * // Delete one Agreement_consent
+     * const Agreement_consent = await prisma.agreement_consent.delete({
+     *   where: {
+     *     // ... filter to delete one Agreement_consent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends agreement_consentDeleteArgs>(args: SelectSubset<T, agreement_consentDeleteArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Agreement_consent.
+     * @param {agreement_consentUpdateArgs} args - Arguments to update one Agreement_consent.
+     * @example
+     * // Update one Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends agreement_consentUpdateArgs>(args: SelectSubset<T, agreement_consentUpdateArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Agreement_consents.
+     * @param {agreement_consentDeleteManyArgs} args - Arguments to filter Agreement_consents to delete.
+     * @example
+     * // Delete a few Agreement_consents
+     * const { count } = await prisma.agreement_consent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends agreement_consentDeleteManyArgs>(args?: SelectSubset<T, agreement_consentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Agreement_consents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Agreement_consents
+     * const agreement_consent = await prisma.agreement_consent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends agreement_consentUpdateManyArgs>(args: SelectSubset<T, agreement_consentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Agreement_consent.
+     * @param {agreement_consentUpsertArgs} args - Arguments to update or create a Agreement_consent.
+     * @example
+     * // Update or create a Agreement_consent
+     * const agreement_consent = await prisma.agreement_consent.upsert({
+     *   create: {
+     *     // ... data to create a Agreement_consent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Agreement_consent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends agreement_consentUpsertArgs>(args: SelectSubset<T, agreement_consentUpsertArgs<ExtArgs>>): Prisma__agreement_consentClient<$Result.GetResult<Prisma.$agreement_consentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Agreement_consents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentCountArgs} args - Arguments to filter Agreement_consents to count.
+     * @example
+     * // Count the number of Agreement_consents
+     * const count = await prisma.agreement_consent.count({
+     *   where: {
+     *     // ... the filter for the Agreement_consents we want to count
+     *   }
+     * })
+    **/
+    count<T extends agreement_consentCountArgs>(
+      args?: Subset<T, agreement_consentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Agreement_consentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Agreement_consent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Agreement_consentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Agreement_consentAggregateArgs>(args: Subset<T, Agreement_consentAggregateArgs>): Prisma.PrismaPromise<GetAgreement_consentAggregateType<T>>
+
+    /**
+     * Group by Agreement_consent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {agreement_consentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends agreement_consentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: agreement_consentGroupByArgs['orderBy'] }
+        : { orderBy?: agreement_consentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, agreement_consentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAgreement_consentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the agreement_consent model
+   */
+  readonly fields: agreement_consentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for agreement_consent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__agreement_consentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the agreement_consent model
+   */
+  interface agreement_consentFieldRefs {
+    readonly id: FieldRef<"agreement_consent", 'BigInt'>
+    readonly user_id: FieldRef<"agreement_consent", 'BigInt'>
+    readonly terms_of_service: FieldRef<"agreement_consent", 'Boolean'>
+    readonly privacy_policy: FieldRef<"agreement_consent", 'Boolean'>
+    readonly location_service: FieldRef<"agreement_consent", 'Boolean'>
+    readonly is_over14: FieldRef<"agreement_consent", 'Boolean'>
+    readonly created_at: FieldRef<"agreement_consent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * agreement_consent findUnique
+   */
+  export type agreement_consentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter, which agreement_consent to fetch.
+     */
+    where: agreement_consentWhereUniqueInput
+  }
+
+  /**
+   * agreement_consent findUniqueOrThrow
+   */
+  export type agreement_consentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter, which agreement_consent to fetch.
+     */
+    where: agreement_consentWhereUniqueInput
+  }
+
+  /**
+   * agreement_consent findFirst
+   */
+  export type agreement_consentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter, which agreement_consent to fetch.
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agreement_consents to fetch.
+     */
+    orderBy?: agreement_consentOrderByWithRelationInput | agreement_consentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for agreement_consents.
+     */
+    cursor?: agreement_consentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agreement_consents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agreement_consents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of agreement_consents.
+     */
+    distinct?: Agreement_consentScalarFieldEnum | Agreement_consentScalarFieldEnum[]
+  }
+
+  /**
+   * agreement_consent findFirstOrThrow
+   */
+  export type agreement_consentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter, which agreement_consent to fetch.
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agreement_consents to fetch.
+     */
+    orderBy?: agreement_consentOrderByWithRelationInput | agreement_consentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for agreement_consents.
+     */
+    cursor?: agreement_consentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agreement_consents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agreement_consents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of agreement_consents.
+     */
+    distinct?: Agreement_consentScalarFieldEnum | Agreement_consentScalarFieldEnum[]
+  }
+
+  /**
+   * agreement_consent findMany
+   */
+  export type agreement_consentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter, which agreement_consents to fetch.
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of agreement_consents to fetch.
+     */
+    orderBy?: agreement_consentOrderByWithRelationInput | agreement_consentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing agreement_consents.
+     */
+    cursor?: agreement_consentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` agreement_consents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` agreement_consents.
+     */
+    skip?: number
+    distinct?: Agreement_consentScalarFieldEnum | Agreement_consentScalarFieldEnum[]
+  }
+
+  /**
+   * agreement_consent create
+   */
+  export type agreement_consentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a agreement_consent.
+     */
+    data: XOR<agreement_consentCreateInput, agreement_consentUncheckedCreateInput>
+  }
+
+  /**
+   * agreement_consent createMany
+   */
+  export type agreement_consentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many agreement_consents.
+     */
+    data: agreement_consentCreateManyInput | agreement_consentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * agreement_consent update
+   */
+  export type agreement_consentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a agreement_consent.
+     */
+    data: XOR<agreement_consentUpdateInput, agreement_consentUncheckedUpdateInput>
+    /**
+     * Choose, which agreement_consent to update.
+     */
+    where: agreement_consentWhereUniqueInput
+  }
+
+  /**
+   * agreement_consent updateMany
+   */
+  export type agreement_consentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update agreement_consents.
+     */
+    data: XOR<agreement_consentUpdateManyMutationInput, agreement_consentUncheckedUpdateManyInput>
+    /**
+     * Filter which agreement_consents to update
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * Limit how many agreement_consents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * agreement_consent upsert
+   */
+  export type agreement_consentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the agreement_consent to update in case it exists.
+     */
+    where: agreement_consentWhereUniqueInput
+    /**
+     * In case the agreement_consent found by the `where` argument doesn't exist, create a new agreement_consent with this data.
+     */
+    create: XOR<agreement_consentCreateInput, agreement_consentUncheckedCreateInput>
+    /**
+     * In case the agreement_consent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<agreement_consentUpdateInput, agreement_consentUncheckedUpdateInput>
+  }
+
+  /**
+   * agreement_consent delete
+   */
+  export type agreement_consentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+    /**
+     * Filter which agreement_consent to delete.
+     */
+    where: agreement_consentWhereUniqueInput
+  }
+
+  /**
+   * agreement_consent deleteMany
+   */
+  export type agreement_consentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which agreement_consents to delete
+     */
+    where?: agreement_consentWhereInput
+    /**
+     * Limit how many agreement_consents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * agreement_consent without action
+   */
+  export type agreement_consentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the agreement_consent
+     */
+    select?: agreement_consentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the agreement_consent
+     */
+    omit?: agreement_consentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: agreement_consentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21689,6 +22798,19 @@ export namespace Prisma {
   };
 
   export type User_restScalarFieldEnum = (typeof User_restScalarFieldEnum)[keyof typeof User_restScalarFieldEnum]
+
+
+  export const Agreement_consentScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    terms_of_service: 'terms_of_service',
+    privacy_policy: 'privacy_policy',
+    location_service: 'location_service',
+    is_over14: 'is_over14',
+    created_at: 'created_at'
+  };
+
+  export type Agreement_consentScalarFieldEnum = (typeof Agreement_consentScalarFieldEnum)[keyof typeof Agreement_consentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -22606,6 +23728,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
     profileImageUrl?: StringNullableFilter<"user"> | string | null
+    agreement_consent?: Agreement_consentListRelationFilter
     allergy?: AllergyListRelationFilter
     mukburim?: MukburimListRelationFilter
     prefer?: PreferListRelationFilter
@@ -22627,6 +23750,7 @@ export namespace Prisma {
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     profileImageUrl?: SortOrderInput | SortOrder
+    agreement_consent?: agreement_consentOrderByRelationAggregateInput
     allergy?: allergyOrderByRelationAggregateInput
     mukburim?: mukburimOrderByRelationAggregateInput
     prefer?: preferOrderByRelationAggregateInput
@@ -22652,6 +23776,7 @@ export namespace Prisma {
     created_at?: DateTimeNullableFilter<"user"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"user"> | Date | string | null
     profileImageUrl?: StringNullableFilter<"user"> | string | null
+    agreement_consent?: Agreement_consentListRelationFilter
     allergy?: AllergyListRelationFilter
     mukburim?: MukburimListRelationFilter
     prefer?: PreferListRelationFilter
@@ -23100,6 +24225,73 @@ export namespace Prisma {
     id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
     user_id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
     rest_id?: BigIntWithAggregatesFilter<"user_rest"> | bigint | number
+  }
+
+  export type agreement_consentWhereInput = {
+    AND?: agreement_consentWhereInput | agreement_consentWhereInput[]
+    OR?: agreement_consentWhereInput[]
+    NOT?: agreement_consentWhereInput | agreement_consentWhereInput[]
+    id?: BigIntFilter<"agreement_consent"> | bigint | number
+    user_id?: BigIntFilter<"agreement_consent"> | bigint | number
+    terms_of_service?: BoolFilter<"agreement_consent"> | boolean
+    privacy_policy?: BoolFilter<"agreement_consent"> | boolean
+    location_service?: BoolFilter<"agreement_consent"> | boolean
+    is_over14?: BoolFilter<"agreement_consent"> | boolean
+    created_at?: DateTimeFilter<"agreement_consent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }
+
+  export type agreement_consentOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    terms_of_service?: SortOrder
+    privacy_policy?: SortOrder
+    location_service?: SortOrder
+    is_over14?: SortOrder
+    created_at?: SortOrder
+    user?: userOrderByWithRelationInput
+  }
+
+  export type agreement_consentWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: agreement_consentWhereInput | agreement_consentWhereInput[]
+    OR?: agreement_consentWhereInput[]
+    NOT?: agreement_consentWhereInput | agreement_consentWhereInput[]
+    user_id?: BigIntFilter<"agreement_consent"> | bigint | number
+    terms_of_service?: BoolFilter<"agreement_consent"> | boolean
+    privacy_policy?: BoolFilter<"agreement_consent"> | boolean
+    location_service?: BoolFilter<"agreement_consent"> | boolean
+    is_over14?: BoolFilter<"agreement_consent"> | boolean
+    created_at?: DateTimeFilter<"agreement_consent"> | Date | string
+    user?: XOR<UserScalarRelationFilter, userWhereInput>
+  }, "id">
+
+  export type agreement_consentOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    terms_of_service?: SortOrder
+    privacy_policy?: SortOrder
+    location_service?: SortOrder
+    is_over14?: SortOrder
+    created_at?: SortOrder
+    _count?: agreement_consentCountOrderByAggregateInput
+    _avg?: agreement_consentAvgOrderByAggregateInput
+    _max?: agreement_consentMaxOrderByAggregateInput
+    _min?: agreement_consentMinOrderByAggregateInput
+    _sum?: agreement_consentSumOrderByAggregateInput
+  }
+
+  export type agreement_consentScalarWhereWithAggregatesInput = {
+    AND?: agreement_consentScalarWhereWithAggregatesInput | agreement_consentScalarWhereWithAggregatesInput[]
+    OR?: agreement_consentScalarWhereWithAggregatesInput[]
+    NOT?: agreement_consentScalarWhereWithAggregatesInput | agreement_consentScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"agreement_consent"> | bigint | number
+    user_id?: BigIntWithAggregatesFilter<"agreement_consent"> | bigint | number
+    terms_of_service?: BoolWithAggregatesFilter<"agreement_consent"> | boolean
+    privacy_policy?: BoolWithAggregatesFilter<"agreement_consent"> | boolean
+    location_service?: BoolWithAggregatesFilter<"agreement_consent"> | boolean
+    is_over14?: BoolWithAggregatesFilter<"agreement_consent"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"agreement_consent"> | Date | string
   }
 
   export type choiceCreateInput = {
@@ -23755,6 +24947,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -23776,6 +24969,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -23797,6 +24991,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -23818,6 +25013,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
@@ -24216,6 +25412,75 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     user_id?: BigIntFieldUpdateOperationsInput | bigint | number
     rest_id?: BigIntFieldUpdateOperationsInput | bigint | number
+  }
+
+  export type agreement_consentCreateInput = {
+    id?: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+    user: userCreateNestedOneWithoutAgreement_consentInput
+  }
+
+  export type agreement_consentUncheckedCreateInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+  }
+
+  export type agreement_consentUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: userUpdateOneRequiredWithoutAgreement_consentNestedInput
+  }
+
+  export type agreement_consentUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agreement_consentCreateManyInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+  }
+
+  export type agreement_consentUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agreement_consentUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -25067,6 +26332,12 @@ export namespace Prisma {
     not?: NestedEnumuser_exerciseNullableFilter<$PrismaModel> | $Enums.user_exercise | null
   }
 
+  export type Agreement_consentListRelationFilter = {
+    every?: agreement_consentWhereInput
+    some?: agreement_consentWhereInput
+    none?: agreement_consentWhereInput
+  }
+
   export type AllergyListRelationFilter = {
     every?: allergyWhereInput
     some?: allergyWhereInput
@@ -25083,6 +26354,10 @@ export namespace Prisma {
     every?: preferWhereInput
     some?: preferWhereInput
     none?: preferWhereInput
+  }
+
+  export type agreement_consentOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type allergyOrderByRelationAggregateInput = {
@@ -25505,6 +26780,59 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     rest_id?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type agreement_consentCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    terms_of_service?: SortOrder
+    privacy_policy?: SortOrder
+    location_service?: SortOrder
+    is_over14?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agreement_consentAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type agreement_consentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    terms_of_service?: SortOrder
+    privacy_policy?: SortOrder
+    location_service?: SortOrder
+    is_over14?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agreement_consentMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    terms_of_service?: SortOrder
+    privacy_policy?: SortOrder
+    location_service?: SortOrder
+    is_over14?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type agreement_consentSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type BigIntFieldUpdateOperationsInput = {
@@ -26179,6 +27507,13 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type agreement_consentCreateNestedManyWithoutUserInput = {
+    create?: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput> | agreement_consentCreateWithoutUserInput[] | agreement_consentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: agreement_consentCreateOrConnectWithoutUserInput | agreement_consentCreateOrConnectWithoutUserInput[]
+    createMany?: agreement_consentCreateManyUserInputEnvelope
+    connect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+  }
+
   export type allergyCreateNestedManyWithoutUserInput = {
     create?: XOR<allergyCreateWithoutUserInput, allergyUncheckedCreateWithoutUserInput> | allergyCreateWithoutUserInput[] | allergyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: allergyCreateOrConnectWithoutUserInput | allergyCreateOrConnectWithoutUserInput[]
@@ -26233,6 +27568,13 @@ export namespace Prisma {
     connectOrCreate?: zzimCreateOrConnectWithoutUserInput | zzimCreateOrConnectWithoutUserInput[]
     createMany?: zzimCreateManyUserInputEnvelope
     connect?: zzimWhereUniqueInput | zzimWhereUniqueInput[]
+  }
+
+  export type agreement_consentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput> | agreement_consentCreateWithoutUserInput[] | agreement_consentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: agreement_consentCreateOrConnectWithoutUserInput | agreement_consentCreateOrConnectWithoutUserInput[]
+    createMany?: agreement_consentCreateManyUserInputEnvelope
+    connect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
   }
 
   export type allergyUncheckedCreateNestedManyWithoutUserInput = {
@@ -26301,6 +27643,20 @@ export namespace Prisma {
 
   export type NullableEnumuser_exerciseFieldUpdateOperationsInput = {
     set?: $Enums.user_exercise | null
+  }
+
+  export type agreement_consentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput> | agreement_consentCreateWithoutUserInput[] | agreement_consentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: agreement_consentCreateOrConnectWithoutUserInput | agreement_consentCreateOrConnectWithoutUserInput[]
+    upsert?: agreement_consentUpsertWithWhereUniqueWithoutUserInput | agreement_consentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: agreement_consentCreateManyUserInputEnvelope
+    set?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    disconnect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    delete?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    connect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    update?: agreement_consentUpdateWithWhereUniqueWithoutUserInput | agreement_consentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: agreement_consentUpdateManyWithWhereWithoutUserInput | agreement_consentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: agreement_consentScalarWhereInput | agreement_consentScalarWhereInput[]
   }
 
   export type allergyUpdateManyWithoutUserNestedInput = {
@@ -26413,6 +27769,20 @@ export namespace Prisma {
     update?: zzimUpdateWithWhereUniqueWithoutUserInput | zzimUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: zzimUpdateManyWithWhereWithoutUserInput | zzimUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: zzimScalarWhereInput | zzimScalarWhereInput[]
+  }
+
+  export type agreement_consentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput> | agreement_consentCreateWithoutUserInput[] | agreement_consentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: agreement_consentCreateOrConnectWithoutUserInput | agreement_consentCreateOrConnectWithoutUserInput[]
+    upsert?: agreement_consentUpsertWithWhereUniqueWithoutUserInput | agreement_consentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: agreement_consentCreateManyUserInputEnvelope
+    set?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    disconnect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    delete?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    connect?: agreement_consentWhereUniqueInput | agreement_consentWhereUniqueInput[]
+    update?: agreement_consentUpdateWithWhereUniqueWithoutUserInput | agreement_consentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: agreement_consentUpdateManyWithWhereWithoutUserInput | agreement_consentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: agreement_consentScalarWhereInput | agreement_consentScalarWhereInput[]
   }
 
   export type allergyUncheckedUpdateManyWithoutUserNestedInput = {
@@ -26649,6 +28019,24 @@ export namespace Prisma {
     upsert?: userUpsertWithoutUser_restInput
     connect?: userWhereUniqueInput
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutUser_restInput, userUpdateWithoutUser_restInput>, userUncheckedUpdateWithoutUser_restInput>
+  }
+
+  export type userCreateNestedOneWithoutAgreement_consentInput = {
+    create?: XOR<userCreateWithoutAgreement_consentInput, userUncheckedCreateWithoutAgreement_consentInput>
+    connectOrCreate?: userCreateOrConnectWithoutAgreement_consentInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type userUpdateOneRequiredWithoutAgreement_consentNestedInput = {
+    create?: XOR<userCreateWithoutAgreement_consentInput, userUncheckedCreateWithoutAgreement_consentInput>
+    connectOrCreate?: userCreateOrConnectWithoutAgreement_consentInput
+    upsert?: userUpsertWithoutAgreement_consentInput
+    connect?: userWhereUniqueInput
+    update?: XOR<XOR<userUpdateToOneWithWhereWithoutAgreement_consentInput, userUpdateWithoutAgreement_consentInput>, userUncheckedUpdateWithoutAgreement_consentInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -27034,6 +28422,19 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type recommend_exceptCreateWithoutMenuInput = {
     id?: bigint | number
     bit?: boolean | null
@@ -27138,6 +28539,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
@@ -27158,6 +28560,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
@@ -27194,6 +28597,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
@@ -27214,6 +28618,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
@@ -27269,6 +28674,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -27289,6 +28695,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -27366,6 +28773,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -27386,6 +28794,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
@@ -27406,6 +28815,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -27426,6 +28836,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -27491,6 +28902,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -27511,6 +28923,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
@@ -28103,6 +29516,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -28123,6 +29537,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -28258,6 +29673,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -28278,6 +29694,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
@@ -28532,6 +29949,34 @@ export namespace Prisma {
     zzim?: zzimUncheckedUpdateManyWithoutRestaurantNestedInput
   }
 
+  export type agreement_consentCreateWithoutUserInput = {
+    id?: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+  }
+
+  export type agreement_consentUncheckedCreateWithoutUserInput = {
+    id?: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+  }
+
+  export type agreement_consentCreateOrConnectWithoutUserInput = {
+    where: agreement_consentWhereUniqueInput
+    create: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput>
+  }
+
+  export type agreement_consentCreateManyUserInputEnvelope = {
+    data: agreement_consentCreateManyUserInput | agreement_consentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type allergyCreateWithoutUserInput = {
     allergy: $Enums.allergy_type
   }
@@ -28712,6 +30157,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type agreement_consentUpsertWithWhereUniqueWithoutUserInput = {
+    where: agreement_consentWhereUniqueInput
+    update: XOR<agreement_consentUpdateWithoutUserInput, agreement_consentUncheckedUpdateWithoutUserInput>
+    create: XOR<agreement_consentCreateWithoutUserInput, agreement_consentUncheckedCreateWithoutUserInput>
+  }
+
+  export type agreement_consentUpdateWithWhereUniqueWithoutUserInput = {
+    where: agreement_consentWhereUniqueInput
+    data: XOR<agreement_consentUpdateWithoutUserInput, agreement_consentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type agreement_consentUpdateManyWithWhereWithoutUserInput = {
+    where: agreement_consentScalarWhereInput
+    data: XOR<agreement_consentUpdateManyMutationInput, agreement_consentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type agreement_consentScalarWhereInput = {
+    AND?: agreement_consentScalarWhereInput | agreement_consentScalarWhereInput[]
+    OR?: agreement_consentScalarWhereInput[]
+    NOT?: agreement_consentScalarWhereInput | agreement_consentScalarWhereInput[]
+    id?: BigIntFilter<"agreement_consent"> | bigint | number
+    user_id?: BigIntFilter<"agreement_consent"> | bigint | number
+    terms_of_service?: BoolFilter<"agreement_consent"> | boolean
+    privacy_policy?: BoolFilter<"agreement_consent"> | boolean
+    location_service?: BoolFilter<"agreement_consent"> | boolean
+    is_over14?: BoolFilter<"agreement_consent"> | boolean
+    created_at?: DateTimeFilter<"agreement_consent"> | Date | string
+  }
+
   export type allergyUpsertWithWhereUniqueWithoutUserInput = {
     where: allergyWhereUniqueInput
     update: XOR<allergyUpdateWithoutUserInput, allergyUncheckedUpdateWithoutUserInput>
@@ -28879,6 +30353,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
@@ -28899,6 +30374,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
@@ -28935,6 +30411,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
@@ -28955,6 +30432,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
@@ -28975,6 +30453,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
@@ -28995,6 +30474,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
@@ -29031,6 +30511,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
@@ -29051,6 +30532,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
@@ -29071,6 +30553,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -29091,6 +30574,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -29178,6 +30662,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -29198,6 +30683,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
@@ -29542,6 +31028,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentCreateNestedManyWithoutUserInput
     allergy?: allergyCreateNestedManyWithoutUserInput
     mukburim?: mukburimCreateNestedManyWithoutUserInput
     prefer?: preferCreateNestedManyWithoutUserInput
@@ -29562,6 +31049,7 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     profileImageUrl?: string | null
+    agreement_consent?: agreement_consentUncheckedCreateNestedManyWithoutUserInput
     allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
     mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
     prefer?: preferUncheckedCreateNestedManyWithoutUserInput
@@ -29655,6 +31143,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUpdateManyWithoutUserNestedInput
     allergy?: allergyUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUpdateManyWithoutUserNestedInput
     prefer?: preferUpdateManyWithoutUserNestedInput
@@ -29675,12 +31164,113 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    agreement_consent?: agreement_consentUncheckedUpdateManyWithoutUserNestedInput
     allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
     mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
     prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
     recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
     report?: reportUncheckedUpdateManyWithoutUserNestedInput
     review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type userCreateWithoutAgreement_consentInput = {
+    id?: bigint | number
+    email?: string | null
+    nickname?: string | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
+    password: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    profileImageUrl?: string | null
+    allergy?: allergyCreateNestedManyWithoutUserInput
+    mukburim?: mukburimCreateNestedManyWithoutUserInput
+    prefer?: preferCreateNestedManyWithoutUserInput
+    recommend_except?: recommend_exceptCreateNestedManyWithoutUserInput
+    report?: reportCreateNestedManyWithoutUserInput
+    review?: reviewCreateNestedManyWithoutUserInput
+    user_rest?: user_restCreateNestedManyWithoutUserInput
+    zzim?: zzimCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutAgreement_consentInput = {
+    id?: bigint | number
+    email?: string | null
+    nickname?: string | null
+    body_type?: $Enums.user_body_type | null
+    gender?: $Enums.user_gender | null
+    exercise?: $Enums.user_exercise | null
+    password: string
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    profileImageUrl?: string | null
+    allergy?: allergyUncheckedCreateNestedManyWithoutUserInput
+    mukburim?: mukburimUncheckedCreateNestedManyWithoutUserInput
+    prefer?: preferUncheckedCreateNestedManyWithoutUserInput
+    recommend_except?: recommend_exceptUncheckedCreateNestedManyWithoutUserInput
+    report?: reportUncheckedCreateNestedManyWithoutUserInput
+    review?: reviewUncheckedCreateNestedManyWithoutUserInput
+    user_rest?: user_restUncheckedCreateNestedManyWithoutUserInput
+    zzim?: zzimUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutAgreement_consentInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutAgreement_consentInput, userUncheckedCreateWithoutAgreement_consentInput>
+  }
+
+  export type userUpsertWithoutAgreement_consentInput = {
+    update: XOR<userUpdateWithoutAgreement_consentInput, userUncheckedUpdateWithoutAgreement_consentInput>
+    create: XOR<userCreateWithoutAgreement_consentInput, userUncheckedCreateWithoutAgreement_consentInput>
+    where?: userWhereInput
+  }
+
+  export type userUpdateToOneWithWhereWithoutAgreement_consentInput = {
+    where?: userWhereInput
+    data: XOR<userUpdateWithoutAgreement_consentInput, userUncheckedUpdateWithoutAgreement_consentInput>
+  }
+
+  export type userUpdateWithoutAgreement_consentInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
+    password?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    allergy?: allergyUpdateManyWithoutUserNestedInput
+    mukburim?: mukburimUpdateManyWithoutUserNestedInput
+    prefer?: preferUpdateManyWithoutUserNestedInput
+    recommend_except?: recommend_exceptUpdateManyWithoutUserNestedInput
+    report?: reportUpdateManyWithoutUserNestedInput
+    review?: reviewUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUpdateManyWithoutUserNestedInput
+    zzim?: zzimUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutAgreement_consentInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    nickname?: NullableStringFieldUpdateOperationsInput | string | null
+    body_type?: NullableEnumuser_body_typeFieldUpdateOperationsInput | $Enums.user_body_type | null
+    gender?: NullableEnumuser_genderFieldUpdateOperationsInput | $Enums.user_gender | null
+    exercise?: NullableEnumuser_exerciseFieldUpdateOperationsInput | $Enums.user_exercise | null
+    password?: StringFieldUpdateOperationsInput | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    allergy?: allergyUncheckedUpdateManyWithoutUserNestedInput
+    mukburim?: mukburimUncheckedUpdateManyWithoutUserNestedInput
+    prefer?: preferUncheckedUpdateManyWithoutUserNestedInput
+    recommend_except?: recommend_exceptUncheckedUpdateManyWithoutUserNestedInput
+    report?: reportUncheckedUpdateManyWithoutUserNestedInput
+    review?: reviewUncheckedUpdateManyWithoutUserNestedInput
+    user_rest?: user_restUncheckedUpdateManyWithoutUserNestedInput
     zzim?: zzimUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -29948,6 +31538,15 @@ export namespace Prisma {
     link?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type agreement_consentCreateManyUserInput = {
+    id?: bigint | number
+    terms_of_service?: boolean
+    privacy_policy?: boolean
+    location_service?: boolean
+    is_over14?: boolean
+    created_at?: Date | string
+  }
+
   export type allergyCreateManyUserInput = {
     id?: number
     allergy: $Enums.allergy_type
@@ -29995,6 +31594,33 @@ export namespace Prisma {
     id?: bigint | number
     rest_id: bigint | number
     created_at?: Date | string | null
+  }
+
+  export type agreement_consentUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agreement_consentUncheckedUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type agreement_consentUncheckedUpdateManyWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    terms_of_service?: BoolFieldUpdateOperationsInput | boolean
+    privacy_policy?: BoolFieldUpdateOperationsInput | boolean
+    location_service?: BoolFieldUpdateOperationsInput | boolean
+    is_over14?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type allergyUpdateWithoutUserInput = {

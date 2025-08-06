@@ -6,7 +6,7 @@ export const handleAddReview = async (req, res, next) => {
     bodyToAddReview({
       data: req.body,
       storeId: req.params.restId,
-      userId: req.session.user.id,
+      userId: req.user.id,
     })
   );
   console.log(review);

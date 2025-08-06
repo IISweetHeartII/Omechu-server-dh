@@ -80,7 +80,7 @@ export const handleUpdateUserInfo = async (req, res, next) => {
     console.log("회원 정보 수정을 요청했습니다!");
     console.log("body:", req.body);
 
-    const userId = req.session.user?.id;
+    const userId = req.user?.id;
     if (!userId) {
       throw new LoginRequiredError("로그인이 필요한 서비스입니다.");
     }

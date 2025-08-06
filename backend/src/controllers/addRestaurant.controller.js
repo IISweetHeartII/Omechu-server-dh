@@ -3,7 +3,7 @@ import { bodyToAddRest } from "../dtos/addRestaurant.dto.js";
 import { StatusCodes } from "http-status-codes";
 import { responsesFromAddRest } from "../dtos/addRestaurant.dto.js";
 export const handleAddRestaurant = async (req, res) => {
-  const rest = await addRest(bodyToAddRest(req.body, req.session.user.id));
+  const rest = await addRest(bodyToAddRest(req.body, req.user.id));
   res.status(StatusCodes.OK).success(responsesFromAddRest(rest));
   /*
   #swagger.tags = ["Restaurant"]
