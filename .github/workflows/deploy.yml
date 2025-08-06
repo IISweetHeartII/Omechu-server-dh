@@ -216,7 +216,7 @@ jobs:
             docker image prune -f > /dev/null 2>&1 || true
             
             log "🧹 Pruning all unused Docker resources including volumes..."
-            docker system prune -a --volumes -f > /dev/null 2>&1 || {
+            docker system prune -a -f > /dev/null 2>&1 || {
             log "⚠️ docker system prune failed"
             }
 
