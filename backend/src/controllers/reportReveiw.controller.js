@@ -11,7 +11,7 @@ export const handleReportReview = async (req, res) => {
   #swagger.tags=["Restaurant"]
   #swagger.summary="리뷰 신고하기 API"
   #swagger.description="해당 리뷰를 신고하는 API 입니다"
-  #swagger.parameters["id"]={
+  #swagger.parameters["reviewId"]={
     in:"path",
     description:"해당 리뷰의 ID",
     required:true
