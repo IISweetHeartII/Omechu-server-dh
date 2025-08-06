@@ -38,7 +38,7 @@ export const exchangeCodeForTokenService = async (code) => {
     };
   } catch (err) {
     console.error(
-      "❌ exchangeCodeForTokenService 실패:",
+      "exchangeCodeForTokenService 실패:",
       err.response ? err.response.data : err.message
     );
     throw err;
@@ -53,7 +53,7 @@ export const findOrCreateKakaoUserService = async ({ email, id }) => {
     }
     return user;
   } catch (err) {
-    console.error("❌ findOrCreateKakaoUserService 실패:", err.message);
+    console.error("findOrCreateKakaoUserService 실패:", err.message);
     throw err;
   }
 };
