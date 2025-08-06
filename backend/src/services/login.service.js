@@ -8,8 +8,9 @@ export const findUser = async (data) => {
     );
   }
   const user = await userLogin(data);
-  console.log("user", user);
-  if (user === null) {
+  if (user.error == "NO_USER") {
+    throw new NoEmailOrPasswd("이메일이 틀렸습니다");
+  } else if (user.error == "IN_CORRECT_PASSWORD") {
     throw new InCorrectPasswd("비밀번호가 틀렸습니다", data);
   } else {
     return user;

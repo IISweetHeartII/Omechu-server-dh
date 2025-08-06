@@ -3,8 +3,8 @@ import { reportReveiw } from "../services/reportReview.service.js";
 export const handleReportReview = async (req, res) => {
   const reportId = await reportReveiw({
     reason: req.body.reason,
-    userId: req.session.user.id,
-    reviewId: req.params.id,
+    userId: req.user.id,
+    reviewId: req.params.reviewId,
   });
   res.status(StatusCodes.OK).success(reportId);
   /*
