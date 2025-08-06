@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { bodyToUser } from "../dtos/auth.dto.js";
 import { userSignUp } from "../services/auth.service.js";
+import { generateAccessToken, generateRefreshToken } from "../utils/token.js"; 
 
 export const handleUserSignUp = async (req, res, next) => {
   /*
@@ -37,8 +38,8 @@ export const handleUserSignUp = async (req, res, next) => {
               properties: {
                 id: { type: "number", example: 1 },
                 email: { type: "string", example: "user@example.com" },
-                created_at: { type: "string", example: "2023-01-01T00:00:00.000Z" },
-                updated_at: { type: "string", example: "2023-01-01T00:00:00.000Z" }
+                accessToken: { type: "string", example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." },
+                refreshToken: { type: "string", example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." },
               }
             }
           }
@@ -102,20 +103,26 @@ export const handleUserSignUp = async (req, res, next) => {
   }
 */
 
-  console.log("회원가입을 요청했습니다!");
-  console.log("body:", req.body);
+  try {
+    console.log("회원가입 요청:", req.body);
 
-  const user = await userSignUp(bodyToUser(req.body));
+    const user = await userSignUp(bodyToUser(req.body));
 
-  req.session.user = {
-    id: Number(user.id),
-    email: user.email,
-  };
+    // JWT 발급
+    const accessToken = generateAccessToken({ id: user.id });
+    const refreshToken = generateRefreshToken({ id: user.id });
 
-  console.log(req.session);
-
-  res.status(StatusCodes.OK).success({
-    ...user,
-    id: Number(user.id),
-  });
+    // JWT만 응답에 포함
+    res.status(StatusCodes.OK).success({
+      ...user,
+      accessToken,
+      refreshToken,
+    });
+  } catch (err) {
+    console.error("회원가입 에러:", err);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).error({
+      errorCode: "SERVER_ERROR",
+      reason: err.message,
+    });
+  }
 };
