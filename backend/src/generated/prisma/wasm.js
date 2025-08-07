@@ -273,6 +273,16 @@ exports.Prisma.User_restScalarFieldEnum = {
   rest_id: 'rest_id'
 };
 
+exports.Prisma.Agreement_consentScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  terms_of_service: 'terms_of_service',
+  privacy_policy: 'privacy_policy',
+  location_service: 'location_service',
+  is_over14: 'is_over14',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -424,7 +434,8 @@ exports.Prisma.ModelName = {
   rest_tag: 'rest_tag',
   password_reset_token: 'password_reset_token',
   repre_menu: 'repre_menu',
-  user_rest: 'user_rest'
+  user_rest: 'user_rest',
+  agreement_consent: 'agreement_consent'
 };
 
 /**

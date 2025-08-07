@@ -233,8 +233,6 @@ export const getPlaceDetail = async (restId) => {
       googlePlaceId: placeId.google_place_id,
       reviewImage: reviewImage,
     };
-
-    console.error("Google Places 요청 중 에러 발생:", error);
   }
 };
 

@@ -13,27 +13,27 @@ export const findUserExceptedMenus = async (userId) => {
           select: {
             id: true,
             name: true,
-            image_link: true
-          }
-        }
+            image_link: true,
+          },
+        },
       },
       orderBy: {
-        id: 'desc'
-      }
+        id: "desc",
+      },
     });
 
-    return exceptedMenus.map(item => ({
+    return exceptedMenus.map((item) => ({
       id: item.id.toString(),
       menu_id: item.menu_id.toString(),
       user_id: item.user_id.toString(),
       menu: {
         id: item.menu.id.toString(),
         name: item.menu.name,
-        image_link: item.menu.image_link
-      }
+        image_link: item.menu.image_link,
+      },
     }));
   } catch (error) {
-    console.error('제외 메뉴 목록 조회 오류:', error);
+    console.error("제외 메뉴 목록 조회 오류:", error);
     throw new Error(`Failed to fetch excepted menus: ${error.message}`);
   }
 };
@@ -47,20 +47,20 @@ export const findAllAvailableMenus = async () => {
       select: {
         id: true,
         name: true,
-        image_link: true
+        image_link: true,
       },
       orderBy: {
-        name: 'asc'
-      }
+        name: "asc",
+      },
     });
 
-    return menus.map(menu => ({
+    return menus.map((menu) => ({
       id: menu.id.toString(),
       name: menu.name,
-      image_link: menu.image_link
+      image_link: menu.image_link,
     }));
   } catch (error) {
-    console.error('전체 메뉴 조회 오류:', error);
+    console.error("전체 메뉴 조회 오류:", error);
     throw new Error(`Failed to fetch all menus: ${error.message}`);
   }
 };
@@ -74,8 +74,8 @@ export const addMenuToExceptList = async (userId, menuId) => {
     const existing = await prisma.recommend_except.findFirst({
       where: {
         user_id: BigInt(userId),
-        menu_id: BigInt(menuId)
-      }
+        menu_id: BigInt(menuId),
+      },
     });
 
     if (existing) {
@@ -83,7 +83,7 @@ export const addMenuToExceptList = async (userId, menuId) => {
         id: existing.id.toString(),
         menu_id: existing.menu_id.toString(),
         user_id: existing.user_id.toString(),
-        isNew: false
+        isNew: false,
       };
     }
 
@@ -92,18 +92,18 @@ export const addMenuToExceptList = async (userId, menuId) => {
       data: {
         user_id: BigInt(userId),
         menu_id: BigInt(menuId),
-        bit: true // 제외 상태
-      }
+        bit: true, // 제외 상태
+      },
     });
 
     return {
       id: newExcept.id.toString(),
       menu_id: newExcept.menu_id.toString(),
       user_id: newExcept.user_id.toString(),
-      isNew: true
+      isNew: true,
     };
   } catch (error) {
-    console.error('제외 메뉴 추가 오류:', error);
+    console.error("제외 메뉴 추가 오류:", error);
     throw new Error(`Failed to add menu to except list: ${error.message}`);
   }
 };
@@ -116,16 +116,16 @@ export const removeMenuFromExceptList = async (userId, menuId) => {
     const deleted = await prisma.recommend_except.deleteMany({
       where: {
         user_id: BigInt(userId),
-        menu_id: BigInt(menuId)
-      }
+        menu_id: BigInt(menuId),
+      },
     });
 
-    return { 
+    return {
       success: deleted.count > 0,
-      deletedCount: deleted.count 
+      deletedCount: deleted.count,
     };
   } catch (error) {
-    console.error('제외 메뉴 제거 오류:', error);
+    console.error("제외 메뉴 제거 오류:", error);
     throw new Error(`Failed to remove menu from except list: ${error.message}`);
   }
 };
@@ -140,8 +140,8 @@ export const findMenuByName = async (menuName) => {
       select: {
         id: true,
         name: true,
-        image_link: true
-      }
+        image_link: true,
+      },
     });
 
     if (!menu) return null;
@@ -149,10 +149,10 @@ export const findMenuByName = async (menuName) => {
     return {
       id: menu.id.toString(),
       name: menu.name,
-      image_link: menu.image_link
+      image_link: menu.image_link,
     };
   } catch (error) {
-    console.error('메뉴 이름으로 조회 오류:', error);
+    console.error("메뉴 이름으로 조회 오류:", error);
     throw new Error(`Failed to find menu by name: ${error.message}`);
   }
 };

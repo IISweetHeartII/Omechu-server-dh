@@ -3,28 +3,32 @@ import { prisma } from "../db.config.js";
 /**
  * 사용자의 특정 기간 먹부림 통계 조회
  */
-export const findUserMukburimStatistics = async (userId, startDate, endDate) => {
+export const findUserMukburimStatistics = async (
+  userId,
+  startDate,
+  endDate
+) => {
   try {
     const mukburimList = await prisma.mukburim.findMany({
       where: {
         user_id: BigInt(userId),
         date: {
           gte: startDate,
-          lte: endDate
-        }
+          lte: endDate,
+        },
       },
       select: {
         menu_name: true,
-        date: true
+        date: true,
       },
       orderBy: {
-        date: 'desc'
-      }
+        date: "desc",
+      },
     });
 
     // 메뉴별 횟수 집계
     const menuCounts = {};
-    mukburimList.forEach(item => {
+    mukburimList.forEach((item) => {
       const menuName = item.menu_name;
       menuCounts[menuName] = (menuCounts[menuName] || 0) + 1;
     });
@@ -33,7 +37,7 @@ export const findUserMukburimStatistics = async (userId, startDate, endDate) => 
     const sortedMenus = Object.entries(menuCounts)
       .map(([menu_name, count]) => ({
         menu_name,
-        count
+        count,
       }))
       .sort((a, b) => b.count - a.count);
 
@@ -41,10 +45,10 @@ export const findUserMukburimStatistics = async (userId, startDate, endDate) => 
       totalRecords: mukburimList.length,
       uniqueMenus: Object.keys(menuCounts).length,
       menuStatistics: sortedMenus,
-      rawData: mukburimList
+      rawData: mukburimList,
     };
   } catch (error) {
-    console.error('먹부림 통계 조회 오류:', error);
+    console.error("먹부림 통계 조회 오류:", error);
     throw new Error(`Failed to fetch mukburim statistics: ${error.message}`);
   }
 };
@@ -63,25 +67,25 @@ export const findUserMukburimByMonth = async (userId, year, month) => {
         user_id: BigInt(userId),
         date: {
           gte: startDate,
-          lte: endDate
-        }
+          lte: endDate,
+        },
       },
       orderBy: {
-        date: 'desc'
-      }
+        date: "desc",
+      },
     });
 
     // BigInt를 String으로 변환
-    const formattedList = mukburimList.map(item => ({
+    const formattedList = mukburimList.map((item) => ({
       ...item,
       id: item.id.toString(),
       user_id: item.user_id.toString(),
-      date: item.date
+      date: item.date,
     }));
 
     return formattedList;
   } catch (error) {
-    console.error('사용자 먹부림 월별 조회 오류:', error);
+    console.error("사용자 먹부림 월별 조회 오류:", error);
     throw new Error(`Failed to fetch mukburim by month: ${error.message}`);
   }
 };
@@ -94,7 +98,7 @@ export const findUserMukburimByDate = async (userId, targetDate) => {
     // 해당 날짜의 시작과 끝 시간 설정
     const startOfDay = new Date(targetDate);
     startOfDay.setHours(0, 0, 0, 0);
-    
+
     const endOfDay = new Date(targetDate);
     endOfDay.setHours(23, 59, 59, 999);
 
@@ -103,22 +107,22 @@ export const findUserMukburimByDate = async (userId, targetDate) => {
         user_id: BigInt(userId),
         date: {
           gte: startOfDay,
-          lte: endOfDay
-        }
+          lte: endOfDay,
+        },
       },
       orderBy: {
-        date: 'desc'
-      }
+        date: "desc",
+      },
     });
 
     // BigInt를 String으로 변환
-    return mukburimList.map(item => ({
+    return mukburimList.map((item) => ({
       ...item,
       id: item.id.toString(),
-      user_id: item.user_id.toString()
+      user_id: item.user_id.toString(),
     }));
   } catch (error) {
-    console.error('사용자 먹부림 일별 조회 오류:', error);
+    console.error("사용자 먹부림 일별 조회 오류:", error);
     throw new Error(`Failed to fetch mukburim by date: ${error.message}`);
   }
 };

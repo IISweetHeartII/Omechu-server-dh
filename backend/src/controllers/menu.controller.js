@@ -1,21 +1,27 @@
 import { StatusCodes } from "http-status-codes";
 import { bodyToChoice } from "../dtos/choice.dto.js";
 import { getUserIdBySession } from "../repositories/user.repository.js";
-import { recommendMenuService, findRelatedMenuService } from "../services/menu.service.js";
-import { getMenuService, getMenuInfoService } from "../services/menu.service.js";
+import {
+  recommendMenuService,
+  findRelatedMenuService,
+} from "../services/menu.service.js";
+import {
+  getMenuService,
+  getMenuInfoService,
+} from "../services/menu.service.js";
 export const handleRecommendMenu = async (req, res) => {
-
-    
-    const choice = bodyToChoice(req.body);
-    const userId = req.session?.user?.id;
-    console.log("User ID:", userId);
-    const newRecommendation = await recommendMenuService(choice, userId);
-    if (newRecommendation) {
-        res.status(StatusCodes.OK).json(newRecommendation);
-    } else {
-        res.status(StatusCodes.NOT_FOUND).json({ message: "No recommendation found" });
-    }
-    /*
+  const choice = bodyToChoice(req.body);
+  const userId = req.session?.user?.id;
+  console.log("User ID:", userId);
+  const newRecommendation = await recommendMenuService(choice, userId);
+  if (newRecommendation) {
+    res.status(StatusCodes.OK).json(newRecommendation);
+  } else {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "No recommendation found" });
+  }
+  /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "메뉴 추천 API"
     #swagger.description = "사용자의 선택 조건에 따라 메뉴를 추천하는 API입니다."
@@ -155,32 +161,27 @@ export const handleRecommendMenu = async (req, res) => {
       }
     }
     */
-
-}
-
-
-
-
-
-
-
+};
 
 export const handleFindRelatedMenu = async (req, res) => {
+  const { menuName } = req.body;
 
-     const { menuName } = req.body;
-
-    try {
-        const relatedMenus = await findRelatedMenuService(menuName);
-        if (relatedMenus && relatedMenus.length > 0) {
-            res.status(StatusCodes.OK).json(relatedMenus);
-        } else {
-            res.status(StatusCodes.NOT_FOUND).json({ message: "No related menus found" });
-        }
-    } catch (error) {
-        console.error("Error finding related menus:", error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
+  try {
+    const relatedMenus = await findRelatedMenuService(menuName);
+    if (relatedMenus && relatedMenus.length > 0) {
+      res.status(StatusCodes.OK).json(relatedMenus);
+    } else {
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "No related menus found" });
     }
-    /*
+  } catch (error) {
+    console.error("Error finding related menus:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal server error" });
+  }
+  /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "관련 메뉴 찾기 API"
     #swagger.description = "입력된 메뉴명과 관련된 메뉴들을 찾는 API입니다."
@@ -266,25 +267,24 @@ export const handleFindRelatedMenu = async (req, res) => {
       }
     }
     */
-
-   
-}
+};
 
 export const handleGetMenu = async (req, res) => {
-    try {
-        const menus = await getMenuService();
-        if (menus && menus.length > 0) {
-            res.status(StatusCodes.OK).json(menus);
-        } else {
-            res.status(StatusCodes.NOT_FOUND).json({ message: "No menus found" });
-        }
-    } catch (error) {
-        console.error("Error fetching menus:", error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
+  try {
+    const menus = await getMenuService();
+    if (menus && menus.length > 0) {
+      res.status(StatusCodes.OK).json(menus);
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ message: "No menus found" });
     }
+  } catch (error) {
+    console.error("Error fetching menus:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal server error" });
+  }
 
-
-    /*
+  /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "전체 메뉴 조회 API"
     #swagger.description = "데이터베이스에 저장된 모든 메뉴 목록을 조회하는 API입니다."
@@ -355,23 +355,25 @@ export const handleGetMenu = async (req, res) => {
       }
     }
     */
-}
+};
 
 export const handleGetMenuInfo = async (req, res) => {
-    const { name } = req.body;
-    try {
-        const menuInfo = await getMenuInfoService(name);
-        if (menuInfo) {
-            res.status(StatusCodes.OK).json(menuInfo);
-        } else {
-            res.status(StatusCodes.NOT_FOUND).json({ message: "Menu not found" });
-        }
-    } catch (error) {
-        console.error("Error fetching menu info:", error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Internal server error" });
+  const { name } = req.body;
+  try {
+    const menuInfo = await getMenuInfoService(name);
+    if (menuInfo) {
+      res.status(StatusCodes.OK).json(menuInfo);
+    } else {
+      res.status(StatusCodes.NOT_FOUND).json({ message: "Menu not found" });
     }
+  } catch (error) {
+    console.error("Error fetching menu info:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Internal server error" });
+  }
 
-     /*
+  /*
     #swagger.tags = ["Menu"]
     #swagger.summary = "특정 메뉴 정보 조회 API"
     #swagger.description = "메뉴명을 통해 특정 메뉴의 상세 정보를 조회하는 API입니다."
@@ -457,4 +459,4 @@ export const handleGetMenuInfo = async (req, res) => {
       }
     }
     */
-}
+};

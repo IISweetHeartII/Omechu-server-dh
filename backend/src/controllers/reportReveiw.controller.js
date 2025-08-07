@@ -3,15 +3,15 @@ import { reportReveiw } from "../services/reportReview.service.js";
 export const handleReportReview = async (req, res) => {
   const reportId = await reportReveiw({
     reason: req.body.reason,
-    userId: req.session.user.id,
-    reviewId: req.params.id,
+    userId: req.user.id,
+    reviewId: req.params.reviewId,
   });
   res.status(StatusCodes.OK).success(reportId);
   /*
   #swagger.tags=["Restaurant"]
   #swagger.summary="리뷰 신고하기 API"
   #swagger.description="해당 리뷰를 신고하는 API 입니다"
-  #swagger.parameters["id"]={
+  #swagger.parameters["reviewId"]={
     in:"path",
     description:"해당 리뷰의 ID",
     required:true

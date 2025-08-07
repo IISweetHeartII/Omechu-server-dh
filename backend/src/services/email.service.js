@@ -1,6 +1,13 @@
-import { createEmailVerification, findEmailVerification, deleteEmailVerification } from "../repositories/email.repository.js";
+import {
+  createEmailVerification,
+  findEmailVerification,
+  deleteEmailVerification,
+} from "../repositories/email.repository.js";
 import nodemailer from "nodemailer";
-import { InvalidVerificationCodeError, VerificationCodeExpiredError } from "../errors.js";
+import {
+  InvalidVerificationCodeError,
+  VerificationCodeExpiredError,
+} from "../errors.js";
 
 // Nodemailer transporter 설정
 const transporter = nodemailer.createTransport({
@@ -16,7 +23,8 @@ export const sendVerificationCodeService = async (email) => {
 
   await createEmailVerification(email, code);
 
-  const imageUrl = "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/email/a4e1f2ed-62bb-491d-93a0-3b88de6a64b3.jpg";
+  const imageUrl =
+    "https://omechu-s3-bucket.s3.ap-northeast-2.amazonaws.com/email/a4e1f2ed-62bb-491d-93a0-3b88de6a64b3.jpg";
 
   await transporter.sendMail({
     from: `"Omechu" <${process.env.MAIL_USER}>`,
@@ -35,10 +43,9 @@ export const sendVerificationCodeService = async (email) => {
         </p>
         <img src="${imageUrl}" alt="오메추 배너" style="width: 600px; max-width: 100%; height: auto; display: block;"/>
       </div>
-    `
+    `,
   });
 };
-
 
 export const verifyCodeService = async (email, code) => {
   const record = await findEmailVerification(email);
@@ -48,9 +55,10 @@ export const verifyCodeService = async (email, code) => {
   }
 
   if (record.expires_at < new Date()) {
-    throw new VerificationCodeExpiredError("인증번호가 만료되었습니다. 다시 요청해 주세요.");
+    throw new VerificationCodeExpiredError(
+      "인증번호가 만료되었습니다. 다시 요청해 주세요."
+    );
   }
 
   await deleteEmailVerification(email);
 };
-

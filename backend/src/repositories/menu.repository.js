@@ -1,72 +1,85 @@
-import { OpenAI } from 'openai';
+import { OpenAI } from "openai";
 import dotenv from "dotenv";
 import { pool } from "../db.config.js";
-import {prisma} from "../db.config.js";
-import { getUserInfoForMenu, getUserAllergies, getUserExceptedMenus, getUserPreferences } from './user.repository.js';
-import { getUser } from './auth.repository.js';
+import { prisma } from "../db.config.js";
+import {
+  getUserInfoForMenu,
+  getUserAllergies,
+  getUserExceptedMenus,
+  getUserPreferences,
+} from "./user.repository.js";
+import { getUser } from "./auth.repository.js";
 dotenv.config();
 const key = process.env.OPENAI_API_KEY;
 
 // 데이터베이스 연결 테스트
 export const testDatabaseConnection = async () => {
-    try {
-        console.log("Testing database connection...");
-        const [rows] = await pool.execute('SELECT 1 as test');
-        console.log("Database connection successful!");
-        return true;
-    } catch (error) {
-        console.error("Database connection failed:", error);
-        return false;
-    }
+  try {
+    console.log("Testing database connection...");
+    const [rows] = await pool.execute("SELECT 1 as test");
+    console.log("Database connection successful!");
+    return true;
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    return false;
+  }
 };
-
 
 // 메뉴가 데이터베이스에 존재하는지 확인
 export const checkMenuExists = async (menuName) => {
-    if (menuName === undefined || menuName === null) {
-        console.error("Menu name is undefined or null");
-        return true;
-    }
-    try {
-        const [rows] = await pool.execute(
-            'SELECT * FROM menu WHERE name = ?',
-            [menuName]
-        );
-        return rows.length > 0;
-    } catch (error) {
-        console.error("Error checking menu existence:", error);
-        throw error;
-    }
+  if (menuName === undefined || menuName === null) {
+    console.error("Menu name is undefined or null");
+    return true;
+  }
+  try {
+    const [rows] = await pool.execute("SELECT * FROM menu WHERE name = ?", [
+      menuName,
+    ]);
+    return rows.length > 0;
+  } catch (error) {
+    console.error("Error checking menu existence:", error);
+    throw error;
+  }
 };
 
 // 새로운 메뉴를 데이터베이스에 추가
 export const addMenuToDatabase = async (menuData) => {
-    try {
-        console.log("Adding menu to database:", menuData);
-        const { menuName, description, calories, carbs, protein, fat, sodium, vitamins, allergyInfo } = menuData;
+  try {
+    console.log("Adding menu to database:", menuData);
+    const {
+      menuName,
+      description,
+      calories,
+      carbs,
+      protein,
+      fat,
+      sodium,
+      vitamins,
+      allergyInfo,
+    } = menuData;
 
-        const [result] = await pool.execute(
-            `INSERT INTO menu (name, description, calory, carbo, protein, fat, vitamin, allergic, sodium) 
+    const [result] = await pool.execute(
+      `INSERT INTO menu (name, description, calory, carbo, protein, fat, vitamin, allergic, sodium) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-                menuName,
-                description,
-                calories,
-                carbs,
-                protein,
-                fat,
-                JSON.stringify(vitamins),
-                JSON.stringify(allergyInfo),
-                sodium,
-            ]
-        );
+      [
+        menuName,
+        description,
+        calories,
+        carbs,
+        protein,
+        fat,
+        JSON.stringify(vitamins),
+        JSON.stringify(allergyInfo),
+        sodium,
+      ]
+    );
 
-        console.log("Menu added to database:", menuName);
-        return result;
-    } catch (error) {
-        console.error("Error adding menu to database:", error);
-        throw error;
-    }
+    console.log("Menu added to database:", menuName);
+    return result;
+  } catch (error) {
+    console.error("Error adding menu to database:", error);
+    throw error;
+  }
 };
 
 //req.body.choice
@@ -192,125 +205,141 @@ LA 갈비
 팥빙수`;
 
 export const recommendMenu = async (choice, userId) => {
-    try {
-        console.log("Received request for GPT processing");
+  try {
+    console.log("Received request for GPT processing");
 
-        const openai = new OpenAI({
-            apiKey: key
-        });
-        console.log("OpenAI client initialized successfully");
-        // 사용자 정보 가져오기
-        if(userId != undefined && userId != "") {
-            choice.exceptions2 = await getUserExceptedMenus(userId);
-            choice.allergy = await getUserAllergies(userId);
-            choice.prefer = await getUserPreferences(userId);
-            const userInfo = await getUserInfoForMenu(userId);
+    const openai = new OpenAI({
+      apiKey: key,
+    });
+    console.log("OpenAI client initialized successfully");
+    // 사용자 정보 가져오기
+    if (userId != undefined && userId != "") {
+      choice.exceptions2 = await getUserExceptedMenus(userId);
+      choice.allergy = await getUserAllergies(userId);
+      choice.prefer = await getUserPreferences(userId);
+      const userInfo = await getUserInfoForMenu(userId);
 
-            choice.gender = userInfo.gender;
-            choice.exercise = userInfo.exercise;
-            choice.body_type = userInfo.body_type;
-        }
-        else {
-            choice.exceptions2 = [];
-            choice.allergy = [];
-            choice.prefer = [];
-            choice.gender = 3; 
-            choice.exercise = 3; // 기본값: 상관 없음
-            choice.body_type = 5; // 기본값: 상관 없음
-        }
-        const { meal_time, purpose, mood, with: withWhom, budget, exceptions, exceptions2, gender, exercise, prefer, body_type, allergy } = choice;
-        console.log("Received choice data:", choice);
-        // bigint -> 자연어 매핑
-        const mealTimeText = {
-            1: "아침 식사: 속이 편한 음식, 자극적이지 않고 간단한 조리 가능",
-            2: "점심 식사: 활동을 위한 에너지를 줄 수 있는 먹을거",
-            3: "저녁 식사: 포만감 높은 먹을거",
-            4: "야식: 부담이 적고 간편하거나 입맛 당기는 음식"
-        }[meal_time] || "상관 없음";
+      choice.gender = userInfo.gender;
+      choice.exercise = userInfo.exercise;
+      choice.body_type = userInfo.body_type;
+    } else {
+      choice.exceptions2 = [];
+      choice.allergy = [];
+      choice.prefer = [];
+      choice.gender = 3;
+      choice.exercise = 3; // 기본값: 상관 없음
+      choice.body_type = 5; // 기본값: 상관 없음
+    }
+    const {
+      meal_time,
+      purpose,
+      mood,
+      with: withWhom,
+      budget,
+      exceptions,
+      exceptions2,
+      gender,
+      exercise,
+      prefer,
+      body_type,
+      allergy,
+    } = choice;
+    console.log("Received choice data:", choice);
+    // bigint -> 자연어 매핑
+    const mealTimeText =
+      {
+        1: "아침 식사: 속이 편한 음식, 자극적이지 않고 간단한 조리 가능",
+        2: "점심 식사: 활동을 위한 에너지를 줄 수 있는 먹을거",
+        3: "저녁 식사: 포만감 높은 먹을거",
+        4: "야식: 부담이 적고 간편하거나 입맛 당기는 음식",
+      }[meal_time] || "상관 없음";
 
-        const purposeText = {
-            1: "든든한 한끼 식사: 국, 찌개 혹은 단일 고열량 식사 ",
-            2: "술 안주 겸: 짭조름하거나 자극적인 음식, 소스가 강하거나 튀김류",
-            3: "간식: 양이 적거나 간편식, 디저트류 ",
-            4: "기념일 식사: 예쁘거나 고급진 느낌, 공유하기 좋은 메뉴 ",
-        }[purpose] || "상관 없음";
+    const purposeText =
+      {
+        1: "든든한 한끼 식사: 국, 찌개 혹은 단일 고열량 식사 ",
+        2: "술 안주 겸: 짭조름하거나 자극적인 음식, 소스가 강하거나 튀김류",
+        3: "간식: 양이 적거나 간편식, 디저트류 ",
+        4: "기념일 식사: 예쁘거나 고급진 느낌, 공유하기 좋은 메뉴 ",
+      }[purpose] || "상관 없음";
 
-        const moodText = {
-            1: "들뜨고 신나요 : 새롭거나 특이한 메뉴, 강한 자극을 줄 수 있는 음식",
-            2: "지치고 피곤해요 : 따뜻하거나 국물이 있는 음식, 속 편한 식사",
-            3: "슬프고 울적해요 : 부드럽고 달달하고, 자극적인 음식",
-            4: "화나고 답답해요 : 매운 음식, 자극적인 음식",
-        }[mood] || "상관 없음";
+    const moodText =
+      {
+        1: "들뜨고 신나요 : 새롭거나 특이한 메뉴, 강한 자극을 줄 수 있는 음식",
+        2: "지치고 피곤해요 : 따뜻하거나 국물이 있는 음식, 속 편한 식사",
+        3: "슬프고 울적해요 : 부드럽고 달달하고, 자극적인 음식",
+        4: "화나고 답답해요 : 매운 음식, 자극적인 음식",
+      }[mood] || "상관 없음";
 
+    const withText =
+      {
+        1: "혼자 : 1인분으로 즐기기 쉬운 음식, 단일메뉴",
+        2: "연인 : 비주얼 좋고 나눠먹기 좋은 메뉴",
+        3: "친구들 : 공유 가능한 양 많거나 취향 다양한 메뉴",
+        4: "가족들 : 따뜻하고 밥반찬 구성",
+      }[withWhom] || "상관 없음";
 
-        const withText = {
-            1: "혼자 : 1인분으로 즐기기 쉬운 음식, 단일메뉴",
-            2: "연인 : 비주얼 좋고 나눠먹기 좋은 메뉴",
-            3: "친구들 : 공유 가능한 양 많거나 취향 다양한 메뉴",
-            4: "가족들 : 따뜻하고 밥반찬 구성"
-        }[withWhom] || "상관 없음";
+    const budgetText =
+      {
+        1: "0원 이상 1만원 미만",
+        2: "0원 이상 3만 원 이하",
+        3: "가격 제한 없음",
+      }[budget] || "상관 없음";
+    console.log("gender: ", gender);
+    console.log("exercise: ", exercise);
+    console.log("body_type: ", body_type);
+    const genderText =
+      {
+        female: "여성",
+        male: "남성",
+      }[gender] || "정보 없음";
 
+    const exerciseText =
+      {
+        dieting: "다이어트 중",
+        bulking: "벌크업 중",
+        maintaining: "상관 없음",
+      }[exercise] || "정보 없음";
 
-        const budgetText = {
-            1: "0원 이상 1만원 미만",
-            2: "0원 이상 3만 원 이하",
-            3: "가격 제한 없음",
-        }[budget] || "상관 없음";
-        console.log("gender: ", gender);
-        console.log("exercise: ", exercise);
-        console.log("body_type: ", body_type);
-        const genderText = {
-            "female": "여성",
-            "male": "남성",
-        }[gender] || "정보 없음";
+    const bodyTypeText =
+      {
+        cold: "감기에 잘 걸리는 편",
+        indigestion: "소화가 잘 안 되는 편",
+        heat_sensitive: "열이 많아서 더위를 잘 타는 편",
+        cold_sensitive: "추위를 잘 타고 몸이 쉽게 차가워지는 편",
+      }[body_type] || "정보 없음";
 
-        const exerciseText = {
-            "dieting": "다이어트 중",
-            "bulking": "벌크업 중",
-            "maintaining": "상관 없음",
-        }[exercise] || "정보 없음";
+    console.log("Meal Time:", mealTimeText);
+    console.log("Purpose:", purposeText);
+    console.log("Mood:", moodText);
+    console.log("With:", withText);
+    console.log("Budget:", budgetText);
+    console.log("Gender:", genderText);
+    console.log("Exercise:", exerciseText);
+    console.log("Body Type:", bodyTypeText);
+    console.log("Exceptions:", exceptions);
+    const exceptionsString =
+      exceptions && exceptions.length > 0 ? exceptions.join(", ") : "없음";
+    console.log("exceptionsString:", exceptionsString);
+    const preferencesString =
+      prefer && prefer.length > 0 ? prefer.join(", ") : "없음";
+    console.log("preferencesString: ", preferencesString);
+    const allergyString =
+      allergy && allergy.length > 0 ? allergy.join(", ") : "없음";
+    console.log("allergyString:", allergyString);
 
-        const bodyTypeText = {
-            "cold": "감기에 잘 걸리는 편",
-            "indigestion": "소화가 잘 안 되는 편",
-            "heat_sensitive": "열이 많아서 더위를 잘 타는 편",
-            "cold_sensitive": "추위를 잘 타고 몸이 쉽게 차가워지는 편"
-        }[body_type] || "정보 없음";
+    const exceptedMenus2String =
+      exceptions2 && exceptions2.length > 0
+        ? exceptions2.map((item) => item.name || item).join(", ") // 객체에서 name 속성 추출
+        : "없음";
+    console.log("exceptedMenus2String:", exceptedMenus2String);
 
-        console.log("Meal Time:", mealTimeText);
-        console.log("Purpose:", purposeText);
-        console.log("Mood:", moodText);
-        console.log("With:", withText);
-        console.log("Budget:", budgetText);
-        console.log("Gender:", genderText);
-        console.log("Exercise:", exerciseText);
-        console.log("Body Type:", bodyTypeText);
-        console.log("Exceptions:", exceptions);
-        const exceptionsString = exceptions && exceptions.length > 0
-            ? exceptions.join(", ")
-            : "없음";
-        console.log("exceptionsString:", exceptionsString);
-        const preferencesString = prefer && prefer.length > 0
-            ? prefer.join(", ")
-            : "없음";
-        console.log("preferencesString: ", preferencesString);
-        const allergyString = allergy && allergy.length > 0
-            ? allergy.join(", ")
-            : "없음";
-        console.log("allergyString:", allergyString);
-
-        const exceptedMenus2String = exceptions2 && exceptions2.length > 0
-            ? exceptions2.map(item => item.name || item).join(", ")  // 객체에서 name 속성 추출
-            : "없음";
-        console.log("exceptedMenus2String:", exceptedMenus2String);
-
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4.1",
-            store: true,
-            messages: [
-                {
-                    role: "user",
-                    content: `그 동안 나온거 제외하고 먹을 거 하나를 추천해줘.
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1",
+      store: true,
+      messages: [
+        {
+          role: "user",
+          content: `그 동안 나온거 제외하고 먹을 거 하나를 추천해줘.
                         다음은 메뉴 추천을 할 때 참고할 정보들이야.
                         먹는 시간: ${mealTimeText}
                         목적: ${purposeText}
@@ -341,117 +370,114 @@ export const recommendMenu = async (choice, userId) => {
                             "allergies": ["밀", "대두"],
                         }
                          
-                            `
-                },
-            ],
-        });
+                            `,
+        },
+      ],
+    });
 
-        const rawText = completion.choices[0].message.content.trim();
+    const rawText = completion.choices[0].message.content.trim();
 
-        // JSON 배열로 파싱
-        const parsedArray = JSON.parse(rawText);
+    // JSON 배열로 파싱
+    const parsedArray = JSON.parse(rawText);
 
-
-        return parsedArray;
-    } catch (error) {
-        console.error("Error handling GPT request:", error);
-        throw error;
-    }
-}
+    return parsedArray;
+  } catch (error) {
+    console.error("Error handling GPT request:", error);
+    throw error;
+  }
+};
 
 export const findRelatedMenu = async (menuName) => {
-    const openai = new OpenAI({
-        apiKey: key
-    });
-    const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        store: true,
-        messages: [
-            {
-                role: "user",
-                content: `다음 메뉴와 관련된 메뉴를 추천해줘. 
+  const openai = new OpenAI({
+    apiKey: key,
+  });
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o-mini",
+    store: true,
+    messages: [
+      {
+        role: "user",
+        content: `다음 메뉴와 관련된 메뉴를 추천해줘. 
                         메뉴 이름: ${menuName}
                         해당 메뉴 이름은 현재 구글 맵에서 관련된 음식점을 찾을 수 없는 메뉴 이름이야.
                         따라서 구글맵에 검색했을 때 음식점이 나올만한 메뉴 중 일반적인 메뉴 한개를 응답해주면 돼.
                         그냥 단어 한개만 응답하면돼.
-                        `
-            },
-        ],
-    });
-    const rawText = completion.choices[0].message.content.trim();
-    console.log("Raw response from GPT:", rawText);
-    return rawText;
-}
-
+                        `,
+      },
+    ],
+  });
+  const rawText = completion.choices[0].message.content.trim();
+  console.log("Raw response from GPT:", rawText);
+  return rawText;
+};
 
 export const getMenu = async () => {
-    try {
-        const menus = await prisma.menu.findMany({
-            select: {
-                name: true,
-                image_link: true,
-            },
-        });
-        if (!menus || menus.length === 0) {
-            console.error("No menus found");
-            return [];
-        }
-        return menus;
-    } catch (error) {
-        console.error("Error fetching menus:", error);
-        throw error;
+  try {
+    const menus = await prisma.menu.findMany({
+      select: {
+        name: true,
+        image_link: true,
+      },
+    });
+    if (!menus || menus.length === 0) {
+      console.error("No menus found");
+      return [];
     }
-}
+    return menus;
+  } catch (error) {
+    console.error("Error fetching menus:", error);
+    throw error;
+  }
+};
 
 export const getMenuInfo = async (menuName) => {
-    try {
-        console.log("Fetching menu info for:", menuName);
-        const menuInfo = await prisma.menu.findFirst({  // findUnique → findFirst로 변경
-            where: { name: menuName },
-            select: {
-                name: true,
-                description: true,
-                calory: true,
-                carbo: true,
-                protein: true,
-                fat: true,
-                sodium: true,
-                vitamin: true,
-                allergic: true,
-                image_link: true,
-            },
-        });
+  try {
+    console.log("Fetching menu info for:", menuName);
+    const menuInfo = await prisma.menu.findFirst({
+      // findUnique → findFirst로 변경
+      where: { name: menuName },
+      select: {
+        name: true,
+        description: true,
+        calory: true,
+        carbo: true,
+        protein: true,
+        fat: true,
+        sodium: true,
+        vitamin: true,
+        allergic: true,
+        image_link: true,
+      },
+    });
 
-        if (!menuInfo) {
-            console.error(`No menu info found for: ${menuName}`);
-            return null;
-        }
-
-        // 숫자 변환
-        for (const key of ['calory', 'carbo', 'protein', 'fat', 'sodium']) {
-            if (menuInfo[key] !== null && menuInfo[key] !== undefined) {
-                menuInfo[key] = Number(menuInfo[key]);
-            }
-        }
-
-        // JSON 문자열 파싱
-        for(const key of ['vitamin', 'allergic']) {
-            try {
-                if (menuInfo[key] && typeof menuInfo[key] === 'string') {
-                    menuInfo[key] = JSON.parse(menuInfo[key]);
-                }
-            } catch (parseError) {
-                console.warn(`Error parsing ${key} data:`, parseError);
-                menuInfo[key] = [];
-            }
-        }
-        
-    
-
-        console.log("Menu info fetched successfully:", menuInfo);
-        return menuInfo;
-    } catch (error) {
-        console.error(`Error fetching menu info for ${menuName}:`, error);
-        throw error;
+    if (!menuInfo) {
+      console.error(`No menu info found for: ${menuName}`);
+      return null;
     }
-}
+
+    // 숫자 변환
+    for (const key of ["calory", "carbo", "protein", "fat", "sodium"]) {
+      if (menuInfo[key] !== null && menuInfo[key] !== undefined) {
+        menuInfo[key] = Number(menuInfo[key]);
+      }
+    }
+
+    // JSON 문자열 파싱
+    for (const key of ["vitamin", "allergic"]) {
+      try {
+        if (menuInfo[key] && typeof menuInfo[key] === "string") {
+          menuInfo[key] = JSON.parse(menuInfo[key]);
+        }
+      } catch (parseError) {
+        console.warn(`Error parsing ${key} data:`, parseError);
+        menuInfo[key] = [];
+      }
+    }
+
+    console.log("Menu info fetched successfully:", menuInfo);
+    return menuInfo;
+  } catch (error) {
+    console.error(`Error fetching menu info for ${menuName}:`, error);
+    throw error;
+  }
+};

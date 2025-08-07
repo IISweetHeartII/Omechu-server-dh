@@ -5,10 +5,9 @@ export const bodyToUser = (body) => {
   };
 };
 
-
 export const responseFromUser = (user) => {
   return {
-    id: user.id,
+    id: Number(user.id),
     email: user.email,
   };
 };

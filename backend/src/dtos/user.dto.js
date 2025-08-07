@@ -2,9 +2,9 @@ export const bodyToUserInfo = (body, userId) => {
   const user = {
     nickname: body.nickname,
     profileImageUrl: body.profileImageUrl,
-    body_type: convertBodyTypeToEnum(body.body_type), 
-    exercise: convertExerciseToEnum(body.exercise),      
-    gender: convertGenderToEnum(body.gender),      
+    body_type: convertBodyTypeToEnum(body.body_type),
+    exercise: convertExerciseToEnum(body.exercise),
+    gender: convertGenderToEnum(body.gender),
   };
 
   return user;
@@ -21,9 +21,9 @@ export const responseFromUser = (user) => {
     email: user.email,
     nickname: user.nickname,
     profileImageUrl: user.profileImageUrl,
-    gender: convertGender(user.gender),          
-    body_type: convertBodyType(user.body_type),  
-    exercise: convertExercise(user.exercise),   
+    gender: convertGender(user.gender),
+    body_type: convertBodyType(user.body_type),
+    exercise: convertExercise(user.exercise),
     prefer: preferCategories,
     allergy: allergyTypes,
   };
@@ -31,8 +31,8 @@ export const responseFromUser = (user) => {
 
 function convertGenderToEnum(gender) {
   const map = {
-    "남성": "male",
-    "여성": "female",
+    남성: "male",
+    여성: "female",
   };
   return map[gender] ?? null;
 }
@@ -48,10 +48,10 @@ function convertExerciseToEnum(exercise) {
 
 function convertBodyTypeToEnum(type) {
   const map = {
-    "감기": "cold",
-    "소화불량": "indigestion",
-    "더위잘탐": "heat_sensitive",
-    "추위잘탐": "cold_sensitive",
+    감기: "cold",
+    소화불량: "indigestion",
+    더위잘탐: "heat_sensitive",
+    추위잘탐: "cold_sensitive",
   };
   return map[type] ?? null;
 }

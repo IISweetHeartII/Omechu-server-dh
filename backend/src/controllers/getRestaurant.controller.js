@@ -2,7 +2,7 @@ import { getRestaurant } from "../services/getRestaurant.service.js";
 import { StatusCodes } from "http-status-codes";
 export const handleGetRestaurant = async (req, res) => {
   const restData = await getRestaurant({
-    userId: BigInt(req.session.user.id),
+    userId: BigInt(req.user.id),
     cursor: parseInt(req.query.cursor),
     limit: parseInt(req.query.limit),
   });

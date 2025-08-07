@@ -158,8 +158,7 @@ jobs:
             # 환경변수 설정
             log "🌍 Setting up environment variables..."
             if [ -f .env.production ]; then
-              cp .env.production .env
-              log "✅ Environment variables copied to .env"
+              log "✅ Using .env.production directly (no copying needed)"
             else
               log "❌ .env.production not found in EC2"
               exit 1
@@ -171,8 +170,8 @@ jobs:
 
             # Docker 컨테이너 재시작
             log "🔄 Restarting Docker containers..."
-            docker-compose down || true
-            docker-compose up -d --build
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml down || true
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 
             # 서비스 시작 대기
             log "⏳ Waiting for services to start..."
@@ -215,5 +214,10 @@ jobs:
             # 정리
             log "🧹 Cleaning up old Docker images..."
             docker image prune -f > /dev/null 2>&1 || true
+            
+            log "🧹 Pruning all unused Docker resources including volumes..."
+            docker system prune -a -f > /dev/null 2>&1 || {
+            log "⚠️ docker system prune failed"
+            }
 
             log "✨ Deployment process finished"

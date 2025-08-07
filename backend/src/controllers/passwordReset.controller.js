@@ -2,11 +2,14 @@ import {
   createPasswordResetTokenService,
   validatePasswordResetTokenService,
   resetUserPasswordService,
-} from '../services/passwordReset.service.js';
-import { bodyToResetRequestDto, bodyToResetPasswordDto } from '../dtos/passwordReset.dto.js';
+} from "../services/passwordReset.service.js";
+import {
+  bodyToResetRequestDto,
+  bodyToResetPasswordDto,
+} from "../dtos/passwordReset.dto.js";
 
 export const handleResetRequest = async (req, res, next) => {
-/*
+  /*
 #swagger.tags = ["Auth"]
 #swagger.summary = "비밀번호 재설정 요청"
 #swagger.description = "사용자가 이메일을 입력하면 비밀번호 재설정 링크를 이메일로 발송합니다."
@@ -54,8 +57,8 @@ export const handleResetRequest = async (req, res, next) => {
     const { email } = bodyToResetRequestDto(req.body);
     const token = await createPasswordResetTokenService(email);
     res.success({
-      message: '비밀번호 재설정 링크를 이메일로 보냈습니다',
-      token,   
+      message: "비밀번호 재설정 링크를 이메일로 보냈습니다",
+      token,
     });
   } catch (err) {
     next(err);
@@ -63,7 +66,7 @@ export const handleResetRequest = async (req, res, next) => {
 };
 
 export const handleResetPassword = async (req, res, next) => {
-/*
+  /*
   #swagger.tags = ["Auth"]
   #swagger.summary = "비밀번호 재설정"
   #swagger.description = "토큰을 검증하고, 사용자가 입력한 새 비밀번호로 변경합니다."
@@ -114,7 +117,7 @@ export const handleResetPassword = async (req, res, next) => {
     const email = await validatePasswordResetTokenService(token);
     await resetUserPasswordService(email, newPassword, token);
 
-    res.success('비밀번호가 성공적으로 변경되었습니다');
+    res.success("비밀번호가 성공적으로 변경되었습니다");
   } catch (err) {
     next(err);
   }

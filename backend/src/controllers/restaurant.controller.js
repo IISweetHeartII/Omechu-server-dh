@@ -60,28 +60,28 @@ export const handleFetchGooglePlaces = async (req, res) => {
           type: 'object',
           required: ['latitude', 'longitude', 'radius', 'keyword', 'pageSize'],
           properties: {
-            latitude: {
-              type: 'number',
+            latitude: { 
+              type: 'number', 
               example: 37.4895246,
               description: "검색할 위치의 위도"
             },
-            longitude: {
-              type: 'number',
+            longitude: { 
+              type: 'number', 
               example: 126.986331,
               description: "검색할 위치의 경도"
             },
-            radius: {
-              type: 'integer',
+            radius: { 
+              type: 'integer', 
               example: 3000,
               description: "검색 반경 (미터 단위)"
             },
-            keyword: {
-              type: 'string',
+            keyword: { 
+              type: 'string', 
               example: "젤라또",
               description: "검색할 키워드"
             },
-            pageSize: {
-              type: 'integer',
+            pageSize: { 
+              type: 'integer', 
               example: 5,
               description: "반환할 결과 개수"
             }
@@ -209,13 +209,13 @@ export const handleGetPlaceDetail = async (req, res) => {
             items: {
               type: 'object',
               properties: {
-                days_of_the_week: {
-                  type: 'string',
+                days_of_the_week: { 
+                  type: 'string', 
                   example: '월',
                   description: '요일 (월, 화, 수, 목, 금, 토, 일)'
                 },
-                time: {
-                  type: 'string',
+                time: { 
+                  type: 'string', 
                   example: '10:00 - 22:00',
                   description: '영업시간 (휴일인 경우 "휴무")'
                 }

@@ -1,13 +1,12 @@
 import { StatusCodes } from "http-status-codes";
-import { insertMukburimService } from '../services/mukburim.service.js';
+import { insertMukburimService } from "../services/mukburim.service.js";
 
 export const handleInsertMukburim = async (req, res) => {
-
   try {
     const { menu_name } = req.body;
 
     const mukburimData = {
-      menu_name
+      menu_name,
     };
     console.log(req.session.user);
     mukburimData.user_id = req.session.user.id;
@@ -21,7 +20,7 @@ export const handleInsertMukburim = async (req, res) => {
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
   }
 
@@ -126,6 +125,4 @@ export const handleInsertMukburim = async (req, res) => {
     }
   }
   */
-
-  
 };

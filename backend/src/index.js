@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express from "express";
 import session from "express-session";
 import MySQLStore from "express-mysql-session";
+import jwt from "jsonwebtoken";
 import { handleUserSignUp } from "./controllers/auth.controller.js";
 import swaggerAutogen from "swagger-autogen";
 import swaggerUiExpress from "swagger-ui-express";
@@ -15,8 +16,8 @@ import { testDatabaseConnection } from "./repositories/menu.repository.js";
 import { handleFetchKakaoPlaces } from "./controllers/restaurant.controller.js";
 import { handleFetchGooglePlaces } from "./controllers/restaurant.controller.js";
 import { generatePresignedUrl } from "./controllers/image.uploader.js";
-import { handleUserLogin } from "./controllers/login.controller.js";
-import { handleRenewSession } from "./controllers/session.controller.js";
+import { handleUserLoginJWT } from "./controllers/login.controller.js";
+import { handleRenewToken } from "./controllers/renewToken.controller.js";
 import { handleUpdateUserInfo } from "./controllers/user.controller.js";
 import { handleAddReview } from "./controllers/addReview.controller.js";
 import { handleUserLogout } from "./controllers/logout.controller.js";
@@ -55,7 +56,6 @@ import {
   handleAddMenuToExcept,
   handleRemoveMenuExcept,
 } from "./controllers/recommend.management.controller.js";
-
 import { handleAddRestaurant } from "./controllers/addRestaurant.controller.js";
 import { handleEditRestaurant } from "./controllers/editRestaurant.controller.js";
 import { handleGetRestaurant } from "./controllers/getRestaurant.controller.js";
@@ -67,9 +67,19 @@ import {
   handleKakaoRedirect,
   handleKakaoCallback,
 } from "./controllers/kakao.controller.js";
-import { handleSearchRestaurant } from "./controllers/searchRestaurant.controller.js";
-dotenv.config();
+import { handleSearchRestaurant } from "./controllers/getSearchRestaurant.controller.js";
+import {
+  handleAgreementConsent,
+  getAgreementConsent,
+} from "./controllers/agreement.controller.js";
+import {
+  NoBearerToken,
+  ExpireToken,
+  BearerTokenError,
+  BearerTokenServerError,
+} from "./errors.js";
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use((req, res, next) => {
@@ -103,35 +113,6 @@ app.use(
   })
 );
 
-const isProduction = process.env.NODE_ENV === "production";
-console.log("isProduction", isProduction);
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: sessionStore,
-    cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60,
-      secure: isProduction,
-      sameSite: isProduction ? "None" : "Lax",
-    },
-  })
-);
-
-// 세션 검증 미들웨어
-const isLoggedIn = (req, res, next) => {
-  if (req.session.user) {
-    console.log("하이");
-    next();
-  } else {
-    res
-      .status(401)
-      .error({ errorCode: "AUTH_REQUIRED", reason: "로그인이 필요합니다" });
-  }
-};
-
 // swagger 미들웨어 등록
 app.use(
   "/docs",
@@ -151,19 +132,51 @@ app.get("/openapi.json", async (req, res, next) => {
     writeOutputFile: false,
   };
   const outputFile = "/dev/null";
-  const routes = ["./src/index.js"];
+  const routes = ["./src/index.js", "./src/controllers/*.js"];
   const doc = {
     info: {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "localhost:3000",
+    host: "omechu-api.log8.kr",
+    schemes: ["https"],
     basePath: "/",
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }],
   };
   const result = await swaggerAutogen(options)(outputFile, routes, doc);
   res.json(result ? result.data : null);
 });
 
+// 토큰 검증 미들웨어
+export const isLoggedIn = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    throw new NoBearerToken("인증 토큰이 없습니다.");
+  }
+  const accessToken = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
+    req.user = { id: decoded.payload };
+    next();
+  } catch (err) {
+    if (err.name === "TokenExpiredError") {
+      throw new ExpireToken("액세스 토큰이 만료되었습니다.");
+    } else if (err.name === "JsonWebTokenError") {
+      throw new BearerTokenError("액세스 토큰이 만료되었습니다.");
+    } else {
+      throw new BearerTokenServerError("토큰 검증 중 서버 오류");
+    }
+  }
+};
 // 기타 미들웨어
 app.use(express.static("public"));
 app.use(express.json());
@@ -178,12 +191,15 @@ app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
 app.post("/auth/reset-request", handleResetRequest);
 app.patch("/reset-passwd", handleResetPassword);
-app.post("/auth/login", handleUserLogin);
-app.post("/auth/reissue", isLoggedIn, handleRenewSession);
+app.post("/auth/login", handleUserLoginJWT);
+app.post("/auth/reissue", handleRenewToken);
 app.post("/auth/logout", isLoggedIn, handleUserLogout);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
 app.patch("/auth/change-passwd", handleChangePassword);
+app.post("/agreements/consent", isLoggedIn, handleAgreementConsent);
+app.get("/agreements/consent", isLoggedIn, getAgreementConsent);
+
 // 카카오 로그인
 app.get("/auth/kakao", handleKakaoRedirect); // 인가코드 받기
 app.get("/auth/kakao/callback", handleKakaoCallback); // 토큰 → 사용자 정보 → 세션 저장
@@ -217,7 +233,7 @@ app.post("/place", isLoggedIn, handleAddRestaurant);
 app.get("/place", isLoggedIn, handleGetRestaurant);
 app.get("/place/detail/:restId", isLoggedIn, handleGetPlaceDetail);
 app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
-app.post("/place/:id/report", isLoggedIn, handleReportReview);
+app.post("/place/:reviewId/report", isLoggedIn, handleReportReview);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 app.get("/place/search", isLoggedIn, handleSearchRestaurant);
 // ImageUpload
@@ -233,7 +249,7 @@ app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
 
-// 추천 목록 관리
+// Recommend
 app.get(
   "/recommend/management/:userId",
   isLoggedIn,

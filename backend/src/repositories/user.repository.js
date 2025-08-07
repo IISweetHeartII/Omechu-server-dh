@@ -1,4 +1,4 @@
-import { PrismaClient } from '../generated/prisma/index.js'
+import { PrismaClient } from "../generated/prisma/index.js";
 const prisma = new PrismaClient();
 
 export const findUserByEmail = async (email) => {
@@ -13,7 +13,6 @@ export const createUser = async ({ email, kakao_id }) => {
     },
   });
 };
-
 
 export const findUserById = async (userId) => {
   return await prisma.user.findUnique({
@@ -35,12 +34,11 @@ export const updateUserInfo = async (userId, data) => {
   } catch (error) {
     console.error("Prisma update 실패!");
     console.error("message:", error.message);
-    console.error("meta:", error.meta);  // 핵심 정보
+    console.error("meta:", error.meta); // 핵심 정보
     console.error("code:", error.code);
     throw error;
   }
 };
-
 
 export const createUserPreferences = async (userId, preferArray) => {
   if (!preferArray || preferArray.length === 0) return;
@@ -53,7 +51,6 @@ export const createUserPreferences = async (userId, preferArray) => {
   await prisma.prefer.createMany({ data });
 };
 
-
 export const createUserAllergies = async (userId, allergyArray) => {
   if (!allergyArray || allergyArray.length === 0) return;
 
@@ -64,8 +61,6 @@ export const createUserAllergies = async (userId, allergyArray) => {
   const data = allergyArray.map((a) => ({ userId, allergy: a }));
   await prisma.allergy.createMany({ data });
 };
-
-
 
 export const getUserInfoForMenu = async (userId) => {
   if (!userId) {
@@ -88,7 +83,7 @@ export const getUserInfoForMenu = async (userId) => {
     exercise: userInfo.exercise,
     body_type: userInfo.body_type,
   };
-}
+};
 
 export const getUserPreferences = async (userId) => {
   if (!userId) {
@@ -99,7 +94,7 @@ export const getUserPreferences = async (userId) => {
     select: { prefer: true },
   });
   return preferences.map((p) => p.prefer);
-}
+};
 
 export const getUserAllergies = async (userId) => {
   if (!userId) {
@@ -110,10 +105,9 @@ export const getUserAllergies = async (userId) => {
     select: { allergy: true },
   });
   return allergies.map((a) => a.allergy);
-}
+};
 
 export const getUserExceptedMenus = async (userId) => {
-
   //prisma로 변경
   try {
     const exceptedMenus = await prisma.recommend_except.findMany({
@@ -132,8 +126,7 @@ export const getUserExceptedMenus = async (userId) => {
     console.error("Error getting user excepted menus:", error);
     throw error;
   }
-
-}
+};
 
 export const getUserIdBySession = async (session) => {
   console.log("Session ID:", session);
@@ -154,4 +147,4 @@ export const getUserIdBySession = async (session) => {
   }
 
   return sessionData.user.id;
-}
+};

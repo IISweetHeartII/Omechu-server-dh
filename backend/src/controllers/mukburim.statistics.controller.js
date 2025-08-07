@@ -2,8 +2,8 @@ import { StatusCodes } from "http-status-codes";
 import {
   getMukburimStatisticsService,
   getMukburimCalendarService,
-  getMukburimByDateService
-} from '../services/mukburim.statistics.service.js';
+  getMukburimByDateService,
+} from "../services/mukburim.statistics.service.js";
 
 /**
  * 먹부림 통계 조회 컨트롤러
@@ -135,10 +135,10 @@ export const handleGetMukburimStatistics = async (req, res, next) => {
 
   try {
     const { userId } = req.params;
-    const { period = '1개월', startDate, endDate } = req.query;
+    const { period = "1개월", startDate, endDate } = req.query;
 
     const result = await getMukburimStatisticsService(
-      parseInt(userId), 
+      parseInt(userId),
       period,
       startDate,
       endDate
@@ -215,8 +215,8 @@ export const handleGetMukburimCalendar = async (req, res, next) => {
     const { year, month } = req.query;
 
     const result = await getMukburimCalendarService(
-      parseInt(userId), 
-      parseInt(year), 
+      parseInt(userId),
+      parseInt(year),
       parseInt(month)
     );
 

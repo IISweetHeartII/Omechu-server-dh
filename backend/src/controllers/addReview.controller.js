@@ -6,7 +6,7 @@ export const handleAddReview = async (req, res, next) => {
     bodyToAddReview({
       data: req.body,
       storeId: req.params.restId,
-      userId: req.session.user.id,
+      userId: req.user.id,
     })
   );
   console.log(review);
@@ -21,7 +21,7 @@ export const handleAddReview = async (req, res, next) => {
   /*
 #swagger.tags = ["Restaurant"]
 #swagger.summary = "리뷰 작성 API"
-#swagger.description = "리뷰 작성을 위한 API입니다. userId는 path variable로 전달하세요."
+#swagger.description = "리뷰 작성을 위한 API입니다."
 
 #swagger.requestBody = {
   required: true,
