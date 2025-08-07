@@ -400,3 +400,12 @@ export class BearerTokenServerError extends Error {
     this.data = data;
   }
 }
+
+export class NoMenuData extends Error {
+  errorCode = "C009";
+  constructor(reason, data) {
+    super(reason);
+    this.reason = reason;
+    this.data = data;
+  }
+}
