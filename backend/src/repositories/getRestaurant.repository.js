@@ -44,7 +44,6 @@ export const getRestData = async (userId, cursor, limit) => {
     ...rest,
     id: rest.id.toString(),
   }));
-
   return {
     restData: sliceRestData,
     hasNextPage: hasNextPage,

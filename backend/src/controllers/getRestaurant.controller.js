@@ -16,7 +16,7 @@ export const handleGetRestaurant = async (req, res) => {
     description:"가져오려는 데이터의 첫번째 ID 값",
     required:true
     } 
-
+  
   #swagger.parameters["limit"]={
     in:"query",
     description:"한 번에 가져오는 데이터의 양",
