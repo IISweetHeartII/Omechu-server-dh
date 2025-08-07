@@ -14,5 +14,8 @@ export const getData = async (data) => {
     distinct: ["menu"],
     orderBy: { menu: "asc" },
   });
+  if (menuData.length == 0) {
+    return { error: "NO_DATA" };
+  }
   return menuData;
 };
