@@ -196,7 +196,7 @@ app.post("/auth/reissue", handleRenewToken);
 app.post("/auth/logout", isLoggedIn, handleUserLogoutJWT);
 app.post("/auth/send", handleSendEmailCode);
 app.post("/auth/verify", handleVerifyEmailCode);
-app.patch("/auth/change-passwd", handleChangePassword);
+app.patch("/auth/change-passwd", isLoggedIn, handleChangePassword);
 app.post("/agreements/consent", isLoggedIn, handleAgreementConsent);
 app.get("/agreements/consent", isLoggedIn, getAgreementConsent);
 

@@ -108,7 +108,7 @@ export const handleChangePassword = async (req, res, next) => {
   */
 
   try {
-    const userId = req.session.user?.id;
+    const userId = req.user?.id;
     if (!userId) throw new LoginRequiredError();
 
     const { currentPassword, newPassword } = bodyToChangePasswordDto(req.body);
