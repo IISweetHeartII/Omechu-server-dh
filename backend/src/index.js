@@ -216,14 +216,18 @@ app.post("/mukburim", handleInsertMukburim);
 // Mukburim 기본 기능
 app.post("/mukburim", isLoggedIn, handleInsertMukburim);
 
-// Mukburim 통계 기능
-app.get(
-  "/mukburim/statistics/:userId",
-  isLoggedIn,
-  handleGetMukburimStatistics
-);
-app.get("/mukburim/calendar/:userId", isLoggedIn, handleGetMukburimCalendar);
-app.get("/mukburim/date/:userId", isLoggedIn, handleGetMukburimByDate);
+// 먹부림 통계 기능 - :JWT 형식으로 변경
+app.get("/mukburim/statistics", isLoggedIn, handleGetMukburimStatistics);
+app.get("/mukburim/calendar", isLoggedIn, handleGetMukburimCalendar);
+app.get("/mukburim/date", isLoggedIn, handleGetMukburimByDate);
+
+// 추천 관리 - :userId 제거
+app.get("/recommend/management", isLoggedIn, handleGetRecommendManagement);
+app.post("/recommend/except", isLoggedIn, handleAddMenuToExcept);
+app.post("/recommend/except/remove", isLoggedIn, handleRemoveMenuExcept);
+
+// 내 활동 내역
+app.get("/reviews", isLoggedIn, handleGetUserReviews);
 
 // Restaurant & Review
 app.post("/place/review/:restId", isLoggedIn, handleAddReview);
@@ -244,25 +248,10 @@ app.get("/profile", isLoggedIn, handleGetUserProfile);
 app.patch("/profile", isLoggedIn, handleUpdateUserProfile);
 app.get("/profile/myPlace", isLoggedIn, handleGetMyRestaurants);
 
-// Heart
-app.get("/hearts/:userId", isLoggedIn, handleGetZzimList);
+// 찜 기능
+app.get("/hearts", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
-
-// Recommend
-app.get(
-  "/recommend/management/:userId",
-  isLoggedIn,
-  handleGetRecommendManagement
-);
-app.post("/recommend/except/:userId", isLoggedIn, handleAddMenuToExcept);
-app.post(
-  "/recommend/except/:userId/remove",
-  isLoggedIn,
-  handleRemoveMenuExcept
-);
-//내 활동 내역
-app.get("/reviews/:userId", isLoggedIn, handleGetUserReviews);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
