@@ -165,7 +165,7 @@ export const handleAddMenuToExcept = async (req, res, next) => {
               type: 'object',
               required: ['menuId'],
               properties: {
-                menuId: { type: 'string', example: 'menu_001', description: '추가할 메뉴의 고유 ID' }
+                menuId: { type: 'string', example: 35, description: '추가할 메뉴의 고유 ID' }
               }
             },
             {
@@ -180,7 +180,7 @@ export const handleAddMenuToExcept = async (req, res, next) => {
         examples: {
           menuIdExample: {
             summary: '메뉴 ID로 추가',
-            value: { menuId: 'menu_001' }
+            value: { menuId: 35 }
           },
           menuNameExample: {
             summary: '메뉴 이름으로 추가',
@@ -386,7 +386,7 @@ export const handleRemoveMenuExcept = async (req, res, next) => {
         examples: {
           menuIdExample: {
             summary: '메뉴 ID로 제거',
-            value: { menuId: 'menu_005' }
+            value: { menuId: 35 }
           },
           menuNameExample: {
             summary: '메뉴 이름으로 제거',
