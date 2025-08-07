@@ -138,7 +138,16 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "localhost:3000",
+    servers: [
+      {
+        url: "https://omechu-api.log8.kr",
+        description: "배포 서버",
+      },
+      {
+        url: "http://localhost:3000",
+        description: "로컬 서버",
+      },
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
