@@ -429,17 +429,11 @@ export const handleGetZzimList = async (req, res, next) => {
   /*
   #swagger.tags = ["Heart"]
   #swagger.summary = "사용자의 모든 찜 목록 조회"
-  #swagger.description = "사용자 ID만으로 모든 찜 목록을 조회합니다."
-  #swagger.parameters['userId'] = {
-    in: 'path',
-    description: '사용자 ID',
-    required: true,
-    type: 'string'
-  }
+  #swagger.description = "사용자의 모든 찜 목록을 조회합니다."
   */
   try {
-    const { userId } = req.params;
-
+    const userId = req.user.id;
+    console.log(userId);
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
@@ -449,6 +443,7 @@ export const handleGetZzimList = async (req, res, next) => {
     }
 
     const result = await getZzimList(parseInt(userId), 1000, null);
+    console.log(result);
     const responseData = responseFromZzimList(result.data, false, null);
 
     res.status(StatusCodes.OK).success(responseData);
@@ -541,42 +536,16 @@ export const handleRemoveZzim = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  try {
-    const { userId, restaurantId } = req.body;
-
-    if (!userId || !restaurantId) {
-      return res.status(StatusCodes.BAD_REQUEST).error({
-        errorCode: "C006",
-        reason: "사용자 ID와 맛집 ID가 필요합니다.",
-        data: null,
-      });
-    }
-
-    await removeZzimService(parseInt(userId), parseInt(restaurantId));
-
-    res.status(StatusCodes.OK).success({
-      message: "찜이 성공적으로 해제되었습니다.",
-    });
-  } catch (error) {
-    next(error);
-  }
 };
 
 export const handleGetUserReviews = async (req, res, next) => {
   /*
   #swagger.tags = ["MyPage"]
   #swagger.summary = "사용자가 작성한 모든 리뷰 목록 조회"
-  #swagger.description = "사용자 ID로 해당 사용자가 작성한 모든 리뷰를 조회합니다."
-  #swagger.parameters['userId'] = {
-    in: 'path',
-    description: '사용자 ID',
-    required: true,
-    type: 'string'
-  }
+  #swagger.description = "사용자가 작성한 모든 리뷰를 조회합니다."
   */
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
 
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
