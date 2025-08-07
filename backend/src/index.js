@@ -77,7 +77,7 @@ import {
   BearerTokenError,
   BearerTokenServerError,
 } from "./errors.js";
-
+import { handleSuggestion } from "./controllers/suggestions.controller.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -232,7 +232,7 @@ app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
 app.post("/place/:reviewId/report", isLoggedIn, handleReportReview);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 app.get("/place/search", isLoggedIn, handleSearchRestaurant);
-
+app.get("/place/suggestions", isLoggedIn, handleSuggestion);
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
