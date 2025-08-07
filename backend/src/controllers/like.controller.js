@@ -11,8 +11,8 @@ export const handleLike = async (req, res) => {
   res.status(StatusCodes.OK).success(responseFromLike(like));
   /*
   #swagger.tags=["Restaurant"]
-  #swagger.summary="좋아요 누르기/취소하기"
-  #swagger.description="좋아요를 누르거나 취소할 때 사용하는 API 입니다"
+  #swagger.summary="맛집의 리뷰 좋아요 누르기/취소하기"
+  #swagger.description="맛집의 리뷰 좋아요를 누르거나 취소할 때 사용하는 API 입니다"
   #swagger.parameters["restId"]={
     in:"path",
     description:"해당 가게의 ID"
