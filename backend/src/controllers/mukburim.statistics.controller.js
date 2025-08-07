@@ -134,7 +134,7 @@ export const handleGetMukburimStatistics = async (req, res, next) => {
   */
 
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const { period = "1개월", startDate, endDate } = req.query;
 
     const result = await getMukburimStatisticsService(
@@ -211,7 +211,7 @@ export const handleGetMukburimCalendar = async (req, res, next) => {
   */
 
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const { year, month } = req.query;
 
     const result = await getMukburimCalendarService(
@@ -283,7 +283,7 @@ export const handleGetMukburimByDate = async (req, res, next) => {
   */
 
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const { date } = req.query;
 
     const result = await getMukburimByDateService(parseInt(userId), date);
