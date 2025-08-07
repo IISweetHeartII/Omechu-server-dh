@@ -136,7 +136,7 @@ export const handleGetRecommendManagement = async (req, res, next) => {
   }
 */
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const result = await getRecommendManagementService(parseInt(userId));
     res.status(StatusCodes.OK).success(result);
   } catch (error) {
@@ -332,7 +332,7 @@ export const handleAddMenuToExcept = async (req, res, next) => {
   }
 */
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const { menuId, menuName } = req.body;
 
     const result = await addMenuToExceptService(
@@ -516,7 +516,7 @@ export const handleRemoveMenuExcept = async (req, res, next) => {
   }
 */
   try {
-    const { userId } = req.params;
+    const userId = req.user.id;
     const { menuId, menuName } = req.body;
 
     const result = await removeMenuFromExceptService(

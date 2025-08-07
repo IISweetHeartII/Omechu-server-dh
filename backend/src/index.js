@@ -1,4 +1,3 @@
-// index.js
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
@@ -82,6 +81,7 @@ import {
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
+
 app.use((req, res, next) => {
   res.success = (success) => {
     return res.json({ resultType: "SUCCESS", error: null, success });
@@ -177,6 +177,7 @@ export const isLoggedIn = (req, res, next) => {
     }
   }
 };
+
 // 기타 미들웨어
 app.use(express.static("public"));
 app.use(express.json());
@@ -186,6 +187,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello Omechu!");
 });
+
 // Auth
 app.post("/auth/signup", handleUserSignUp);
 app.patch("/auth/complete", isLoggedIn, handleUpdateUserInfo);
@@ -216,18 +218,10 @@ app.post("/mukburim", handleInsertMukburim);
 // Mukburim 기본 기능
 app.post("/mukburim", isLoggedIn, handleInsertMukburim);
 
-// 먹부림 통계 기능 - :JWT 형식으로 변경
+// Mukburim 통계 기능 - JWT 형식으로 변경 (userId 제거)
 app.get("/mukburim/statistics", isLoggedIn, handleGetMukburimStatistics);
 app.get("/mukburim/calendar", isLoggedIn, handleGetMukburimCalendar);
 app.get("/mukburim/date", isLoggedIn, handleGetMukburimByDate);
-
-// 추천 관리 - :userId 제거
-app.get("/recommend/management", isLoggedIn, handleGetRecommendManagement);
-app.post("/recommend/except", isLoggedIn, handleAddMenuToExcept);
-app.post("/recommend/except/remove", isLoggedIn, handleRemoveMenuExcept);
-
-// 내 활동 내역
-app.get("/reviews", isLoggedIn, handleGetUserReviews);
 
 // Restaurant & Review
 app.post("/place/review/:restId", isLoggedIn, handleAddReview);
@@ -240,6 +234,7 @@ app.patch("/place/detail/:restId/edit", isLoggedIn, handleEditRestaurant);
 app.post("/place/:reviewId/report", isLoggedIn, handleReportReview);
 app.post("/place/coordinates", isLoggedIn, handleGetCoordinates);
 app.get("/place/search", isLoggedIn, handleSearchRestaurant);
+
 // ImageUpload
 app.post("/image/upload", generatePresignedUrl);
 
@@ -248,10 +243,18 @@ app.get("/profile", isLoggedIn, handleGetUserProfile);
 app.patch("/profile", isLoggedIn, handleUpdateUserProfile);
 app.get("/profile/myPlace", isLoggedIn, handleGetMyRestaurants);
 
-// 찜 기능
+// Heart (찜 기능) - JWT 형식으로 변경 (userId 제거)
 app.get("/hearts", isLoggedIn, handleGetZzimList);
 app.post("/heart", isLoggedIn, handleAddZzim);
 app.delete("/heart", isLoggedIn, handleRemoveZzim);
+
+// Recommend (추천 관리) - JWT 형식으로 변경 (userId 제거)
+app.get("/recommend/management", isLoggedIn, handleGetRecommendManagement);
+app.post("/recommend/except", isLoggedIn, handleAddMenuToExcept);
+app.post("/recommend/except/remove", isLoggedIn, handleRemoveMenuExcept);
+
+// 내 활동 내역 - JWT 형식으로 변경 (userId 제거)
+app.get("/reviews", isLoggedIn, handleGetUserReviews);
 
 // 에러 처리 미들웨어 ( 미들웨어 중 가장 아래에 배치 )
 app.use((err, req, res, next) => {
