@@ -433,7 +433,7 @@ export const handleGetZzimList = async (req, res, next) => {
   */
   try {
     const userId = req.user.id;
-
+    console.log(userId);
     if (!userId) {
       return res.status(StatusCodes.BAD_REQUEST).error({
         errorCode: "C006",
@@ -443,6 +443,7 @@ export const handleGetZzimList = async (req, res, next) => {
     }
 
     const result = await getZzimList(parseInt(userId), 1000, null);
+    console.log(result);
     const responseData = responseFromZzimList(result.data, false, null);
 
     res.status(StatusCodes.OK).success(responseData);
