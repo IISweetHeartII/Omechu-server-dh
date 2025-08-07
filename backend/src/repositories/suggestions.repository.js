@@ -1,7 +1,9 @@
 import { prisma } from "../db.config.js";
 
 export const getData = async (data) => {
-  console.log(data);
+  if (data == null) {
+    return { error: "NO_PARAMS" };
+  }
   const menuData = await prisma.repre_menu.findMany({
     select: {
       menu: true,
