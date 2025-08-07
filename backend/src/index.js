@@ -138,9 +138,7 @@ app.get("/openapi.json", async (req, res, next) => {
       title: "Omechu",
       description: "Umc 8th Omechu 데모데이 프로젝트",
     },
-    host: "omechu-api.log8.kr",
-    schemes: ["https"],
-    basePath: "/",
+    host: "localhost:3000",
     components: {
       securitySchemes: {
         bearerAuth: {
