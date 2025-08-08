@@ -7,6 +7,7 @@ export const searchRestaurant = async (
   cursor,
   limit
 ) => {
+  console.log("menu", menu.length);
   const isFirstPage = cursor == 0;
   const locationFilters = Array.isArray(location)
     ? location?.map((loc) => ({
@@ -66,15 +67,17 @@ export const searchRestaurant = async (
                 },
               },
             },
-        {
-          repre_menu: {
-            some: {
-              menu: {
-                contains: menu,
+        menu.length > 0
+          ? {
+              repre_menu: {
+                some: {
+                  menu: {
+                    contains: menu,
+                  },
+                },
               },
-            },
-          },
-        },
+            }
+          : {},
         location.length > 0 ? { OR: locationFilters } : {},
       ],
     },

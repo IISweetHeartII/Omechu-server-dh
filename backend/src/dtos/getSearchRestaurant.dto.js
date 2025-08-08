@@ -5,7 +5,7 @@ export const BodyToSearchRestaurant = (
   limit = 10
 ) => {
   return {
-    menu: data.menu,
+    menu: data.menu || [],
     location: data.location || [],
     tag: data.tag || [],
     userId: parseInt(userId),
