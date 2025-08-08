@@ -9,19 +9,21 @@ export const handleSearchRestaurant = async (req, res) => {
   #swagger.parameters["menu"]={
     in:"query",
     description:"검색하려는 음식명",
-    required:true,
     example:"스파게티"
     } 
-    #swagger.parameters["tag"]={
+
+  #swagger.parameters["tag"]={
     in:"query",
     description:"맛집 필터링 시 태그 이름",
     example:"아침식사"
     } 
-    #swagger.parameters["location"]={
+
+  #swagger.parameters["location"]={
     in:"query",
     description:"맛집 필터링 시 위치명",
     example:"서울 강남구 신사동"
     } 
+
   #swagger.parameters["cursor"]={
     in:"query",
     description:"가져오려는 데이터의 첫번째 ID 값",
@@ -35,6 +37,7 @@ export const handleSearchRestaurant = async (req, res) => {
     required:true,
     example:5
     }
+    
   #swagger.responses[200] = {
   description: "올바른 맛집 정보를 가져왔을 때",
   content: {
